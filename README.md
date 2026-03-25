@@ -1,97 +1,97 @@
 # Mentalitys | Custom Enchantments
 
-> [English version](README.md)
+> [Русская версия](README_RU.md)
 
-Мод для **Minecraft 1.20.1** на **Fabric API**, добавляющий уникальные зачарования с гибкой настройкой через **Cloth Config API**.
-
----
-
-## Зачарования
-
-### ⚔️ Сияющий удар (Glow Strike)
-
-Зачарование для **мечей и топоров**. При ударе накладывает эффект **Свечение** на цель, делая её видимой сквозь стены.
-
-| Уровень | Длительность | Тики |
-|---------|-------------|------|
-| I       | 2 сек       | 40   |
-| II      | 4 сек       | 80   |
-| III     | 7 сек       | 140  |
-
-- **Редкость:** Редкое
-- **Макс. уровень:** 3
-- **Несовместимо** с Отбрасыванием (Knockback)
-- Эффект срабатывает только если атакующий — игрок, а цель — живое существо
-- Длительность каждого уровня настраивается через конфиг
-
-### 🦘 Двойной прыжок (Double Jump)
-
-Зачарование для **ботинок**. Позволяет совершить **второй прыжок в воздухе**.
-
-| Уровень | Эффект         |
-|---------|----------------|
-| I       | Двойной прыжок |
-
-- **Редкость:** Очень редкое
-- **Макс. уровень:** 1
-- При прыжке появляются **белые частицы** под ногами
-- **67% шанс** потратить 1 прочность ботинок (зачарование **Прочность/Unbreaking** снижает шанс)
-- Работает только если игрок не в воде и не в лаве
-- Можно включить/выключить через конфиг
+A **Minecraft 1.20.1** mod for **Fabric API** that adds unique enchantments with flexible configuration via **Cloth Config API**.
 
 ---
 
-## Получение
+## Enchantments
 
-Зачарованные книги можно купить у **жителя-Библиотекаря**:
+### ⚔️ Glow Strike
 
-| Зачарование        | Уровень жителя   | Цена          |
-|--------------------|------------------|---------------|
-| Сияющий удар I     | Новичок (1)      | 10 изумрудов  |
-| Сияющий удар II    | Подмастерье (3)  | 28 изумрудов  |
-| Сияющий удар III   | Мастер (5)       | 48 изумрудов  |
-| Двойной прыжок I   | Эксперт (4)      | 38 изумрудов  |
+A weapon enchantment for **swords and axes**. On hit, applies the **Glowing** effect to the target, making them visible through walls.
+
+| Level | Duration | Ticks |
+|-------|----------|-------|
+| I     | 2 sec    | 40    |
+| II    | 4 sec    | 80    |
+| III   | 7 sec    | 140   |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- **Incompatible** with Knockback
+- Effect only triggers when the attacker is a Player and the target is a LivingEntity
+- Duration for each level is configurable
+
+### 🦘 Double Jump
+
+A boots enchantment. Allows the player to perform a **second jump in mid-air**.
+
+| Level | Effect      |
+|-------|-------------|
+| I     | Double jump |
+
+- **Rarity:** Very Rare
+- **Max level:** 1
+- Spawns **white particles** under the player on double jump
+- **67% chance** to consume 1 durability from boots (**Unbreaking** enchantment reduces this chance)
+- Only works when not in water or lava
+- Can be enabled/disabled via config
 
 ---
 
-## Настройка (Cloth Config)
+## Obtaining
 
-Мод поддерживает конфигурацию через **Cloth Config API**. Файл конфига: `config/custom-enchants.json`.
+Enchanted books can be purchased from **Librarian villagers**:
 
-### Параметры
-
-| Параметр               | По умолчанию | Описание                              |
-|------------------------|-------------|---------------------------------------|
-| `glowStrikeEnabled`    | `true`      | Включить/выключить Сияющий удар       |
-| `glowStrikeDurationL1` | `40`        | Длительность I уровня (тики)          |
-| `glowStrikeDurationL2` | `80`        | Длительность II уровня (тики)         |
-| `glowStrikeDurationL3` | `140`       | Длительность III уровня (тики)        |
-| `doubleJumpEnabled`    | `true`      | Включить/выключить Двойной прыжок     |
+| Enchantment      | Villager Tier    | Price       |
+|------------------|------------------|-------------|
+| Glow Strike I    | Novice (1)       | 10 Emeralds |
+| Glow Strike II   | Journeyman (3)   | 28 Emeralds |
+| Glow Strike III  | Master (5)       | 48 Emeralds |
+| Double Jump I    | Expert (4)       | 38 Emeralds |
 
 ---
 
-## Структура проекта
+## Configuration (Cloth Config)
+
+The mod supports configuration via **Cloth Config API**. Config file: `config/custom-enchants.json`.
+
+### Parameters
+
+| Parameter              | Default | Description                         |
+|------------------------|---------|-------------------------------------|
+| `glowStrikeEnabled`   | `true`  | Enable/disable Glow Strike          |
+| `glowStrikeDurationL1`| `40`    | Level I duration (ticks)            |
+| `glowStrikeDurationL2`| `80`    | Level II duration (ticks)           |
+| `glowStrikeDurationL3`| `140`   | Level III duration (ticks)          |
+| `doubleJumpEnabled`   | `true`  | Enable/disable Double Jump          |
+
+---
+
+## Project Structure
 
 ```
 src/main/java/com/mentality/customenchants/
-├── CustomEnchantsMod.java         — Главный класс мода, регистрация торговли
+├── CustomEnchantsMod.java         — Main mod class, trade registration
 ├── config/
-│   ├── ModConfig.java             — Загрузка/сохранение JSON-конфига
-│   └── ModConfigScreen.java       — GUI экран настроек (Cloth Config)
+│   ├── ModConfig.java             — JSON config load/save
+│   └── ModConfigScreen.java       — GUI settings screen (Cloth Config)
 └── enchantment/
-    ├── ModEnchantments.java       — Регистрация зачарований
-    ├── GlowStrikeEnchantment.java — Логика Сияющего удара
-    └── DoubleJumpEnchantment.java — Определение Двойного прыжка
+    ├── ModEnchantments.java       — Enchantment registration
+    ├── GlowStrikeEnchantment.java — Glow Strike logic
+    └── DoubleJumpEnchantment.java — Double Jump definition
 
 src/client/java/com/mentality/customenchants/
-├── CustomEnchantsClient.java      — Клиентский инициализатор
+├── CustomEnchantsClient.java      — Client initializer
 └── enchantment/
-    └── DoubleJumpHandler.java     — Клиентская логика двойного прыжка
+    └── DoubleJumpHandler.java     — Client-side double jump logic
 ```
 
 ---
 
-## Требования
+## Requirements
 
 - Minecraft 1.20.1
 - Fabric Loader ≥ 0.18.4
@@ -99,14 +99,14 @@ src/client/java/com/mentality/customenchants/
 - Cloth Config API ≥ 11.0.0
 - Java 21+
 
-## Сборка
+## Building
 
 ```bash
 ./gradlew build
 ```
 
-Скомпилированный jar будет в `build/libs/`.
+The compiled jar will be in `build/libs/`.
 
-## Лицензия
+## License
 
 CC0-1.0
