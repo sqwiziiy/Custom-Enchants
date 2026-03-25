@@ -1,0 +1,9 @@
+.grandle/
+.idea/
+*.iml
+*.log
+*.class
+*.jar
+old_data/
+.vscode/
+.gradle/

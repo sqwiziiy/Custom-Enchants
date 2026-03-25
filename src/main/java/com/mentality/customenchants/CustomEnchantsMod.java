@@ -1,0 +1,80 @@
+package com.mentality.customenchants;
+
+import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.enchantment.ModEnchantments;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.trading.MerchantOffer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class CustomEnchantsMod implements ModInitializer {
+
+    public static final String MOD_ID = "custom-enchants";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    @Override
+    public void onInitialize() {
+        ModConfig.load();
+        ModEnchantments.register();
+        registerVillagerTrades();
+        LOGGER.info("Mentalitys | Custom Enchantments initialized!");
+    }
+
+    private void registerVillagerTrades() {
+        ModConfig config = ModConfig.get();
+
+        // Glow Strike I — Novice Librarian (tier 1)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 1, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.GLOW_STRIKE, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 10),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Glow Strike II — Journeyman Librarian (tier 3)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.GLOW_STRIKE, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 28),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Glow Strike III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.GLOW_STRIKE, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 48),
+                        book,
+                        3, 30, 0.2f);
+            });
+        });
+
+        // Double Jump I — Expert Librarian (tier 4), rare
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.DOUBLE_JUMP, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 38),
+                        book,
+                        3, 25, 0.2f);
+            });
+        });
+    }
+}

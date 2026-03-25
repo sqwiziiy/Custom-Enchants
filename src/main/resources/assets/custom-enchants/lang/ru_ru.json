@@ -1,0 +1,12 @@
+{
+  "enchantment.custom-enchants.glow_strike": "Сияющий удар",
+  "enchantment.custom-enchants.double_jump": "Двойной прыжок",
+  "config.custom-enchants.title": "Mentalitys | Custom Enchantments — Настройки",
+  "config.custom-enchants.category.glow_strike": "Сияющий удар",
+  "config.custom-enchants.category.double_jump": "Двойной прыжок",
+  "config.custom-enchants.glow_strike.enabled": "Включено",
+  "config.custom-enchants.glow_strike.duration_l1": "Длительность I уровня (тики)",
+  "config.custom-enchants.glow_strike.duration_l2": "Длительность II уровня (тики)",
+  "config.custom-enchants.glow_strike.duration_l3": "Длительность III уровня (тики)",
+  "config.custom-enchants.double_jump.enabled": "Включено"
+}

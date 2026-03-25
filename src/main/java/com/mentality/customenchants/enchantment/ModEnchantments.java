@@ -1,0 +1,26 @@
+package com.mentality.customenchants.enchantment;
+
+import com.mentality.customenchants.CustomEnchantsMod;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.enchantment.Enchantment;
+
+public class ModEnchantments {
+
+    public static final Enchantment GLOW_STRIKE = new GlowStrikeEnchantment();
+    public static final Enchantment DOUBLE_JUMP = new DoubleJumpEnchantment();
+
+    public static void register() {
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "glow_strike"),
+                GLOW_STRIKE
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "double_jump"),
+                DOUBLE_JUMP
+        );
+    }
+}
