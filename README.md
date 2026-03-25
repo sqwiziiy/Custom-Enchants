@@ -1,6 +1,6 @@
 # Mentalitys | Custom Enchantments
 
-> [English version](README_EN.md)
+> [English version](README.md)
 
 Мод для **Minecraft 1.20.1** на **Fabric API**, добавляющий уникальные зачарования с гибкой настройкой через **Cloth Config API**.
 
