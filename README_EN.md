@@ -34,6 +34,8 @@ A boots enchantment. Allows the player to perform a **second jump in mid-air**.
 
 - **Rarity:** Very Rare
 - **Max level:** 1
+- Spawns **white particles** under the player on double jump
+- **67% chance** to consume 1 durability from boots (**Unbreaking** enchantment reduces this chance)
 - Only works when not in water or lava
 - Can be enabled/disabled via config
 

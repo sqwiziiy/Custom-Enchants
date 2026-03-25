@@ -1,6 +1,7 @@
 package com.mentality.customenchants;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.enchantment.DoubleJumpServerHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -22,6 +23,7 @@ public class CustomEnchantsMod implements ModInitializer {
     public void onInitialize() {
         ModConfig.load();
         ModEnchantments.register();
+        DoubleJumpServerHandler.register();
         registerVillagerTrades();
         LOGGER.info("Mentalitys | Custom Enchantments initialized!");
     }
