@@ -9,12 +9,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class DrillHandler {
@@ -32,8 +29,7 @@ public class DrillHandler {
             if (tool.isEmpty()) return;
             if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DRILL, tool) <= 0) return;
 
-            Direction face = getMinedFace(serverPlayer);
-            if (face == null) return;
+            Direction face = getMinedFace(serverPlayer, pos);
 
             isDrilling = true;
             try {
@@ -44,19 +40,23 @@ public class DrillHandler {
         });
     }
 
-    private static Direction getMinedFace(ServerPlayer player) {
+    private static Direction getMinedFace(ServerPlayer player, BlockPos brokenPos) {
         Vec3 eyePos = player.getEyePosition(1.0f);
-        Vec3 lookVec = player.getLookAngle();
-        double reach = 5.0;
-        Vec3 endPos = eyePos.add(lookVec.scale(reach));
+        double dx = eyePos.x - (brokenPos.getX() + 0.5);
+        double dy = eyePos.y - (brokenPos.getY() + 0.5);
+        double dz = eyePos.z - (brokenPos.getZ() + 0.5);
 
-        BlockHitResult hit = player.level().clip(new ClipContext(
-                eyePos, endPos, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
+        double absDx = Math.abs(dx);
+        double absDy = Math.abs(dy);
+        double absDz = Math.abs(dz);
 
-        if (hit.getType() == HitResult.Type.BLOCK) {
-            return hit.getDirection();
+        if (absDy >= absDx && absDy >= absDz) {
+            return dy > 0 ? Direction.UP : Direction.DOWN;
+        } else if (absDx >= absDz) {
+            return dx > 0 ? Direction.EAST : Direction.WEST;
+        } else {
+            return dz > 0 ? Direction.SOUTH : Direction.NORTH;
         }
-        return null;
     }
 
     private static void breakSurroundingBlocks(ServerPlayer player, BlockPos center, Direction face) {

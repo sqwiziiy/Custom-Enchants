@@ -3,6 +3,37 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [1.8.0] - 2026-03-26
+
+### Changed
+
+- **Shadow Blade** can now only be enchanted on **tridents** — added `canEnchant` check and anvil mixin protection.
+- **Poison Blade** is now **incompatible with Fire Aspect**.
+- **Drill** now works on **shovels** too — digs dirt, sand, gravel, etc. in a 3×3 area.
+
+### Fixed
+
+- **Drill** — fixed a bug where the slightest camera movement caused wrong blocks to be mined. Face detection now uses geometric player-to-block position calculation instead of raycast.
+
+---
+
+## [1.7.0] - 2026-03-26
+
+### Added
+
+- **Magnet** enchantment for tools (pickaxe, axe, shovel, hoe) (rare, max level 1). When mining blocks, items within a 5-block radius are automatically picked up into the player's inventory.
+  - Works with Drill and Lumberjack — collects all drops from additional blocks.
+  - Pickup radius is configurable (default 5 blocks).
+  - Available from enchanting table and villager trades.
+- Librarian villager trade: Magnet I (tier 3, 24 emeralds).
+- Config options: enable/disable enchantment, configurable pickup radius.
+
+### Fixed
+
+- **Cloth Config settings screen** now opens via Mod Menu — added Mod Menu integration.
+
+---
+
 ## [1.6.0] - 2026-03-26
 
 ### Added

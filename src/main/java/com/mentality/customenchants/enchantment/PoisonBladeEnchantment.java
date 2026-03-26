@@ -11,6 +11,7 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class PoisonBladeEnchantment extends Enchantment {
 
@@ -26,6 +27,12 @@ public class PoisonBladeEnchantment extends Enchantment {
     @Override
     public boolean canEnchant(ItemStack stack) {
         return stack.getItem() instanceof AxeItem || super.canEnchant(stack);
+    }
+
+    @Override
+    protected boolean checkCompatibility(Enchantment other) {
+        return super.checkCompatibility(other)
+                && other != Enchantments.FIRE_ASPECT;
     }
 
     @Override

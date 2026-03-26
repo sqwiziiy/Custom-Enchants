@@ -41,10 +41,10 @@ A boots enchantment. Allows the player to perform a **second jump in mid-air**.
 
 ### ⛏️ Drill
 
-A pickaxe enchantment. Breaks blocks in a **3×3 area** around the center block.
+A tool enchantment for **pickaxes and shovels**. Breaks blocks in a **3×3 area** around the center block.
 
 | Level | Effect    |
-|-------|-----------|
+|-------|----------|
 | I     | 3×3 mining |
 
 - **Rarity:** Very Rare
@@ -52,7 +52,7 @@ A pickaxe enchantment. Breaks blocks in a **3×3 area** around the center block.
 - **Disabled while sneaking** (Shift) — allows precise single-block mining
 - The 3×3 plane is determined by the face of the block being mined
 - Consumes 1 durability per extra block broken (Unbreaking applies)
-- Only breaks blocks appropriate for the pickaxe; unbreakable blocks (bedrock, etc.) are skipped
+- Only breaks blocks appropriate for the tool; unbreakable blocks (bedrock, etc.) are skipped
 - Can be enabled/disabled via config
 ### 🗡️ Poison Blade
 
@@ -66,6 +66,7 @@ A weapon enchantment for **swords and axes**. On hit, applies the **Poison** eff
 
 - **Rarity:** Rare
 - **Max level:** 3
+- **Incompatible** with Fire Aspect
 - Effect only triggers when the attacker is a Player and the target is a LivingEntity
 - Duration for each level is configurable
 - Can be obtained from enchanting table and villager trades
@@ -106,6 +107,21 @@ A trident enchantment. On hit, has a chance to **teleport the player behind the 
 - Chance and slowness duration are configurable per level
 - Can be obtained from enchanting table and villager trades
 
+### 🧲 Magnet
+
+A tool enchantment for **pickaxes, axes, shovels, and hoes**. When mining blocks, items within a configurable radius are **automatically picked up** into the player's inventory.
+
+| Level | Effect                      |
+|-------|-----------------------------|
+| I     | Auto-pickup within 5 blocks |
+
+- **Rarity:** Rare
+- **Max level:** 1
+- Works with Drill and Lumberjack — collects all drops from additional blocks
+- Pickup radius is configurable (default: 5 blocks)
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -128,6 +144,7 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Shadow Blade I   | Apprentice (2)   | 16 Emeralds |
 | Shadow Blade II  | Expert (4)       | 34 Emeralds |
 | Shadow Blade III | Master (5)       | 54 Emeralds |
+| Magnet I         | Journeyman (3)   | 24 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -162,6 +179,8 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `shadowBladeSlowDurationL1` | `20` | Slowness duration Level I (ticks)   |
 | `shadowBladeSlowDurationL2` | `40` | Slowness duration Level II (ticks)  |
 | `shadowBladeSlowDurationL3` | `60` | Slowness duration Level III (ticks) |
+| `magnetEnabled`          | `true`  | Enable/disable Magnet               |
+| `magnetRadius`           | `5`     | Pickup radius (blocks)              |
 
 ---
 
