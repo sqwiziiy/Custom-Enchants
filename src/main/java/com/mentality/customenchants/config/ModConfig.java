@@ -47,6 +47,10 @@ public class ModConfig {
     public int shadowBladeSlowDurationL2 = 40;
     public int shadowBladeSlowDurationL3 = 60;
 
+    // Magnet settings
+    public boolean magnetEnabled = true;
+    public int magnetRadius = 5;
+
     public static ModConfig get() {
         return INSTANCE;
     }

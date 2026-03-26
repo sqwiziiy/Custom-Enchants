@@ -204,6 +204,25 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.shadowBladeSlowDurationL3 = val)
                 .build());
 
+        // Magnet category
+        ConfigCategory magnet = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.magnet"));
+
+        magnet.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.magnet.enabled"),
+                        config.magnetEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.magnetEnabled = val)
+                .build());
+
+        magnet.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.magnet.radius"),
+                        config.magnetRadius)
+                .setDefaultValue(5)
+                .setMin(1).setMax(20)
+                .setSaveConsumer(val -> config.magnetRadius = val)
+                .build());
+
         return builder.build();
     }
 }

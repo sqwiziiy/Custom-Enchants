@@ -3,7 +3,7 @@
 	"id": "custom-enchants",
 	"version": "${version}",
 	"name": "Mentalitys | Custom Enchantments",
-	"description": "Adds custom enchantments: Glow Strike, Double Jump, Drill, Poison Blade, and Lumberjack. Configurable via Cloth Config.",
+	"description": "Adds custom enchantments: Glow Strike, Double Jump, Drill, Poison Blade, Lumberjack, Shadow Blade, and Magnet. Configurable via Cloth Config.",
 	"authors": [
 		"mentality"
 	],
@@ -16,6 +16,9 @@
 		],
 		"client": [
 			"com.mentality.customenchants.CustomEnchantsClient"
+		],
+		"modmenu": [
+			"com.mentality.customenchants.config.ModMenuIntegration"
 		]
 	},
 	"depends": {
@@ -25,7 +28,8 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"cloth-config": ">=11.0.0"
+		"cloth-config": ">=11.0.0",
+		"modmenu": ">=7.0.0"
 	},
 	"mixins": [
 		"custom-enchants.mixins.json",

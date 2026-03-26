@@ -14,6 +14,7 @@ public class ModEnchantments {
     public static final Enchantment POISON_BLADE = new PoisonBladeEnchantment();
     public static final Enchantment LUMBERJACK = new LumberjackEnchantment();
     public static final Enchantment SHADOW_BLADE = new ShadowBladeEnchantment();
+    public static final Enchantment MAGNET = new MagnetEnchantment();
 
     public static void register() {
         Registry.register(
@@ -45,6 +46,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "shadow_blade"),
                 SHADOW_BLADE
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "magnet"),
+                MAGNET
         );
     }
 }
