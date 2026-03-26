@@ -89,6 +89,23 @@ An axe enchantment. Chops down an entire **tree** by breaking one log block. Sma
 - Consumes 1 durability per log broken (Unbreaking applies)
 - Can be enabled/disabled via config; max blocks per level are configurable
 
+### 🗡️ Shadow Blade
+
+A trident enchantment. On hit, has a chance to **teleport the player behind the target** and apply **Slowness II** to the target.
+
+| Level | Chance | Slowness Duration |
+|-------|--------|--------------------|
+| I     | 15%    | 1 sec              |
+| II    | 25%    | 2 sec              |
+| III   | 35%    | 3 sec              |
+
+- **Rarity:** Very Rare
+- **Max level:** 3
+- **Incompatible** with Channeling and Riptide
+- Teleports the player 1.5 blocks behind the target entity, facing it
+- Chance and slowness duration are configurable per level
+- Can be obtained from enchanting table and villager trades
+
 ---
 
 ## Obtaining
@@ -108,6 +125,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Lumberjack I     | Apprentice (2)   | 14 Emeralds |
 | Lumberjack II    | Expert (4)       | 32 Emeralds |
 | Lumberjack III   | Master (5)       | 52 Emeralds |
+| Shadow Blade I   | Apprentice (2)   | 16 Emeralds |
+| Shadow Blade II  | Expert (4)       | 34 Emeralds |
+| Shadow Blade III | Master (5)       | 54 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -135,6 +155,13 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `lumberjackMaxBlocksL1`  | `16`    | Max blocks Level I                  |
 | `lumberjackMaxBlocksL2`  | `48`    | Max blocks Level II                 |
 | `lumberjackMaxBlocksL3`  | `128`   | Max blocks Level III                |
+| `shadowBladeEnabled`     | `true`  | Enable/disable Shadow Blade         |
+| `shadowBladeChanceL1`    | `15`    | Chance Level I (%)                  |
+| `shadowBladeChanceL2`    | `25`    | Chance Level II (%)                 |
+| `shadowBladeChanceL3`    | `35`    | Chance Level III (%)                |
+| `shadowBladeSlowDurationL1` | `20` | Slowness duration Level I (ticks)   |
+| `shadowBladeSlowDurationL2` | `40` | Slowness duration Level II (ticks)  |
+| `shadowBladeSlowDurationL3` | `60` | Slowness duration Level III (ticks) |
 
 ---
 
@@ -156,6 +183,7 @@ src/main/java/com/mentality/customenchants/
     ├── PoisonBladeEnchantment.java — Poison Blade logic
     ├── LumberjackEnchantment.java — Lumberjack definition
     ├── LumberjackHandler.java     — Server-side tree felling logic
+    ├── ShadowBladeEnchantment.java — Shadow Blade logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

@@ -166,5 +166,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         3, 30, 0.2f);
             });
         });
+
+        // Shadow Blade I — Apprentice Librarian (tier 2)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SHADOW_BLADE, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 16),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Shadow Blade II — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SHADOW_BLADE, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 34),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Shadow Blade III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SHADOW_BLADE, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 54),
+                        book,
+                        3, 30, 0.2f);
+            });
+        });
     }
 }

@@ -38,6 +38,15 @@ public class ModConfig {
     public int lumberjackMaxBlocksL2 = 48;
     public int lumberjackMaxBlocksL3 = 128;
 
+    // Shadow Blade settings
+    public boolean shadowBladeEnabled = true;
+    public int shadowBladeChanceL1 = 15;
+    public int shadowBladeChanceL2 = 25;
+    public int shadowBladeChanceL3 = 35;
+    public int shadowBladeSlowDurationL1 = 20;
+    public int shadowBladeSlowDurationL2 = 40;
+    public int shadowBladeSlowDurationL3 = 60;
+
     public static ModConfig get() {
         return INSTANCE;
     }

@@ -3,6 +3,19 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [1.6.0] - 2026-03-26
+
+### Added
+
+- **Shadow Blade** enchantment for tridents (very rare, max level 3). On hit, has a chance to teleport the player behind the target and apply Slowness II.
+  - Level I: 15% chance, slowness 1 sec. Level II: 25% chance, 2 sec. Level III: 35% chance, 3 sec.
+  - Incompatible with Channeling and Riptide.
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Shadow Blade I (tier 2, 16 emeralds), II (tier 4, 34 emeralds), III (tier 5, 54 emeralds).
+- Config options: enable/disable enchantment, configurable chance and slowness duration per level.
+
+---
+
 ## [1.5.1] - 2026-03-26
 
 ### Fixed

@@ -26,5 +26,9 @@
 	},
 	"suggests": {
 		"cloth-config": ">=11.0.0"
-	}
+	},
+	"mixins": [
+		"custom-enchants.mixins.json",
+		"custom-enchants.client.mixins.json"
+	]
 }

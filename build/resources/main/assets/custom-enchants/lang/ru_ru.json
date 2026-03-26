@@ -23,5 +23,14 @@
   "config.custom-enchants.lumberjack.enabled": "Включено",
   "config.custom-enchants.lumberjack.max_blocks_l1": "Макс. блоков I уровень",
   "config.custom-enchants.lumberjack.max_blocks_l2": "Макс. блоков II уровень",
-  "config.custom-enchants.lumberjack.max_blocks_l3": "Макс. блоков III уровень"
+  "config.custom-enchants.lumberjack.max_blocks_l3": "Макс. блоков III уровень",
+  "enchantment.custom-enchants.shadow_blade": "Теневой клинок",
+  "config.custom-enchants.category.shadow_blade": "Теневой клинок",
+  "config.custom-enchants.shadow_blade.enabled": "Включено",
+  "config.custom-enchants.shadow_blade.chance_l1": "Шанс I уровня (%)",
+  "config.custom-enchants.shadow_blade.chance_l2": "Шанс II уровня (%)",
+  "config.custom-enchants.shadow_blade.chance_l3": "Шанс III уровня (%)",
+  "config.custom-enchants.shadow_blade.slow_duration_l1": "Длительность замедления I уровня (тики)",
+  "config.custom-enchants.shadow_blade.slow_duration_l2": "Длительность замедления II уровня (тики)",
+  "config.custom-enchants.shadow_blade.slow_duration_l3": "Длительность замедления III уровня (тики)"
 }

@@ -145,6 +145,65 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.lumberjackMaxBlocksL3 = val)
                 .build());
 
+        // Shadow Blade category
+        ConfigCategory shadowBlade = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.shadow_blade"));
+
+        shadowBlade.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.shadow_blade.enabled"),
+                        config.shadowBladeEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.shadowBladeEnabled = val)
+                .build());
+
+        shadowBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.shadow_blade.chance_l1"),
+                        config.shadowBladeChanceL1)
+                .setDefaultValue(15)
+                .setMin(1).setMax(100)
+                .setSaveConsumer(val -> config.shadowBladeChanceL1 = val)
+                .build());
+
+        shadowBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.shadow_blade.chance_l2"),
+                        config.shadowBladeChanceL2)
+                .setDefaultValue(25)
+                .setMin(1).setMax(100)
+                .setSaveConsumer(val -> config.shadowBladeChanceL2 = val)
+                .build());
+
+        shadowBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.shadow_blade.chance_l3"),
+                        config.shadowBladeChanceL3)
+                .setDefaultValue(35)
+                .setMin(1).setMax(100)
+                .setSaveConsumer(val -> config.shadowBladeChanceL3 = val)
+                .build());
+
+        shadowBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.shadow_blade.slow_duration_l1"),
+                        config.shadowBladeSlowDurationL1)
+                .setDefaultValue(20)
+                .setMin(1).setMax(6000)
+                .setSaveConsumer(val -> config.shadowBladeSlowDurationL1 = val)
+                .build());
+
+        shadowBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.shadow_blade.slow_duration_l2"),
+                        config.shadowBladeSlowDurationL2)
+                .setDefaultValue(40)
+                .setMin(1).setMax(6000)
+                .setSaveConsumer(val -> config.shadowBladeSlowDurationL2 = val)
+                .build());
+
+        shadowBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.shadow_blade.slow_duration_l3"),
+                        config.shadowBladeSlowDurationL3)
+                .setDefaultValue(60)
+                .setMin(1).setMax(6000)
+                .setSaveConsumer(val -> config.shadowBladeSlowDurationL3 = val)
+                .build());
+
         return builder.build();
     }
 }

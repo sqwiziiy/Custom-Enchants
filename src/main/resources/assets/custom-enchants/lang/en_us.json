@@ -23,5 +23,14 @@
   "config.custom-enchants.lumberjack.enabled": "Enabled",
   "config.custom-enchants.lumberjack.max_blocks_l1": "Max blocks Level I",
   "config.custom-enchants.lumberjack.max_blocks_l2": "Max blocks Level II",
-  "config.custom-enchants.lumberjack.max_blocks_l3": "Max blocks Level III"
+  "config.custom-enchants.lumberjack.max_blocks_l3": "Max blocks Level III",
+  "enchantment.custom-enchants.shadow_blade": "Shadow Blade",
+  "config.custom-enchants.category.shadow_blade": "Shadow Blade",
+  "config.custom-enchants.shadow_blade.enabled": "Enabled",
+  "config.custom-enchants.shadow_blade.chance_l1": "Chance Level I (%)",
+  "config.custom-enchants.shadow_blade.chance_l2": "Chance Level II (%)",
+  "config.custom-enchants.shadow_blade.chance_l3": "Chance Level III (%)",
+  "config.custom-enchants.shadow_blade.slow_duration_l1": "Slowness duration Level I (ticks)",
+  "config.custom-enchants.shadow_blade.slow_duration_l2": "Slowness duration Level II (ticks)",
+  "config.custom-enchants.shadow_blade.slow_duration_l3": "Slowness duration Level III (ticks)"
 }
