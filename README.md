@@ -39,6 +39,22 @@ A boots enchantment. Allows the player to perform a **second jump in mid-air**.
 - Only works when not in water or lava
 - Can be enabled/disabled via config
 
+### ⛏️ Drill
+
+A pickaxe enchantment. Breaks blocks in a **3×3 area** around the center block.
+
+| Level | Effect    |
+|-------|-----------|
+| I     | 3×3 mining |
+
+- **Rarity:** Very Rare
+- **Max level:** 1
+- **Disabled while sneaking** (Shift) — allows precise single-block mining
+- The 3×3 plane is determined by the face of the block being mined
+- Consumes 1 durability per extra block broken (Unbreaking applies)
+- Only breaks blocks appropriate for the pickaxe; unbreakable blocks (bedrock, etc.) are skipped
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -51,6 +67,7 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Glow Strike II   | Journeyman (3)   | 28 Emeralds |
 | Glow Strike III  | Master (5)       | 48 Emeralds |
 | Double Jump I    | Expert (4)       | 38 Emeralds |
+| Drill I          | Master (5)       | 50 Emeralds |
 
 ---
 
@@ -67,6 +84,7 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `glowStrikeDurationL2`| `80`    | Level II duration (ticks)           |
 | `glowStrikeDurationL3`| `140`   | Level III duration (ticks)          |
 | `doubleJumpEnabled`   | `true`  | Enable/disable Double Jump          |
+| `drillEnabled`        | `true`  | Enable/disable Drill                |
 
 ---
 
@@ -81,10 +99,15 @@ src/main/java/com/mentality/customenchants/
 └── enchantment/
     ├── ModEnchantments.java       — Enchantment registration
     ├── GlowStrikeEnchantment.java — Glow Strike logic
-    └── DoubleJumpEnchantment.java — Double Jump definition
+    ├── DoubleJumpEnchantment.java — Double Jump definition
+    ├── DoubleJumpServerHandler.java — Server-side double jump + durability
+    ├── DrillEnchantment.java      — Drill definition
+    └── DrillHandler.java          — Server-side 3×3 mining logic
 
 src/client/java/com/mentality/customenchants/
 ├── CustomEnchantsClient.java      — Client initializer
+├── config/
+│   └── ModConfigScreen.java       — GUI settings screen (Cloth Config)
 └── enchantment/
     └── DoubleJumpHandler.java     — Client-side double jump logic
 ```

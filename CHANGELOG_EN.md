@@ -17,6 +17,17 @@ All notable changes to the **Mentalitys | Custom Enchantments** mod are document
 
 ---
 
+## [1.2.0] - 2026-03-25
+
+### Added
+
+- **White particles** on double jump (12 `cloud` particles under the player).
+- **Durability cost** on double jump: 67% chance to consume 1 durability from boots.
+  - **Unbreaking** enchantment reduces this chance as usual.
+- Server-side double jump validation via network packet (client → server).
+
+---
+
 ## [1.1.0] - 2026-03-25
 
 ### Added
