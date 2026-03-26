@@ -54,7 +54,21 @@ A pickaxe enchantment. Breaks blocks in a **3×3 area** around the center block.
 - Consumes 1 durability per extra block broken (Unbreaking applies)
 - Only breaks blocks appropriate for the pickaxe; unbreakable blocks (bedrock, etc.) are skipped
 - Can be enabled/disabled via config
+### 🗡️ Poison Blade
 
+A weapon enchantment for **swords and axes**. On hit, applies the **Poison** effect to the target.
+
+| Level | Duration |
+|-------|----------|
+| I     | 2 sec    |
+| II    | 3 sec    |
+| III   | 4 sec    |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Effect only triggers when the attacker is a Player and the target is a LivingEntity
+- Duration for each level is configurable
+- Can be obtained from enchanting table and villager trades
 ---
 
 ## Obtaining
@@ -68,6 +82,11 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Glow Strike III  | Master (5)       | 48 Emeralds |
 | Double Jump I    | Expert (4)       | 38 Emeralds |
 | Drill I          | Master (5)       | 50 Emeralds |
+| Poison Blade I   | Novice (1)       | 12 Emeralds |
+| Poison Blade II  | Journeyman (3)   | 30 Emeralds |
+| Poison Blade III | Master (5)       | 50 Emeralds |
+
+All enchantments can also be obtained from the **enchanting table**.
 
 ---
 
@@ -77,14 +96,18 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 
 ### Parameters
 
-| Parameter              | Default | Description                         |
-|------------------------|---------|-------------------------------------|
-| `glowStrikeEnabled`   | `true`  | Enable/disable Glow Strike          |
-| `glowStrikeDurationL1`| `40`    | Level I duration (ticks)            |
-| `glowStrikeDurationL2`| `80`    | Level II duration (ticks)           |
-| `glowStrikeDurationL3`| `140`   | Level III duration (ticks)          |
-| `doubleJumpEnabled`   | `true`  | Enable/disable Double Jump          |
-| `drillEnabled`        | `true`  | Enable/disable Drill                |
+| Parameter                | Default | Description                         |
+|--------------------------|---------|-------------------------------------|
+| `glowStrikeEnabled`      | `true`  | Enable/disable Glow Strike          |
+| `glowStrikeDurationL1`   | `40`    | Level I duration (ticks)            |
+| `glowStrikeDurationL2`   | `80`    | Level II duration (ticks)           |
+| `glowStrikeDurationL3`   | `140`   | Level III duration (ticks)          |
+| `doubleJumpEnabled`      | `true`  | Enable/disable Double Jump          |
+| `drillEnabled`           | `true`  | Enable/disable Drill                |
+| `poisonBladeEnabled`     | `true`  | Enable/disable Poison Blade         |
+| `poisonBladeDurationL1`  | `40`    | Level I duration (ticks)            |
+| `poisonBladeDurationL2`  | `60`    | Level II duration (ticks)           |
+| `poisonBladeDurationL3`  | `80`    | Level III duration (ticks)          |
 
 ---
 
@@ -102,7 +125,9 @@ src/main/java/com/mentality/customenchants/
     ├── DoubleJumpEnchantment.java — Double Jump definition
     ├── DoubleJumpServerHandler.java — Server-side double jump + durability
     ├── DrillEnchantment.java      — Drill definition
-    └── DrillHandler.java          — Server-side 3×3 mining logic
+    ├── DrillHandler.java          — Server-side 3×3 mining logic
+    ├── PoisonBladeEnchantment.java — Poison Blade logic
+    └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/
 ├── CustomEnchantsClient.java      — Client initializer

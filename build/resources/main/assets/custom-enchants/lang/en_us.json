@@ -2,14 +2,20 @@
   "enchantment.custom-enchants.glow_strike": "Glow Strike",
   "enchantment.custom-enchants.double_jump": "Double Jump",
   "enchantment.custom-enchants.drill": "Drill",
+  "enchantment.custom-enchants.poison_blade": "Poison Blade",
   "config.custom-enchants.title": "Mentalitys | Custom Enchantments — Settings",
   "config.custom-enchants.category.glow_strike": "Glow Strike",
   "config.custom-enchants.category.double_jump": "Double Jump",
   "config.custom-enchants.category.drill": "Drill",
+  "config.custom-enchants.category.poison_blade": "Poison Blade",
   "config.custom-enchants.glow_strike.enabled": "Enabled",
   "config.custom-enchants.glow_strike.duration_l1": "Duration Level I (ticks)",
   "config.custom-enchants.glow_strike.duration_l2": "Duration Level II (ticks)",
   "config.custom-enchants.glow_strike.duration_l3": "Duration Level III (ticks)",
   "config.custom-enchants.double_jump.enabled": "Enabled",
-  "config.custom-enchants.drill.enabled": "Enabled"
+  "config.custom-enchants.drill.enabled": "Enabled",
+  "config.custom-enchants.poison_blade.enabled": "Enabled",
+  "config.custom-enchants.poison_blade.duration_l1": "Duration Level I (ticks)",
+  "config.custom-enchants.poison_blade.duration_l2": "Duration Level II (ticks)",
+  "config.custom-enchants.poison_blade.duration_l3": "Duration Level III (ticks)"
 }

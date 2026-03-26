@@ -3,7 +3,7 @@
 	"id": "custom-enchants",
 	"version": "${version}",
 	"name": "Mentalitys | Custom Enchantments",
-	"description": "Adds custom enchantments: Glow Strike and Double Jump. Configurable via Cloth Config.",
+	"description": "Adds custom enchantments: Glow Strike, Double Jump, Drill, and Poison Blade. Configurable via Cloth Config.",
 	"authors": [
 		"mentality"
 	],

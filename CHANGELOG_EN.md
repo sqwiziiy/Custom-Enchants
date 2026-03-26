@@ -3,6 +3,19 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [1.4.0] - 2026-03-26
+
+### Added
+
+- **Poison Blade** enchantment for swords and axes (rare, max level 3). On hit, applies the Poison effect to the target.
+  - Level I: 2 sec, Level II: 3 sec, Level III: 4 sec.
+  - Can be applied to swords and axes.
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Poison Blade I (tier 1, 12 emeralds), II (tier 3, 30 emeralds), III (tier 5, 50 emeralds).
+- Config options: enable/disable enchantment, configurable poison duration for each level.
+
+---
+
 ## [1.3.0] - 2026-03-26
 
 ### Added

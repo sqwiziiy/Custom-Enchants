@@ -26,6 +26,12 @@ public class ModConfig {
     // Drill settings
     public boolean drillEnabled = true;
 
+    // Poison Blade settings
+    public int poisonBladeDurationL1 = 40;
+    public int poisonBladeDurationL2 = 60;
+    public int poisonBladeDurationL3 = 80;
+    public boolean poisonBladeEnabled = true;
+
     public static ModConfig get() {
         return INSTANCE;
     }

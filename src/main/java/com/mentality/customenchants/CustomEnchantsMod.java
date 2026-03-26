@@ -92,5 +92,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         2, 30, 0.2f);
             });
         });
+
+        // Poison Blade I — Novice Librarian (tier 1)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 1, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.POISON_BLADE, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 12),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Poison Blade II — Journeyman Librarian (tier 3)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.POISON_BLADE, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 30),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Poison Blade III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.POISON_BLADE, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 50),
+                        book,
+                        3, 30, 0.2f);
+            });
+        });
     }
 }

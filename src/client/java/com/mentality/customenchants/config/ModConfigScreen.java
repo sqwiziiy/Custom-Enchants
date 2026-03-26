@@ -75,6 +75,41 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.drillEnabled = val)
                 .build());
 
+        // Poison Blade category
+        ConfigCategory poisonBlade = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.poison_blade"));
+
+        poisonBlade.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.poison_blade.enabled"),
+                        config.poisonBladeEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.poisonBladeEnabled = val)
+                .build());
+
+        poisonBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.poison_blade.duration_l1"),
+                        config.poisonBladeDurationL1)
+                .setDefaultValue(40)
+                .setMin(1).setMax(6000)
+                .setSaveConsumer(val -> config.poisonBladeDurationL1 = val)
+                .build());
+
+        poisonBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.poison_blade.duration_l2"),
+                        config.poisonBladeDurationL2)
+                .setDefaultValue(60)
+                .setMin(1).setMax(6000)
+                .setSaveConsumer(val -> config.poisonBladeDurationL2 = val)
+                .build());
+
+        poisonBlade.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.poison_blade.duration_l3"),
+                        config.poisonBladeDurationL3)
+                .setDefaultValue(80)
+                .setMin(1).setMax(6000)
+                .setSaveConsumer(val -> config.poisonBladeDurationL3 = val)
+                .build());
+
         return builder.build();
     }
 }
