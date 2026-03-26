@@ -69,6 +69,26 @@ A weapon enchantment for **swords and axes**. On hit, applies the **Poison** eff
 - Effect only triggers when the attacker is a Player and the target is a LivingEntity
 - Duration for each level is configurable
 - Can be obtained from enchanting table and villager trades
+
+### 🪵 Lumberjack
+
+An axe enchantment. Chops down an entire **tree** by breaking one log block. Smart detection ensures only natural tree logs are felled — won't break player-built structures.
+
+| Level | Tree Size       | Max Blocks |
+|-------|-----------------|------------|
+| I     | Small trees     | 16         |
+| II    | Medium trees    | 48         |
+| III   | Large trees     | 128        |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Only breaks **log blocks** of the same type (oak, birch, spruce, crimson, warped, etc.)
+- Works with **Nether trees** (crimson and warped stems)
+- Verifies the block is part of a natural tree (checks for leaves or wart blocks at the top)
+- Does **not** break below the original block (safe for log walls)
+- Consumes 1 durability per log broken (Unbreaking applies)
+- Can be enabled/disabled via config; max blocks per level are configurable
+
 ---
 
 ## Obtaining

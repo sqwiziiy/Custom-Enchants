@@ -3,6 +3,15 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [1.5.1] - 2026-03-26
+
+### Fixed
+
+- **Lumberjack** now works with **Nether trees** (crimson and warped stems) — added `wart_blocks` check alongside regular leaves.
+- Fixed incomplete felling of **large oak trees** and branching trees — neighbor search now covers all 26 directions (full 3×3×3 cube), including horizontal diagonals.
+
+---
+
 ## [1.5.0] - 2026-03-26
 
 ### Added
