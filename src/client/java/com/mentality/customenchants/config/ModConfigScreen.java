@@ -64,6 +64,17 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.doubleJumpEnabled = val)
                 .build());
 
+        // Drill category
+        ConfigCategory drill = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.drill"));
+
+        drill.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.drill.enabled"),
+                        config.drillEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.drillEnabled = val)
+                .build());
+
         return builder.build();
     }
 }

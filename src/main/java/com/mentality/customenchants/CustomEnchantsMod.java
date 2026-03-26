@@ -2,6 +2,7 @@ package com.mentality.customenchants;
 
 import com.mentality.customenchants.config.ModConfig;
 import com.mentality.customenchants.enchantment.DoubleJumpServerHandler;
+import com.mentality.customenchants.enchantment.DrillHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -24,6 +25,7 @@ public class CustomEnchantsMod implements ModInitializer {
         ModConfig.load();
         ModEnchantments.register();
         DoubleJumpServerHandler.register();
+        DrillHandler.register();
         registerVillagerTrades();
         LOGGER.info("Mentalitys | Custom Enchantments initialized!");
     }
@@ -76,6 +78,18 @@ public class CustomEnchantsMod implements ModInitializer {
                         new ItemStack(Items.EMERALD, 38),
                         book,
                         3, 25, 0.2f);
+            });
+        });
+
+        // Drill I — Master Librarian (tier 5), very rare
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.DRILL, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 50),
+                        book,
+                        2, 30, 0.2f);
             });
         });
     }

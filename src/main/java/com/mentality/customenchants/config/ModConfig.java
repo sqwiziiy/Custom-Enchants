@@ -23,6 +23,9 @@ public class ModConfig {
     // Double Jump settings
     public boolean doubleJumpEnabled = true;
 
+    // Drill settings
+    public boolean drillEnabled = true;
+
     public static ModConfig get() {
         return INSTANCE;
     }

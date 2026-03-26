@@ -10,6 +10,7 @@ public class ModEnchantments {
 
     public static final Enchantment GLOW_STRIKE = new GlowStrikeEnchantment();
     public static final Enchantment DOUBLE_JUMP = new DoubleJumpEnchantment();
+    public static final Enchantment DRILL = new DrillEnchantment();
 
     public static void register() {
         Registry.register(
@@ -21,6 +22,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "double_jump"),
                 DOUBLE_JUMP
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "drill"),
+                DRILL
         );
     }
 }
