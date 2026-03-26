@@ -110,6 +110,41 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.poisonBladeDurationL3 = val)
                 .build());
 
+        // Lumberjack category
+        ConfigCategory lumberjack = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.lumberjack"));
+
+        lumberjack.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.lumberjack.enabled"),
+                        config.lumberjackEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.lumberjackEnabled = val)
+                .build());
+
+        lumberjack.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.lumberjack.max_blocks_l1"),
+                        config.lumberjackMaxBlocksL1)
+                .setDefaultValue(16)
+                .setMin(1).setMax(256)
+                .setSaveConsumer(val -> config.lumberjackMaxBlocksL1 = val)
+                .build());
+
+        lumberjack.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.lumberjack.max_blocks_l2"),
+                        config.lumberjackMaxBlocksL2)
+                .setDefaultValue(48)
+                .setMin(1).setMax(256)
+                .setSaveConsumer(val -> config.lumberjackMaxBlocksL2 = val)
+                .build());
+
+        lumberjack.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.lumberjack.max_blocks_l3"),
+                        config.lumberjackMaxBlocksL3)
+                .setDefaultValue(128)
+                .setMin(1).setMax(256)
+                .setSaveConsumer(val -> config.lumberjackMaxBlocksL3 = val)
+                .build());
+
         return builder.build();
     }
 }

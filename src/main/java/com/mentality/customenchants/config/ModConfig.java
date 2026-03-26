@@ -32,6 +32,12 @@ public class ModConfig {
     public int poisonBladeDurationL3 = 80;
     public boolean poisonBladeEnabled = true;
 
+    // Lumberjack settings
+    public boolean lumberjackEnabled = true;
+    public int lumberjackMaxBlocksL1 = 16;
+    public int lumberjackMaxBlocksL2 = 48;
+    public int lumberjackMaxBlocksL3 = 128;
+
     public static ModConfig get() {
         return INSTANCE;
     }

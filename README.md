@@ -85,6 +85,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Poison Blade I   | Novice (1)       | 12 Emeralds |
 | Poison Blade II  | Journeyman (3)   | 30 Emeralds |
 | Poison Blade III | Master (5)       | 50 Emeralds |
+| Lumberjack I     | Apprentice (2)   | 14 Emeralds |
+| Lumberjack II    | Expert (4)       | 32 Emeralds |
+| Lumberjack III   | Master (5)       | 52 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -108,6 +111,10 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `poisonBladeDurationL1`  | `40`    | Level I duration (ticks)            |
 | `poisonBladeDurationL2`  | `60`    | Level II duration (ticks)           |
 | `poisonBladeDurationL3`  | `80`    | Level III duration (ticks)          |
+| `lumberjackEnabled`      | `true`  | Enable/disable Lumberjack           |
+| `lumberjackMaxBlocksL1`  | `16`    | Max blocks Level I                  |
+| `lumberjackMaxBlocksL2`  | `48`    | Max blocks Level II                 |
+| `lumberjackMaxBlocksL3`  | `128`   | Max blocks Level III                |
 
 ---
 
@@ -127,6 +134,8 @@ src/main/java/com/mentality/customenchants/
     ├── DrillEnchantment.java      — Drill definition
     ├── DrillHandler.java          — Server-side 3×3 mining logic
     ├── PoisonBladeEnchantment.java — Poison Blade logic
+    ├── LumberjackEnchantment.java — Lumberjack definition
+    ├── LumberjackHandler.java     — Server-side tree felling logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

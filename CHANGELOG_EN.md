@@ -3,6 +3,21 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [1.5.0] - 2026-03-26
+
+### Added
+
+- **Lumberjack** enchantment for axes (rare, max level 3). Chops down an entire tree when one log is broken.
+  - Level I: small trees (up to 16 blocks), Level II: medium (up to 48), Level III: large (up to 128).
+  - Smart tree detection: verifies leaves exist, only breaks logs of the same type.
+  - Does not break blocks below the broken log — safe for player-built log structures.
+  - Consumes axe durability per log broken.
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Lumberjack I (tier 2, 14 emeralds), II (tier 4, 32 emeralds), III (tier 5, 52 emeralds).
+- Config options: enable/disable enchantment, configurable max blocks per level.
+
+---
+
 ## [1.4.0] - 2026-03-26
 
 ### Added

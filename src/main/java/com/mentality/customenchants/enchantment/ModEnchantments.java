@@ -12,6 +12,7 @@ public class ModEnchantments {
     public static final Enchantment DOUBLE_JUMP = new DoubleJumpEnchantment();
     public static final Enchantment DRILL = new DrillEnchantment();
     public static final Enchantment POISON_BLADE = new PoisonBladeEnchantment();
+    public static final Enchantment LUMBERJACK = new LumberjackEnchantment();
 
     public static void register() {
         Registry.register(
@@ -33,6 +34,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "poison_blade"),
                 POISON_BLADE
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "lumberjack"),
+                LUMBERJACK
         );
     }
 }
