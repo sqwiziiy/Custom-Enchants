@@ -331,6 +331,33 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.feedbackRepairAmount = val)
                 .build());
 
+        // Second Wind category
+        ConfigCategory secondWind = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.second_wind"));
+
+        secondWind.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.second_wind.enabled"),
+                        config.secondWindEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.secondWindEnabled = val)
+                .build());
+
+        secondWind.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.second_wind.speed_duration"),
+                        config.secondWindSpeedDuration)
+                .setDefaultValue(5)
+                .setMin(1).setMax(60)
+                .setSaveConsumer(val -> config.secondWindSpeedDuration = val)
+                .build());
+
+        secondWind.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.second_wind.cooldown"),
+                        config.secondWindCooldown)
+                .setDefaultValue(60)
+                .setMin(10).setMax(600)
+                .setSaveConsumer(val -> config.secondWindCooldown = val)
+                .build());
+
         return builder.build();
     }
 }

@@ -71,6 +71,11 @@ public class ModConfig {
     public float feedbackHealAmount = 2.0f;
     public int feedbackRepairAmount = 2;
 
+    // Second Wind settings
+    public boolean secondWindEnabled = true;
+    public int secondWindSpeedDuration = 5;
+    public int secondWindCooldown = 60;
+
     public static ModConfig get() {
         return INSTANCE;
     }

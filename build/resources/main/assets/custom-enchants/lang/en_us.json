@@ -56,5 +56,10 @@
   "config.custom-enchants.category.feedback": "Feedback",
   "config.custom-enchants.feedback.enabled": "Enabled",
   "config.custom-enchants.feedback.heal_amount": "Heal amount (HP)",
-  "config.custom-enchants.feedback.repair_amount": "Durability restored"
+  "config.custom-enchants.feedback.repair_amount": "Durability restored",
+  "enchantment.custom-enchants.second_wind": "Second Wind",
+  "config.custom-enchants.category.second_wind": "Second Wind",
+  "config.custom-enchants.second_wind.enabled": "Enabled",
+  "config.custom-enchants.second_wind.speed_duration": "Speed II duration (seconds)",
+  "config.custom-enchants.second_wind.cooldown": "Cooldown (seconds)"
 }

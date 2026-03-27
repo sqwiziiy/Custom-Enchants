@@ -56,5 +56,10 @@
   "config.custom-enchants.category.feedback": "Эхо-удар",
   "config.custom-enchants.feedback.enabled": "Включено",
   "config.custom-enchants.feedback.heal_amount": "Количество лечения (HP)",
-  "config.custom-enchants.feedback.repair_amount": "Восстановление прочности"
+  "config.custom-enchants.feedback.repair_amount": "Восстановление прочности",
+  "enchantment.custom-enchants.second_wind": "Второе дыхание",
+  "config.custom-enchants.category.second_wind": "Второе дыхание",
+  "config.custom-enchants.second_wind.enabled": "Включено",
+  "config.custom-enchants.second_wind.speed_duration": "Длительность Скорости II (секунды)",
+  "config.custom-enchants.second_wind.cooldown": "Перезарядка (секунды)"
 }

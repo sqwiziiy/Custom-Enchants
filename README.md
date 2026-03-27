@@ -135,6 +135,7 @@ A pickaxe enchantment. When mining ores that require smelting, **automatically d
 - **Max level:** 1
 - Only applies to ores that have a smelting recipe (iron, gold, copper ores and their deepslate variants)
 - Grants smelting XP on smelt
+- **Incompatible** with Fortune
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -171,7 +172,7 @@ A shield enchantment. When blocking a melee attack, **knocks the attacker back**
 - **Max level:** 3
 - Does **not** deal damage
 - Consumes extra shield durability (1 per level)
-- The player also receives a small self-knockback (30% of attacker knockback)
+- The player also receives a small self-knockback (15% of attacker knockback)
 - Knockback strength per level is configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
@@ -189,6 +190,25 @@ A shield enchantment. When blocking a **magical attack** (witch potion, evoker f
 - Triggers on magic damage, indirect magic, and shulker bullets
 - Blocks harmful potion effects while the shield is raised
 - Heal amount and durability restoration are configurable
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
+### 🫁 Second Wind
+
+A chestplate enchantment. When the player's health drops below **1 heart** (2 HP), instantly grants a burst of survival effects.
+
+| Level | Effect                                                   |
+|-------|----------------------------------------------------------|
+| I     | Speed II (5 sec) + Damage Resistance + 100% knockback resistance |
+
+- **Rarity:** Very Rare
+- **Max level:** 1
+- Triggers when health ≤ 2.0 HP (1 heart)
+- Grants **Speed II** for 5 seconds (configurable)
+- Grants **Damage Resistance I** for 5 seconds
+- Grants **100% knockback resistance** for 5 seconds
+- **Visual effects:** red pulsing screen overlay + smoke and cloud particles
+- **Cooldown:** 60 seconds (configurable)
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -223,6 +243,7 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Rebound II       | Expert (4)       | 32 Emeralds |
 | Rebound III      | Master (5)       | 50 Emeralds |
 | Feedback I       | Journeyman (3)   | 22 Emeralds |
+| Second Wind I    | Master (5)       | 52 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -271,6 +292,9 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `feedbackEnabled`        | `true`  | Enable/disable Feedback             |
 | `feedbackHealAmount`     | `2.0`   | Heal amount (HP)                    |
 | `feedbackRepairAmount`   | `2`     | Durability restored                 |
+| `secondWindEnabled`      | `true`  | Enable/disable Second Wind          |
+| `secondWindSpeedDuration`| `5`     | Speed II duration (seconds)         |
+| `secondWindCooldown`     | `60`    | Cooldown (seconds)                  |
 
 ---
 
@@ -301,6 +325,8 @@ src/main/java/com/mentality/customenchants/
     ├── VegetationHandler.java     — Server-side auto-replant logic
     ├── ReboundEnchantment.java    — Rebound definition
     ├── FeedbackEnchantment.java   — Feedback definition
+    ├── SecondWindEnchantment.java  — Second Wind definition
+    ├── SecondWindHandler.java      — Server-side second wind logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/
@@ -308,7 +334,8 @@ src/client/java/com/mentality/customenchants/
 ├── config/
 │   └── ModConfigScreen.java       — GUI settings screen (Cloth Config)
 └── enchantment/
-    └── DoubleJumpHandler.java     — Client-side double jump logic
+    ├── DoubleJumpHandler.java     — Client-side double jump logic
+    └── SecondWindClientHandler.java — Client-side second wind effects
 ```
 
 ---

@@ -19,6 +19,7 @@ public class ModEnchantments {
     public static final Enchantment VEGETATION = new VegetationEnchantment();
     public static final Enchantment REBOUND = new ReboundEnchantment();
     public static final Enchantment FEEDBACK = new FeedbackEnchantment();
+    public static final Enchantment SECOND_WIND = new SecondWindEnchantment();
 
     public static void register() {
         Registry.register(
@@ -75,6 +76,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "feedback"),
                 FEEDBACK
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "second_wind"),
+                SECOND_WIND
         );
     }
 }

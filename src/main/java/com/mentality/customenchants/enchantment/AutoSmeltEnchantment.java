@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class AutoSmeltEnchantment extends Enchantment {
 
@@ -20,5 +21,10 @@ public class AutoSmeltEnchantment extends Enchantment {
     @Override
     public boolean canEnchant(ItemStack stack) {
         return stack.getItem() instanceof PickaxeItem;
+    }
+
+    @Override
+    protected boolean checkCompatibility(Enchantment other) {
+        return other != Enchantments.BLOCK_FORTUNE && super.checkCompatibility(other);
     }
 }

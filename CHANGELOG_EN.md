@@ -3,6 +3,27 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.3.0] - 2026-03-27
+
+### Added
+
+- **Second Wind** enchantment for chestplates (very rare, max level 1). When the player's health drops below 1 heart (2 HP), instantly grants a burst of survival effects.
+  - Speed II for 5 seconds (configurable).
+  - Damage Resistance I for 5 seconds.
+  - 100% knockback resistance for 5 seconds.
+  - Visual effects: red pulsing screen overlay + smoke and cloud particles.
+  - Cooldown: 60 seconds (configurable).
+  - Available from enchanting table and villager trades.
+- Librarian villager trade: Second Wind I (tier 5, 52 emeralds).
+- Config options: enable/disable enchantment, configurable speed duration and cooldown.
+
+### Changed
+
+- **Auto Smelt** is now **incompatible with Fortune**.
+- **Rebound** — reduced player self-knockback from 30% to 15%.
+
+---
+
 ## [2.2.0] - 2026-03-27
 
 ### Added
