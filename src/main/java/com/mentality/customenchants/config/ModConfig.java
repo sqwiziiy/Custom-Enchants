@@ -51,6 +51,9 @@ public class ModConfig {
     public boolean magnetEnabled = true;
     public int magnetRadius = 5;
 
+    // Auto Smelt settings
+    public boolean autoSmeltEnabled = true;
+
     public static ModConfig get() {
         return INSTANCE;
     }

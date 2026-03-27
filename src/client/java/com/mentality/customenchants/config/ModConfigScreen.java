@@ -223,6 +223,17 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.magnetRadius = val)
                 .build());
 
+        // Auto Smelt category
+        ConfigCategory autoSmelt = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.auto_smelt"));
+
+        autoSmelt.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.auto_smelt.enabled"),
+                        config.autoSmeltEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.autoSmeltEnabled = val)
+                .build());
+
         return builder.build();
     }
 }

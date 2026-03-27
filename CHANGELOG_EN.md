@@ -3,6 +3,20 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [1.9.0] - 2026-03-26
+
+### Added
+
+- **Auto Smelt** enchantment for pickaxes (rare, max level 1). When mining ores that require smelting (iron, gold, copper), automatically drops the smelted result instead of raw ore.
+  - Only applies to ores that have a smelting recipe (iron, gold, copper ores and their deepslate variants).
+  - Grants smelting XP.
+  - Available from enchanting table and villager trades.
+- Librarian villager trade: Auto Smelt I (tier 4, 32 emeralds).
+- Config options: enable/disable enchantment.
+- Added GitHub source code link to mod description.
+
+---
+
 ## [1.8.0] - 2026-03-26
 
 ### Changed

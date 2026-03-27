@@ -122,6 +122,21 @@ A tool enchantment for **pickaxes, axes, shovels, and hoes**. When mining blocks
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### 🔥 Auto Smelt
+
+A pickaxe enchantment. When mining ores that require smelting, **automatically drops the smelted result** instead of raw ore.
+
+| Level | Effect                                  |
+|-------|----------------------------------------|
+| I     | Auto-smelts iron, gold, copper ores     |
+
+- **Rarity:** Rare
+- **Max level:** 1
+- Only applies to ores that have a smelting recipe (iron, gold, copper ores and their deepslate variants)
+- Grants smelting XP on smelt
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -145,6 +160,7 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Shadow Blade II  | Expert (4)       | 34 Emeralds |
 | Shadow Blade III | Master (5)       | 54 Emeralds |
 | Magnet I         | Journeyman (3)   | 24 Emeralds |
+| Auto Smelt I     | Expert (4)       | 32 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -181,6 +197,7 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `shadowBladeSlowDurationL3` | `60` | Slowness duration Level III (ticks) |
 | `magnetEnabled`          | `true`  | Enable/disable Magnet               |
 | `magnetRadius`           | `5`     | Pickup radius (blocks)              |
+| `autoSmeltEnabled`       | `true`  | Enable/disable Auto Smelt           |
 
 ---
 
@@ -203,6 +220,10 @@ src/main/java/com/mentality/customenchants/
     ├── LumberjackEnchantment.java — Lumberjack definition
     ├── LumberjackHandler.java     — Server-side tree felling logic
     ├── ShadowBladeEnchantment.java — Shadow Blade logic
+    ├── MagnetEnchantment.java     — Magnet definition
+    ├── MagnetHandler.java         — Server-side auto-pickup logic
+    ├── AutoSmeltEnchantment.java  — Auto Smelt definition
+    ├── AutoSmeltHandler.java      — Server-side auto-smelt logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

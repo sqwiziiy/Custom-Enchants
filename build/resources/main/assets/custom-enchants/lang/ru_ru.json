@@ -36,5 +36,8 @@
   "enchantment.custom-enchants.magnet": "Магнит",
   "config.custom-enchants.category.magnet": "Магнит",
   "config.custom-enchants.magnet.enabled": "Включено",
-  "config.custom-enchants.magnet.radius": "Радиус сбора (блоки)"
+  "config.custom-enchants.magnet.radius": "Радиус сбора (блоки)",
+  "enchantment.custom-enchants.auto_smelt": "Автопечка",
+  "config.custom-enchants.category.auto_smelt": "Автопечка",
+  "config.custom-enchants.auto_smelt.enabled": "Включено"
 }

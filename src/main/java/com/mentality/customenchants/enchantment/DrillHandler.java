@@ -29,15 +29,18 @@ public class DrillHandler {
             if (tool.isEmpty()) return;
             if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DRILL, tool) <= 0) return;
 
-            Direction face = getMinedFace(serverPlayer, pos);
-
-            isDrilling = true;
-            try {
-                breakSurroundingBlocks(serverPlayer, pos, face);
-            } finally {
-                isDrilling = false;
-            }
+            drillAround(serverPlayer, pos);
         });
+    }
+
+    public static void drillAround(ServerPlayer player, BlockPos center) {
+        Direction face = getMinedFace(player, center);
+        isDrilling = true;
+        try {
+            breakSurroundingBlocks(player, center, face);
+        } finally {
+            isDrilling = false;
+        }
     }
 
     private static Direction getMinedFace(ServerPlayer player, BlockPos brokenPos) {
@@ -80,8 +83,11 @@ public class DrillHandler {
                 if (targetState.getDestroySpeed(level, targetPos) < 0) continue; // unbreakable (bedrock etc)
                 if (!tool.isCorrectToolForDrops(targetState)) continue;
 
-                BlockEntity be = level.getBlockEntity(targetPos);
-                Block.dropResources(targetState, level, targetPos, be, player, tool);
+                boolean smelted = AutoSmeltHandler.trySmeltBlock(level, player, targetPos, targetState, tool);
+                if (!smelted) {
+                    BlockEntity be = level.getBlockEntity(targetPos);
+                    Block.dropResources(targetState, level, targetPos, be, player, tool);
+                }
                 level.removeBlock(targetPos, false);
 
                 tool.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));

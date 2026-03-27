@@ -36,5 +36,8 @@
   "enchantment.custom-enchants.magnet": "Magnet",
   "config.custom-enchants.category.magnet": "Magnet",
   "config.custom-enchants.magnet.enabled": "Enabled",
-  "config.custom-enchants.magnet.radius": "Pickup radius (blocks)"
+  "config.custom-enchants.magnet.radius": "Pickup radius (blocks)",
+  "enchantment.custom-enchants.auto_smelt": "Auto Smelt",
+  "config.custom-enchants.category.auto_smelt": "Auto Smelt",
+  "config.custom-enchants.auto_smelt.enabled": "Enabled"
 }
