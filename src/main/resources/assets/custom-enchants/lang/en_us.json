@@ -51,5 +51,10 @@
   "config.custom-enchants.rebound.enabled": "Enabled",
   "config.custom-enchants.rebound.knockback_l1": "Knockback Level I (×0.1)",
   "config.custom-enchants.rebound.knockback_l2": "Knockback Level II (×0.1)",
-  "config.custom-enchants.rebound.knockback_l3": "Knockback Level III (×0.1)"
+  "config.custom-enchants.rebound.knockback_l3": "Knockback Level III (×0.1)",
+  "enchantment.custom-enchants.feedback": "Feedback",
+  "config.custom-enchants.category.feedback": "Feedback",
+  "config.custom-enchants.feedback.enabled": "Enabled",
+  "config.custom-enchants.feedback.heal_amount": "Heal amount (HP)",
+  "config.custom-enchants.feedback.repair_amount": "Durability restored"
 }

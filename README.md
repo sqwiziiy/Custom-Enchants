@@ -151,7 +151,8 @@ A hoe enchantment. When breaking a **mature crop**, has a chance to **auto-repla
 - **Rarity:** Rare
 - **Max level:** 3
 - Works with wheat, carrots, potatoes, beetroot, and nether wart
-- Replants on the next tick after harvest
+- Replants on the next server tick after harvest
+- Freshly replanted crops are protected from accidental breaking for 0.5 sec
 - Chance per level is configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
@@ -172,6 +173,22 @@ A shield enchantment. When blocking a melee attack, **knocks the attacker back**
 - Consumes extra shield durability (1 per level)
 - The player also receives a small self-knockback (30% of attacker knockback)
 - Knockback strength per level is configurable
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
+### 🛡️ Feedback
+
+A shield enchantment. When blocking a **magical attack** (witch potion, evoker fangs, shulker bullet), the shield **restores 2 durability** and the player **heals 1 heart** of health. Also **blocks all harmful potion effects** (poison, slowness, weakness, etc.) while the shield is raised.
+
+| Level | Effect                                 |
+|-------|----------------------------------------|
+| I     | +2 durability, +1 heart on magic block |
+
+- **Rarity:** Rare
+- **Max level:** 1
+- Triggers on magic damage, indirect magic, and shulker bullets
+- Blocks harmful potion effects while the shield is raised
+- Heal amount and durability restoration are configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -205,6 +222,7 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Rebound I        | Apprentice (2)   | 16 Emeralds |
 | Rebound II       | Expert (4)       | 32 Emeralds |
 | Rebound III      | Master (5)       | 50 Emeralds |
+| Feedback I       | Journeyman (3)   | 22 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -250,6 +268,9 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `reboundKnockbackL1`    | `5`     | Knockback Level I (×0.1)            |
 | `reboundKnockbackL2`    | `10`    | Knockback Level II (×0.1)           |
 | `reboundKnockbackL3`    | `20`    | Knockback Level III (×0.1)          |
+| `feedbackEnabled`        | `true`  | Enable/disable Feedback             |
+| `feedbackHealAmount`     | `2.0`   | Heal amount (HP)                    |
+| `feedbackRepairAmount`   | `2`     | Durability restored                 |
 
 ---
 
@@ -279,6 +300,7 @@ src/main/java/com/mentality/customenchants/
     ├── VegetationEnchantment.java — Vegetation definition
     ├── VegetationHandler.java     — Server-side auto-replant logic
     ├── ReboundEnchantment.java    — Rebound definition
+    ├── FeedbackEnchantment.java   — Feedback definition
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

@@ -66,6 +66,11 @@ public class ModConfig {
     public int reboundKnockbackL2 = 10;
     public int reboundKnockbackL3 = 20;
 
+    // Feedback settings
+    public boolean feedbackEnabled = true;
+    public float feedbackHealAmount = 2.0f;
+    public int feedbackRepairAmount = 2;
+
     public static ModConfig get() {
         return INSTANCE;
     }

@@ -304,6 +304,33 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.reboundKnockbackL3 = val)
                 .build());
 
+        // Feedback category
+        ConfigCategory feedback = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.feedback"));
+
+        feedback.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.feedback.enabled"),
+                        config.feedbackEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.feedbackEnabled = val)
+                .build());
+
+        feedback.addEntry(entryBuilder.startFloatField(
+                        Component.translatable("config.custom-enchants.feedback.heal_amount"),
+                        config.feedbackHealAmount)
+                .setDefaultValue(2.0f)
+                .setMin(0.0f).setMax(20.0f)
+                .setSaveConsumer(val -> config.feedbackHealAmount = val)
+                .build());
+
+        feedback.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.feedback.repair_amount"),
+                        config.feedbackRepairAmount)
+                .setDefaultValue(2)
+                .setMin(1).setMax(50)
+                .setSaveConsumer(val -> config.feedbackRepairAmount = val)
+                .build());
+
         return builder.build();
     }
 }

@@ -3,6 +3,23 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.2.0] - 2026-03-27
+
+### Added
+
+- **Feedback** enchantment for shields (rare, max level 1). When blocking a magical attack (witch potion, evoker fangs, shulker bullet), the shield restores 2 durability and the player heals 1 heart of health.
+  - Blocks all harmful potion effects (poison, slowness, weakness, etc.) while blocking.
+  - Available from enchanting table and villager trades.
+- Librarian villager trade: Feedback I (tier 3, 22 emeralds).
+- Config options: enable/disable enchantment, configurable heal amount and durability restoration.
+
+### Fixed
+
+- **Vegetation** — fixed unreliable auto-replanting: replant now guaranteed to execute on the next server tick.
+- **Vegetation** — added seedling protection: a freshly replanted crop cannot be broken for 10 ticks (0.5 sec) after planting.
+
+---
+
 ## [2.1.0] - 2026-03-27
 
 ### Added

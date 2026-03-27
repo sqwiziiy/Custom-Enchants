@@ -304,5 +304,17 @@ public class CustomEnchantsMod implements ModInitializer {
                         3, 30, 0.2f);
             });
         });
+
+        // Feedback I — Journeyman Librarian (tier 3)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.FEEDBACK, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 22),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
     }
 }

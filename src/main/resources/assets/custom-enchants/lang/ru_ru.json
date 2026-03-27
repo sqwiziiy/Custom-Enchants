@@ -51,5 +51,10 @@
   "config.custom-enchants.rebound.enabled": "Включено",
   "config.custom-enchants.rebound.knockback_l1": "Отдача I уровня (×0.1)",
   "config.custom-enchants.rebound.knockback_l2": "Отдача II уровня (×0.1)",
-  "config.custom-enchants.rebound.knockback_l3": "Отдача III уровня (×0.1)"
+  "config.custom-enchants.rebound.knockback_l3": "Отдача III уровня (×0.1)",
+  "enchantment.custom-enchants.feedback": "Эхо-удар",
+  "config.custom-enchants.category.feedback": "Эхо-удар",
+  "config.custom-enchants.feedback.enabled": "Включено",
+  "config.custom-enchants.feedback.heal_amount": "Количество лечения (HP)",
+  "config.custom-enchants.feedback.repair_amount": "Восстановление прочности"
 }

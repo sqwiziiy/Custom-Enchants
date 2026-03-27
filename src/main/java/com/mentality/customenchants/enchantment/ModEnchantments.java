@@ -18,6 +18,7 @@ public class ModEnchantments {
     public static final Enchantment AUTO_SMELT = new AutoSmeltEnchantment();
     public static final Enchantment VEGETATION = new VegetationEnchantment();
     public static final Enchantment REBOUND = new ReboundEnchantment();
+    public static final Enchantment FEEDBACK = new FeedbackEnchantment();
 
     public static void register() {
         Registry.register(
@@ -69,6 +70,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "rebound"),
                 REBOUND
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "feedback"),
+                FEEDBACK
         );
     }
 }

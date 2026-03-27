@@ -6,7 +6,8 @@
 		"ExampleMixin",
 		"ThrownTridentMixin",
 		"AnvilMenuMixin",
-		"ShieldReboundMixin"
+		"ShieldReboundMixin",
+		"ShieldFeedbackMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
