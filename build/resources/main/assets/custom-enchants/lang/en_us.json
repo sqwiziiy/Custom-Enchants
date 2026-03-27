@@ -61,5 +61,11 @@
   "config.custom-enchants.category.second_wind": "Second Wind",
   "config.custom-enchants.second_wind.enabled": "Enabled",
   "config.custom-enchants.second_wind.speed_duration": "Speed II duration (seconds)",
-  "config.custom-enchants.second_wind.cooldown": "Cooldown (seconds)"
+  "config.custom-enchants.second_wind.cooldown": "Cooldown (seconds)",
+  "enchantment.custom-enchants.guardians_grace": "Guardian's Grace",
+  "config.custom-enchants.category.guardians_grace": "Guardian's Grace",
+  "config.custom-enchants.guardians_grace.enabled": "Enabled",
+  "config.custom-enchants.guardians_grace.chance_l1": "Chance Level I (%)",
+  "config.custom-enchants.guardians_grace.chance_l2": "Chance Level II (%)",
+  "config.custom-enchants.guardians_grace.chance_l3": "Chance Level III (%)"
 }

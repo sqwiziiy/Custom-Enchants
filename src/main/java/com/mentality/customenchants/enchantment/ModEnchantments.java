@@ -20,6 +20,7 @@ public class ModEnchantments {
     public static final Enchantment REBOUND = new ReboundEnchantment();
     public static final Enchantment FEEDBACK = new FeedbackEnchantment();
     public static final Enchantment SECOND_WIND = new SecondWindEnchantment();
+    public static final Enchantment GUARDIANS_GRACE = new GuardiansGraceEnchantment();
 
     public static void register() {
         Registry.register(
@@ -81,6 +82,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "second_wind"),
                 SECOND_WIND
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "guardians_grace"),
+                GUARDIANS_GRACE
         );
     }
 }

@@ -330,5 +330,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         2, 30, 0.2f);
             });
         });
+
+        // Guardian's Grace I — Apprentice Librarian (tier 2)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.GUARDIANS_GRACE, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 16),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Guardian's Grace II — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.GUARDIANS_GRACE, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 32),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Guardian's Grace III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.GUARDIANS_GRACE, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 50),
+                        book,
+                        3, 30, 0.2f);
+            });
+        });
     }
 }

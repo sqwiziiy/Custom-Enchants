@@ -3,6 +3,8 @@ package com.mentality.customenchants.enchantment;
 import com.mentality.customenchants.config.ModConfig;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -33,7 +35,7 @@ public class LumberjackHandler {
 
             if (!(world instanceof ServerLevel serverLevel)) return;
 
-            if (!state.is(BlockTags.LOGS)) return;
+            if (!isNaturalLog(state)) return;
 
             ItemStack tool = player.getMainHandItem();
             if (tool.isEmpty()) return;
@@ -79,7 +81,7 @@ public class LumberjackHandler {
             for (BlockPos neighbor : getTreeNeighbors(current)) {
                 if (visited.contains(neighbor)) continue;
                 BlockState neighborState = world.getBlockState(neighbor);
-                if (neighborState.is(BlockTags.LOGS) && neighborState.getBlock() == logBlock) {
+                if (isNaturalLog(neighborState) && neighborState.getBlock() == logBlock) {
                     visited.add(neighbor);
                     queue.add(neighbor);
                     if (neighbor.getY() > topLog.getY()) {
@@ -124,7 +126,7 @@ public class LumberjackHandler {
         for (BlockPos neighbor : getTreeNeighbors(brokenPos)) {
             if (neighbor.getY() < brokenPos.getY()) continue; // don't go below
             BlockState neighborState = level.getBlockState(neighbor);
-            if (neighborState.is(BlockTags.LOGS) && neighborState.getBlock() == logBlock) {
+            if (isNaturalLog(neighborState) && neighborState.getBlock() == logBlock) {
                 queue.add(neighbor);
                 visited.add(neighbor);
             }
@@ -136,7 +138,7 @@ public class LumberjackHandler {
             BlockState currentState = level.getBlockState(current);
 
             // Double-check it's still a matching log
-            if (!currentState.is(BlockTags.LOGS) || currentState.getBlock() != logBlock) continue;
+            if (!isNaturalLog(currentState) || currentState.getBlock() != logBlock) continue;
 
             // Break the block
             BlockEntity be = level.getBlockEntity(current);
@@ -152,12 +154,24 @@ public class LumberjackHandler {
                 if (visited.contains(neighbor)) continue;
                 if (neighbor.getY() < brokenPos.getY()) continue; // never go below the original block
                 BlockState neighborState = level.getBlockState(neighbor);
-                if (neighborState.is(BlockTags.LOGS) && neighborState.getBlock() == logBlock) {
+                if (isNaturalLog(neighborState) && neighborState.getBlock() == logBlock) {
                     visited.add(neighbor);
                     queue.add(neighbor);
                 }
             }
         }
+    }
+
+    /**
+     * Only match true log/stem blocks (including stripped variants).
+     * Explicitly includes only blocks ending in _log or _stem.
+     * Excludes: _wood, stripped_*_wood, *_hyphae, bamboo_block, etc.
+     */
+    private static boolean isNaturalLog(BlockState state) {
+        if (!state.is(BlockTags.LOGS)) return false;
+        ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        String path = id.getPath();
+        return path.endsWith("_log") || path.endsWith("_stem");
     }
 
     /**

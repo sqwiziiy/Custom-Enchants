@@ -76,6 +76,12 @@ public class ModConfig {
     public int secondWindSpeedDuration = 5;
     public int secondWindCooldown = 60;
 
+    // Guardian's Grace settings
+    public boolean guardiansGraceEnabled = true;
+    public int guardiansGraceChanceL1 = 10;
+    public int guardiansGraceChanceL2 = 20;
+    public int guardiansGraceChanceL3 = 30;
+
     public static ModConfig get() {
         return INSTANCE;
     }

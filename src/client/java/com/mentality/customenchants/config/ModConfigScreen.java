@@ -358,6 +358,41 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.secondWindCooldown = val)
                 .build());
 
+        // Guardian's Grace category
+        ConfigCategory guardiansGrace = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.guardians_grace"));
+
+        guardiansGrace.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.guardians_grace.enabled"),
+                        config.guardiansGraceEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.guardiansGraceEnabled = val)
+                .build());
+
+        guardiansGrace.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.guardians_grace.chance_l1"),
+                        config.guardiansGraceChanceL1)
+                .setDefaultValue(10)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.guardiansGraceChanceL1 = val)
+                .build());
+
+        guardiansGrace.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.guardians_grace.chance_l2"),
+                        config.guardiansGraceChanceL2)
+                .setDefaultValue(20)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.guardiansGraceChanceL2 = val)
+                .build());
+
+        guardiansGrace.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.guardians_grace.chance_l3"),
+                        config.guardiansGraceChanceL3)
+                .setDefaultValue(30)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.guardiansGraceChanceL3 = val)
+                .build());
+
         return builder.build();
     }
 }

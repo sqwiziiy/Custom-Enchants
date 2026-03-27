@@ -84,6 +84,7 @@ An axe enchantment. Chops down an entire **tree** by breaking one log block. Sma
 - **Rarity:** Rare
 - **Max level:** 3
 - Only breaks **log blocks** of the same type (oak, birch, spruce, crimson, warped, etc.)
+- Does **not** work on `_wood` or `hyphae` blocks (crafted full-bark blocks from the sawmill/crafting)
 - Works with **Nether trees** (crimson and warped stems)
 - Verifies the block is part of a natural tree (checks for leaves or wart blocks at the top)
 - Does **not** break below the original block (safe for log walls)
@@ -195,20 +196,40 @@ A shield enchantment. When blocking a **magical attack** (witch potion, evoker f
 
 ### 🫁 Second Wind
 
-A chestplate enchantment. When the player's health drops below **1 heart** (2 HP), instantly grants a burst of survival effects.
+A chestplate enchantment. When the player's health drops below **1 heart** (2 HP), instantly grants a burst of survival effects. The duration of effects **scales with how many armor pieces** have the enchantment.
 
-| Level | Effect                                                   |
-|-------|----------------------------------------------------------|
-| I     | Speed II (5 sec) + Damage Resistance + 100% knockback resistance |
+| Pieces enchanted | Speed II duration | Resistance I duration |
+|------------------|-------------------|------------------------|
+| 1                | 2 sec             | 1 sec                  |
+| 2                | 3 sec             | 1 sec                  |
+| 3                | 3 sec             | 2 sec                  |
+| 4                | 4 sec             | 2 sec                  |
 
 - **Rarity:** Very Rare
 - **Max level:** 1
+- Can be applied to **helmet, chestplate, leggings, and boots**
 - Triggers when health ≤ 2.0 HP (1 heart)
-- Grants **Speed II** for 5 seconds (configurable)
-- Grants **Damage Resistance I** for 5 seconds
-- Grants **100% knockback resistance** for 5 seconds
-- **Visual effects:** red pulsing screen overlay + smoke and cloud particles
+- Grants **Speed II**, **Damage Resistance I**, and **100% knockback resistance**
+- **Visual effects:** smoke and cloud particles (no screen overlay)
 - **Cooldown:** 60 seconds (configurable)
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
+### 🛡️ Guardian's Grace
+
+A shield enchantment. When successfully blocking an attack, has a chance to **convert part of the blocked damage into food** (saturation restore). At max level, also rarely **heals** the player.
+
+| Level | Food Restore Chance | Bonus                  |
+|-------|---------------------|------------------------|
+| I     | 10%                 | —                      |
+| II    | 20%                 | —                      |
+| III   | 30%                 | +10% to heal 1 heart   |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Restores **1 food point** (half a visual drumstick) on proc
+- Level III: additional **10% chance to heal 2 HP (1 heart)**
+- Chances per level are configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -244,6 +265,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Rebound III      | Master (5)       | 50 Emeralds |
 | Feedback I       | Journeyman (3)   | 22 Emeralds |
 | Second Wind I    | Master (5)       | 52 Emeralds |
+| Guardian's Grace I   | Apprentice (2)   | 16 Emeralds |
+| Guardian's Grace II  | Expert (4)       | 32 Emeralds |
+| Guardian's Grace III | Master (5)       | 50 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -295,6 +319,10 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `secondWindEnabled`      | `true`  | Enable/disable Second Wind          |
 | `secondWindSpeedDuration`| `5`     | Speed II duration (seconds)         |
 | `secondWindCooldown`     | `60`    | Cooldown (seconds)                  |
+| `guardiansGraceEnabled`  | `true`  | Enable/disable Guardian's Grace     |
+| `guardiansGraceChanceL1` | `10`    | Level I chance (%)                  |
+| `guardiansGraceChanceL2` | `20`    | Level II chance (%)                 |
+| `guardiansGraceChanceL3` | `30`    | Level III chance (%)                |
 
 ---
 
@@ -325,8 +353,9 @@ src/main/java/com/mentality/customenchants/
     ├── VegetationHandler.java     — Server-side auto-replant logic
     ├── ReboundEnchantment.java    — Rebound definition
     ├── FeedbackEnchantment.java   — Feedback definition
-    ├── SecondWindEnchantment.java  — Second Wind definition
-    ├── SecondWindHandler.java      — Server-side second wind logic
+    ├── SecondWindEnchantment.java  — Second Wind definition (all armor slots)
+    ├── SecondWindHandler.java      — Server-side second wind logic (scales by piece count)
+    ├── GuardiansGraceEnchantment.java — Guardian's Grace definition
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

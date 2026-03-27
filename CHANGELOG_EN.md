@@ -3,6 +3,30 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.4.0] - 2026-03-28
+
+### Added
+
+- **Guardian's Grace** enchantment for shields (rare, max level 3). When successfully blocking an attack, has a chance to restore food. At level III, also has a rare chance to heal the player.
+  - Level I: 10% chance to restore 1 food point.
+  - Level II: 20% chance to restore 1 food point.
+  - Level III: 30% food chance + additional 10% chance to heal 2 HP (1 heart).
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Guardian's Grace I (tier 2, 16 emeralds), II (tier 4, 32 emeralds), III (tier 5, 50 emeralds).
+- Config options: enable/disable enchantment, configurable chance per level.
+
+### Changed
+
+- **Second Wind** can now be applied to **any armor piece** (helmet, chestplate, leggings, boots). Effect durations now scale by the number of pieces enchanted:
+  - 1 piece: Speed II — 2 sec, Resistance I — 1 sec
+  - 2 pieces: Speed II — 3 sec, Resistance I — 1 sec
+  - 3 pieces: Speed II — 3 sec, Resistance I — 2 sec
+  - 4 pieces: Speed II — 4 sec, Resistance I — 2 sec
+- **Second Wind** — removed the red screen overlay effect; smoke particles remain.
+- **Lumberjack** — no longer triggers on `_wood` or `hyphae` blocks (full-bark crafted blocks); only works on true log/stem blocks and their stripped variants.
+
+---
+
 ## [2.3.0] - 2026-03-27
 
 ### Added

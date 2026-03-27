@@ -61,5 +61,11 @@
   "config.custom-enchants.category.second_wind": "Второе дыхание",
   "config.custom-enchants.second_wind.enabled": "Включено",
   "config.custom-enchants.second_wind.speed_duration": "Длительность Скорости II (секунды)",
-  "config.custom-enchants.second_wind.cooldown": "Перезарядка (секунды)"
+  "config.custom-enchants.second_wind.cooldown": "Перезарядка (секунды)",
+  "enchantment.custom-enchants.guardians_grace": "Живой щит",
+  "config.custom-enchants.category.guardians_grace": "Живой щит",
+  "config.custom-enchants.guardians_grace.enabled": "Включено",
+  "config.custom-enchants.guardians_grace.chance_l1": "Шанс I уровня (%)",
+  "config.custom-enchants.guardians_grace.chance_l2": "Шанс II уровня (%)",
+  "config.custom-enchants.guardians_grace.chance_l3": "Шанс III уровня (%)"
 }

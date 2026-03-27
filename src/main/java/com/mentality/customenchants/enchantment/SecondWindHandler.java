@@ -30,10 +30,15 @@ public class SecondWindHandler {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 if (player.isDeadOrDying() || player.isSpectator() || player.isCreative()) continue;
 
-                ItemStack chestplate = player.getItemBySlot(EquipmentSlot.CHEST);
-                if (chestplate.isEmpty()) continue;
-                int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SECOND_WIND, chestplate);
-                if (level <= 0) continue;
+                // Count how many armor pieces have Second Wind
+                int pieces = 0;
+                for (EquipmentSlot slot : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
+                    ItemStack armor = player.getItemBySlot(slot);
+                    if (!armor.isEmpty() && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SECOND_WIND, armor) > 0) {
+                        pieces++;
+                    }
+                }
+                if (pieces <= 0) continue;
 
                 // Trigger when health drops to 2 HP (1 heart) or below
                 if (player.getHealth() > 2.0f) continue;
@@ -44,27 +49,29 @@ public class SecondWindHandler {
                 Long lastTriggered = cooldowns.get(player.getUUID());
                 if (lastTriggered != null && (currentTime - lastTriggered) < cooldownTicks) continue;
 
-                // Trigger Second Wind
+                // Trigger Second Wind — scale durations by piece count
                 cooldowns.put(player.getUUID(), currentTime);
 
-                int speedDuration = ModConfig.get().secondWindSpeedDuration * 20;
+                // Speed: 1→2s, 2→3s, 3→3s, 4→4s
+                int speedTicks = switch (pieces) {
+                    case 1 -> 40;
+                    case 2 -> 60;
+                    case 3 -> 60;
+                    default -> 80;
+                };
+                // Resistance: 1→1s, 2→1s, 3+→2s
+                int resistanceTicks = (pieces >= 3) ? 40 : 20;
 
-                // Speed II for configured duration
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, speedDuration, 1, false, true, true));
+                // Speed II
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, speedTicks, 1, false, true, true));
+                // Resistance I
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, resistanceTicks, 0, false, true, true));
 
-                // Knockback resistance 100% for same duration
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1, 0, false, false, false) {
-                    // This is just a workaround — we use the attribute approach below
-                });
-                player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN); // Remove the dummy
-                // Apply full knockback resistance via effect
-                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, speedDuration, 0, false, true, true));
-
-                // Apply knockback resistance as an attribute modifier
+                // Knockback resistance 100% for speed duration
                 var knockbackAttr = player.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE);
                 if (knockbackAttr != null) {
                     var modifier = new net.minecraft.world.entity.ai.attributes.AttributeModifier(
-                            UUID.fromString("b3f7c466-7c2a-4c3f-9e1a-1d2f3a4b5c6d"),
+                            java.util.UUID.fromString("b3f7c466-7c2a-4c3f-9e1a-1d2f3a4b5c6d"),
                             "Second Wind knockback resistance",
                             1.0,
                             net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION
@@ -72,10 +79,7 @@ public class SecondWindHandler {
                     knockbackAttr.removeModifier(modifier);
                     knockbackAttr.addTransientModifier(modifier);
 
-                    // Schedule removal after duration
-                    server.execute(() -> {
-                        scheduleKnockbackRemoval(player, modifier, speedDuration);
-                    });
+                    server.execute(() -> scheduleKnockbackRemoval(player, modifier, speedTicks));
                 }
 
                 // Send visual effect packet to client
