@@ -3,6 +3,23 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.1.0] - 2026-03-27
+
+### Added
+
+- **Rebound** enchantment for shields (rare, max level 3). When blocking a melee hit, knocks the attacker back and gives the player a small backwards impulse.
+  - Level I: knockback 0.5, Level II: knockback 1.0, Level III: knockback 2.0.
+  - Does not deal damage. Consumes extra shield durability.
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Rebound I (tier 2, 16 emeralds), II (tier 4, 32 emeralds), III (tier 5, 50 emeralds).
+- Config options: enable/disable enchantment, configurable knockback strength per level.
+
+### Changed
+
+- **Vegetation** Level III now has **100% replant chance** (was 75%).
+
+---
+
 ## [2.0.0] - 2026-03-27
 
 ### Added

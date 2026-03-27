@@ -146,13 +146,32 @@ A hoe enchantment. When breaking a **mature crop**, has a chance to **auto-repla
 |-------|--------|
 | I     | 30%    |
 | II    | 60%    |
-| III   | 75%    |
+| III   | 100%   |
 
 - **Rarity:** Rare
 - **Max level:** 3
 - Works with wheat, carrots, potatoes, beetroot, and nether wart
 - Replants on the next tick after harvest
 - Chance per level is configurable
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
+### 🛡️ Rebound
+
+A shield enchantment. When blocking a melee attack, **knocks the attacker back** and gives the player a small **backwards impulse**.
+
+| Level | Knockback Strength |
+|-------|--------------------|
+| I     | 0.5                |
+| II    | 1.0                |
+| III   | 2.0                |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Does **not** deal damage
+- Consumes extra shield durability (1 per level)
+- The player also receives a small self-knockback (30% of attacker knockback)
+- Knockback strength per level is configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -183,6 +202,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Vegetation I     | Apprentice (2)   | 14 Emeralds |
 | Vegetation II    | Expert (4)       | 30 Emeralds |
 | Vegetation III   | Master (5)       | 48 Emeralds |
+| Rebound I        | Apprentice (2)   | 16 Emeralds |
+| Rebound II       | Expert (4)       | 32 Emeralds |
+| Rebound III      | Master (5)       | 50 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -223,7 +245,11 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `vegetationEnabled`      | `true`  | Enable/disable Vegetation           |
 | `vegetationChanceL1`     | `30`    | Chance Level I (%)                  |
 | `vegetationChanceL2`     | `60`    | Chance Level II (%)                 |
-| `vegetationChanceL3`     | `75`    | Chance Level III (%)                |
+| `vegetationChanceL3`     | `100`   | Chance Level III (%)                |
+| `reboundEnabled`         | `true`  | Enable/disable Rebound              |
+| `reboundKnockbackL1`    | `5`     | Knockback Level I (×0.1)            |
+| `reboundKnockbackL2`    | `10`    | Knockback Level II (×0.1)           |
+| `reboundKnockbackL3`    | `20`    | Knockback Level III (×0.1)          |
 
 ---
 
@@ -252,6 +278,7 @@ src/main/java/com/mentality/customenchants/
     ├── AutoSmeltHandler.java      — Server-side auto-smelt logic
     ├── VegetationEnchantment.java — Vegetation definition
     ├── VegetationHandler.java     — Server-side auto-replant logic
+    ├── ReboundEnchantment.java    — Rebound definition
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

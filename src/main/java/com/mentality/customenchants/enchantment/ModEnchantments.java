@@ -17,6 +17,7 @@ public class ModEnchantments {
     public static final Enchantment MAGNET = new MagnetEnchantment();
     public static final Enchantment AUTO_SMELT = new AutoSmeltEnchantment();
     public static final Enchantment VEGETATION = new VegetationEnchantment();
+    public static final Enchantment REBOUND = new ReboundEnchantment();
 
     public static void register() {
         Registry.register(
@@ -63,6 +64,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "vegetation"),
                 VEGETATION
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "rebound"),
+                REBOUND
         );
     }
 }

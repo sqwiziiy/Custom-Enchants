@@ -5,7 +5,8 @@
 	"mixins": [
 		"ExampleMixin",
 		"ThrownTridentMixin",
-		"AnvilMenuMixin"
+		"AnvilMenuMixin",
+		"ShieldReboundMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

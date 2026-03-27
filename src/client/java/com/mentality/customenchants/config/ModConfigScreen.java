@@ -264,9 +264,44 @@ public class ModConfigScreen {
         vegetation.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.vegetation.chance_l3"),
                         config.vegetationChanceL3)
-                .setDefaultValue(75)
+                .setDefaultValue(100)
                 .setMin(0).setMax(100)
                 .setSaveConsumer(val -> config.vegetationChanceL3 = val)
+                .build());
+
+        // Rebound category
+        ConfigCategory rebound = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.rebound"));
+
+        rebound.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.rebound.enabled"),
+                        config.reboundEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.reboundEnabled = val)
+                .build());
+
+        rebound.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.rebound.knockback_l1"),
+                        config.reboundKnockbackL1)
+                .setDefaultValue(5)
+                .setMin(1).setMax(50)
+                .setSaveConsumer(val -> config.reboundKnockbackL1 = val)
+                .build());
+
+        rebound.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.rebound.knockback_l2"),
+                        config.reboundKnockbackL2)
+                .setDefaultValue(10)
+                .setMin(1).setMax(50)
+                .setSaveConsumer(val -> config.reboundKnockbackL2 = val)
+                .build());
+
+        rebound.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.rebound.knockback_l3"),
+                        config.reboundKnockbackL3)
+                .setDefaultValue(20)
+                .setMin(1).setMax(50)
+                .setSaveConsumer(val -> config.reboundKnockbackL3 = val)
                 .build());
 
         return builder.build();

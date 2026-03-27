@@ -45,5 +45,11 @@
   "config.custom-enchants.vegetation.enabled": "Enabled",
   "config.custom-enchants.vegetation.chance_l1": "Chance Level I (%)",
   "config.custom-enchants.vegetation.chance_l2": "Chance Level II (%)",
-  "config.custom-enchants.vegetation.chance_l3": "Chance Level III (%)"
+  "config.custom-enchants.vegetation.chance_l3": "Chance Level III (%)",
+  "enchantment.custom-enchants.rebound": "Rebound",
+  "config.custom-enchants.category.rebound": "Rebound",
+  "config.custom-enchants.rebound.enabled": "Enabled",
+  "config.custom-enchants.rebound.knockback_l1": "Knockback Level I (×0.1)",
+  "config.custom-enchants.rebound.knockback_l2": "Knockback Level II (×0.1)",
+  "config.custom-enchants.rebound.knockback_l3": "Knockback Level III (×0.1)"
 }

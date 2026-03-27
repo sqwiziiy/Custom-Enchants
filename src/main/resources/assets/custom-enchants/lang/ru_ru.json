@@ -45,5 +45,11 @@
   "config.custom-enchants.vegetation.enabled": "Включено",
   "config.custom-enchants.vegetation.chance_l1": "Шанс I уровня (%)",
   "config.custom-enchants.vegetation.chance_l2": "Шанс II уровня (%)",
-  "config.custom-enchants.vegetation.chance_l3": "Шанс III уровня (%)"
+  "config.custom-enchants.vegetation.chance_l3": "Шанс III уровня (%)",
+  "enchantment.custom-enchants.rebound": "Эластичность",
+  "config.custom-enchants.category.rebound": "Эластичность",
+  "config.custom-enchants.rebound.enabled": "Включено",
+  "config.custom-enchants.rebound.knockback_l1": "Отдача I уровня (×0.1)",
+  "config.custom-enchants.rebound.knockback_l2": "Отдача II уровня (×0.1)",
+  "config.custom-enchants.rebound.knockback_l3": "Отдача III уровня (×0.1)"
 }

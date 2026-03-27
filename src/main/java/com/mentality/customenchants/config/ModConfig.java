@@ -58,7 +58,13 @@ public class ModConfig {
     public boolean vegetationEnabled = true;
     public int vegetationChanceL1 = 30;
     public int vegetationChanceL2 = 60;
-    public int vegetationChanceL3 = 75;
+    public int vegetationChanceL3 = 100;
+
+    // Rebound settings
+    public boolean reboundEnabled = true;
+    public int reboundKnockbackL1 = 5;
+    public int reboundKnockbackL2 = 10;
+    public int reboundKnockbackL3 = 20;
 
     public static ModConfig get() {
         return INSTANCE;
