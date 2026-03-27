@@ -16,6 +16,7 @@ public class ModEnchantments {
     public static final Enchantment SHADOW_BLADE = new ShadowBladeEnchantment();
     public static final Enchantment MAGNET = new MagnetEnchantment();
     public static final Enchantment AUTO_SMELT = new AutoSmeltEnchantment();
+    public static final Enchantment VEGETATION = new VegetationEnchantment();
 
     public static void register() {
         Registry.register(
@@ -57,6 +58,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "auto_smelt"),
                 AUTO_SMELT
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "vegetation"),
+                VEGETATION
         );
     }
 }

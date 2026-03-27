@@ -54,6 +54,11 @@ public class ShadowBladeEnchantment extends Enchantment {
             default -> config.shadowBladeSlowDurationL1;
         };
 
+        // Distance bonus: up to +10% at 30 blocks distance
+        double distance = player.distanceTo(livingTarget);
+        float distanceBonus = (float) (Math.min(distance / 30.0, 1.0) * 0.10);
+        chance += distanceBonus;
+
         if (player.getRandom().nextFloat() < chance) {
             double yawRad = Math.toRadians(livingTarget.getYRot());
             double behindX = livingTarget.getX() + Math.sin(yawRad) * 1.5;

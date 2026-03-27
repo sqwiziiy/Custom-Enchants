@@ -6,6 +6,7 @@ import com.mentality.customenchants.enchantment.DrillHandler;
 import com.mentality.customenchants.enchantment.LumberjackHandler;
 import com.mentality.customenchants.enchantment.MagnetHandler;
 import com.mentality.customenchants.enchantment.AutoSmeltHandler;
+import com.mentality.customenchants.enchantment.VegetationHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -32,6 +33,7 @@ public class CustomEnchantsMod implements ModInitializer {
         LumberjackHandler.register();
         MagnetHandler.register();
         AutoSmeltHandler.register();
+        VegetationHandler.register();
         registerVillagerTrades();
         LOGGER.info("Mentalitys | Custom Enchantments initialized!");
     }
@@ -228,6 +230,42 @@ public class CustomEnchantsMod implements ModInitializer {
                         new ItemStack(Items.EMERALD, 32),
                         book,
                         6, 15, 0.2f);
+            });
+        });
+
+        // Vegetation I — Apprentice Librarian (tier 2)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.VEGETATION, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 14),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Vegetation II — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.VEGETATION, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 30),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Vegetation III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.VEGETATION, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 48),
+                        book,
+                        3, 30, 0.2f);
             });
         });
     }

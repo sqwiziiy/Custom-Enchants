@@ -3,6 +3,24 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.0.0] - 2026-03-27
+
+### Added
+
+- **Vegetation** enchantment for hoes (rare, max level 3). When breaking a mature crop, has a chance to auto-replant.
+  - Level I: 30%, Level II: 60%, Level III: 75%.
+  - Works with wheat, carrots, potatoes, beetroot, nether wart.
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Vegetation I (tier 2, 14 emeralds), II (tier 4, 30 emeralds), III (tier 5, 48 emeralds).
+- Config options: enable/disable enchantment, configurable chance per level.
+
+### Changed
+
+- **Glow Strike** can now be enchanted on **tridents** — Glowing effect triggers when thrown trident hits.
+- **Shadow Blade** — added distance-based teleport chance bonus: up to +10% at 30 blocks (linear scaling).
+
+---
+
 ## [1.9.0] - 2026-03-26
 
 ### Added

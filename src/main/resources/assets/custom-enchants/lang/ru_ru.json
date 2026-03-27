@@ -39,5 +39,11 @@
   "config.custom-enchants.magnet.radius": "Радиус сбора (блоки)",
   "enchantment.custom-enchants.auto_smelt": "Автопечка",
   "config.custom-enchants.category.auto_smelt": "Автопечка",
-  "config.custom-enchants.auto_smelt.enabled": "Включено"
+  "config.custom-enchants.auto_smelt.enabled": "Включено",
+  "enchantment.custom-enchants.vegetation": "Вегетация",
+  "config.custom-enchants.category.vegetation": "Вегетация",
+  "config.custom-enchants.vegetation.enabled": "Включено",
+  "config.custom-enchants.vegetation.chance_l1": "Шанс I уровня (%)",
+  "config.custom-enchants.vegetation.chance_l2": "Шанс II уровня (%)",
+  "config.custom-enchants.vegetation.chance_l3": "Шанс III уровня (%)"
 }

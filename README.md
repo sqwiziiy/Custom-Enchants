@@ -10,7 +10,7 @@ A **Minecraft 1.20.1** mod for **Fabric API** that adds unique enchantments with
 
 ### ⚔️ Glow Strike
 
-A weapon enchantment for **swords and axes**. On hit, applies the **Glowing** effect to the target, making them visible through walls.
+A weapon enchantment for **swords, axes, and tridents**. On hit, applies the **Glowing** effect to the target, making them visible through walls.
 
 | Level | Duration | Ticks |
 |-------|----------|-------|
@@ -104,6 +104,7 @@ A trident enchantment. On hit, has a chance to **teleport the player behind the 
 - **Max level:** 3
 - **Incompatible** with Channeling and Riptide
 - Teleports the player 1.5 blocks behind the target entity, facing it
+- **Distance bonus:** up to +10% chance when thrown from 30 blocks away (linear scaling)
 - Chance and slowness duration are configurable per level
 - Can be obtained from enchanting table and villager trades
 
@@ -137,6 +138,24 @@ A pickaxe enchantment. When mining ores that require smelting, **automatically d
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### 🌱 Vegetation
+
+A hoe enchantment. When breaking a **mature crop**, has a chance to **auto-replant** it.
+
+| Level | Chance |
+|-------|--------|
+| I     | 30%    |
+| II    | 60%    |
+| III   | 75%    |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Works with wheat, carrots, potatoes, beetroot, and nether wart
+- Replants on the next tick after harvest
+- Chance per level is configurable
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -161,6 +180,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Shadow Blade III | Master (5)       | 54 Emeralds |
 | Magnet I         | Journeyman (3)   | 24 Emeralds |
 | Auto Smelt I     | Expert (4)       | 32 Emeralds |
+| Vegetation I     | Apprentice (2)   | 14 Emeralds |
+| Vegetation II    | Expert (4)       | 30 Emeralds |
+| Vegetation III   | Master (5)       | 48 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -198,6 +220,10 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `magnetEnabled`          | `true`  | Enable/disable Magnet               |
 | `magnetRadius`           | `5`     | Pickup radius (blocks)              |
 | `autoSmeltEnabled`       | `true`  | Enable/disable Auto Smelt           |
+| `vegetationEnabled`      | `true`  | Enable/disable Vegetation           |
+| `vegetationChanceL1`     | `30`    | Chance Level I (%)                  |
+| `vegetationChanceL2`     | `60`    | Chance Level II (%)                 |
+| `vegetationChanceL3`     | `75`    | Chance Level III (%)                |
 
 ---
 
@@ -224,6 +250,8 @@ src/main/java/com/mentality/customenchants/
     ├── MagnetHandler.java         — Server-side auto-pickup logic
     ├── AutoSmeltEnchantment.java  — Auto Smelt definition
     ├── AutoSmeltHandler.java      — Server-side auto-smelt logic
+    ├── VegetationEnchantment.java — Vegetation definition
+    ├── VegetationHandler.java     — Server-side auto-replant logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

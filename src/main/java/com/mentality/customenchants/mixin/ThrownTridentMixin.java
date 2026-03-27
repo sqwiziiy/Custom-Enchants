@@ -1,6 +1,6 @@
 package com.mentality.customenchants.mixin;
 
-import com.mentality.customenchants.CustomEnchantsMod;
+import com.mentality.customenchants.enchantment.GlowStrikeEnchantment;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import com.mentality.customenchants.enchantment.ShadowBladeEnchantment;
 import net.minecraft.world.entity.Entity;
@@ -23,22 +23,24 @@ public abstract class ThrownTridentMixin {
     private ItemStack tridentItem;
 
     @Inject(method = "onHitEntity(Lnet/minecraft/world/phys/EntityHitResult;)V", at = @At("HEAD"))
-    private void onShadowBladeHit(EntityHitResult result, CallbackInfo ci) {
+    private void onTridentHitEntity(EntityHitResult result, CallbackInfo ci) {
         ThrownTrident self = (ThrownTrident) (Object) this;
         Entity owner = self.getOwner();
         Entity hitEntity = result.getEntity();
 
-        CustomEnchantsMod.LOGGER.info("[ShadowBlade] Trident hit! Owner: {}, Target: {}, Item: {}",
-                owner != null ? owner.getClass().getSimpleName() : "null",
-                hitEntity != null ? hitEntity.getClass().getSimpleName() : "null",
-                this.tridentItem);
-
         if (owner instanceof Player player && hitEntity instanceof LivingEntity livingTarget) {
-            int level = EnchantmentHelper.getItemEnchantmentLevel(
+            // Shadow Blade
+            int shadowLevel = EnchantmentHelper.getItemEnchantmentLevel(
                     ModEnchantments.SHADOW_BLADE, this.tridentItem);
-            CustomEnchantsMod.LOGGER.info("[ShadowBlade] Enchantment level: {}", level);
-            if (level > 0) {
-                ShadowBladeEnchantment.applyShadowBlade(player, livingTarget, level);
+            if (shadowLevel > 0) {
+                ShadowBladeEnchantment.applyShadowBlade(player, livingTarget, shadowLevel);
+            }
+
+            // Glow Strike
+            int glowLevel = EnchantmentHelper.getItemEnchantmentLevel(
+                    ModEnchantments.GLOW_STRIKE, this.tridentItem);
+            if (glowLevel > 0) {
+                GlowStrikeEnchantment.applyGlowStrike(player, livingTarget, glowLevel);
             }
         }
     }

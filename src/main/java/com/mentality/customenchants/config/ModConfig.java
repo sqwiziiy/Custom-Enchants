@@ -54,6 +54,12 @@ public class ModConfig {
     // Auto Smelt settings
     public boolean autoSmeltEnabled = true;
 
+    // Vegetation settings
+    public boolean vegetationEnabled = true;
+    public int vegetationChanceL1 = 30;
+    public int vegetationChanceL2 = 60;
+    public int vegetationChanceL3 = 75;
+
     public static ModConfig get() {
         return INSTANCE;
     }

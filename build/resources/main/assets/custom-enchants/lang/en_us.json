@@ -39,5 +39,11 @@
   "config.custom-enchants.magnet.radius": "Pickup radius (blocks)",
   "enchantment.custom-enchants.auto_smelt": "Auto Smelt",
   "config.custom-enchants.category.auto_smelt": "Auto Smelt",
-  "config.custom-enchants.auto_smelt.enabled": "Enabled"
+  "config.custom-enchants.auto_smelt.enabled": "Enabled",
+  "enchantment.custom-enchants.vegetation": "Vegetation",
+  "config.custom-enchants.category.vegetation": "Vegetation",
+  "config.custom-enchants.vegetation.enabled": "Enabled",
+  "config.custom-enchants.vegetation.chance_l1": "Chance Level I (%)",
+  "config.custom-enchants.vegetation.chance_l2": "Chance Level II (%)",
+  "config.custom-enchants.vegetation.chance_l3": "Chance Level III (%)"
 }

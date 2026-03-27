@@ -234,6 +234,41 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.autoSmeltEnabled = val)
                 .build());
 
+        // Vegetation category
+        ConfigCategory vegetation = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.vegetation"));
+
+        vegetation.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.vegetation.enabled"),
+                        config.vegetationEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.vegetationEnabled = val)
+                .build());
+
+        vegetation.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.vegetation.chance_l1"),
+                        config.vegetationChanceL1)
+                .setDefaultValue(30)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.vegetationChanceL1 = val)
+                .build());
+
+        vegetation.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.vegetation.chance_l2"),
+                        config.vegetationChanceL2)
+                .setDefaultValue(60)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.vegetationChanceL2 = val)
+                .build());
+
+        vegetation.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.vegetation.chance_l3"),
+                        config.vegetationChanceL3)
+                .setDefaultValue(75)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.vegetationChanceL3 = val)
+                .build());
+
         return builder.build();
     }
 }

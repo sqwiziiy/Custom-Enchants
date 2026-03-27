@@ -7,6 +7,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -15,6 +17,11 @@ public class GlowStrikeEnchantment extends Enchantment {
 
     public GlowStrikeEnchantment() {
         super(Rarity.RARE, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+    }
+
+    @Override
+    public boolean canEnchant(ItemStack stack) {
+        return super.canEnchant(stack) || stack.getItem() instanceof TridentItem;
     }
 
     @Override
@@ -27,20 +34,22 @@ public class GlowStrikeEnchantment extends Enchantment {
         return super.checkCompatibility(other) && other != Enchantments.KNOCKBACK;
     }
 
+    public static void applyGlowStrike(Player player, LivingEntity livingTarget, int level) {
+        ModConfig config = ModConfig.get();
+        if (!config.glowStrikeEnabled) return;
+        int duration = switch (level) {
+            case 1 -> config.glowStrikeDurationL1;
+            case 2 -> config.glowStrikeDurationL2;
+            case 3 -> config.glowStrikeDurationL3;
+            default -> config.glowStrikeDurationL1;
+        };
+        livingTarget.addEffect(new MobEffectInstance(MobEffects.GLOWING, duration, 0));
+    }
+
     @Override
     public void doPostAttack(LivingEntity attacker, Entity target, int level) {
-        ModConfig config = ModConfig.get();
-        if (!config.glowStrikeEnabled) {
-            return;
-        }
-        if (attacker instanceof Player && target instanceof LivingEntity livingTarget) {
-            int duration = switch (level) {
-                case 1 -> config.glowStrikeDurationL1;
-                case 2 -> config.glowStrikeDurationL2;
-                case 3 -> config.glowStrikeDurationL3;
-                default -> config.glowStrikeDurationL1;
-            };
-            livingTarget.addEffect(new MobEffectInstance(MobEffects.GLOWING, duration, 0));
+        if (attacker instanceof Player player && target instanceof LivingEntity livingTarget) {
+            applyGlowStrike(player, livingTarget, level);
         }
         super.doPostAttack(attacker, target, level);
     }
