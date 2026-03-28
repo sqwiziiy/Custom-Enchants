@@ -95,6 +95,9 @@ public class ModConfig {
     public boolean skyRageEnabled = true;
     public int skyRageCooldownTicks = 30;
 
+    // XP Syphon (Собиратель искр) settings
+    public boolean xpSyphonEnabled = true;
+
     public static ModConfig get() {
         return INSTANCE;
     }

@@ -3,6 +3,24 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.8.0] - 2026-03-28
+
+### Added
+
+- **XP Syphon** — new sword enchantment (uncommon, max level 3). Hits on mobs have a chance to drop XP orbs before the mob dies.
+  - Level I: 5% chance, 1 XP.
+  - Level II: 10% chance, 2 XP.
+  - Level III: 15% chance, 3 XP.
+- Librarian trades: XP Syphon I (tier 2, 14 emeralds), II (tier 3, 26 emeralds), III (tier 4, 40 emeralds).
+
+### Fixed
+
+- **Feedback** — complete rework of negative effect protection:
+  - On any blocked hit, ALL currently-active harmful effects are now cleared (including pre-existing ones).
+  - Added `forceAddEffect` interception — some effects previously bypassed the protection.
+
+---
+
 ## [2.7.0] - 2026-03-28
 
 ### Added

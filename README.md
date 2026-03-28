@@ -289,6 +289,22 @@ A **bow and crossbow** enchantment. During a thunderstorm, arrows have a chance 
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### ✨ XP Syphon
+
+A **sword** enchantment. Hits on mobs have a chance to drop XP orbs before the mob dies.
+
+| Level | Chance | XP |
+|-------|--------|----|
+| I     | 5%     | 1  |
+| II    | 10%    | 2  |
+| III   | 15%    | 3  |
+
+- **Rarity:** Uncommon
+- **Max level:** 3
+- Works on any mob including bosses
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -333,6 +349,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Sky Rage I           | Journeyman (3)   | 22 Emeralds |
 | Sky Rage II          | Expert (4)       | 38 Emeralds |
 | Sky Rage III         | Master (5)       | 55 Emeralds |
+| XP Syphon I          | Apprentice (2)   | 14 Emeralds |
+| XP Syphon II         | Journeyman (3)   | 26 Emeralds |
+| XP Syphon III        | Expert (4)       | 40 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -395,6 +414,7 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `tetherMasterEnabled`    | `true`  | Enable/disable Tether Master        |
 | `skyRageEnabled`         | `true`  | Enable/disable Sky Rage             |
 | `skyRageCooldownTicks`   | `30`    | Cooldown between strikes (ticks)    |
+| `xpSyphonEnabled`        | `true`  | Enable/disable XP Syphon            |
 
 ---
 

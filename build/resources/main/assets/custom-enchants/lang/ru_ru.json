@@ -81,5 +81,9 @@
   "enchantment.custom-enchants.sky_rage": "Ярость Неба",
   "config.custom-enchants.category.sky_rage": "Ярость Неба",
   "config.custom-enchants.sky_rage.enabled": "Включено",
-  "config.custom-enchants.sky_rage.cooldown_ticks": "Кулдаун (тиков)"
+  "config.custom-enchants.sky_rage.cooldown_ticks": "Кулдаун (тиков)",
+
+  "enchantment.custom-enchants.xp_syphon": "Собиратель искр",
+  "config.custom-enchants.category.xp_syphon": "Собиратель искр",
+  "config.custom-enchants.xp_syphon.enabled": "Включено"
 }

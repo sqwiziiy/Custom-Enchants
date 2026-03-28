@@ -458,6 +458,17 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.skyRageCooldownTicks = val)
                 .build());
 
+        // XP Syphon (Собиратель искр) category
+        ConfigCategory xpSyphon = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.xp_syphon"));
+
+        xpSyphon.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.xp_syphon.enabled"),
+                        config.xpSyphonEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.xpSyphonEnabled = val)
+                .build());
+
         return builder.build();
     }
 }

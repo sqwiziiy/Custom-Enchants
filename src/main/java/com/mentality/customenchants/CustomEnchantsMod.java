@@ -474,5 +474,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         3, 30, 0.2f);
             });
         });
+
+        // XP Syphon I — Apprentice Librarian (tier 2)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.XP_SYPHON, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 14),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // XP Syphon II — Journeyman Librarian (tier 3)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.XP_SYPHON, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 26),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // XP Syphon III — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.XP_SYPHON, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 40),
+                        book,
+                        6, 20, 0.2f);
+            });
+        });
     }
 }
