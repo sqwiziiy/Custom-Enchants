@@ -181,20 +181,24 @@ A shield enchantment. When blocking a melee attack, **knocks the attacker back**
 
 ### 🛡️ Feedback
 
-A shield enchantment. When blocking a **magical attack** (witch potion, evoker fangs, shulker bullet), the shield **restores 2 durability** and the player **heals 1 heart** of health. Also **blocks all harmful potion effects** (poison, slowness, weakness, etc.) while the shield is raised.
+A shield enchantment. When blocking a **magical attack** (harming potions, harming arrows, shulker bullets, etc.), **fully cancels the incoming damage**, **restores shield durability**, and **clears all active harmful effects** (poison, instant damage, slowness, etc.) while the shield is raised. Also **prevents new harmful effects** from being applied while blocking.
 
-| Level | Effect                                 |
-|-------|----------------------------------------|
-| I     | +2 durability, +1 heart on magic block |
+| Level | Effect                                               |
+|-------|------------------------------------------------------|
+| I     | Cancel magic damage, purge effects, restore durability |
 
 - **Rarity:** Rare
 - **Max level:** 1
-- Triggers on magic damage, indirect magic, and shulker bullets
-- Blocks harmful potion effects while the shield is raised
-- Heal amount and durability restoration are configurable
+- Fully blocks **instant damage** from harming potions/arrows (fix v2.9)
+- Cancels magic damage inside `hurt()` before it is applied
+- Purges all currently-active harmful effects on magic block
+- Shield durability is partially restored as a bonus for blocking
+- Durability restoration amount is configurable
 - **Incompatible** with Rebound and Guardian's Grace
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
+
+### 🪱 Second Wind
 
 A chestplate enchantment. When the player's health drops below **1 heart** (2 HP), instantly grants a burst of survival effects. The duration of effects **scales with how many armor pieces** have the enchantment.
 
@@ -305,19 +309,23 @@ A **sword** enchantment. Hits on mobs have a chance to drop XP orbs before the m
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
-### 🪦 Steady Footing
+### 💥 Kinetic Discharge
 
-A **boots** enchantment. Reduces slipping on ice and inertia while running.
+An **elytra** enchantment. Landing on the ground after fast elytra flight creates a **shockwave** that knocks back nearby mobs. Wave strength depends on enchantment level.
 
-| Level | Friction control               |
-|-------|--------------------------------|
-| I     | -30% slipperiness              |
-| II    | -60% slipperiness              |
-| III   | Full control (ice = ground)    |
+| Level | Radius   | Effect                                              |
+|-------|----------|-----------------------------------------------------|
+| I     | 3 blocks | Weak knockback                                      |
+| II    | 5 blocks | Medium knockback                                    |
+| III   | 7 blocks | Strong knockback + 2 HP damage to all hit entities  |
 
-- **Rarity:** Uncommon
+- **Rarity:** Rare
 - **Max level:** 3
-- Works on ice, packed ice, frosted ice, and blue ice
+- Only triggers when landing speed ≥ 0.4 blocks/tick (configurable)
+- **Level III (passive):** during flight, 90% of durability ticks are refunded (≈−90% elytra wear)
+- **Level III:** shockwave activation has only a 10% chance to cost durability (90% free)
+- Visual effect: central explosion particle + ring of poof particles at wave radius
+- All parameters (speed threshold, knockback, damage) are configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -368,9 +376,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | XP Syphon I          | Apprentice (2)   | 14 Emeralds |
 | XP Syphon II         | Journeyman (3)   | 26 Emeralds |
 | XP Syphon III        | Expert (4)       | 40 Emeralds |
-| Steady Footing I     | Apprentice (2)   | 14 Emeralds |
-| Steady Footing II    | Expert (4)       | 30 Emeralds |
-| Steady Footing III   | Master (5)       | 44 Emeralds |
+| Kinetic Discharge I  | Expert (4)       | 28 Emeralds |
+| Kinetic Discharge II | Master (5)       | 44 Emeralds |
+| Kinetic Discharge III| Master (5)       | 62 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -434,7 +442,12 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `skyRageEnabled`         | `true`  | Enable/disable Sky Rage             |
 | `skyRageCooldownTicks`   | `30`    | Cooldown between strikes (ticks)    |
 | `xpSyphonEnabled`        | `true`  | Enable/disable XP Syphon            |
-| `steadyFootingEnabled`   | `true`  | Enable/disable Steady Footing       |
+| `kineticDischargeEnabled`   | `true` | Enable/disable Kinetic Discharge    |
+| `kineticDischargeMinSpeed`  | `0.4`  | Min flight speed to trigger (blocks/tick) |
+| `kineticDischargeKnockbackL1` | `1.5` | Knockback strength Level I         |
+| `kineticDischargeKnockbackL2` | `2.5` | Knockback strength Level II        |
+| `kineticDischargeKnockbackL3` | `3.5` | Knockback strength Level III       |
+| `kineticDischargeDamageL3`  | `2.0`  | Bonus damage at Level III (HP)      |
 
 ---
 
@@ -468,6 +481,9 @@ src/main/java/com/mentality/customenchants/
     ├── SecondWindEnchantment.java  — Second Wind definition (all armor slots)
     ├── SecondWindHandler.java      — Server-side second wind logic (scales by piece count)
     ├── GuardiansGraceEnchantment.java — Guardian's Grace definition
+    ├── XpSyphonEnchantment.java   — XP Syphon definition
+    ├── KineticDischargeEnchantment.java — Kinetic Discharge definition
+    ├── KineticDischargeHandler.java — Server-side shockwave on landing logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/
