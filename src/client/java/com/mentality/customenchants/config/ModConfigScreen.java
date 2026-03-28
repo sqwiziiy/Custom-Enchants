@@ -393,6 +393,41 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.guardiansGraceChanceL3 = val)
                 .build());
 
+        // Vulnerability (Аналитик) category
+        ConfigCategory vulnerability = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.vulnerability"));
+
+        vulnerability.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.vulnerability.enabled"),
+                        config.vulnerabilityEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.vulnerabilityEnabled = val)
+                .build());
+
+        vulnerability.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.vulnerability.ignore_l1"),
+                        config.vulnerabilityIgnoreL1)
+                .setDefaultValue(10)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.vulnerabilityIgnoreL1 = val)
+                .build());
+
+        vulnerability.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.vulnerability.ignore_l2"),
+                        config.vulnerabilityIgnoreL2)
+                .setDefaultValue(20)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.vulnerabilityIgnoreL2 = val)
+                .build());
+
+        vulnerability.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.vulnerability.ignore_l3"),
+                        config.vulnerabilityIgnoreL3)
+                .setDefaultValue(30)
+                .setMin(0).setMax(100)
+                .setSaveConsumer(val -> config.vulnerabilityIgnoreL3 = val)
+                .build());
+
         return builder.build();
     }
 }

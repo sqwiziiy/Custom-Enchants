@@ -67,5 +67,11 @@
   "config.custom-enchants.guardians_grace.enabled": "Enabled",
   "config.custom-enchants.guardians_grace.chance_l1": "Chance Level I (%)",
   "config.custom-enchants.guardians_grace.chance_l2": "Chance Level II (%)",
-  "config.custom-enchants.guardians_grace.chance_l3": "Chance Level III (%)"
+  "config.custom-enchants.guardians_grace.chance_l3": "Chance Level III (%)",
+  "enchantment.custom-enchants.vulnerability": "Vulnerability",
+  "config.custom-enchants.category.vulnerability": "Vulnerability",
+  "config.custom-enchants.vulnerability.enabled": "Enabled",
+  "config.custom-enchants.vulnerability.ignore_l1": "Armor ignore Level I (%)",
+  "config.custom-enchants.vulnerability.ignore_l2": "Armor ignore Level II (%)",
+  "config.custom-enchants.vulnerability.ignore_l3": "Armor ignore Level III (%)"
 }

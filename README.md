@@ -20,7 +20,7 @@ A weapon enchantment for **swords, axes, and tridents**. On hit, applies the **G
 
 - **Rarity:** Rare
 - **Max level:** 3
-- **Incompatible** with Knockback
+- **Incompatible** with Knockback; when applied to a trident — also incompatible with Shadow Blade
 - Effect only triggers when the attacker is a Player and the target is a LivingEntity
 - Duration for each level is configurable
 
@@ -103,7 +103,7 @@ A trident enchantment. On hit, has a chance to **teleport the player behind the 
 
 - **Rarity:** Very Rare
 - **Max level:** 3
-- **Incompatible** with Channeling and Riptide
+- **Incompatible** with Channeling, Riptide, Loyalty, and Glow Strike
 - Teleports the player 1.5 blocks behind the target entity, facing it
 - **Distance bonus:** up to +10% chance when thrown from 30 blocks away (linear scaling)
 - Chance and slowness duration are configurable per level
@@ -175,6 +175,7 @@ A shield enchantment. When blocking a melee attack, **knocks the attacker back**
 - Consumes extra shield durability (1 per level)
 - The player also receives a small self-knockback (15% of attacker knockback)
 - Knockback strength per level is configurable
+- **Incompatible** with Feedback and Guardian's Grace
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -191,10 +192,9 @@ A shield enchantment. When blocking a **magical attack** (witch potion, evoker f
 - Triggers on magic damage, indirect magic, and shulker bullets
 - Blocks harmful potion effects while the shield is raised
 - Heal amount and durability restoration are configurable
+- **Incompatible** with Rebound and Guardian's Grace
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
-
-### 🫁 Second Wind
 
 A chestplate enchantment. When the player's health drops below **1 heart** (2 HP), instantly grants a burst of survival effects. The duration of effects **scales with how many armor pieces** have the enchantment.
 
@@ -230,6 +230,27 @@ A shield enchantment. When successfully blocking an attack, has a chance to **co
 - Restores **1 food point** (half a visual drumstick) on proc
 - Level III: additional **10% chance to heal 2 HP (1 heart)**
 - Chances per level are configurable
+- **Incompatible** with Rebound and Feedback
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
+---
+
+### 🎯 Vulnerability
+
+A **bow and crossbow** enchantment. Arrows from this bow partially ignore the target's armor value, piercing through protection.
+
+| Level | Armor Ignore |
+|-------|--------------|
+| I     | 10%          |
+| II    | 20%          |
+| III   | 30%          |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Works with regular arrows, fire arrows, and other projectile types
+- Reduces the effective armor and toughness values when calculating damage
+- Percentage per level is configurable
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
@@ -268,6 +289,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Guardian's Grace I   | Apprentice (2)   | 16 Emeralds |
 | Guardian's Grace II  | Expert (4)       | 32 Emeralds |
 | Guardian's Grace III | Master (5)       | 50 Emeralds |
+| Vulnerability I      | Apprentice (2)   | 18 Emeralds |
+| Vulnerability II     | Expert (4)       | 36 Emeralds |
+| Vulnerability III    | Master (5)       | 52 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -323,6 +347,10 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `guardiansGraceChanceL1` | `10`    | Level I chance (%)                  |
 | `guardiansGraceChanceL2` | `20`    | Level II chance (%)                 |
 | `guardiansGraceChanceL3` | `30`    | Level III chance (%)                |
+| `vulnerabilityEnabled`   | `true`  | Enable/disable Vulnerability        |
+| `vulnerabilityIgnoreL1`  | `10`    | Armor ignore Level I (%)            |
+| `vulnerabilityIgnoreL2`  | `20`    | Armor ignore Level II (%)           |
+| `vulnerabilityIgnoreL3`  | `30`    | Armor ignore Level III (%)          |
 
 ---
 

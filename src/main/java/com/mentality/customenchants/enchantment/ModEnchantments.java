@@ -21,6 +21,7 @@ public class ModEnchantments {
     public static final Enchantment FEEDBACK = new FeedbackEnchantment();
     public static final Enchantment SECOND_WIND = new SecondWindEnchantment();
     public static final Enchantment GUARDIANS_GRACE = new GuardiansGraceEnchantment();
+    public static final Enchantment VULNERABILITY = new VulnerabilityEnchantment();
 
     public static void register() {
         Registry.register(
@@ -87,6 +88,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "guardians_grace"),
                 GUARDIANS_GRACE
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "vulnerability"),
+                VULNERABILITY
         );
     }
 }

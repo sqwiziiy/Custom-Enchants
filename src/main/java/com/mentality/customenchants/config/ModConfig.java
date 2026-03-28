@@ -82,6 +82,12 @@ public class ModConfig {
     public int guardiansGraceChanceL2 = 20;
     public int guardiansGraceChanceL3 = 30;
 
+    // Vulnerability (Аналитик) settings
+    public boolean vulnerabilityEnabled = true;
+    public int vulnerabilityIgnoreL1 = 10;
+    public int vulnerabilityIgnoreL2 = 20;
+    public int vulnerabilityIgnoreL3 = 30;
+
     public static ModConfig get() {
         return INSTANCE;
     }

@@ -31,7 +31,9 @@ public class GlowStrikeEnchantment extends Enchantment {
 
     @Override
     protected boolean checkCompatibility(Enchantment other) {
-        return super.checkCompatibility(other) && other != Enchantments.KNOCKBACK;
+        return super.checkCompatibility(other)
+                && other != Enchantments.KNOCKBACK
+                && !(other instanceof ShadowBladeEnchantment);
     }
 
     public static void applyGlowStrike(Player player, LivingEntity livingTarget, int level) {

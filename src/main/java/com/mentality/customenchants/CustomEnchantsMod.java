@@ -366,5 +366,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         3, 30, 0.2f);
             });
         });
+
+        // Vulnerability I — Apprentice Librarian (tier 2)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.VULNERABILITY, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 18),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Vulnerability II — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.VULNERABILITY, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 36),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Vulnerability III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.VULNERABILITY, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 52),
+                        book,
+                        3, 30, 0.2f);
+            });
+        });
     }
 }

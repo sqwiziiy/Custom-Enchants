@@ -8,7 +8,9 @@
 		"AnvilMenuMixin",
 		"ShieldReboundMixin",
 		"ShieldFeedbackMixin",
-		"ShieldGuardianGraceMixin"
+		"ShieldGuardianGraceMixin",
+		"VulnerabilityArrowMixin",
+		"VulnerabilityArmorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

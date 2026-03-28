@@ -21,4 +21,11 @@ public class FeedbackEnchantment extends Enchantment {
     public boolean canEnchant(ItemStack stack) {
         return stack.getItem() instanceof ShieldItem;
     }
+
+    @Override
+    protected boolean checkCompatibility(Enchantment other) {
+        return !(other instanceof ReboundEnchantment) &&
+               !(other instanceof GuardiansGraceEnchantment) &&
+               super.checkCompatibility(other);
+    }
 }

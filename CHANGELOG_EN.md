@@ -3,6 +3,35 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.5.1] - 2026-03-28
+
+### Changed
+
+- **Shadow Blade** is now incompatible with **Loyalty** and **Glow Strike**.
+  - Loyalty: trident returns after throwing; Shadow Blade teleports the player on throw — mechanics are mutually exclusive.
+  - Glow Strike: two offensive special effects on one trident create an overpowered combo.
+- **Glow Strike** on tridents is now incompatible with **Shadow Blade**.
+
+---
+
+## [2.5.0] - 2026-03-28
+
+### Added
+
+- **Vulnerability** enchantment for bows and crossbows (rare, max level 3). Arrows from this bow partially bypass the target's armor.
+  - Level I: ignores 10% of armor.
+  - Level II: ignores 20% of armor.
+  - Level III: ignores 30% of armor.
+  - Available from enchanting table and villager trades.
+- Librarian villager trades: Vulnerability I (tier 2, 18 emeralds), II (tier 4, 36 emeralds), III (tier 5, 52 emeralds).
+- Config options: enable/disable enchantment, configurable armor ignore percentage per level.
+
+### Changed
+
+- **Rebound**, **Feedback**, and **Guardian's Grace** are now mutually incompatible — only one of the three can be applied to a shield at a time.
+
+---
+
 ## [2.4.0] - 2026-03-28
 
 ### Added
