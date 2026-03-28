@@ -85,5 +85,14 @@
 
   "enchantment.custom-enchants.xp_syphon": "Собиратель искр",
   "config.custom-enchants.category.xp_syphon": "Собиратель искр",
-  "config.custom-enchants.xp_syphon.enabled": "Включено"
+  "config.custom-enchants.xp_syphon.enabled": "Включено",
+
+  "enchantment.custom-enchants.kinetic_discharge": "Кинетический разряд",
+  "config.custom-enchants.category.kinetic_discharge": "Кинетический разряд",
+  "config.custom-enchants.kinetic_discharge.enabled": "Включено",
+  "config.custom-enchants.kinetic_discharge.min_speed": "Мин. скорость полёта (блок/тик)",
+  "config.custom-enchants.kinetic_discharge.knockback_l1": "Сила отбрасывания I уровня",
+  "config.custom-enchants.kinetic_discharge.knockback_l2": "Сила отбрасывания II уровня",
+  "config.custom-enchants.kinetic_discharge.knockback_l3": "Сила отбрасывания III уровня",
+  "config.custom-enchants.kinetic_discharge.damage_l3": "Урон при III уровне (HP)"
 }

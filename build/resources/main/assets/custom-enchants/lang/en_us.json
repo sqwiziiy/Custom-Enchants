@@ -85,5 +85,14 @@
 
   "enchantment.custom-enchants.xp_syphon": "XP Syphon",
   "config.custom-enchants.category.xp_syphon": "XP Syphon",
-  "config.custom-enchants.xp_syphon.enabled": "Enabled"
+  "config.custom-enchants.xp_syphon.enabled": "Enabled",
+
+  "enchantment.custom-enchants.kinetic_discharge": "Kinetic Discharge",
+  "config.custom-enchants.category.kinetic_discharge": "Kinetic Discharge",
+  "config.custom-enchants.kinetic_discharge.enabled": "Enabled",
+  "config.custom-enchants.kinetic_discharge.min_speed": "Min flight speed (blocks/tick)",
+  "config.custom-enchants.kinetic_discharge.knockback_l1": "Knockback strength Level I",
+  "config.custom-enchants.kinetic_discharge.knockback_l2": "Knockback strength Level II",
+  "config.custom-enchants.kinetic_discharge.knockback_l3": "Knockback strength Level III",
+  "config.custom-enchants.kinetic_discharge.damage_l3": "Damage at Level III (HP)"
 }

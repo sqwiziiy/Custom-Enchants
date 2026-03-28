@@ -25,6 +25,7 @@ public class ModEnchantments {
     public static final Enchantment TETHER_MASTER = new TetherMasterEnchantment();
     public static final Enchantment SKY_RAGE = new SkyRageEnchantment();
     public static final Enchantment XP_SYPHON = new XpSyphonEnchantment();
+    public static final Enchantment KINETIC_DISCHARGE = new KineticDischargeEnchantment();
 
     public static void register() {
         Registry.register(
@@ -76,6 +77,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "rebound"),
                 REBOUND
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "kinetic_discharge"),
+                KINETIC_DISCHARGE
         );
         Registry.register(
                 BuiltInRegistries.ENCHANTMENT,

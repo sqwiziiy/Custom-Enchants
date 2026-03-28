@@ -305,6 +305,22 @@ A **sword** enchantment. Hits on mobs have a chance to drop XP orbs before the m
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### 🪦 Steady Footing
+
+A **boots** enchantment. Reduces slipping on ice and inertia while running.
+
+| Level | Friction control               |
+|-------|--------------------------------|
+| I     | -30% slipperiness              |
+| II    | -60% slipperiness              |
+| III   | Full control (ice = ground)    |
+
+- **Rarity:** Uncommon
+- **Max level:** 3
+- Works on ice, packed ice, frosted ice, and blue ice
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -352,6 +368,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | XP Syphon I          | Apprentice (2)   | 14 Emeralds |
 | XP Syphon II         | Journeyman (3)   | 26 Emeralds |
 | XP Syphon III        | Expert (4)       | 40 Emeralds |
+| Steady Footing I     | Apprentice (2)   | 14 Emeralds |
+| Steady Footing II    | Expert (4)       | 30 Emeralds |
+| Steady Footing III   | Master (5)       | 44 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -415,6 +434,7 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `skyRageEnabled`         | `true`  | Enable/disable Sky Rage             |
 | `skyRageCooldownTicks`   | `30`    | Cooldown between strikes (ticks)    |
 | `xpSyphonEnabled`        | `true`  | Enable/disable XP Syphon            |
+| `steadyFootingEnabled`   | `true`  | Enable/disable Steady Footing       |
 
 ---
 

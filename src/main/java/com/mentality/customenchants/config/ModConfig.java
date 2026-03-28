@@ -98,6 +98,14 @@ public class ModConfig {
     // XP Syphon (Собиратель искр) settings
     public boolean xpSyphonEnabled = true;
 
+    // Kinetic Discharge (Кинетический разряд) settings
+    public boolean kineticDischargeEnabled = true;
+    public float kineticDischargeMinSpeed = 0.4f;
+    public float kineticDischargeKnockbackL1 = 1.5f;
+    public float kineticDischargeKnockbackL2 = 2.5f;
+    public float kineticDischargeKnockbackL3 = 3.5f;
+    public float kineticDischargeDamageL3 = 2.0f;
+
     public static ModConfig get() {
         return INSTANCE;
     }

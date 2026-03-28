@@ -40,12 +40,40 @@ public abstract class ShieldFeedbackMixin {
     }
 
     /**
-     * On any blocked hit: purge ALL active harmful effects from the player.
-     * For magic damage additionally heal and repair the shield.
+     * Cancel ALL magic-type damage (including instant damage from harming arrows/potions)
+     * when the player is actively blocking with a Feedback shield.
+     * This runs BEFORE the damage is applied, so it fully negates instant damage as well.
+     */
+    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
+    private void onFeedbackCancelMagic(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Entity directEntity = source.getDirectEntity();
+        boolean isMagicAttack = source.is(DamageTypes.MAGIC)
+                || source.is(DamageTypes.INDIRECT_MAGIC)
+                || directEntity instanceof ShulkerBullet;
+        if (!isMagicAttack) return;
+        if (!customEnchants$hasFeedbackShield()) return;
+        // Purge any active harmful effects and fully block the magic damage
+        Player player = (Player) (Object) this;
+        List<MobEffect> toRemove = player.getActiveEffects().stream()
+                .filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL)
+                .map(MobEffectInstance::getEffect)
+                .collect(Collectors.toList());
+        toRemove.forEach(player::removeEffect);
+        // Repair the shield slightly as a reward for blocking magic
+        ItemStack shield = player.getUseItem();
+        shield.setDamageValue(Math.max(0, shield.getDamageValue() - ModConfig.get().feedbackRepairAmount));
+        cir.setReturnValue(false);
+    }
+
+    /**
+     * On any blocked physical hit: purge ALL active harmful effects from the player.
+     * Magic hits are already fully cancelled in onFeedbackCancelMagic.
      */
     @Inject(method = "hurt", at = @At("RETURN"))
     private void onFeedbackHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!customEnchants$hasFeedbackShield()) return;
+        // Skip if no damage was actually applied (e.g. magic was already cancelled above)
+        if (!cir.getReturnValue()) return;
         Player player = (Player) (Object) this;
 
         // Purge ALL currently-active harmful effects
@@ -54,17 +82,6 @@ public abstract class ShieldFeedbackMixin {
                 .map(MobEffectInstance::getEffect)
                 .collect(Collectors.toList());
         toRemove.forEach(player::removeEffect);
-
-        // For magic damage: also heal and repair the shield
-        Entity directEntity = source.getDirectEntity();
-        boolean isMagicAttack = source.is(DamageTypes.MAGIC)
-                || source.is(DamageTypes.INDIRECT_MAGIC)
-                || directEntity instanceof ShulkerBullet;
-        if (isMagicAttack) {
-            player.heal(ModConfig.get().feedbackHealAmount);
-            ItemStack shield = player.getUseItem();
-            shield.setDamageValue(Math.max(0, shield.getDamageValue() - ModConfig.get().feedbackRepairAmount));
-        }
     }
 
     /** Pre-emptively cancel any harmful effect being added via addEffect() while blocking. */

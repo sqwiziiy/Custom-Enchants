@@ -469,6 +469,57 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.xpSyphonEnabled = val)
                 .build());
 
+        // Kinetic Discharge (Кинетический разряд) category
+        ConfigCategory kineticDischarge = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.kinetic_discharge"));
+
+        kineticDischarge.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.kinetic_discharge.enabled"),
+                        config.kineticDischargeEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.kineticDischargeEnabled = val)
+                .build());
+
+        kineticDischarge.addEntry(entryBuilder.startFloatField(
+                        Component.translatable("config.custom-enchants.kinetic_discharge.min_speed"),
+                        config.kineticDischargeMinSpeed)
+                .setDefaultValue(0.4f)
+                .setMin(0.1f).setMax(5.0f)
+                .setSaveConsumer(val -> config.kineticDischargeMinSpeed = val)
+                .build());
+
+        kineticDischarge.addEntry(entryBuilder.startFloatField(
+                        Component.translatable("config.custom-enchants.kinetic_discharge.knockback_l1"),
+                        config.kineticDischargeKnockbackL1)
+                .setDefaultValue(1.5f)
+                .setMin(0.1f).setMax(10.0f)
+                .setSaveConsumer(val -> config.kineticDischargeKnockbackL1 = val)
+                .build());
+
+        kineticDischarge.addEntry(entryBuilder.startFloatField(
+                        Component.translatable("config.custom-enchants.kinetic_discharge.knockback_l2"),
+                        config.kineticDischargeKnockbackL2)
+                .setDefaultValue(2.5f)
+                .setMin(0.1f).setMax(10.0f)
+                .setSaveConsumer(val -> config.kineticDischargeKnockbackL2 = val)
+                .build());
+
+        kineticDischarge.addEntry(entryBuilder.startFloatField(
+                        Component.translatable("config.custom-enchants.kinetic_discharge.knockback_l3"),
+                        config.kineticDischargeKnockbackL3)
+                .setDefaultValue(3.5f)
+                .setMin(0.1f).setMax(10.0f)
+                .setSaveConsumer(val -> config.kineticDischargeKnockbackL3 = val)
+                .build());
+
+        kineticDischarge.addEntry(entryBuilder.startFloatField(
+                        Component.translatable("config.custom-enchants.kinetic_discharge.damage_l3"),
+                        config.kineticDischargeDamageL3)
+                .setDefaultValue(2.0f)
+                .setMin(0.0f).setMax(20.0f)
+                .setSaveConsumer(val -> config.kineticDischargeDamageL3 = val)
+                .build());
+
         return builder.build();
     }
 }
