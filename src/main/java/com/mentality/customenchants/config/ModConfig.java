@@ -88,6 +88,9 @@ public class ModConfig {
     public int vulnerabilityIgnoreL2 = 20;
     public int vulnerabilityIgnoreL3 = 30;
 
+    // Tether Master (Крепкая нить) settings
+    public boolean tetherMasterEnabled = true;
+
     public static ModConfig get() {
         return INSTANCE;
     }

@@ -34,7 +34,6 @@ public class ShadowBladeEnchantment extends Enchantment {
         return super.checkCompatibility(other)
                 && other != Enchantments.CHANNELING
                 && other != Enchantments.RIPTIDE
-                && other != Enchantments.LOYALTY
                 && !(other instanceof GlowStrikeEnchantment);
     }
 

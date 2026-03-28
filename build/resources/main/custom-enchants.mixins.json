@@ -10,7 +10,8 @@
 		"ShieldFeedbackMixin",
 		"ShieldGuardianGraceMixin",
 		"VulnerabilityArrowMixin",
-		"VulnerabilityArmorMixin"
+		"VulnerabilityArmorMixin",
+		"TetherMasterMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

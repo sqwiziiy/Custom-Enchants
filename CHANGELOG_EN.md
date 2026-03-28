@@ -3,6 +3,24 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.6.0] - 2026-03-28
+
+### Added
+
+- **Tether Master** enchantment for fishing rods (uncommon, max level 3). Increases the pull strength when reeling in hooked mobs.
+  - Level I: +15% pull strength.
+  - Level II: +25% pull strength.
+  - Level III: +40% pull strength.
+  - Available from enchanting table and villager trades.
+- Librarian trades: Tether Master I (tier 1, 10 emeralds), II (tier 3, 22 emeralds), III (tier 4, 36 emeralds).
+- Config option: enable/disable enchantment.
+
+### Changed
+
+- **Shadow Blade** is now compatible with **Loyalty** again. A trident with both enchantments will teleport the player on throw and return as normal.
+
+---
+
 ## [2.5.1] - 2026-03-28
 
 ### Changed

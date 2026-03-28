@@ -402,5 +402,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         3, 30, 0.2f);
             });
         });
+
+        // Tether Master I — Novice Librarian (tier 1)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 1, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.TETHER_MASTER, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 10),
+                        book,
+                        12, 5, 0.2f);
+            });
+        });
+
+        // Tether Master II — Journeyman Librarian (tier 3)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.TETHER_MASTER, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 22),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
+
+        // Tether Master III — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.TETHER_MASTER, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 36),
+                        book,
+                        6, 15, 0.2f);
+            });
+        });
     }
 }

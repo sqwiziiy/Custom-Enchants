@@ -428,6 +428,17 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.vulnerabilityIgnoreL3 = val)
                 .build());
 
+        // Tether Master (Крепкая нить) category
+        ConfigCategory tetherMaster = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.tether_master"));
+
+        tetherMaster.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.tether_master.enabled"),
+                        config.tetherMasterEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.tetherMasterEnabled = val)
+                .build());
+
         return builder.build();
     }
 }

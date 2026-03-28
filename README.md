@@ -103,7 +103,7 @@ A trident enchantment. On hit, has a chance to **teleport the player behind the 
 
 - **Rarity:** Very Rare
 - **Max level:** 3
-- **Incompatible** with Channeling, Riptide, Loyalty, and Glow Strike
+- **Incompatible** with Channeling, Riptide, and Glow Strike
 - Teleports the player 1.5 blocks behind the target entity, facing it
 - **Distance bonus:** up to +10% chance when thrown from 30 blocks away (linear scaling)
 - Chance and slowness duration are configurable per level
@@ -254,6 +254,22 @@ A **bow and crossbow** enchantment. Arrows from this bow partially ignore the ta
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### 🎣 Tether Master
+
+A **fishing rod** enchantment. Increases the pull strength when reeling in hooked mobs.
+
+| Level | Pull Strength |
+|-------|---------------|
+| I     | +15%          |
+| II    | +25%          |
+| III   | +40%          |
+
+- **Rarity:** Uncommon
+- **Max level:** 3
+- Works on any mob hooked by the fishing rod
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -292,6 +308,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Vulnerability I      | Apprentice (2)   | 18 Emeralds |
 | Vulnerability II     | Expert (4)       | 36 Emeralds |
 | Vulnerability III    | Master (5)       | 52 Emeralds |
+| Tether Master I      | Novice (1)       | 10 Emeralds |
+| Tether Master II     | Journeyman (3)   | 22 Emeralds |
+| Tether Master III    | Expert (4)       | 36 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -351,6 +370,7 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `vulnerabilityIgnoreL1`  | `10`    | Armor ignore Level I (%)            |
 | `vulnerabilityIgnoreL2`  | `20`    | Armor ignore Level II (%)           |
 | `vulnerabilityIgnoreL3`  | `30`    | Armor ignore Level III (%)          |
+| `tetherMasterEnabled`    | `true`  | Enable/disable Tether Master        |
 
 ---
 

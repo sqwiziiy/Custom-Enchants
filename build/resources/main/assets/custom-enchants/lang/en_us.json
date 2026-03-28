@@ -73,5 +73,8 @@
   "config.custom-enchants.vulnerability.enabled": "Enabled",
   "config.custom-enchants.vulnerability.ignore_l1": "Armor ignore Level I (%)",
   "config.custom-enchants.vulnerability.ignore_l2": "Armor ignore Level II (%)",
-  "config.custom-enchants.vulnerability.ignore_l3": "Armor ignore Level III (%)"
+  "config.custom-enchants.vulnerability.ignore_l3": "Armor ignore Level III (%)",
+  "enchantment.custom-enchants.tether_master": "Tether Master",
+  "config.custom-enchants.category.tether_master": "Tether Master",
+  "config.custom-enchants.tether_master.enabled": "Enabled"
 }

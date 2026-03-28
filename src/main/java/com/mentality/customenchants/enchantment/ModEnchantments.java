@@ -22,6 +22,7 @@ public class ModEnchantments {
     public static final Enchantment SECOND_WIND = new SecondWindEnchantment();
     public static final Enchantment GUARDIANS_GRACE = new GuardiansGraceEnchantment();
     public static final Enchantment VULNERABILITY = new VulnerabilityEnchantment();
+    public static final Enchantment TETHER_MASTER = new TetherMasterEnchantment();
 
     public static void register() {
         Registry.register(
@@ -93,6 +94,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "vulnerability"),
                 VULNERABILITY
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "tether_master"),
+                TETHER_MASTER
         );
     }
 }

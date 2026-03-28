@@ -73,5 +73,8 @@
   "config.custom-enchants.vulnerability.enabled": "Включено",
   "config.custom-enchants.vulnerability.ignore_l1": "Игнорирование брони I уровня (%)",
   "config.custom-enchants.vulnerability.ignore_l2": "Игнорирование брони II уровня (%)",
-  "config.custom-enchants.vulnerability.ignore_l3": "Игнорирование брони III уровня (%)"
+  "config.custom-enchants.vulnerability.ignore_l3": "Игнорирование брони III уровня (%)",
+  "enchantment.custom-enchants.tether_master": "Крепкая нить",
+  "config.custom-enchants.category.tether_master": "Крепкая нить",
+  "config.custom-enchants.tether_master.enabled": "Включено"
 }
