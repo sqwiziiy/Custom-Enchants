@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "custom-enchants",
-	"version": "2.6.0",
+	"version": "2.7.0",
 	"name": "Mentalitys | Custom Enchantments",
 	"description": "Adds custom enchantments: Glow Strike, Double Jump, Drill, Poison Blade, Lumberjack, Shadow Blade, Magnet, Auto Smelt, Vegetation, Rebound, Feedback, and Second Wind. Configurable via Cloth Config.",
 	"authors": [

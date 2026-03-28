@@ -11,7 +11,8 @@
 		"ShieldGuardianGraceMixin",
 		"VulnerabilityArrowMixin",
 		"VulnerabilityArmorMixin",
-		"TetherMasterMixin"
+		"TetherMasterMixin",
+		"SkyRageMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

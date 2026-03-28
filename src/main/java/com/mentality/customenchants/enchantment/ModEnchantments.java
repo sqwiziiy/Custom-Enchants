@@ -23,6 +23,7 @@ public class ModEnchantments {
     public static final Enchantment GUARDIANS_GRACE = new GuardiansGraceEnchantment();
     public static final Enchantment VULNERABILITY = new VulnerabilityEnchantment();
     public static final Enchantment TETHER_MASTER = new TetherMasterEnchantment();
+    public static final Enchantment SKY_RAGE = new SkyRageEnchantment();
 
     public static void register() {
         Registry.register(
@@ -99,6 +100,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "tether_master"),
                 TETHER_MASTER
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "sky_rage"),
+                SKY_RAGE
         );
     }
 }

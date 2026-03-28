@@ -438,5 +438,41 @@ public class CustomEnchantsMod implements ModInitializer {
                         6, 15, 0.2f);
             });
         });
+
+        // Sky Rage I — Journeyman Librarian (tier 3)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SKY_RAGE, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 22),
+                        book,
+                        8, 15, 0.2f);
+            });
+        });
+
+        // Sky Rage II — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SKY_RAGE, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 38),
+                        book,
+                        5, 20, 0.2f);
+            });
+        });
+
+        // Sky Rage III — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SKY_RAGE, 3));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 55),
+                        book,
+                        3, 30, 0.2f);
+            });
+        });
     }
 }

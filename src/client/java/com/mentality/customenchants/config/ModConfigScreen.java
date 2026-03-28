@@ -439,6 +439,25 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.tetherMasterEnabled = val)
                 .build());
 
+        // Sky Rage (Ярость Неба) category
+        ConfigCategory skyRage = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.sky_rage"));
+
+        skyRage.addEntry(entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.sky_rage.enabled"),
+                        config.skyRageEnabled)
+                .setDefaultValue(true)
+                .setSaveConsumer(val -> config.skyRageEnabled = val)
+                .build());
+
+        skyRage.addEntry(entryBuilder.startIntField(
+                        Component.translatable("config.custom-enchants.sky_rage.cooldown_ticks"),
+                        config.skyRageCooldownTicks)
+                .setDefaultValue(30)
+                .setMin(1).setMax(600)
+                .setSaveConsumer(val -> config.skyRageCooldownTicks = val)
+                .build());
+
         return builder.build();
     }
 }

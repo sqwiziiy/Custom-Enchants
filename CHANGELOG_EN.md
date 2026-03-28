@@ -3,6 +3,24 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [2.7.0] - 2026-03-28
+
+### Added
+
+- **Sky Rage** enchantment for bows and crossbows (rare, max level 3). During a thunderstorm, arrows have a chance to call a lightning strike at the hit location.
+  - Level I: 10% chance.
+  - Level II: 20% chance.
+  - Level III: 30% chance.
+  - Only activates during a thunderstorm (not plain rain).
+  - Does not work under a roof (sky exposure required).
+  - Per-player cooldown: 1.5 seconds (30 ticks) between strikes.
+  - Incompatible with: Flame, Infinity, Piercing.
+  - Available from enchanting table and villager trades.
+- Librarian trades: Sky Rage I (tier 3, 22 emeralds), II (tier 4, 38 emeralds), III (tier 5, 55 emeralds).
+- Config options: enable/disable, cooldown ticks.
+
+---
+
 ## [2.6.0] - 2026-03-28
 
 ### Added

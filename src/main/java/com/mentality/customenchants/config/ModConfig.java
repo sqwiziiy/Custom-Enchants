@@ -91,6 +91,10 @@ public class ModConfig {
     // Tether Master (Крепкая нить) settings
     public boolean tetherMasterEnabled = true;
 
+    // Sky Rage (Ярость Неба) settings
+    public boolean skyRageEnabled = true;
+    public int skyRageCooldownTicks = 30;
+
     public static ModConfig get() {
         return INSTANCE;
     }

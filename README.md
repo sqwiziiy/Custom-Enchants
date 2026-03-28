@@ -270,6 +270,25 @@ A **fishing rod** enchantment. Increases the pull strength when reeling in hooke
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### ⚡ Sky Rage
+
+A **bow and crossbow** enchantment. During a thunderstorm, arrows have a chance to summon a lightning strike at the hit location.
+
+| Level | Chance |
+|-------|--------|
+| I     | 10%    |
+| II    | 20%    |
+| III   | 30%    |
+
+- **Rarity:** Rare
+- **Max level:** 3
+- Only activates during a **thunderstorm** (not plain rain)
+- Does not work under a roof — the hit position must be sky-exposed
+- Per-player cooldown: 1.5 seconds (30 ticks) between strikes
+- **Incompatible with:** Flame, Infinity, Piercing
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -311,6 +330,9 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Tether Master I      | Novice (1)       | 10 Emeralds |
 | Tether Master II     | Journeyman (3)   | 22 Emeralds |
 | Tether Master III    | Expert (4)       | 36 Emeralds |
+| Sky Rage I           | Journeyman (3)   | 22 Emeralds |
+| Sky Rage II          | Expert (4)       | 38 Emeralds |
+| Sky Rage III         | Master (5)       | 55 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -371,6 +393,8 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `vulnerabilityIgnoreL2`  | `20`    | Armor ignore Level II (%)           |
 | `vulnerabilityIgnoreL3`  | `30`    | Armor ignore Level III (%)          |
 | `tetherMasterEnabled`    | `true`  | Enable/disable Tether Master        |
+| `skyRageEnabled`         | `true`  | Enable/disable Sky Rage             |
+| `skyRageCooldownTicks`   | `30`    | Cooldown between strikes (ticks)    |
 
 ---
 

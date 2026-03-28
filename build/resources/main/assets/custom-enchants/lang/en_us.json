@@ -76,5 +76,10 @@
   "config.custom-enchants.vulnerability.ignore_l3": "Armor ignore Level III (%)",
   "enchantment.custom-enchants.tether_master": "Tether Master",
   "config.custom-enchants.category.tether_master": "Tether Master",
-  "config.custom-enchants.tether_master.enabled": "Enabled"
+  "config.custom-enchants.tether_master.enabled": "Enabled",
+
+  "enchantment.custom-enchants.sky_rage": "Sky Rage",
+  "config.custom-enchants.category.sky_rage": "Sky Rage",
+  "config.custom-enchants.sky_rage.enabled": "Enabled",
+  "config.custom-enchants.sky_rage.cooldown_ticks": "Cooldown (ticks)"
 }
