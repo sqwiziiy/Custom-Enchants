@@ -3,22 +3,18 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
-## [2.9.0] - 2026-03-28
+[2.9.0] - 2026-03-28
+Added
 
-### Added
+    Steady Footing — new boots enchantment (uncommon, max level 3). Reduces slipping on ice.
+        Level I: −30% slipperiness.
+        Level II: −60% slipperiness.
+        Level III: Full control (ice = normal ground).
 
-- **Kinetic Discharge** — new elytra enchantment (rare, max level 3). Landing on the ground after fast elytra flight creates a shockwave that knocks back nearby mobs.
-  - Level I: 3-block radius, weak knockback.
-  - Level II: 5-block radius, medium knockback.
-  - Level III: 7-block radius + 2 HP damage to all affected mobs. Shockwave activation has only a 10% chance to cost elytra durability (90% chance to skip). Passive: during flight, 90% of durability ticks are refunded (≈−90% elytra wear).
-- Librarian trades: Kinetic Discharge I (tier 4, 28 emeralds), II (tier 5, 44 emeralds), III (tier 5, 62 emeralds).
+Fixed
 
-### Fixed
+    Feedback — critical fix: hurt() interception moved from RETURN to HEAD. Magic damage (e.g. Instant Damage from a Harming potion) is now fully blocked while blocking, and the player heals.
 
-- **Feedback** — the enchantment now fully protects against magic-type damage, including **instant damage** (harming arrows and splash potions of harming). Previously the shield only blocked persistent negative effects; instant damage (`DamageTypes.MAGIC`) still applied. Now:
-  - Magic-type hits are cancelled inside `hurt()` before damage is applied.
-  - All active harmful effects are purged.
-  - The shield is partially repaired as a reward for blocking.
 
 ---
 
