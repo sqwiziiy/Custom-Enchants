@@ -93,14 +93,14 @@ public class ModConfig {
 
     // Sky Rage (Ярость Неба) settings
     public boolean skyRageEnabled = true;
-    public int skyRageCooldownTicks = 30;
+    public int skyRageCooldownTicks = 0;
 
     // XP Syphon (Собиратель искр) settings
     public boolean xpSyphonEnabled = true;
 
     // Kinetic Discharge (Кинетический разряд) settings
     public boolean kineticDischargeEnabled = true;
-    public float kineticDischargeMinSpeed = 0.4f;
+    public float kineticDischargeMinSpeed = 1.2f;
     public float kineticDischargeKnockbackL1 = 1.5f;
     public float kineticDischargeKnockbackL2 = 2.5f;
     public float kineticDischargeKnockbackL3 = 3.5f;

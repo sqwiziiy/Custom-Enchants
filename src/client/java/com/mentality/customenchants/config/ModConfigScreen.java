@@ -453,8 +453,8 @@ public class ModConfigScreen {
         skyRage.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.sky_rage.cooldown_ticks"),
                         config.skyRageCooldownTicks)
-                .setDefaultValue(30)
-                .setMin(1).setMax(600)
+                .setDefaultValue(0)
+                .setMin(0).setMax(600)
                 .setSaveConsumer(val -> config.skyRageCooldownTicks = val)
                 .build());
 
@@ -483,8 +483,8 @@ public class ModConfigScreen {
         kineticDischarge.addEntry(entryBuilder.startFloatField(
                         Component.translatable("config.custom-enchants.kinetic_discharge.min_speed"),
                         config.kineticDischargeMinSpeed)
-                .setDefaultValue(0.4f)
-                .setMin(0.1f).setMax(5.0f)
+                .setDefaultValue(1.2f)
+                .setMin(0.1f).setMax(8.0f)
                 .setSaveConsumer(val -> config.kineticDischargeMinSpeed = val)
                 .build());
 

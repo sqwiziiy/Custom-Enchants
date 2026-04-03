@@ -5,6 +5,7 @@ import com.mentality.customenchants.enchantment.ModEnchantments;
 import com.mentality.customenchants.enchantment.SkyRageEnchantment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -48,9 +49,12 @@ public abstract class SkyRageMixin {
         // Requires a thunderstorm, not just rain
         if (!serverLevel.isThundering()) return;
 
-        // Requires the hit position to be sky-exposed (handles "под навесом" naturally)
-        BlockPos strikePos = BlockPos.containing(pos);
-        if (!serverLevel.isRainingAt(strikePos)) return;
+        // For vertical block faces strikePos can end up inside/beside the block,
+        // causing isRainingAt to return false even in the open.  Use the top of
+        // the block column at this X,Z for the sky-exposure check instead.
+        BlockPos strikePos  = BlockPos.containing(pos);
+        BlockPos columnTop  = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, strikePos);
+        if (!serverLevel.isRainingAt(columnTop)) return;
 
         Entity owner = arrow.getOwner();
         if (!(owner instanceof Player player)) return;

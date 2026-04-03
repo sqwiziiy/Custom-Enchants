@@ -56,11 +56,12 @@ public class KineticDischargeHandler {
                     }
                 }
 
-                // Detect transition: was flying → now grounded = landing
+                // Detect transition: was flying → now grounded = landing.
+                // Use total 3D vector length so fireworks are reliably required.
                 if (wasFlying && !isFlying && player.onGround()) {
-                    double speed = lastVel.horizontalDistance();
+                    double speed = lastVel.length();
                     if (speed >= ModConfig.get().kineticDischargeMinSpeed) {
-                        triggerShockwave(player, level, elytra);
+                        triggerShockwave(player, level, elytra, speed);
                     }
                 }
 
@@ -70,7 +71,7 @@ public class KineticDischargeHandler {
         });
     }
 
-    private static void triggerShockwave(ServerPlayer player, int level, ItemStack elytra) {
+    private static void triggerShockwave(ServerPlayer player, int level, ItemStack elytra, double landingSpeed) {
         double radius = switch (level) {
             case 1  -> 3.0;
             case 2  -> 5.0;
@@ -100,10 +101,15 @@ public class KineticDischargeHandler {
             if (dist < 0.001) { dx = 1.0; dz = 0.0; dist = 1.0; }
             target.knockback(knockbackStrength, -dx / dist, -dz / dist);
 
-            // Level III bonus: deal additional damage
+            // Level III bonus: deal speed-scaled additional damage (up to +15% at high speed).
             if (level == 3) {
-                target.hurt(player.damageSources().playerAttack(player),
-                        ModConfig.get().kineticDischargeDamageL3);
+                float baseDamage = ModConfig.get().kineticDischargeDamageL3;
+                float minSpeed   = ModConfig.get().kineticDischargeMinSpeed;
+                // Full +15% bonus is reached 2.5 blocks/tick above the activation threshold.
+                float excess      = (float) Math.max(0, landingSpeed - minSpeed);
+                float bonusFactor = Math.min(0.15f, excess / 2.5f * 0.15f);
+                float actualDamage = baseDamage * (1.0f + bonusFactor);
+                target.hurt(player.damageSources().playerAttack(player), actualDamage);
             }
         }
 
