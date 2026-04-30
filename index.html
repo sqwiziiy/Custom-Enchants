@@ -15,7 +15,7 @@
       <div class="header-icon">✦</div>
       <div>
         <h1 class="site-title">Mentalitys | Custom Enchantments</h1>
-        <p class="site-subtitle">Minecraft 1.20.1 · Fabric API · v2.9.0</p>
+        <p class="site-subtitle">Minecraft 1.20.1 · Fabric API · v3.0.0</p>
       </div>
     </div>
     <div class="header-right">
@@ -66,14 +66,14 @@
       <p class="intro-text">
         <span data-en>
           <strong>Mentalitys | Custom Enchantments</strong> is a <strong>Minecraft 1.20.1 (Fabric API)</strong> mod
-          that adds <strong>18 unique enchantments</strong> with flexible configuration via Cloth Config API.
+          that adds <strong>19 unique enchantments</strong> with flexible configuration via Cloth Config API.
           Each enchantment can be toggled individually, and all parameters — levels, chances,
           durations, radii — are tweakable via the GUI settings screen (Mod Menu) without restarting the server.
           Config file: <code>config/custom-enchants.json</code>.
         </span>
         <span data-ru hidden>
           <strong>Mentalitys | Custom Enchantments</strong> — мод для <strong>Minecraft 1.20.1 (Fabric API)</strong>,
-          добавляющий <strong>18 уникальных зачарований</strong> с гибкой настройкой через Cloth Config API.
+          добавляющий <strong>19 уникальных зачарований</strong> с гибкой настройкой через Cloth Config API.
           Все зачарования можно включать и выключать по отдельности в конфиг-файле
           <code>config/custom-enchants.json</code>, а параметры настраиваются через GUI (Mod Menu).
         </span>
@@ -83,7 +83,7 @@
         <span class="badge badge-fabric">Fabric API</span>
         <span class="badge badge-cloth">Cloth Config</span>
         <span class="badge badge-java">Java 21</span>
-        <span class="badge badge-version">v2.9.0</span>
+        <span class="badge badge-version">v3.0.0</span>
       </div>
     </section>
 
@@ -733,6 +733,43 @@
           </ul>
         </article>
 
+        <!-- ── Sculk Bloom ── -->
+        <article class="enchant-card" data-category="weapon">
+          <div class="card-header">
+            <span class="card-emoji">🌑</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span>
+                <span class="card-sub" data-ru>Sculk Bloom</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-weapon" data-en>Weapon</span><span class="tag tag-weapon" data-ru hidden>Оружие</span>
+                <span class="tag tag-rare"   data-en>Rare</span><span class="tag tag-rare"   data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: II</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: II</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>When killing a mob, <strong>sculk spreads</strong> at the death location — as if a <strong>Sculk Catalyst</strong> were placed there.</span>
+            <span data-ru hidden>При убийстве моба на месте смерти <strong>распространяется скалк</strong> — как если бы рядом стоял <strong>скалк-катализатор</strong>.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Sword</span><span data-ru hidden>📦 Меч</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Effect</th><th data-ru hidden>Эффект</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td><span data-en>Small bloom (≈2–3 block radius)</span><span data-ru hidden>Малое цветение (≈2–3 блока)</span></td></tr>
+              <tr><td>II</td><td><span data-en>Large bloom (≈4–5 block radius)</span><span data-ru hidden>Большое цветение (≈4–5 блоков)</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Works only on direct kills with the enchanted weapon</span><span data-ru hidden>Работает только при прямом убийстве зачарованным оружием</span></li>
+            <li><span data-en>May generate sculk veins, sensors, and shriekers</span><span data-ru hidden>Может порождать скалковые прожилки, датчики и крикуны</span></li>
+          </ul>
+        </article>
+
       </div><!-- /enchant-grid -->
     </section>
 
@@ -743,8 +780,19 @@
 
         <details class="cl-entry" open>
           <summary class="cl-summary">
+            <span class="cl-ver">v3.0.0</span>
+            <span class="cl-date">2026-04-30</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Sculk Bloom — sword enchantment (Rare, max II). On kill, sculk spreads at the death location like a Sculk Catalyst. Level II produces a larger bloom and can generate sensors/shriekers.</span><span data-ru hidden><strong>Добавлено:</strong> Скалковое цветение — зачарование для меча (ред., макс. II). При убийстве скалк распространяется как от катализатора. II уровень — большее цветение, может порождать датчики и крикуны.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
             <span class="cl-ver">v2.9.0</span>
-            <span class="cl-date">2026-04-03</span>
+            <span class="cl-date">2026-03-28</span>
             <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
           </summary>
           <div class="cl-body">
@@ -1011,6 +1059,8 @@
             <tr><td><span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span></td><td>I</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>28 Emeralds</span><span data-ru hidden>28 изумрудов</span></td></tr>
             <tr><td><span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span></td><td>II</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>44 Emeralds</span><span data-ru hidden>44 изумруда</span></td></tr>
             <tr><td><span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>62 Emeralds</span><span data-ru hidden>62 изумруда</span></td></tr>
+            <tr><td><span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span></td><td>I</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>30 Emeralds</span><span data-ru hidden>30 изумрудов</span></td></tr>
+            <tr><td><span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span></td><td>II</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>50 Emeralds</span><span data-ru hidden>50 изумрудов</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1054,7 +1104,9 @@
     ├── GuardiansGraceEnchantment.java  — Guardian's Grace definition
     ├── XpSyphonEnchantment.java        — XP Syphon definition
     ├── KineticDischargeEnchantment.java — Kinetic Discharge definition
-    └── KineticDischargeHandler.java    — Server-side shockwave on landing logic
+    ├── KineticDischargeHandler.java    — Server-side shockwave on landing logic
+    ├── SculkBloomEnchantment.java      — Sculk Bloom definition
+    └── SculkBloomHandler.java          — Server-side sculk spreading on kill logic
 
 src/client/java/com/mentality/customenchants/
 ├── CustomEnchantsClient.java           — Client initializer
@@ -1092,7 +1144,9 @@ src/client/java/com/mentality/customenchants/
     ├── GuardiansGraceEnchantment.java  — Определение Живого щита
     ├── XpSyphonEnchantment.java        — Определение Собирателя искр
     ├── KineticDischargeEnchantment.java — Определение Кинетического разряда
-    └── KineticDischargeHandler.java    — Серверная логика шоквейва при приземлении
+    ├── KineticDischargeHandler.java    — Серверная логика шоквейва при приземлении
+    ├── SculkBloomEnchantment.java      — Определение Скалкового цветения
+    └── SculkBloomHandler.java          — Серверная логика распространения скалка при убийстве
 
 src/client/java/com/mentality/customenchants/
 ├── CustomEnchantsClient.java           — Клиентский инициализатор
@@ -1115,99 +1169,11 @@ src/client/java/com/mentality/customenchants/
       <span class="footer-sep">·</span>
       <a href="https://modrinth.com/project/NJPtH6f5" target="_blank" class="footer-link">Modrinth</a>
     </div>
-    <p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v2.9.0</p>
+    <p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.0.0</p>
   </div>
 </footer>
 
-<script>
-/* ══════════════════════════════════════
-   Language system
-   ══════════════════════════════════════ */
-let currentLang = 'en';
-
-function applyLang(lang) {
-  currentLang = lang;
-  document.documentElement.setAttribute('data-lang', lang);
-  document.documentElement.lang = lang;
-
-  // Show/hide [data-en] and [data-ru] elements
-  document.querySelectorAll('[data-en]').forEach(el => {
-    el.hidden = (lang !== 'en');
-  });
-  document.querySelectorAll('[data-ru]').forEach(el => {
-    el.hidden = (lang !== 'ru');
-  });
-
-  // Update section titles with data-en / data-ru attributes
-  document.querySelectorAll('[data-en][data-ru]').forEach(el => {
-    el.textContent = lang === 'ru' ? el.getAttribute('data-ru') : el.getAttribute('data-en');
-    el.hidden = false;
-  });
-
-  // Update nav filter button labels
-  document.querySelectorAll('.filter-btn[data-en][data-ru]').forEach(btn => {
-    btn.textContent = lang === 'ru' ? btn.getAttribute('data-ru') : btn.getAttribute('data-en');
-  });
-
-  // Update lang switcher active state
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === lang);
-  });
-
-  localStorage.setItem('wiki-lang', lang);
-}
-
-// Init
-const savedLang = localStorage.getItem('wiki-lang') || 'en';
-applyLang(savedLang);
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
-});
-
-/* ══════════════════════════════════════
-   Tab / filter system
-   ══════════════════════════════════════ */
-const viewEnchants   = document.getElementById('view-enchants');
-const viewTrades     = document.getElementById('view-trades');
-const viewStructure  = document.getElementById('view-structure');
-const filterBtns     = document.querySelectorAll('.filter-btn');
-const enchantCards   = document.querySelectorAll('.enchant-card');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const filter = btn.dataset.filter;
-
-    if (filter === 'trades') {
-      viewEnchants.hidden  = true;
-      viewTrades.hidden    = false;
-      viewStructure.hidden = true;
-    } else if (filter === 'structure') {
-      viewEnchants.hidden  = true;
-      viewTrades.hidden    = true;
-      viewStructure.hidden = false;
-    } else {
-      viewEnchants.hidden  = false;
-      viewTrades.hidden    = true;
-      viewStructure.hidden = true;
-      enchantCards.forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
-      });
-    }
-  });
-});
-
-/* ══════════════════════════════════════
-   Sticky nav shadow
-   ══════════════════════════════════════ */
-const nav = document.getElementById('sticky-nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
-});
-</script>
+<script src="script.js" defer></script>
 
 </body>
 </html>
