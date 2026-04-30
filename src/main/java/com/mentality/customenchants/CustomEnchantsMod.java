@@ -9,6 +9,7 @@ import com.mentality.customenchants.enchantment.AutoSmeltHandler;
 import com.mentality.customenchants.enchantment.VegetationHandler;
 import com.mentality.customenchants.enchantment.SecondWindHandler;
 import com.mentality.customenchants.enchantment.KineticDischargeHandler;
+import com.mentality.customenchants.enchantment.SculkBloomHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -38,6 +39,7 @@ public class CustomEnchantsMod implements ModInitializer {
         VegetationHandler.register();
         SecondWindHandler.register();
         KineticDischargeHandler.register();
+        SculkBloomHandler.register();
         registerVillagerTrades();
         LOGGER.info("Mentalitys | Custom Enchantments initialized!");
     }
@@ -546,6 +548,30 @@ public class CustomEnchantsMod implements ModInitializer {
                         new ItemStack(Items.EMERALD, 62),
                         book,
                         2, 30, 0.2f);
+            });
+        });
+
+        // Sculk Bloom I — Expert Librarian (tier 4)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SCULK_BLOOM, 1));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 30),
+                        book,
+                        5, 20, 0.2f);
+            });
+        });
+
+        // Sculk Bloom II — Master Librarian (tier 5)
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
+            factories.add((trader, random) -> {
+                ItemStack book = EnchantedBookItem.createForEnchantment(
+                        new EnchantmentInstance(ModEnchantments.SCULK_BLOOM, 2));
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 50),
+                        book,
+                        3, 30, 0.2f);
             });
         });
     }

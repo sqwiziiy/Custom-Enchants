@@ -3,6 +3,17 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [3.0.0] - 2026-04-30
+
+### Added
+
+- **Sculk Bloom** — new sword enchantment (rare, max level 2). When killing a mob, sculk spreads at the death location — as if a Sculk Catalyst were placed there.
+  - Level I: small sculk bloom (8 charges, 12 spread steps, radius ≈2–3 blocks).
+  - Level II: large sculk bloom (20 charges, 28 spread steps, radius ≈4–5 blocks). Can generate sculk veins, sensors, and shriekers following natural sculk propagation rules.
+- Librarian trades: Sculk Bloom I (tier 4, 30 emeralds), II (tier 5, 50 emeralds).
+
+---
+
 [2.9.0] - 2026-03-28
 Added
 

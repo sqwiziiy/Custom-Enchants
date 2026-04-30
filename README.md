@@ -329,6 +329,23 @@ An **elytra** enchantment. Landing on the ground after fast elytra flight create
 - Can be obtained from enchanting table and villager trades
 - Can be enabled/disabled via config
 
+### 🌑 Sculk Bloom
+
+A **sword** enchantment. When you kill a mob, sculk spreads at the death location — as if a **Sculk Catalyst** were placed there.
+
+| Level | Effect                               |
+|-------|--------------------------------------|
+| I     | Small sculk bloom (≈2–3 block radius)|
+| II    | Large sculk bloom (≈4–5 block radius)|
+
+- **Rarity:** Rare
+- **Max level:** 2
+- Works only on direct kills made with the enchanted weapon
+- Can convert soil, stone, and other blocks to sculk following natural propagation rules
+- May generate sculk veins, sensors, or shriekers
+- Can be obtained from enchanting table and villager trades
+- Can be enabled/disabled via config
+
 ---
 
 ## Obtaining
@@ -379,6 +396,8 @@ Enchanted books can be purchased from **Librarian villagers**:
 | Kinetic Discharge I  | Expert (4)       | 28 Emeralds |
 | Kinetic Discharge II | Master (5)       | 44 Emeralds |
 | Kinetic Discharge III| Master (5)       | 62 Emeralds |
+| Sculk Bloom I        | Expert (4)       | 30 Emeralds |
+| Sculk Bloom II       | Master (5)       | 50 Emeralds |
 
 All enchantments can also be obtained from the **enchanting table**.
 
@@ -448,6 +467,7 @@ The mod supports configuration via **Cloth Config API**. Config file: `config/cu
 | `kineticDischargeKnockbackL2` | `2.5` | Knockback strength Level II        |
 | `kineticDischargeKnockbackL3` | `3.5` | Knockback strength Level III       |
 | `kineticDischargeDamageL3`  | `2.0`  | Bonus damage at Level III (HP)      |
+| `sculkBloomEnabled`         | `true` | Enable/disable Sculk Bloom          |
 
 ---
 
@@ -484,6 +504,8 @@ src/main/java/com/mentality/customenchants/
     ├── XpSyphonEnchantment.java   — XP Syphon definition
     ├── KineticDischargeEnchantment.java — Kinetic Discharge definition
     ├── KineticDischargeHandler.java — Server-side shockwave on landing logic
+    ├── SculkBloomEnchantment.java — Sculk Bloom definition
+    ├── SculkBloomHandler.java     — Server-side sculk spreading on kill logic
     └── ModEnchantments.java       — Enchantment registration
 
 src/client/java/com/mentality/customenchants/

@@ -106,6 +106,9 @@ public class ModConfig {
     public float kineticDischargeKnockbackL3 = 3.5f;
     public float kineticDischargeDamageL3 = 2.0f;
 
+    // Sculk Bloom (Скалковое цветение) settings
+    public boolean sculkBloomEnabled = true;
+
     public static ModConfig get() {
         return INSTANCE;
     }

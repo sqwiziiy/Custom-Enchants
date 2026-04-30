@@ -26,6 +26,7 @@ public class ModEnchantments {
     public static final Enchantment SKY_RAGE = new SkyRageEnchantment();
     public static final Enchantment XP_SYPHON = new XpSyphonEnchantment();
     public static final Enchantment KINETIC_DISCHARGE = new KineticDischargeEnchantment();
+    public static final Enchantment SCULK_BLOOM = new SculkBloomEnchantment();
 
     public static void register() {
         Registry.register(
@@ -117,6 +118,11 @@ public class ModEnchantments {
                 BuiltInRegistries.ENCHANTMENT,
                 new ResourceLocation(CustomEnchantsMod.MOD_ID, "xp_syphon"),
                 XP_SYPHON
+        );
+        Registry.register(
+                BuiltInRegistries.ENCHANTMENT,
+                new ResourceLocation(CustomEnchantsMod.MOD_ID, "sculk_bloom"),
+                SCULK_BLOOM
         );
     }
 }

@@ -94,5 +94,9 @@
   "config.custom-enchants.kinetic_discharge.knockback_l1": "Сила отбрасывания I уровня",
   "config.custom-enchants.kinetic_discharge.knockback_l2": "Сила отбрасывания II уровня",
   "config.custom-enchants.kinetic_discharge.knockback_l3": "Сила отбрасывания III уровня",
-  "config.custom-enchants.kinetic_discharge.damage_l3": "Урон при III уровне (HP)"
+  "config.custom-enchants.kinetic_discharge.damage_l3": "Урон при III уровне (HP)",
+
+  "enchantment.custom-enchants.sculk_bloom": "Скалковое цветение",
+  "config.custom-enchants.category.sculk_bloom": "Скалковое цветение",
+  "config.custom-enchants.sculk_bloom.enabled": "Включено"
 }

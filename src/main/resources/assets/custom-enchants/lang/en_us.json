@@ -94,5 +94,9 @@
   "config.custom-enchants.kinetic_discharge.knockback_l1": "Knockback strength Level I",
   "config.custom-enchants.kinetic_discharge.knockback_l2": "Knockback strength Level II",
   "config.custom-enchants.kinetic_discharge.knockback_l3": "Knockback strength Level III",
-  "config.custom-enchants.kinetic_discharge.damage_l3": "Damage at Level III (HP)"
+  "config.custom-enchants.kinetic_discharge.damage_l3": "Damage at Level III (HP)",
+
+  "enchantment.custom-enchants.sculk_bloom": "Sculk Bloom",
+  "config.custom-enchants.category.sculk_bloom": "Sculk Bloom",
+  "config.custom-enchants.sculk_bloom.enabled": "Enabled"
 }
