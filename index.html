@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentalitys | Custom Enchantments — Wiki</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ───── HEADER ───── -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-title-block">
+      <div class="header-icon">✦</div>
+      <div>
+        <h1 class="site-title">Mentalitys | Custom Enchantments</h1>
+        <p class="site-subtitle">Minecraft 1.20.1 · Fabric API · v3.0.0</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <!-- Language switcher -->
+      <div class="lang-switcher" id="lang-switcher" aria-label="Language">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+      </div>
+      <nav class="header-links">
+        <a href="https://github.com/sapexzzz/Custom-Enchants" target="_blank" class="btn btn-github">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a href="https://modrinth.com/project/NJPtH6f5" target="_blank" class="btn btn-modrinth">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 3a7 7 0 0 1 6.93 6H14.8a3 3 0 0 0-2.8-2 3 3 0 0 0-2.8 2H5.07A7 7 0 0 1 12 5zm-7 7h4.07a3 3 0 0 0 2.93 2.5A3 3 0 0 0 14.8 12h4.13a7 7 0 0 1-13.93 0z"/></svg>
+          Modrinth
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ───── STICKY NAV ───── -->
+<nav class="sticky-nav" id="sticky-nav">
+  <div class="sticky-nav-inner">
+    <!-- enchant filters -->
+    <button class="filter-btn active" data-filter="all"      data-en="All"           data-ru="Все">All</button>
+    <button class="filter-btn"        data-filter="weapon"   data-en="⚔️ Weapon"     data-ru="⚔️ Оружие">⚔️ Weapon</button>
+    <button class="filter-btn"        data-filter="tool"     data-en="⛏️ Tools"      data-ru="⛏️ Инструменты">⛏️ Tools</button>
+    <button class="filter-btn"        data-filter="armor"    data-en="🛡️ Armor"      data-ru="🛡️ Броня">🛡️ Armor</button>
+    <button class="filter-btn"        data-filter="ranged"   data-en="🏹 Ranged"     data-ru="🏹 Дальний бой">🏹 Ranged</button>
+    <!-- trades tab -->
+    <button class="filter-btn tab-trades" data-filter="trades" data-en="🧑‍🌾 Trades" data-ru="🧑‍🌾 Торговля">🧑‍🌾 Trades</button>
+    <!-- structure tab -->
+    <button class="filter-btn tab-structure" data-filter="structure" data-en="📂 Structure" data-ru="📂 Структура">📂 Structure</button>
+  </div>
+</nav>
+
+<!-- ───── MAIN ───── -->
+<main class="content">
+
+  <!-- ─── ENCHANTS VIEW ─── -->
+  <div id="view-enchants">
+
+    <!-- Intro -->
+    <section class="intro-section">
+      <h2 class="section-title" data-en="About" data-ru="О моде">About</h2>
+      <p class="intro-text">
+        <span data-en>
+          <strong>Mentalitys | Custom Enchantments</strong> is a <strong>Minecraft 1.20.1 (Fabric API)</strong> mod
+          that adds <strong>19 unique enchantments</strong> with flexible configuration via Cloth Config API.
+          Each enchantment can be toggled individually, and all parameters — levels, chances,
+          durations, radii — are tweakable via the GUI settings screen (Mod Menu) without restarting the server.
+          Config file: <code>config/custom-enchants.json</code>.
+        </span>
+        <span data-ru hidden>
+          <strong>Mentalitys | Custom Enchantments</strong> — мод для <strong>Minecraft 1.20.1 (Fabric API)</strong>,
+          добавляющий <strong>19 уникальных зачарований</strong> с гибкой настройкой через Cloth Config API.
+          Все зачарования можно включать и выключать по отдельности в конфиг-файле
+          <code>config/custom-enchants.json</code>, а параметры настраиваются через GUI (Mod Menu).
+        </span>
+      </p>
+      <div class="intro-badges">
+        <span class="badge badge-mc">Minecraft 1.20.1</span>
+        <span class="badge badge-fabric">Fabric API</span>
+        <span class="badge badge-cloth">Cloth Config</span>
+        <span class="badge badge-java">Java 21</span>
+        <span class="badge badge-version">v3.0.0</span>
+      </div>
+    </section>
+
+    <!-- Requirements -->
+    <section class="requirements-section">
+      <h2 class="section-title" data-en="Requirements" data-ru="Зависимости">Requirements</h2>
+      <div class="req-grid">
+        <div class="req-card"><span class="req-icon">🧩</span><div><div class="req-name">Fabric API</div><div class="req-ver">0.92.7+1.20.1</div></div></div>
+        <div class="req-card"><span class="req-icon">⚙️</span><div><div class="req-name">Cloth Config API</div><div class="req-ver">11.1.118</div></div></div>
+        <div class="req-card"><span class="req-icon">📋</span><div><div class="req-name">Mod Menu</div><div class="req-ver">7.2.2</div></div></div>
+      </div>
+    </section>
+
+    <!-- Enchantments grid -->
+    <section>
+      <h2 class="section-title" data-en="Enchantments" data-ru="Зачарования">Enchantments</h2>
+      <div class="enchant-grid" id="enchant-grid">
+
+        <!-- ── Glow Strike ── -->
+        <article class="enchant-card" data-category="weapon">
+          <div class="card-header">
+            <span class="card-emoji">⚔️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Glow Strike</span>
+                <span data-ru hidden>Сияющий удар</span>
+                <span class="card-sub" data-ru>Glow Strike</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-weapon" data-en>Weapon</span><span class="tag tag-weapon" data-ru hidden>Оружие</span>
+                <span class="tag tag-rare"   data-en>Rare</span>  <span class="tag tag-rare"   data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>On hit, applies <strong>Glowing</strong> to the target — makes them visible through walls. Works on swords, axes, and tridents.</span>
+            <span data-ru hidden>При ударе накладывает <strong>Свечение</strong> — цель видна сквозь стены. Работает на мечах, топорах и тризубцах.</span>
+          </p>
+          <div class="card-slots">
+            <span data-en>📦 Sword · Axe · Trident</span>
+            <span data-ru hidden>📦 Меч · Топор · Тризубец</span>
+          </div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Duration</th><th data-ru hidden>Длительность</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td><span data-en>2 sec</span><span data-ru hidden>2 сек</span></td></tr>
+              <tr><td>II</td><td><span data-en>4 sec</span><span data-ru hidden>4 сек</span></td></tr>
+              <tr><td>III</td><td><span data-en>7 sec</span><span data-ru hidden>7 сек</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Incompatible with <em>Knockback</em>; on trident — also with <em>Shadow Blade</em></span><span data-ru hidden>Несовместимо с <em>Отбрасыванием</em>; на тризубце — также с <em>Теневым клинком</em></span></li>
+            <li><span data-en>Duration per level is configurable</span><span data-ru hidden>Длительность каждого уровня настраивается</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Double Jump ── -->
+        <article class="enchant-card" data-category="armor">
+          <div class="card-header">
+            <span class="card-emoji">🦘</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Double Jump</span><span data-ru hidden>Двойной прыжок</span>
+                <span class="card-sub" data-ru>Double Jump</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-armor"  data-en>Armor</span> <span class="tag tag-armor"  data-ru hidden>Броня</span>
+                <span class="tag tag-vrare"  data-en>Very Rare</span><span class="tag tag-vrare" data-ru hidden>Очень редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: I</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: I</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Allows a <strong>second jump in mid-air</strong>. White cloud particles appear on double jump.</span>
+            <span data-ru hidden>Позволяет совершить <strong>второй прыжок в воздухе</strong>. При активации появляются белые частицы.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Boots</span><span data-ru hidden>📦 Ботинки</span></div>
+          <ul class="card-notes">
+            <li><span data-en>67% chance to consume 1 durability (<em>Unbreaking</em> reduces this)</span><span data-ru hidden>67% шанс потратить 1 прочность (<em>Прочность</em> снижает шанс)</span></li>
+            <li><span data-en>Does not work in water or lava</span><span data-ru hidden>Не работает в воде и лаве</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Drill ── -->
+        <article class="enchant-card" data-category="tool">
+          <div class="card-header">
+            <span class="card-emoji">⛏️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Drill</span><span data-ru hidden>Бур</span>
+                <span class="card-sub" data-ru>Drill</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-tool"  data-en>Tool</span>   <span class="tag tag-tool"  data-ru hidden>Инструмент</span>
+                <span class="tag tag-vrare" data-en>Very Rare</span><span class="tag tag-vrare" data-ru hidden>Очень редкое</span>
+                <span class="tag tag-lvl"   data-en>Max level: I</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: I</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Breaks blocks in a <strong>3×3 area</strong>. The plane is determined by the mined face.</span>
+            <span data-ru hidden>Ломает блоки в области <strong>3×3</strong>. Плоскость определяется по стороне блока.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Pickaxe · Shovel</span><span data-ru hidden>📦 Кирка · Лопата</span></div>
+          <ul class="card-notes">
+            <li><span data-en>Disabled while sneaking (<kbd>Shift</kbd>)</span><span data-ru hidden>Не работает при зажатом <kbd>Shift</kbd></span></li>
+            <li><span data-en>1 durability per extra block (<em>Unbreaking</em> applies)</span><span data-ru hidden>1 прочность за доп. блок (<em>Прочность</em> учитывается)</span></li>
+            <li><span data-en>Compatible with <em>Magnet</em></span><span data-ru hidden>Совместим с <em>Магнитом</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Poison Blade ── -->
+        <article class="enchant-card" data-category="weapon">
+          <div class="card-header">
+            <span class="card-emoji">🗡️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Poison Blade</span><span data-ru hidden>Ядовитый клинок</span>
+                <span class="card-sub" data-ru>Poison Blade</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-weapon" data-en>Weapon</span><span class="tag tag-weapon" data-ru hidden>Оружие</span>
+                <span class="tag tag-rare"   data-en>Rare</span><span class="tag tag-rare"  data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>On hit, applies the <strong>Poison</strong> effect to the target.</span>
+            <span data-ru hidden>При ударе накладывает <strong>Отравление</strong> на цель.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Sword · Axe</span><span data-ru hidden>📦 Меч · Топор</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Duration</th><th data-ru hidden>Длительность</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td><span data-en>2 sec</span><span data-ru hidden>2 сек</span></td></tr>
+              <tr><td>II</td><td><span data-en>3 sec</span><span data-ru hidden>3 сек</span></td></tr>
+              <tr><td>III</td><td><span data-en>4 sec</span><span data-ru hidden>4 сек</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Incompatible with <em>Fire Aspect</em></span><span data-ru hidden>Несовместимо с <em>Заговором огня</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Lumberjack ── -->
+        <article class="enchant-card" data-category="tool">
+          <div class="card-header">
+            <span class="card-emoji">🪵</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Lumberjack</span><span data-ru hidden>Лесоруб</span>
+                <span class="card-sub" data-ru>Lumberjack</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-tool" data-en>Tool</span><span class="tag tag-tool" data-ru hidden>Инструмент</span>
+                <span class="tag tag-rare" data-en>Rare</span><span class="tag tag-rare" data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"  data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Chops an entire <strong>tree</strong> by breaking one log. Smart detection — won't break player-built log structures. Works with Nether trees.</span>
+            <span data-ru hidden>Срубает всё <strong>дерево</strong> за один удар. Умное определение — не ломает постройки из брёвен. Работает с деревьями Незера.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Axe</span><span data-ru hidden>📦 Топор</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Max blocks</th><th data-ru hidden>Макс. блоков</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>16</td></tr>
+              <tr><td>II</td><td>48</td></tr>
+              <tr><td>III</td><td>128</td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Does not work on <code>_wood</code> / <code>hyphae</code> blocks</span><span data-ru hidden>Не работает c блоками <code>_wood</code> / <code>hyphae</code></span></li>
+            <li><span data-en>Does not break below the original block</span><span data-ru hidden>Не ломает блоки ниже исходного</span></li>
+            <li><span data-en>Compatible with <em>Magnet</em></span><span data-ru hidden>Совместим с <em>Магнитом</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Shadow Blade ── -->
+        <article class="enchant-card" data-category="weapon">
+          <div class="card-header">
+            <span class="card-emoji">🗡️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Shadow Blade</span><span data-ru hidden>Теневой клинок</span>
+                <span class="card-sub" data-ru>Shadow Blade</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-weapon" data-en>Weapon</span><span class="tag tag-weapon" data-ru hidden>Оружие</span>
+                <span class="tag tag-vrare"  data-en>Very Rare</span><span class="tag tag-vrare" data-ru hidden>Очень редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>On hit, chance to <strong>teleport behind the target</strong> and apply <strong>Slowness II</strong>. Chance scales with throw distance (up to +10% from 30 blocks).</span>
+            <span data-ru hidden>При броске шанс <strong>телепортироваться за спину цели</strong> и наложить <strong>Замедление II</strong>. Шанс растёт с расстояния (до +10% с 30 блоков).</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Trident</span><span data-ru hidden>📦 Тризубец</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Chance</th><th data-ru hidden>Шанс</th>
+              <th data-en>Slowness</th><th data-ru hidden>Замедление</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>15%</td><td><span data-en>1 sec</span><span data-ru hidden>1 сек</span></td></tr>
+              <tr><td>II</td><td>25%</td><td><span data-en>2 sec</span><span data-ru hidden>2 сек</span></td></tr>
+              <tr><td>III</td><td>35%</td><td><span data-en>3 sec</span><span data-ru hidden>3 сек</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Incompatible with <em>Channeling</em>, <em>Riptide</em>, <em>Glow Strike</em></span><span data-ru hidden>Несовместимо с <em>Громоверзцем</em>, <em>Тягуном</em>, <em>Сияющим ударом</em></span></li>
+            <li><span data-en>Compatible with <em>Loyalty</em> — trident returns after teleport</span><span data-ru hidden>Совместимо с <em>Преданностью</em> — тризубец возвращается после телепорта</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Magnet ── -->
+        <article class="enchant-card" data-category="tool">
+          <div class="card-header">
+            <span class="card-emoji">🧲</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Magnet</span><span data-ru hidden>Магнит</span>
+                <span class="card-sub" data-ru>Magnet</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-tool" data-en>Tool</span><span class="tag tag-tool" data-ru hidden>Инструмент</span>
+                <span class="tag tag-rare" data-en>Rare</span><span class="tag tag-rare" data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"  data-en>Max level: I</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: I</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>When mining, <strong>auto-picks up items</strong> within a configurable radius (default 5 blocks) into the player's inventory.</span>
+            <span data-ru hidden>При добыче блоков <strong>автоматически подбирает предметы</strong> в настраиваемом радиусе (по умолчанию 5 блоков).</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Pickaxe · Axe · Shovel · Hoe</span><span data-ru hidden>📦 Кирка · Топор · Лопата · Мотыга</span></div>
+          <ul class="card-notes">
+            <li><span data-en>Works with <em>Drill</em> and <em>Lumberjack</em></span><span data-ru hidden>Работает с <em>Буром</em> и <em>Лесорубом</em></span></li>
+            <li><span data-en>Pickup radius is configurable</span><span data-ru hidden>Радиус подбора настраивается</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Auto Smelt ── -->
+        <article class="enchant-card" data-category="tool">
+          <div class="card-header">
+            <span class="card-emoji">🔥</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Auto Smelt</span><span data-ru hidden>Автопечка</span>
+                <span class="card-sub" data-ru>Auto Smelt</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-tool" data-en>Tool</span><span class="tag tag-tool" data-ru hidden>Инструмент</span>
+                <span class="tag tag-rare" data-en>Rare</span><span class="tag tag-rare" data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"  data-en>Max level: I</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: I</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Automatically drops the <strong>smelted result</strong> when mining ores (iron, gold, copper and deepslate variants). Grants smelting XP.</span>
+            <span data-ru hidden>Автоматически выдаёт <strong>переплавленный результат</strong> при добыче руд (железо, золото, медь и их глубинносланцевые варианты). Даёт опыт за переплавку.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Pickaxe</span><span data-ru hidden>📦 Кирка</span></div>
+          <ul class="card-notes">
+            <li><span data-en>Incompatible with <em>Fortune</em></span><span data-ru hidden>Несовместимо с <em>Удачей</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Vegetation ── -->
+        <article class="enchant-card" data-category="tool">
+          <div class="card-header">
+            <span class="card-emoji">🌱</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Vegetation</span><span data-ru hidden>Вегетация</span>
+                <span class="card-sub" data-ru>Vegetation</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-tool" data-en>Tool</span><span class="tag tag-tool" data-ru hidden>Инструмент</span>
+                <span class="tag tag-rare" data-en>Rare</span><span class="tag tag-rare" data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"  data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Breaking a mature crop has a chance to <strong>auto-replant</strong> it. Works with wheat, carrots, potatoes, beetroot, nether wart.</span>
+            <span data-ru hidden>При разрушении взрослого растения есть шанс <strong>автоматической посадки</strong>. Работает с пшеницей, морковью, картофелем, свёклой, адским наростом.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Hoe</span><span data-ru hidden>📦 Мотыга</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Replant chance</th><th data-ru hidden>Шанс посадки</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>30%</td></tr>
+              <tr><td>II</td><td>60%</td></tr>
+              <tr><td>III</td><td>100%</td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Freshly planted crop is protected from breaking for 0.5 sec</span><span data-ru hidden>Свежепосаженное растение нельзя сломать 0.5 сек</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Rebound ── -->
+        <article class="enchant-card" data-category="armor">
+          <div class="card-header">
+            <span class="card-emoji">🛡️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Rebound</span><span data-ru hidden>Эластичность</span>
+                <span class="card-sub" data-ru>Rebound</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-armor" data-en>Armor</span><span class="tag tag-armor" data-ru hidden>Броня</span>
+                <span class="tag tag-rare"  data-en>Rare</span><span class="tag tag-rare"  data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"   data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>When blocking a melee attack, <strong>knocks the attacker back</strong>. Player also gets a small backwards impulse (15%). Does not deal damage.</span>
+            <span data-ru hidden>При блокировании удара <strong>отбрасывает атакующего</strong> назад. Игрок получает небольшой импульс назад (15%). Не наносит урона.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Shield</span><span data-ru hidden>📦 Щит</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Knockback</th><th data-ru hidden>Отбрасывание</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>0.5</td></tr>
+              <tr><td>II</td><td>1.0</td></tr>
+              <tr><td>III</td><td>2.0</td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Costs extra shield durability (1 per level)</span><span data-ru hidden>Тратит дополнительную прочность щита (1 ед. за уровень)</span></li>
+            <li><span data-en>Incompatible with <em>Feedback</em> and <em>Guardian's Grace</em></span><span data-ru hidden>Несовместимо с <em>Эхо-ударом</em> и <em>Живым щитом</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Feedback ── -->
+        <article class="enchant-card" data-category="armor">
+          <div class="card-header">
+            <span class="card-emoji">🛡️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Feedback</span><span data-ru hidden>Эхо-удар</span>
+                <span class="card-sub" data-ru>Feedback</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-armor" data-en>Armor</span><span class="tag tag-armor" data-ru hidden>Броня</span>
+                <span class="tag tag-rare"  data-en>Rare</span><span class="tag tag-rare"  data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"   data-en>Max level: I</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: I</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>When blocking a <strong>magical attack</strong> (harming potions, shulker bullets, evoker fangs), <strong>fully cancels damage</strong>, clears all harmful effects, and restores shield durability.</span>
+            <span data-ru hidden>При блокировании <strong>магической атаки</strong> (зелья вреда, снаряды шалкера) <strong>полностью отменяет урон</strong>, очищает негативные эффекты и восстанавливает прочность щита.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Shield</span><span data-ru hidden>📦 Щит</span></div>
+          <ul class="card-notes">
+            <li><span data-en>Cancels magic damage inside <code>hurt()</code> before it is applied</span><span data-ru hidden>Отменяет магический урон в <code>hurt()</code> до его применения</span></li>
+            <li><span data-en>Durability restoration amount is configurable</span><span data-ru hidden>Количество восстановленной прочности настраивается</span></li>
+            <li><span data-en>Incompatible with <em>Rebound</em> and <em>Guardian's Grace</em></span><span data-ru hidden>Несовместимо с <em>Эластичностью</em> и <em>Живым щитом</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Second Wind ── -->
+        <article class="enchant-card" data-category="armor">
+          <div class="card-header">
+            <span class="card-emoji">🌀</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Second Wind</span><span data-ru hidden>Второе дыхание</span>
+                <span class="card-sub" data-ru>Second Wind</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-armor"  data-en>Armor</span><span class="tag tag-armor"  data-ru hidden>Броня</span>
+                <span class="tag tag-vrare"  data-en>Very Rare</span><span class="tag tag-vrare" data-ru hidden>Очень редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: I</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: I</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>When health drops below <strong>1 heart (2 HP)</strong>, instantly grants <strong>Speed II</strong>, <strong>Resistance I</strong>, and <strong>100% knockback resistance</strong>. Effect duration scales with enchanted armor pieces.</span>
+            <span data-ru hidden>Когда здоровье падает ниже <strong>1 сердца (2 HP)</strong>, мгновенно даёт <strong>Скорость II</strong>, <strong>Сопротивление I</strong> и <strong>100% стойкость к отбрасыванию</strong>. Длительность масштабируется по числу экипированных предметов.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Helmet · Chestplate · Leggings · Boots</span><span data-ru hidden>📦 Шлем · Нагрудник · Поножи · Ботинки</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Pieces</th><th data-ru hidden>Предметов</th>
+              <th data-en>Speed II</th><th data-ru hidden>Скорость II</th>
+              <th data-en>Resistance I</th><th data-ru hidden>Сопротивление I</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>1</td><td><span data-en>2 sec</span><span data-ru hidden>2 сек</span></td><td><span data-en>1 sec</span><span data-ru hidden>1 сек</span></td></tr>
+              <tr><td>2</td><td><span data-en>3 sec</span><span data-ru hidden>3 сек</span></td><td><span data-en>1 sec</span><span data-ru hidden>1 сек</span></td></tr>
+              <tr><td>3</td><td><span data-en>3 sec</span><span data-ru hidden>3 сек</span></td><td><span data-en>2 sec</span><span data-ru hidden>2 сек</span></td></tr>
+              <tr><td>4</td><td><span data-en>4 sec</span><span data-ru hidden>4 сек</span></td><td><span data-en>2 sec</span><span data-ru hidden>2 сек</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Cooldown: 60 seconds (configurable)</span><span data-ru hidden>Перезарядка: 60 секунд (настраивается)</span></li>
+            <li><span data-en>Visual effects: smoke and cloud particles</span><span data-ru hidden>Визуальный эффект: частицы дыма и облака</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Guardian's Grace ── -->
+        <article class="enchant-card" data-category="armor">
+          <div class="card-header">
+            <span class="card-emoji">🛡️</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Guardian's Grace</span><span data-ru hidden>Живой щит</span>
+                <span class="card-sub" data-ru>Guardian's Grace</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-armor" data-en>Armor</span><span class="tag tag-armor" data-ru hidden>Броня</span>
+                <span class="tag tag-rare"  data-en>Rare</span><span class="tag tag-rare"  data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"   data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>On block, chance to <strong>restore 1 food point</strong>. Level III: extra 10% chance to <strong>heal 1 heart</strong>.</span>
+            <span data-ru hidden>При блокировании шанс <strong>восстановить 1 ед. сытости</strong>. III уровень: доп. 10% шанс <strong>восстановить 1 сердце</strong>.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Shield</span><span data-ru hidden>📦 Щит</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Food chance</th><th data-ru hidden>Шанс сытости</th>
+              <th data-en>Bonus</th><th data-ru hidden>Бонус</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>10%</td><td>—</td></tr>
+              <tr><td>II</td><td>20%</td><td>—</td></tr>
+              <tr><td>III</td><td>30%</td><td><span data-en>+10% heal (2 HP)</span><span data-ru hidden>+10% лечение (2 HP)</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Incompatible with <em>Rebound</em> and <em>Feedback</em></span><span data-ru hidden>Несовместимо с <em>Эластичностью</em> и <em>Эхо-ударом</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── Vulnerability ── -->
+        <article class="enchant-card" data-category="ranged">
+          <div class="card-header">
+            <span class="card-emoji">🎯</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Vulnerability</span><span data-ru hidden>Аналитик</span>
+                <span class="card-sub" data-ru>Vulnerability</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-ranged" data-en>Ranged</span><span class="tag tag-ranged" data-ru hidden>Дальний бой</span>
+                <span class="tag tag-rare"   data-en>Rare</span><span class="tag tag-rare"   data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Arrows partially <strong>ignore the target's armor</strong>, piercing protection.</span>
+            <span data-ru hidden>Стрелы частично <strong>игнорируют броню</strong> цели.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Bow · Crossbow</span><span data-ru hidden>📦 Лук · Арбалет</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Armor ignored</th><th data-ru hidden>Игнор брони</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>10%</td></tr>
+              <tr><td>II</td><td>20%</td></tr>
+              <tr><td>III</td><td>30%</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- ── Tether Master ── -->
+        <article class="enchant-card" data-category="tool">
+          <div class="card-header">
+            <span class="card-emoji">🎣</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Tether Master</span><span data-ru hidden>Крепкая нить</span>
+                <span class="card-sub" data-ru>Tether Master</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-tool"     data-en>Tool</span><span class="tag tag-tool"     data-ru hidden>Инструмент</span>
+                <span class="tag tag-uncommon" data-en>Uncommon</span><span class="tag tag-uncommon" data-ru hidden>Необычное</span>
+                <span class="tag tag-lvl"      data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Increases the <strong>pull strength</strong> when reeling in hooked mobs.</span>
+            <span data-ru hidden>Увеличивает <strong>силу притяжения</strong> мобов при намотке удочки.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Fishing Rod</span><span data-ru hidden>📦 Удочка</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Pull strength</th><th data-ru hidden>Прирост силы</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>+15%</td></tr>
+              <tr><td>II</td><td>+25%</td></tr>
+              <tr><td>III</td><td>+40%</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- ── Sky Rage ── -->
+        <article class="enchant-card" data-category="ranged">
+          <div class="card-header">
+            <span class="card-emoji">⚡</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Sky Rage</span><span data-ru hidden>Ярость Неба</span>
+                <span class="card-sub" data-ru>Sky Rage</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-ranged" data-en>Ranged</span><span class="tag tag-ranged" data-ru hidden>Дальний бой</span>
+                <span class="tag tag-rare"   data-en>Rare</span><span class="tag tag-rare"   data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>During a <strong>thunderstorm</strong>, arrows have a chance to summon a <strong>lightning strike</strong> at the hit location.</span>
+            <span data-ru hidden>Во время <strong>грозы</strong> стрелы с шансом вызывают <strong>удар молнии</strong> в точку попадания.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Bow · Crossbow</span><span data-ru hidden>📦 Лук · Арбалет</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Chance</th><th data-ru hidden>Шанс</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>10%</td></tr>
+              <tr><td>II</td><td>20%</td></tr>
+              <tr><td>III</td><td>30%</td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Only during thunderstorm (not plain rain)</span><span data-ru hidden>Только во время грозы (не простого дождя)</span></li>
+            <li><span data-en>Does not work under a roof</span><span data-ru hidden>Не работает под крышей</span></li>
+            <li><span data-en>Per-player cooldown: 1.5 sec between strikes</span><span data-ru hidden>Кулдаун 1.5 сек между ударами на игрока</span></li>
+            <li><span data-en>Incompatible with <em>Flame</em>, <em>Infinity</em>, <em>Piercing</em></span><span data-ru hidden>Несовместимо с <em>Пламенем</em>, <em>Бесконечностью</em>, <em>Пробоем</em></span></li>
+          </ul>
+        </article>
+
+        <!-- ── XP Syphon ── -->
+        <article class="enchant-card" data-category="weapon">
+          <div class="card-header">
+            <span class="card-emoji">✨</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>XP Syphon</span><span data-ru hidden>Собиратель искр</span>
+                <span class="card-sub" data-ru>XP Syphon</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-weapon"   data-en>Weapon</span><span class="tag tag-weapon"   data-ru hidden>Оружие</span>
+                <span class="tag tag-uncommon" data-en>Uncommon</span><span class="tag tag-uncommon" data-ru hidden>Необычное</span>
+                <span class="tag tag-lvl"      data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Hits on mobs have a chance to <strong>drop XP orbs</strong> before the mob dies.</span>
+            <span data-ru hidden>Удары по мобам с шансом <strong>выбивают сферы опыта</strong> до смерти моба.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Sword</span><span data-ru hidden>📦 Меч</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Chance</th><th data-ru hidden>Шанс</th>
+              <th data-en>XP</th><th data-ru hidden>Опыт</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td>5%</td><td>1</td></tr>
+              <tr><td>II</td><td>10%</td><td>2</td></tr>
+              <tr><td>III</td><td>15%</td><td>3</td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Works on any mob, including bosses</span><span data-ru hidden>Работает на любых мобах, включая боссов</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Kinetic Discharge ── -->
+        <article class="enchant-card" data-category="armor">
+          <div class="card-header">
+            <span class="card-emoji">💥</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span>
+                <span class="card-sub" data-ru>Kinetic Discharge</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-armor" data-en>Armor</span><span class="tag tag-armor" data-ru hidden>Броня</span>
+                <span class="tag tag-rare"  data-en>Rare</span><span class="tag tag-rare"  data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"   data-en>Max level: III</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: III</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>Landing after fast elytra flight creates a <strong>shockwave</strong> that knocks back nearby mobs. Level III passively reduces elytra durability loss by <strong>~90%</strong>.</span>
+            <span data-ru hidden>Приземление после быстрого полёта на элитрах создаёт <strong>ударную волну</strong>. III уровень: пассивно снижает расход прочности элитры на <strong>~90%</strong>.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Elytra</span><span data-ru hidden>📦 Элитры</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Radius</th><th data-ru hidden>Радиус</th>
+              <th data-en>Effect</th><th data-ru hidden>Эффект</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td><span data-en>3 blocks</span><span data-ru hidden>3 блока</span></td><td><span data-en>Weak knockback</span><span data-ru hidden>Слабое отбрасывание</span></td></tr>
+              <tr><td>II</td><td><span data-en>5 blocks</span><span data-ru hidden>5 блоков</span></td><td><span data-en>Medium knockback</span><span data-ru hidden>Среднее отбрасывание</span></td></tr>
+              <tr><td>III</td><td><span data-en>7 blocks</span><span data-ru hidden>7 блоков</span></td><td><span data-en>Strong + 2 HP dmg</span><span data-ru hidden>Сильное + 2 HP урона</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Triggers at landing speed ≥ 0.4 blocks/tick</span><span data-ru hidden>Активируется при скорости приземления ≥ 0.4 блоков/тик</span></li>
+            <li><span data-en>Level III: only 10% chance to cost durability on shockwave</span><span data-ru hidden>III уровень: шоквейв имеет лишь 10% шанс потратить прочность</span></li>
+          </ul>
+        </article>
+
+        <!-- ── Sculk Bloom ── -->
+        <article class="enchant-card" data-category="weapon">
+          <div class="card-header">
+            <span class="card-emoji">🌑</span>
+            <div>
+              <h3 class="card-title">
+                <span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span>
+                <span class="card-sub" data-ru>Sculk Bloom</span>
+              </h3>
+              <div class="card-tags">
+                <span class="tag tag-weapon" data-en>Weapon</span><span class="tag tag-weapon" data-ru hidden>Оружие</span>
+                <span class="tag tag-rare"   data-en>Rare</span><span class="tag tag-rare"   data-ru hidden>Редкое</span>
+                <span class="tag tag-lvl"    data-en>Max level: II</span><span class="tag tag-lvl" data-ru hidden>Макс. уровень: II</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">
+            <span data-en>When killing a mob, <strong>sculk spreads</strong> at the death location — as if a <strong>Sculk Catalyst</strong> were placed there.</span>
+            <span data-ru hidden>При убийстве моба на месте смерти <strong>распространяется скалк</strong> — как если бы рядом стоял <strong>скалк-катализатор</strong>.</span>
+          </p>
+          <div class="card-slots"><span data-en>📦 Sword</span><span data-ru hidden>📦 Меч</span></div>
+          <table class="stat-table">
+            <thead><tr>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Effect</th><th data-ru hidden>Эффект</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>I</td><td><span data-en>Small bloom (≈2–3 block radius)</span><span data-ru hidden>Малое цветение (≈2–3 блока)</span></td></tr>
+              <tr><td>II</td><td><span data-en>Large bloom (≈4–5 block radius)</span><span data-ru hidden>Большое цветение (≈4–5 блоков)</span></td></tr>
+            </tbody>
+          </table>
+          <ul class="card-notes">
+            <li><span data-en>Works only on direct kills with the enchanted weapon</span><span data-ru hidden>Работает только при прямом убийстве зачарованным оружием</span></li>
+            <li><span data-en>May generate sculk veins, sensors, and shriekers</span><span data-ru hidden>Может порождать скалковые прожилки, датчики и крикуны</span></li>
+          </ul>
+        </article>
+
+      </div><!-- /enchant-grid -->
+    </section>
+
+    <!-- Changelog -->
+    <section class="changelog-section">
+      <h2 class="section-title" data-en="Changelog" data-ru="История версий">Changelog</h2>
+      <div class="changelog-list">
+
+        <details class="cl-entry" open>
+          <summary class="cl-summary">
+            <span class="cl-ver">v3.0.0</span>
+            <span class="cl-date">2026-04-30</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Sculk Bloom — sword enchantment (Rare, max II). On kill, sculk spreads at the death location like a Sculk Catalyst. Level II produces a larger bloom and can generate sensors/shriekers.</span><span data-ru hidden><strong>Добавлено:</strong> Скалковое цветение — зачарование для меча (ред., макс. II). При убийстве скалк распространяется как от катализатора. II уровень — большее цветение, может порождать датчики и крикуны.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.9.0</span>
+            <span class="cl-date">2026-03-28</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Kinetic Discharge — elytra enchantment (Rare, max III). Shockwave on landing after fast flight. Level III: passive ~90% elytra durability savings.</span><span data-ru hidden><strong>Добавлено:</strong> Кинетический разряд — зачарование для элитр (ред., макс. III). Шоквейв при приземлении. III уровень: пассивное снижение расхода прочности ~90%.</span></p>
+            <p><span data-en><strong>Fixed:</strong> Feedback now fully blocks instant magic damage (<code>DamageTypes.MAGIC</code>) and clears effects before they are applied.</span><span data-ru hidden><strong>Исправлено:</strong> Эхо-удар теперь полностью блокирует мгновенный урон (<code>DamageTypes.MAGIC</code>) и очищает эффекты до применения.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.8.0</span>
+            <span class="cl-date">2026-03-28</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> XP Syphon — sword enchantment (Uncommon, max III). Hits drop XP orbs before mob death.</span><span data-ru hidden><strong>Добавлено:</strong> Собиратель искр — зачарование для меча (необыч., макс. III). Удары выбивают опыт до смерти моба.</span></p>
+            <p><span data-en><strong>Fixed:</strong> Feedback — full rework of effect protection; added <code>forceAddEffect</code> interception.</span><span data-ru hidden><strong>Исправлено:</strong> Эхо-удар — полная переработка защиты; добавлен перехват <code>forceAddEffect</code>.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.7.0</span>
+            <span class="cl-date">2026-03-28</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Sky Rage — bow/crossbow enchantment (Rare, max III). Lightning strike during thunderstorms. Cooldown 1.5 sec.</span><span data-ru hidden><strong>Добавлено:</strong> Ярость Неба — зачарование для лука/арбалета (ред., макс. III). Молния во время грозы. Кулдаун 1.5 сек.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.6.0</span>
+            <span class="cl-date">2026-03-28</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Tether Master — fishing rod enchantment (Uncommon, max III). Increases mob pull strength.</span><span data-ru hidden><strong>Добавлено:</strong> Крепкая нить — зачарование для удочки (необыч., макс. III). Увеличивает силу притяжения мобов.</span></p>
+            <p><span data-en><strong>Changed:</strong> Shadow Blade — restored compatibility with Loyalty.</span><span data-ru hidden><strong>Изменено:</strong> Теневой клинок — восстановлена совместимость с Преданностью.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.5.0</span>
+            <span class="cl-date">2026-03-28</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Vulnerability — bow/crossbow enchantment (Rare, max III). Arrows partially ignore armor.</span><span data-ru hidden><strong>Добавлено:</strong> Аналитик — зачарование для лука/арбалета (ред., макс. III). Стрелы частично игнорируют броню.</span></p>
+            <p><span data-en><strong>Changed:</strong> Rebound, Feedback and Guardian's Grace are now mutually incompatible.</span><span data-ru hidden><strong>Изменено:</strong> Эластичность, Эхо-удар и Живой щит теперь мутуально несовместимы.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.4.0</span>
+            <span class="cl-date">2026-03-28</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Guardian's Grace — shield enchantment (Rare, max III). Restores food on block; Level III also heals.</span><span data-ru hidden><strong>Добавлено:</strong> Живой щит — зачарование для щита (ред., макс. III). Восстанавливает сытость при блоке; III уровень — иногда лечит.</span></p>
+            <p><span data-en><strong>Changed:</strong> Second Wind can now be applied to any armor piece; duration scales with piece count.</span><span data-ru hidden><strong>Изменено:</strong> Второе дыхание теперь можно наложить на любой предмет брони; длительность масштабируется.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.3.0</span>
+            <span class="cl-date">2026-03-27</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Second Wind — chestplate enchantment (Very Rare, max I). Survival burst on critical health. Cooldown 60 sec.</span><span data-ru hidden><strong>Добавлено:</strong> Второе дыхание — зачарование для нагрудника (оч. ред., макс. I). Бафф выживания при критически низком здоровье. Кулдаун 60 сек.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.2.0</span>
+            <span class="cl-date">2026-03-27</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Feedback — shield enchantment (Rare, max I). Cancels magic damage, purges effects, restores durability.</span><span data-ru hidden><strong>Добавлено:</strong> Эхо-удар — зачарование для щита (ред., макс. I). Блокирует магический урон, очищает эффекты, восстанавливает прочность.</span></p>
+            <p><span data-en><strong>Fixed:</strong> Vegetation — reliable replanting on the next server tick; 0.5 sec seedling protection.</span><span data-ru hidden><strong>Исправлено:</strong> Вегетация — надёжная посадка на следующем тике; защита саженца 0.5 сек.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.1.0</span>
+            <span class="cl-date">2026-03-27</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Rebound — shield enchantment (Rare, max III). Knocks attacker back on block.</span><span data-ru hidden><strong>Добавлено:</strong> Эластичность — зачарование для щита (ред., макс. III). Отбрасывание атакующего при блокировании.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v2.0.0</span>
+            <span class="cl-date">2026-03-27</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Vegetation — hoe enchantment (Rare, max III). Auto-replant on harvest.</span><span data-ru hidden><strong>Добавлено:</strong> Вегетация — зачарование для мотыги (ред., макс. III). Автопосадка при сборе урожая.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.9.0</span>
+            <span class="cl-date">2026-03-26</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Auto Smelt — pickaxe enchantment (Rare, max I). Auto-smelts ore drops and grants smelting XP.</span><span data-ru hidden><strong>Добавлено:</strong> Автопечка — зачарование для кирки (ред., макс. I). Автосплавка руд и опыт за переплавку.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.7.0</span>
+            <span class="cl-date">2026-03-26</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Magnet — tool enchantment (Rare, max I). Auto-pickup within 5 blocks.</span><span data-ru hidden><strong>Добавлено:</strong> Магнит — зачарование для инструментов (ред., макс. I). Авто-подбор в радиусе 5 блоков.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.6.0</span>
+            <span class="cl-date">2026-03-26</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Shadow Blade — trident enchantment (Very Rare, max III). Teleport behind target + Slowness II.</span><span data-ru hidden><strong>Добавлено:</strong> Теневой клинок — зачарование для тризубца (оч. ред., макс. III). Телепортация за спину цели + Замедление II.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.5.0</span>
+            <span class="cl-date">2026-03-26</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Lumberjack — axe enchantment (Rare, max III). Full tree felling on one hit.</span><span data-ru hidden><strong>Добавлено:</strong> Лесоруб — зачарование для топора (ред., макс. III). Срубание всего дерева за один удар.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.4.0</span>
+            <span class="cl-date">2026-03-26</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Poison Blade — sword/axe enchantment (Rare, max III).</span><span data-ru hidden><strong>Добавлено:</strong> Ядовитый клинок — зачарование для меча/топора (ред., макс. III).</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.3.0</span>
+            <span class="cl-date">2026-03-26</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Drill — pickaxe/shovel enchantment (Very Rare, max I). 3×3 area mining.</span><span data-ru hidden><strong>Добавлено:</strong> Бур — зачарование для кирки/лопаты (оч. ред., макс. I). Добыча 3×3.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.1.0</span>
+            <span class="cl-date">2026-03-25</span>
+            <span class="cl-new" data-en>+1 enchantment</span><span class="cl-new" data-ru hidden>+1 зачарование</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Double Jump — boots enchantment. Cloth Config integration, Mod Menu. Mod renamed.</span><span data-ru hidden><strong>Добавлено:</strong> Двойной прыжок — зачарование для ботинок. Интеграция Cloth Config, Mod Menu. Мод переименован.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v1.0.0</span>
+            <span class="cl-date">2026-03-25</span>
+            <span class="cl-new" data-en>Initial release</span><span class="cl-new" data-ru hidden>Первый релиз</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Added:</strong> Glow Strike — first enchantment. Librarian trades, EN/RU localization.</span><span data-ru hidden><strong>Добавлено:</strong> Сияющий удар — первое зачарование. Торговля с жителями, локализация EN/RU.</span></p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+  </div><!-- /view-enchants -->
+
+  <!-- ─── TRADES VIEW ─── -->
+  <div id="view-trades" hidden>
+    <section class="trades-section">
+      <h2 class="section-title" data-en="Villager Trades" data-ru="Торговля с жителями">Villager Trades</h2>
+      <p class="trades-intro">
+        <span data-en>All enchanted books can be purchased from a <strong>Librarian</strong> villager. All enchantments are also obtainable from the <strong>enchanting table</strong>.</span>
+        <span data-ru hidden>Все зачарованные книги можно купить у жителя-<strong>Библиотекаря</strong>. Также все зачарования доступны через <strong>стол зачарований</strong>.</span>
+      </p>
+      <div class="table-wrapper">
+        <table class="trades-table">
+          <thead>
+            <tr>
+              <th data-en>Enchantment</th><th data-ru hidden>Зачарование</th>
+              <th data-en>Level</th><th data-ru hidden>Уровень</th>
+              <th data-en>Villager Tier</th><th data-ru hidden>Тир жителя</th>
+              <th data-en>Price</th><th data-ru hidden>Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span data-en>Glow Strike</span><span data-ru hidden>Сияющий удар</span></td><td>I</td><td><span data-en>Novice (1)</span><span data-ru hidden>Новичок (1)</span></td><td><span data-en>10 Emeralds</span><span data-ru hidden>10 изумрудов</span></td></tr>
+            <tr><td><span data-en>Glow Strike</span><span data-ru hidden>Сияющий удар</span></td><td>II</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>28 Emeralds</span><span data-ru hidden>28 изумрудов</span></td></tr>
+            <tr><td><span data-en>Glow Strike</span><span data-ru hidden>Сияющий удар</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>48 Emeralds</span><span data-ru hidden>48 изумрудов</span></td></tr>
+            <tr><td><span data-en>Double Jump</span><span data-ru hidden>Двойной прыжок</span></td><td>I</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>38 Emeralds</span><span data-ru hidden>38 изумрудов</span></td></tr>
+            <tr><td><span data-en>Drill</span><span data-ru hidden>Бур</span></td><td>I</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>50 Emeralds</span><span data-ru hidden>50 изумрудов</span></td></tr>
+            <tr><td><span data-en>Poison Blade</span><span data-ru hidden>Ядовитый клинок</span></td><td>I</td><td><span data-en>Novice (1)</span><span data-ru hidden>Новичок (1)</span></td><td><span data-en>12 Emeralds</span><span data-ru hidden>12 изумрудов</span></td></tr>
+            <tr><td><span data-en>Poison Blade</span><span data-ru hidden>Ядовитый клинок</span></td><td>II</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>30 Emeralds</span><span data-ru hidden>30 изумрудов</span></td></tr>
+            <tr><td><span data-en>Poison Blade</span><span data-ru hidden>Ядовитый клинок</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>50 Emeralds</span><span data-ru hidden>50 изумрудов</span></td></tr>
+            <tr><td><span data-en>Lumberjack</span><span data-ru hidden>Лесоруб</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>14 Emeralds</span><span data-ru hidden>14 изумрудов</span></td></tr>
+            <tr><td><span data-en>Lumberjack</span><span data-ru hidden>Лесоруб</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>32 Emeralds</span><span data-ru hidden>32 изумруда</span></td></tr>
+            <tr><td><span data-en>Lumberjack</span><span data-ru hidden>Лесоруб</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>52 Emeralds</span><span data-ru hidden>52 изумруда</span></td></tr>
+            <tr><td><span data-en>Shadow Blade</span><span data-ru hidden>Теневой клинок</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>16 Emeralds</span><span data-ru hidden>16 изумрудов</span></td></tr>
+            <tr><td><span data-en>Shadow Blade</span><span data-ru hidden>Теневой клинок</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>34 Emeralds</span><span data-ru hidden>34 изумруда</span></td></tr>
+            <tr><td><span data-en>Shadow Blade</span><span data-ru hidden>Теневой клинок</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>54 Emeralds</span><span data-ru hidden>54 изумруда</span></td></tr>
+            <tr><td><span data-en>Magnet</span><span data-ru hidden>Магнит</span></td><td>I</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>24 Emeralds</span><span data-ru hidden>24 изумруда</span></td></tr>
+            <tr><td><span data-en>Auto Smelt</span><span data-ru hidden>Автопечка</span></td><td>I</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>32 Emeralds</span><span data-ru hidden>32 изумруда</span></td></tr>
+            <tr><td><span data-en>Vegetation</span><span data-ru hidden>Вегетация</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>14 Emeralds</span><span data-ru hidden>14 изумрудов</span></td></tr>
+            <tr><td><span data-en>Vegetation</span><span data-ru hidden>Вегетация</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>30 Emeralds</span><span data-ru hidden>30 изумрудов</span></td></tr>
+            <tr><td><span data-en>Vegetation</span><span data-ru hidden>Вегетация</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>48 Emeralds</span><span data-ru hidden>48 изумрудов</span></td></tr>
+            <tr><td><span data-en>Rebound</span><span data-ru hidden>Эластичность</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>16 Emeralds</span><span data-ru hidden>16 изумрудов</span></td></tr>
+            <tr><td><span data-en>Rebound</span><span data-ru hidden>Эластичность</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>32 Emeralds</span><span data-ru hidden>32 изумруда</span></td></tr>
+            <tr><td><span data-en>Rebound</span><span data-ru hidden>Эластичность</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>50 Emeralds</span><span data-ru hidden>50 изумрудов</span></td></tr>
+            <tr><td><span data-en>Feedback</span><span data-ru hidden>Эхо-удар</span></td><td>I</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>22 Emeralds</span><span data-ru hidden>22 изумруда</span></td></tr>
+            <tr><td><span data-en>Second Wind</span><span data-ru hidden>Второе дыхание</span></td><td>I</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>52 Emeralds</span><span data-ru hidden>52 изумруда</span></td></tr>
+            <tr><td><span data-en>Guardian's Grace</span><span data-ru hidden>Живой щит</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>16 Emeralds</span><span data-ru hidden>16 изумрудов</span></td></tr>
+            <tr><td><span data-en>Guardian's Grace</span><span data-ru hidden>Живой щит</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>32 Emeralds</span><span data-ru hidden>32 изумруда</span></td></tr>
+            <tr><td><span data-en>Guardian's Grace</span><span data-ru hidden>Живой щит</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>50 Emeralds</span><span data-ru hidden>50 изумрудов</span></td></tr>
+            <tr><td><span data-en>Vulnerability</span><span data-ru hidden>Аналитик</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>18 Emeralds</span><span data-ru hidden>18 изумрудов</span></td></tr>
+            <tr><td><span data-en>Vulnerability</span><span data-ru hidden>Аналитик</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>36 Emeralds</span><span data-ru hidden>36 изумрудов</span></td></tr>
+            <tr><td><span data-en>Vulnerability</span><span data-ru hidden>Аналитик</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>52 Emeralds</span><span data-ru hidden>52 изумруда</span></td></tr>
+            <tr><td><span data-en>Tether Master</span><span data-ru hidden>Крепкая нить</span></td><td>I</td><td><span data-en>Novice (1)</span><span data-ru hidden>Новичок (1)</span></td><td><span data-en>10 Emeralds</span><span data-ru hidden>10 изумрудов</span></td></tr>
+            <tr><td><span data-en>Tether Master</span><span data-ru hidden>Крепкая нить</span></td><td>II</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>22 Emeralds</span><span data-ru hidden>22 изумруда</span></td></tr>
+            <tr><td><span data-en>Tether Master</span><span data-ru hidden>Крепкая нить</span></td><td>III</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>36 Emeralds</span><span data-ru hidden>36 изумрудов</span></td></tr>
+            <tr><td><span data-en>Sky Rage</span><span data-ru hidden>Ярость Неба</span></td><td>I</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>22 Emeralds</span><span data-ru hidden>22 изумруда</span></td></tr>
+            <tr><td><span data-en>Sky Rage</span><span data-ru hidden>Ярость Неба</span></td><td>II</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>38 Emeralds</span><span data-ru hidden>38 изумрудов</span></td></tr>
+            <tr><td><span data-en>Sky Rage</span><span data-ru hidden>Ярость Неба</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>55 Emeralds</span><span data-ru hidden>55 изумрудов</span></td></tr>
+            <tr><td><span data-en>XP Syphon</span><span data-ru hidden>Собиратель искр</span></td><td>I</td><td><span data-en>Apprentice (2)</span><span data-ru hidden>Ученик (2)</span></td><td><span data-en>14 Emeralds</span><span data-ru hidden>14 изумрудов</span></td></tr>
+            <tr><td><span data-en>XP Syphon</span><span data-ru hidden>Собиратель искр</span></td><td>II</td><td><span data-en>Journeyman (3)</span><span data-ru hidden>Подмастерье (3)</span></td><td><span data-en>26 Emeralds</span><span data-ru hidden>26 изумрудов</span></td></tr>
+            <tr><td><span data-en>XP Syphon</span><span data-ru hidden>Собиратель искр</span></td><td>III</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>40 Emeralds</span><span data-ru hidden>40 изумрудов</span></td></tr>
+            <tr><td><span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span></td><td>I</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>28 Emeralds</span><span data-ru hidden>28 изумрудов</span></td></tr>
+            <tr><td><span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span></td><td>II</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>44 Emeralds</span><span data-ru hidden>44 изумруда</span></td></tr>
+            <tr><td><span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span></td><td>III</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>62 Emeralds</span><span data-ru hidden>62 изумруда</span></td></tr>
+            <tr><td><span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span></td><td>I</td><td><span data-en>Expert (4)</span><span data-ru hidden>Эксперт (4)</span></td><td><span data-en>30 Emeralds</span><span data-ru hidden>30 изумрудов</span></td></tr>
+            <tr><td><span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span></td><td>II</td><td><span data-en>Master (5)</span><span data-ru hidden>Мастер (5)</span></td><td><span data-en>50 Emeralds</span><span data-ru hidden>50 изумрудов</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div><!-- /view-trades -->
+
+  <!-- ─── STRUCTURE VIEW ─── -->
+  <div id="view-structure" hidden>
+    <section class="structure-section">
+      <h2 class="section-title" data-en="Project Structure" data-ru="Структура проекта">Project Structure</h2>
+      <p class="trades-intro">
+        <span data-en><code>src/main/</code> — server-side enchantment logic and config. <code>src/client/</code> — client-side effects and GUI.</span>
+        <span data-ru hidden><code>src/main/</code> — серверная логика зачарований и конфиг. <code>src/client/</code> — клиентские эффекты и GUI.</span>
+      </p>
+      <pre class="structure-tree" data-en>src/main/java/com/mentality/customenchants/
+├── CustomEnchantsMod.java              — Main mod class, trade registration
+├── config/
+│   ├── ModConfig.java                  — JSON config load/save
+│   └── ModConfigScreen.java            — GUI settings screen (Cloth Config)
+└── enchantment/
+    ├── ModEnchantments.java            — Enchantment registration
+    ├── GlowStrikeEnchantment.java      — Glow Strike logic
+    ├── DoubleJumpEnchantment.java      — Double Jump definition
+    ├── DoubleJumpServerHandler.java    — Server-side double jump + durability
+    ├── DrillEnchantment.java           — Drill definition
+    ├── DrillHandler.java               — Server-side 3×3 mining logic
+    ├── PoisonBladeEnchantment.java     — Poison Blade logic
+    ├── LumberjackEnchantment.java      — Lumberjack definition
+    ├── LumberjackHandler.java          — Server-side tree felling logic
+    ├── ShadowBladeEnchantment.java     — Shadow Blade logic
+    ├── MagnetEnchantment.java          — Magnet definition
+    ├── MagnetHandler.java              — Server-side auto-pickup logic
+    ├── AutoSmeltEnchantment.java       — Auto Smelt definition
+    ├── AutoSmeltHandler.java           — Server-side auto-smelt logic
+    ├── VegetationEnchantment.java      — Vegetation definition
+    ├── VegetationHandler.java          — Server-side auto-replant logic
+    ├── ReboundEnchantment.java         — Rebound definition
+    ├── FeedbackEnchantment.java        — Feedback definition
+    ├── SecondWindEnchantment.java      — Second Wind definition (all armor slots)
+    ├── SecondWindHandler.java          — Server-side second wind logic (scales by piece count)
+    ├── GuardiansGraceEnchantment.java  — Guardian's Grace definition
+    ├── XpSyphonEnchantment.java        — XP Syphon definition
+    ├── KineticDischargeEnchantment.java — Kinetic Discharge definition
+    ├── KineticDischargeHandler.java    — Server-side shockwave on landing logic
+    ├── SculkBloomEnchantment.java      — Sculk Bloom definition
+    └── SculkBloomHandler.java          — Server-side sculk spreading on kill logic
+
+src/client/java/com/mentality/customenchants/
+├── CustomEnchantsClient.java           — Client initializer
+├── config/
+│   └── ModConfigScreen.java            — GUI settings screen (Cloth Config)
+└── enchantment/
+    ├── DoubleJumpHandler.java          — Client-side double jump logic
+    └── SecondWindClientHandler.java    — Client-side second wind effects</pre>
+      <pre class="structure-tree" data-ru hidden>src/main/java/com/mentality/customenchants/
+├── CustomEnchantsMod.java              — Главный класс мода, регистрация торговли
+├── config/
+│   ├── ModConfig.java                  — Загрузка/сохранение JSON-конфига
+│   └── ModConfigScreen.java            — GUI экран настроек (Cloth Config)
+└── enchantment/
+    ├── ModEnchantments.java            — Регистрация зачарований
+    ├── GlowStrikeEnchantment.java      — Логика Сияющего удара
+    ├── DoubleJumpEnchantment.java      — Определение Двойного прыжка
+    ├── DoubleJumpServerHandler.java    — Серверная логика + прочность
+    ├── DrillEnchantment.java           — Определение Бура
+    ├── DrillHandler.java               — Серверная логика копания 3×3
+    ├── PoisonBladeEnchantment.java     — Логика Ядовитого клинка
+    ├── LumberjackEnchantment.java      — Определение Лесоруба
+    ├── LumberjackHandler.java          — Серверная логика вырубки деревьев
+    ├── ShadowBladeEnchantment.java     — Логика Теневого клинка
+    ├── MagnetEnchantment.java          — Определение Магнита
+    ├── MagnetHandler.java              — Серверная логика авто-сбора
+    ├── AutoSmeltEnchantment.java       — Определение Автопечки
+    ├── AutoSmeltHandler.java           — Серверная логика автопереплавки
+    ├── VegetationEnchantment.java      — Определение Вегетации
+    ├── VegetationHandler.java          — Серверная логика автопосадки
+    ├── ReboundEnchantment.java         — Определение Эластичности
+    ├── FeedbackEnchantment.java        — Определение Эхо-удара
+    ├── SecondWindEnchantment.java      — Определение Второго дыхания (все ячейки брони)
+    ├── SecondWindHandler.java          — Серверная логика (масштабируется по количеству)
+    ├── GuardiansGraceEnchantment.java  — Определение Живого щита
+    ├── XpSyphonEnchantment.java        — Определение Собирателя искр
+    ├── KineticDischargeEnchantment.java — Определение Кинетического разряда
+    ├── KineticDischargeHandler.java    — Серверная логика шоквейва при приземлении
+    ├── SculkBloomEnchantment.java      — Определение Скалкового цветения
+    └── SculkBloomHandler.java          — Серверная логика распространения скалка при убийстве
+
+src/client/java/com/mentality/customenchants/
+├── CustomEnchantsClient.java           — Клиентский инициализатор
+├── config/
+│   └── ModConfigScreen.java            — GUI экран настроек (Cloth Config)
+└── enchantment/
+    ├── DoubleJumpHandler.java          — Клиентская логика двойного прыжка
+    └── SecondWindClientHandler.java    — Клиентские эффекты Второго дыхания</pre>
+    </section>
+  </div><!-- /view-structure -->
+
+</main>
+
+<!-- ───── FOOTER ───── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-text"><strong>Mentalitys | Custom Enchantments</strong> — Minecraft 1.20.1 · Fabric API</p>
+    <div class="footer-links">
+      <a href="https://github.com/sapexzzz/Custom-Enchants" target="_blank" class="footer-link">GitHub</a>
+      <span class="footer-sep">·</span>
+      <a href="https://modrinth.com/project/NJPtH6f5" target="_blank" class="footer-link">Modrinth</a>
+    </div>
+    <p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.0.0</p>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   Language system
+   ══════════════════════════════════════ */
+let currentLang = 'en';
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.lang = lang;
+
+  // Show/hide [data-en] and [data-ru] elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.hidden = (lang !== 'en');
+  });
+  document.querySelectorAll('[data-ru]').forEach(el => {
+    el.hidden = (lang !== 'ru');
+  });
+
+  // Update section titles with data-en / data-ru attributes
+  document.querySelectorAll('[data-en][data-ru]').forEach(el => {
+    el.textContent = lang === 'ru' ? el.getAttribute('data-ru') : el.getAttribute('data-en');
+    el.hidden = false;
+  });
+
+  // Update nav filter button labels
+  document.querySelectorAll('.filter-btn[data-en][data-ru]').forEach(btn => {
+    btn.textContent = lang === 'ru' ? btn.getAttribute('data-ru') : btn.getAttribute('data-en');
+  });
+
+  // Update lang switcher active state
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  localStorage.setItem('wiki-lang', lang);
+}
+
+// Init
+const savedLang = localStorage.getItem('wiki-lang') || 'en';
+applyLang(savedLang);
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+/* ══════════════════════════════════════
+   Tab / filter system
+   ══════════════════════════════════════ */
+const viewEnchants   = document.getElementById('view-enchants');
+const viewTrades     = document.getElementById('view-trades');
+const viewStructure  = document.getElementById('view-structure');
+const filterBtns     = document.querySelectorAll('.filter-btn');
+const enchantCards   = document.querySelectorAll('.enchant-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+
+    if (filter === 'trades') {
+      viewEnchants.hidden  = true;
+      viewTrades.hidden    = false;
+      viewStructure.hidden = true;
+    } else if (filter === 'structure') {
+      viewEnchants.hidden  = true;
+      viewTrades.hidden    = true;
+      viewStructure.hidden = false;
+    } else {
+      viewEnchants.hidden  = false;
+      viewTrades.hidden    = true;
+      viewStructure.hidden = true;
+      enchantCards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    }
+  });
+});
+
+/* ══════════════════════════════════════
+   Sticky nav shadow
+   ══════════════════════════════════════ */
+const nav = document.getElementById('sticky-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+</script>
+
+</body>
+</html>
