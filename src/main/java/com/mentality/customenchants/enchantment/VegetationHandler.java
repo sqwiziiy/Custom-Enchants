@@ -33,7 +33,7 @@ public class VegetationHandler {
 
             ItemStack tool = player.getMainHandItem();
             if (tool.isEmpty()) return;
-            int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.VEGETATION, tool);
+            int level = EnchantmentAccess.getLevel(tool, ModEnchantments.VEGETATION);
             if (level <= 0) return;
 
             Block block = state.getBlock();

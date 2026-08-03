@@ -4,37 +4,21 @@ import com.mentality.customenchants.config.ModConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class XpSyphonEnchantment extends Enchantment {
+/**
+ * Runtime logic for the XP Syphon enchantment. Identity/definition is data-driven
+ * ({@link ModEnchantments#XP_SYPHON}); this neutral holder keeps the on-hit XP-orb drop,
+ * invoked by the melee combat handler (wired in the gameplay-hook phase).
+ */
+public final class XpSyphonEnchantment {
 
-    public XpSyphonEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+    private XpSyphonEnchantment() {
     }
 
-    @Override
-    public int getMaxLevel() {
-        return 3;
-    }
-
-    @Override
-    public int getMinCost(int level) {
-        return 1 + (level - 1) * 10;
-    }
-
-    @Override
-    public int getMaxCost(int level) {
-        return getMinCost(level) + 15;
-    }
-
-    @Override
-    public void doPostAttack(LivingEntity attacker, Entity target, int level) {
+    public static void applyXpSyphon(Player attacker, Entity target, int level) {
         if (!ModConfig.get().xpSyphonEnabled) return;
-        if (!(attacker instanceof Player)) return;
         if (!(target instanceof LivingEntity)) return;
         if (!(attacker.level() instanceof ServerLevel serverLevel)) return;
 

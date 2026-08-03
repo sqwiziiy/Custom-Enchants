@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.custom-enchants.sky_rage"
+  },
+  "exclusive_set": [
+    "minecraft:flame",
+    "minecraft:infinity",
+    "minecraft:piercing"
+  ],
+  "max_cost": {
+    "base": 30,
+    "per_level_above_first": 15
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 15
+  },
+  "primary_items": "#minecraft:enchantable/bow",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#custom-enchants:enchantable/bow_and_crossbow",
+  "weight": 2
+}

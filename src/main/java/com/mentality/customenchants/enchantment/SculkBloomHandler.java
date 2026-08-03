@@ -24,10 +24,7 @@ public class SculkBloomHandler {
         if (!killing.isDirectPlayerHit()) return;
         Player player = killing.player();
 
-        int level = EnchantmentHelper.getItemEnchantmentLevel(
-                ModEnchantments.SCULK_BLOOM,
-                killing.weapon()
-        );
+        int level = EnchantmentAccess.getLevel(killing.weapon(), ModEnchantments.SCULK_BLOOM);
         if (level <= 0) return;
 
         BlockPos deathPos = entity.blockPosition();

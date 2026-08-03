@@ -1,6 +1,7 @@
 package com.mentality.customenchants.mixin;
 
 import com.mentality.customenchants.anvil.AnvilResultPolicy;
+import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.DataSlot;
@@ -28,7 +29,7 @@ public abstract class AnvilMenuMixin {
         AnvilMenu self = (AnvilMenu) (Object) this;
         ItemStack result = self.getSlot(2).getItem();
         if (!result.isEmpty() && AnvilResultPolicy.rejectShadowBladeResult(
-                EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SHADOW_BLADE, result) > 0,
+                EnchantmentAccess.getLevel(result, ModEnchantments.SHADOW_BLADE) > 0,
                 result.getItem() instanceof TridentItem)) {
             self.getSlot(2).set(ItemStack.EMPTY);
             cost.set(0);

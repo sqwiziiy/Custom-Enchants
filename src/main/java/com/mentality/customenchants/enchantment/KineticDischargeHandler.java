@@ -43,7 +43,7 @@ public class KineticDischargeHandler {
                 ItemStack elytra = player.getItemBySlot(EquipmentSlot.CHEST);
                 int level = elytra.isEmpty()
                         ? 0
-                        : EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.KINETIC_DISCHARGE, elytra);
+                        : EnchantmentAccess.getLevel(elytra, ModEnchantments.KINETIC_DISCHARGE);
 
                 if (level <= 0) {
                     states.remove(player.getUUID());

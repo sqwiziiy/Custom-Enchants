@@ -30,7 +30,7 @@ public class LumberjackHandler {
             if (!isNaturalLog(state)) return;
 
             ItemStack tool = player.getMainHandItem();
-            int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.LUMBERJACK, tool);
+            int level = EnchantmentAccess.getLevel(tool, ModEnchantments.LUMBERJACK);
             if (tool.isEmpty() || level <= 0 || !isPartOfTree(serverLevel, pos, state)) return;
 
             int maxBlocks = switch (level) {

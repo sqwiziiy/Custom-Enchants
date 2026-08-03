@@ -36,7 +36,7 @@ public class MagnetHandler {
 
             ItemStack tool = player.getMainHandItem();
             if (tool.isEmpty()) return;
-            if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.MAGNET, tool) <= 0) return;
+            if (EnchantmentAccess.getLevel(tool, ModEnchantments.MAGNET) <= 0) return;
 
             collectNearby(serverLevel, serverPlayer, pos);
         });

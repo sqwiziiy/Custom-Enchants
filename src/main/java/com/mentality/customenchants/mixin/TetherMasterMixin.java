@@ -1,6 +1,7 @@
 package com.mentality.customenchants.mixin;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import com.mentality.customenchants.enchantment.TetherMasterEnchantment;
 import net.minecraft.world.entity.Entity;
@@ -41,7 +42,7 @@ public abstract class TetherMasterMixin {
 
         FishingHook self = (FishingHook) (Object) this;
 
-        int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.TETHER_MASTER, stack);
+        int level = EnchantmentAccess.getLevel(stack, ModEnchantments.TETHER_MASTER);
         if (level <= 0) return;
 
         Entity ownerEntity = self.getOwner();

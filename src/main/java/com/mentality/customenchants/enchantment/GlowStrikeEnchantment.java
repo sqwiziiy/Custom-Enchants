@@ -3,37 +3,17 @@ package com.mentality.customenchants.enchantment;
 import com.mentality.customenchants.config.ModConfig;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.enchantment.Enchantments;
 
-public class GlowStrikeEnchantment extends Enchantment {
+/**
+ * Runtime logic for the Glow Strike enchantment. The enchantment identity/definition is
+ * data-driven ({@link ModEnchantments#GLOW_STRIKE}); this neutral holder keeps the on-hit
+ * effect logic invoked by the combat/projectile handlers.
+ */
+public final class GlowStrikeEnchantment {
 
-    public GlowStrikeEnchantment() {
-        super(Rarity.RARE, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-    }
-
-    @Override
-    public boolean canEnchant(ItemStack stack) {
-        return super.canEnchant(stack) || stack.getItem() instanceof TridentItem;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 3;
-    }
-
-    @Override
-    protected boolean checkCompatibility(Enchantment other) {
-        return super.checkCompatibility(other)
-                && other != Enchantments.KNOCKBACK
-                && !(other instanceof ShadowBladeEnchantment);
+    private GlowStrikeEnchantment() {
     }
 
     public static void applyGlowStrike(Player player, LivingEntity livingTarget, int level) {
@@ -46,13 +26,5 @@ public class GlowStrikeEnchantment extends Enchantment {
             default -> config.glowStrikeDurationL1;
         };
         livingTarget.addEffect(new MobEffectInstance(MobEffects.GLOWING, duration, 0));
-    }
-
-    @Override
-    public void doPostAttack(LivingEntity attacker, Entity target, int level) {
-        if (attacker instanceof Player player && target instanceof LivingEntity livingTarget) {
-            applyGlowStrike(player, livingTarget, level);
-        }
-        super.doPostAttack(attacker, target, level);
     }
 }

@@ -79,7 +79,7 @@ public class DoubleJumpHandler {
 
     private static boolean hasDoubleJumpEnchant(LocalPlayer player) {
         ItemStack boots = player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.FEET);
-        return !boots.isEmpty() && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DOUBLE_JUMP, boots) > 0;
+        return !boots.isEmpty() && EnchantmentAccess.getLevel(boots, ModEnchantments.DOUBLE_JUMP) > 0;
     }
 
     private static void reset() {

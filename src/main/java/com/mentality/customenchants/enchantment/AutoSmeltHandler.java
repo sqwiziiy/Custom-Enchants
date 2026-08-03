@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
@@ -46,7 +45,7 @@ public final class AutoSmeltHandler {
 
     public static boolean isEligible(ItemStack tool) {
         if (!ModConfig.get().autoSmeltEnabled || tool.isEmpty()) return false;
-        if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.AUTO_SMELT, tool) <= 0) return false;
+        if (EnchantmentAccess.getLevel(tool, ModEnchantments.AUTO_SMELT) <= 0) return false;
 
         // Commands can create this combination even though the enchantment API rejects it.
         // Silk Touch remains authoritative over the already generated block-item drop.
@@ -62,6 +61,6 @@ public final class AutoSmeltHandler {
     }
 
     static boolean hasSilkTouch(ItemStack tool) {
-        return EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
+        return EnchantmentAccess.getLevel(tool, Enchantments.SILK_TOUCH) > 0;
     }
 }

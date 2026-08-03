@@ -1,14 +1,16 @@
 package com.mentality.customenchants.projectile;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 /** Immutable, shot-time snapshot of the custom enchantments on a projectile's weapon. */
 public record ProjectileEnchantmentContext(
@@ -50,8 +52,8 @@ public record ProjectileEnchantmentContext(
         return EMPTY;
     }
 
-    private static int level(net.minecraft.world.item.enchantment.Enchantment enchantment, ItemStack stack) {
-        return clamp(EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack));
+    private static int level(ResourceKey<Enchantment> key, ItemStack stack) {
+        return clamp(EnchantmentAccess.getLevel(stack, key));
     }
 
     private static int clamp(int value) { return Math.max(0, Math.min(3, value)); }

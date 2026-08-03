@@ -51,7 +51,7 @@ public class DoubleJumpServerHandler {
         states.put(playerId, decision.state());
 
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if (boots.isEmpty() || EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DOUBLE_JUMP, boots) <= 0) {
+        if (boots.isEmpty() || EnchantmentAccess.getLevel(boots, ModEnchantments.DOUBLE_JUMP) <= 0) {
             return;
         }
 

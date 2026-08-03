@@ -20,7 +20,7 @@ public class DrillHandler {
             if (!ModConfig.get().drillEnabled || player.isShiftKeyDown()) return;
 
             ItemStack tool = player.getMainHandItem();
-            if (tool.isEmpty() || EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DRILL, tool) <= 0) return;
+            if (tool.isEmpty() || EnchantmentAccess.getLevel(tool, ModEnchantments.DRILL) <= 0) return;
             drillAround(serverPlayer, pos);
         });
     }

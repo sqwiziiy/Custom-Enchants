@@ -1,6 +1,8 @@
 package com.mentality.customenchants.shield;
 
+import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.tags.DamageTypeTags;
@@ -8,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public final class ShieldEnchantmentsPolicy {
     private ShieldEnchantmentsPolicy() {}
@@ -37,8 +39,8 @@ public final class ShieldEnchantmentsPolicy {
         return player != null && source != null && feedbackDamage(source) && player.isDamageSourceBlocked(source);
     }
 
-    private static int level(net.minecraft.world.item.enchantment.Enchantment enchantment, ItemStack shield) {
-        return Math.max(0, Math.min(3, EnchantmentHelper.getItemEnchantmentLevel(enchantment, shield)));
+    private static int level(ResourceKey<Enchantment> key, ItemStack shield) {
+        return Math.max(0, Math.min(3, EnchantmentAccess.getLevel(shield, key)));
     }
 
 }

@@ -34,7 +34,7 @@ public class SecondWindHandler {
                 int pieces = 0;
                 for (EquipmentSlot slot : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
                     ItemStack armor = player.getItemBySlot(slot);
-                    if (!armor.isEmpty() && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SECOND_WIND, armor) > 0) {
+                    if (!armor.isEmpty() && EnchantmentAccess.getLevel(armor, ModEnchantments.SECOND_WIND) > 0) {
                         pieces++;
                     }
                 }
