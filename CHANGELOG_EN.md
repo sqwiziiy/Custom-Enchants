@@ -9,6 +9,28 @@ All notable changes to the **Mentalitys | Custom Enchantments** mod are document
 - Public documentation is synchronized with all 19 enchantments, configuration fields, and current librarian offers.
 - Project links and generated-output hygiene rules were corrected.
 
+## [3.1.0-mc1.21.1] - 2026-08-04
+
+Minecraft 1.21.1 port of the 3.1.0 release (branch `3.1/1.21.1`). Same mod version (`3.1.0`),
+same enchantment IDs/translation/config keys, full parity audit against 1.20.1 — see
+[RELEASE_NOTES_3.1.0_MC1.21.1.md](RELEASE_NOTES_3.1.0_MC1.21.1.md) for the complete breakdown.
+
+### Toolchain
+
+- Minecraft 1.21.1, Java 21, Fabric Loader 0.19.3, Fabric API 0.116.15+1.21.1, Cloth Config 15.0.140, Mod Menu 11.0.4.
+
+### Enchantment system
+
+- All 19 enchantments ported to Minecraft 1.21.1's data-driven enchantment model (`data/custom-enchants/enchantment/*.json`), preserving every supported item, level, cost, weight and conflict from 1.20.1.
+- Villager trades ported to the 1.21.1 `MerchantOffer`/`ItemCost` API; all 44 offers verified identical to 1.20.1 (enchantment, level, tier, price, uses, XP, multiplier).
+- Double Jump and Second Wind networking ported to typed `CustomPayload`.
+- All 19 mixins re-verified and applying against Minecraft 1.21.1 Mojang-mapped targets.
+
+### Parity
+
+- Full parity audit against the 1.20.1 baseline found zero gameplay regressions; see `docs/ports/1.21.1/FINAL_PARITY_MATRIX.md` in the source tree for evidence per mechanic.
+- Config schema unchanged — existing 1.20.1 config files load without manual migration.
+
 ## [3.1.0] - 2026-08-03
 
 ### Build and compatibility

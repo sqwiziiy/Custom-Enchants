@@ -149,6 +149,67 @@ class ModConfigTest {
     }
 
     @Test
+    void representative1201ConfigFixtureLoadsUnchangedOn1211() throws Exception {
+        // A fully-populated config resembling a genuine customized 3.1.0/1.20.1 install:
+        // every field present with a non-default, valid value. ModConfig.java is byte-identical
+        // between 3.1/1.20.1 and 3.1/1.21.1, so this is a direct regression check that the same
+        // schema/keys/ranges/configVersion still apply — no manual migration required.
+        String fixture = "{"
+                + "\"configVersion\":1,"
+                + "\"glowStrikeDurationL1\":30,\"glowStrikeDurationL2\":45,\"glowStrikeDurationL3\":60,\"glowStrikeEnabled\":true,"
+                + "\"doubleJumpEnabled\":true,\"drillEnabled\":false,"
+                + "\"poisonBladeDurationL1\":50,\"poisonBladeDurationL2\":70,\"poisonBladeDurationL3\":90,\"poisonBladeEnabled\":true,"
+                + "\"lumberjackEnabled\":true,\"lumberjackMaxBlocksL1\":16,\"lumberjackMaxBlocksL2\":32,\"lumberjackMaxBlocksL3\":48,"
+                + "\"shadowBladeEnabled\":true,\"shadowBladeChanceL1\":15,\"shadowBladeChanceL2\":25,\"shadowBladeChanceL3\":35,"
+                + "\"shadowBladeSlowDurationL1\":20,\"shadowBladeSlowDurationL2\":30,\"shadowBladeSlowDurationL3\":40,"
+                + "\"magnetEnabled\":true,\"magnetRadius\":7,"
+                + "\"autoSmeltEnabled\":false,"
+                + "\"vegetationEnabled\":true,\"vegetationChanceL1\":10,\"vegetationChanceL2\":20,\"vegetationChanceL3\":30,"
+                + "\"reboundEnabled\":true,\"reboundKnockbackL1\":3,\"reboundKnockbackL2\":5,\"reboundKnockbackL3\":7,"
+                + "\"feedbackEnabled\":false,\"feedbackHealAmount\":2.5,\"feedbackRepairAmount\":15,"
+                + "\"secondWindEnabled\":true,\"secondWindSpeedDuration\":8,\"secondWindCooldown\":100,"
+                + "\"guardiansGraceEnabled\":true,\"guardiansGraceChanceL1\":5,\"guardiansGraceChanceL2\":10,\"guardiansGraceChanceL3\":15,"
+                + "\"vulnerabilityEnabled\":true,\"vulnerabilityIgnoreL1\":10,\"vulnerabilityIgnoreL2\":20,\"vulnerabilityIgnoreL3\":30,"
+                + "\"tetherMasterEnabled\":false,"
+                + "\"skyRageEnabled\":true,\"skyRageCooldownTicks\":45,"
+                + "\"xpSyphonEnabled\":true,"
+                + "\"kineticDischargeEnabled\":true,\"kineticDischargeMinSpeed\":2.5,"
+                + "\"kineticDischargeKnockbackL1\":1.5,\"kineticDischargeKnockbackL2\":2.5,\"kineticDischargeKnockbackL3\":3.5,"
+                + "\"kineticDischargeDamageL3\":4.0,"
+                + "\"sculkBloomEnabled\":false"
+                + "}";
+        Path path = write(fixture);
+        ModConfig.load(path);
+
+        ModConfig c = ModConfig.get();
+        assertEquals(1, c.configVersion);
+        assertEquals(30, c.glowStrikeDurationL1);
+        assertEquals(60, c.glowStrikeDurationL3);
+        assertTrue(c.doubleJumpEnabled);
+        assertFalse(c.drillEnabled);
+        assertEquals(90, c.poisonBladeDurationL3);
+        assertEquals(48, c.lumberjackMaxBlocksL3);
+        assertEquals(35, c.shadowBladeChanceL3);
+        assertEquals(7, c.magnetRadius);
+        assertFalse(c.autoSmeltEnabled);
+        assertEquals(30, c.vegetationChanceL3);
+        assertEquals(7, c.reboundKnockbackL3);
+        assertFalse(c.feedbackEnabled);
+        assertEquals(2.5f, c.feedbackHealAmount);
+        assertEquals(100, c.secondWindCooldown);
+        assertEquals(15, c.guardiansGraceChanceL3);
+        assertEquals(30, c.vulnerabilityIgnoreL3);
+        assertFalse(c.tetherMasterEnabled);
+        assertEquals(45, c.skyRageCooldownTicks);
+        assertTrue(c.xpSyphonEnabled);
+        assertEquals(2.5f, c.kineticDischargeMinSpeed);
+        assertEquals(4.0f, c.kineticDischargeDamageL3);
+        assertFalse(c.sculkBloomEnabled);
+        // No corruption backup should have been created for a fully valid fixture.
+        assertTrue(findBackups(path).isEmpty());
+    }
+
+    @Test
     void deadSettingsHaveRuntimeFormulas() {
         assertEquals(40, com.mentality.customenchants.enchantment.SecondWindHandler.calculateSpeedTicks(5, 1));
         assertEquals(60, com.mentality.customenchants.enchantment.SecondWindHandler.calculateSpeedTicks(5, 2));
