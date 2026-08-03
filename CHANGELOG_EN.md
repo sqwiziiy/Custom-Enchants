@@ -9,6 +9,32 @@ All notable changes to the **Mentalitys | Custom Enchantments** mod are document
 - Public documentation is synchronized with all 19 enchantments, configuration fields, and current librarian offers.
 - Project links and generated-output hygiene rules were corrected.
 
+## [3.1.0] - 2026-08-03
+
+### Build and compatibility
+
+- Synchronized the Java 17, Minecraft 1.20.1 and Fabric metadata baseline.
+- Stabilized Gradle/Loom packaging with release-JAR verification and dedicated-server smoke coverage.
+- Added GitHub Actions CI with dependency warm-up retry, unit/contract tests, GameTest and server smoke.
+
+### Correctness and safety
+
+- Hardened configuration validation, normalization and atomic persistence.
+- Safe Drill/Lumberjack block breaking and Auto Smelt vanilla-loot transformation.
+- Shot-time projectile context snapshots, confirmed shield-block handling and safe Shadow Blade destinations.
+- Lifecycle/multiplayer state cleanup and bounded state/memory behavior.
+
+### Major behavior changes
+
+- Feedback requires a real front-facing active shield block; Rebound only reacts to confirmed blocks.
+- Magnet respects ownership and pickup delay; Kinetic Discharge does not repair old Elytra damage.
+- Sculk Bloom uses the captured direct lethal weapon context.
+- Double Jump is server-approved with one activation per airtime.
+
+### Tests
+
+- 62 JUnit/contract tests, 2 official Fabric GameTests, release-JAR contract and dedicated-server smoke.
+
 ## [3.0.0] - 2026-04-30
 
 ### Added
