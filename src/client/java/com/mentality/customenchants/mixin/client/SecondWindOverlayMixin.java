@@ -1,5 +1,6 @@
 package com.mentality.customenchants.mixin.client;
 
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SecondWindOverlayMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
-    private void renderSecondWindOverlay(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
+    private void renderSecondWindOverlay(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         // Red screen overlay removed — only particle effects remain
     }
 }

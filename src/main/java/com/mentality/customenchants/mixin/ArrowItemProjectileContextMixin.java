@@ -1,6 +1,6 @@
 package com.mentality.customenchants.mixin;
 
-import com.mentality.customenchants.projectile.ProjectileEnchantmentCapture;
+import com.mentality.customenchants.projectile.ProjectileEnchantmentContext;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArrowItem;
@@ -12,13 +12,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Attaches the shot-time enchantment context to every arrow entity created by
+ * {@link ArrowItem#createArrow}. Since 1.21.1 this method receives the firing weapon directly
+ * ({@code ProjectileWeaponItem.createProjectile} calls it for both bow and crossbow ammo), so the
+ * context is computed inline; no capture-scope indirection is needed anymore.
+ */
 @Mixin(ArrowItem.class)
 public abstract class ArrowItemProjectileContextMixin {
     @Inject(method = "createArrow", at = @At("RETURN"))
-    private void customEnchants$attachBow(Level level, ItemStack projectile, LivingEntity owner,
-                                          CallbackInfoReturnable<AbstractArrow> cir) {
+    private void customEnchants$attachWeapon(Level level, ItemStack ammo, LivingEntity owner, ItemStack weapon,
+                                             CallbackInfoReturnable<AbstractArrow> cir) {
         if (cir.getReturnValue() instanceof ProjectileEnchantmentContextHolder holder) {
-            ProjectileEnchantmentCapture.attachIfMatching(owner, holder);
+            holder.customEnchants$setProjectileContext(ProjectileEnchantmentContext.fromWeapon(weapon, owner));
         }
     }
 }
