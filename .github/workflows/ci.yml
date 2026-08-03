@@ -20,7 +20,11 @@ jobs:
   validate:
     name: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
+    env:
+      GRADLE_OPTS: >-
+        -Dorg.gradle.internal.http.connectionTimeout=60000
+        -Dorg.gradle.internal.http.socketTimeout=180000
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -35,6 +39,33 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
+
+      # Use one runner so Fabric/Minecraft dependencies are resolved only once.
+      - name: Resolve dependencies
+        shell: bash
+        run: |
+          attempts=3
+          for attempt in $(seq 1 "$attempts"); do
+            echo "Dependency resolution attempt ${attempt}/${attempts}"
+
+            if ./gradlew \
+              --no-daemon \
+              --console=plain \
+              dependencies \
+              --configuration modImplementation \
+              --stacktrace; then
+              exit 0
+            fi
+
+            if [ "$attempt" -eq "$attempts" ]; then
+              echo "Dependency resolution failed after ${attempts} attempts."
+              exit 1
+            fi
+
+            sleep_seconds=$((attempt * 20))
+            echo "Retrying in ${sleep_seconds} seconds..."
+            sleep "$sleep_seconds"
+          done
 
       - name: Print tool versions
         run: |
@@ -54,6 +85,12 @@ jobs:
       - name: Verify release JAR
         run: ./gradlew --no-daemon --console=plain verifyReleaseJar --stacktrace
 
+      - name: Run official Fabric GameTest
+        run: ./gradlew --no-daemon --console=plain gameTest --stacktrace
+
+      - name: Run isolated dedicated server smoke
+        run: ./gradlew --no-daemon --console=plain dedicatedServerSmoke --stacktrace
+
       - name: List release artifacts and hashes
         run: |
           find build/libs -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
@@ -71,76 +108,12 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: validation-diagnostics
+          name: ci-diagnostics
           path: |
             build/reports/tests/**
             build/test-results/**
-            build/logs/**
-          if-no-files-found: ignore
-
-  gametest:
-    name: gametest
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
-
-      - name: Run official Fabric GameTest
-        run: ./gradlew --no-daemon --console=plain gameTest --stacktrace
-
-      - name: Upload GameTest diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v7
-        with:
-          name: gametest-diagnostics
-          path: |
             build/reports/gametest/**
             build/gametest/**
-            build/reports/tests/**
-            build/test-results/**
-          if-no-files-found: ignore
-
-  server-smoke:
-    name: server-smoke
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
-
-      - name: Run isolated dedicated server smoke
-        run: ./gradlew --no-daemon --console=plain dedicatedServerSmoke --stacktrace
-
-      - name: Upload dedicated smoke diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v7
-        with:
-          name: dedicated-server-smoke-diagnostics
-          path: |
             build/dedicated-server-smoke/**
             build/logs/**
-            build/reports/tests/**
           if-no-files-found: ignore
