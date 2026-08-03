@@ -9,6 +9,7 @@
 		"ArrowItemProjectileContextMixin",
 		"ProjectileContextTridentCaptureMixin",
 		"ThrownTridentMixin",
+		"MeleeEnchantmentEffectsMixin",
 		"KillingWeaponContextMixin",
 		"ItemEntityOwnershipAccessor",
 		"AnvilMenuMixin",
