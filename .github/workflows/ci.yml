@@ -27,7 +27,7 @@ jobs:
         -Dorg.gradle.internal.http.socketTimeout=180000
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
