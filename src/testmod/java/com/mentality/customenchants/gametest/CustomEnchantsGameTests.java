@@ -1,24 +1,27 @@
 package com.mentality.customenchants.gametest;
 
+import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.block.Blocks;
 
 public final class CustomEnchantsGameTests implements FabricGameTest {
 
     @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
     public void registryAndRealWorldAreAvailable(GameTestHelper helper) {
-        helper.assertTrue(BuiltInRegistries.ENCHANTMENT.get(new ResourceLocation("custom-enchants", "auto_smelt")) == ModEnchantments.AUTO_SMELT,
-                "Auto Smelt must be registered in the real Minecraft registry");
+        helper.assertTrue(
+                EnchantmentAccess.resolve(ModEnchantments.AUTO_SMELT, helper.getLevel().registryAccess()).isPresent(),
+                "Auto Smelt must be present in the data-driven enchantment registry");
         BlockPos pos = new BlockPos(1, 1, 1);
         helper.setBlock(pos, Blocks.IRON_ORE);
         helper.assertBlockPresent(Blocks.IRON_ORE, pos);
@@ -27,12 +30,15 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
 
     @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
     public void realEnchantedBookUsesRegisteredEnchantments(GameTestHelper helper) {
-        ItemStack book = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(ModEnchantments.AUTO_SMELT, 1));
-        CompoundTag stored = EnchantedBookItem.getEnchantments(book).getCompound(0);
-        helper.assertTrue(EnchantedBookItem.getEnchantments(book).size() == 1
-                        && "custom-enchants:auto_smelt".equals(stored.getString("id"))
-                        && stored.getInt("lvl") == 1,
-                "Real enchanted book must retain the registered level");
+        Holder<Enchantment> holder = EnchantmentAccess
+                .resolve(ModEnchantments.AUTO_SMELT, helper.getLevel().registryAccess())
+                .orElseThrow();
+        ItemStack book = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(holder, 1));
+        ItemEnchantments stored = book.get(DataComponents.STORED_ENCHANTMENTS);
+        helper.assertTrue(stored != null
+                        && stored.getLevel(holder) == 1
+                        && stored.keySet().stream().anyMatch(h -> h.is(ModEnchantments.AUTO_SMELT)),
+                "Real enchanted book must retain the registered Auto Smelt level");
         helper.succeed();
     }
 }

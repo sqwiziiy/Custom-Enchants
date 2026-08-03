@@ -43,12 +43,12 @@ class ResourceContractTest {
         JsonObject metadata = JsonParser.parseString(text).getAsJsonObject();
         assertEquals("custom-enchants", metadata.get("id").getAsString());
         assertEquals("${version}", metadata.get("version").getAsString());
-        assertEquals("~1.20.1", metadata.getAsJsonObject("depends").get("minecraft").getAsString());
-        assertEquals(">=17", metadata.getAsJsonObject("depends").get("java").getAsString());
-        assertEquals(">=0.92.7+1.20.1", metadata.getAsJsonObject("depends").get("fabric-api").getAsString());
+        assertEquals("~1.21.1", metadata.getAsJsonObject("depends").get("minecraft").getAsString());
+        assertEquals(">=21", metadata.getAsJsonObject("depends").get("java").getAsString());
+        assertEquals(">=0.116.15+1.21.1", metadata.getAsJsonObject("depends").get("fabric-api").getAsString());
         assertFalse(metadata.getAsJsonObject("depends").get("fabric-api").getAsString().equals("*"));
-        assertEquals(">=11.1.118", metadata.getAsJsonObject("depends").get("cloth-config").getAsString());
-        assertEquals(">=7.2.2", metadata.getAsJsonObject("suggests").get("modmenu").getAsString());
+        assertEquals(">=15.0.140", metadata.getAsJsonObject("depends").get("cloth-config").getAsString());
+        assertEquals(">=11.0.4", metadata.getAsJsonObject("suggests").get("modmenu").getAsString());
         assertEquals("https://github.com/sqwiziiy/Custom-Enchants", metadata.getAsJsonObject("contact").get("sources").getAsString());
         assertEquals("https://github.com/sqwiziiy/Custom-Enchants/issues", metadata.getAsJsonObject("contact").get("issues").getAsString());
         assertEquals("client", metadata.getAsJsonArray("mixins").get(1).getAsJsonObject().get("environment").getAsString());
@@ -78,33 +78,35 @@ class ResourceContractTest {
     }
 
     @Test
-    void registrationIsExactlyTheStableNineteen() throws IOException {
+    void registrationIsExactlyTheStableNineteenResourceKeys() throws IOException {
         String source = read("src/main/java/com/mentality/customenchants/enchantment/ModEnchantments.java");
-        Set<String> declarations = findAll(source, "public static final Enchantment ([A-Z0-9_]+)");
-        Set<String> registered = findAll(source, "new ResourceLocation\\([^,]+, \"([a-z0-9_]+)\"\\)");
+        Set<String> declarations = findAll(source, "public static final ResourceKey<Enchantment> ([A-Z0-9_]+) =");
+        Set<String> registered = findAll(source, "key\\(\"([a-z0-9_]+)\"\\)");
         assertEquals(19, declarations.size());
         assertEquals(19, registered.size());
         assertEquals(ENCHANTMENT_IDS, registered);
+        // Data-driven: no code registration, no extends Enchantment.
+        assertFalse(source.contains("Registry.register"));
+        assertFalse(source.contains("extends Enchantment"));
         assertFalse(source.contains("Example"));
         assertFalse(Files.exists(root().resolve("src/main/java/com/mentality/customenchants/mixin/ExampleMixin.java")));
     }
 
     @Test
-    void librarianTradeSourceHasUniquePositiveDefinitions() throws IOException {
-        String source = read("src/main/java/com/mentality/customenchants/CustomEnchantsMod.java");
-        Set<String> comments = findAll(source, "// ([^\\n]+Librarian[^\\n]*)");
-        assertEquals(37, comments.size());
-        assertEquals(37, count(source, "new MerchantOffer("));
-        assertEquals(37, count(source, "new EnchantmentInstance("));
-        Matcher levels = Pattern.compile("new EnchantmentInstance\\(ModEnchantments\\.[A-Z0-9_]+, (\\d+)\\)").matcher(source);
-        while (levels.find()) assertTrue(Integer.parseInt(levels.group(1)) >= 1 && Integer.parseInt(levels.group(1)) <= 3);
-        Matcher prices = Pattern.compile("new ItemStack\\(Items\\.EMERALD, (\\d+)\\)").matcher(source);
-        int priceCount = 0;
-        while (prices.find()) {
-            priceCount++;
-            assertTrue(Integer.parseInt(prices.group(1)) > 0);
+    void librarianTradeTableIsCompleteUniqueAndPositive() {
+        var offers = com.mentality.customenchants.trade.LibrarianEnchantTrade.all();
+        assertEquals(44, offers.size());
+        for (var offer : offers) {
+            assertTrue(offer.bookLevel() >= 1 && offer.bookLevel() <= 3, "book level in range");
+            assertTrue(offer.villagerLevel() >= 1 && offer.villagerLevel() <= 5, "villager tier in range");
+            assertTrue(offer.emeralds() > 0, "positive emerald cost");
+            assertTrue(offer.maxUses() > 0, "positive max uses");
+            assertTrue(offer.villagerXp() > 0, "positive villager xp");
+            assertTrue(offer.priceMultiplier() >= 0.0f, "non-negative price multiplier");
         }
-        assertEquals(37, priceCount);
+        long distinct = offers.stream().map(o -> o.enchantment() + "#" + o.bookLevel()).distinct().count();
+        assertEquals(offers.size(), distinct, "no duplicate (enchantment, level) offer");
+        assertEquals(7, com.mentality.customenchants.trade.LibrarianEnchantTrade.shieldOffers().size());
     }
 
     @Test

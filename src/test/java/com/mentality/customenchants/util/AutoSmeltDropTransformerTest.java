@@ -1,5 +1,6 @@
 package com.mentality.customenchants.util;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.network.chat.Component;
@@ -113,10 +114,10 @@ class AutoSmeltDropTransformerTest {
     @Test
     void inputNbtIsNotCopiedToRecipeOutput() {
         ItemStack input = new ItemStack(Items.RAW_IRON);
-        input.setHoverName(Component.literal("raw input"));
+        input.set(DataComponents.CUSTOM_NAME, Component.literal("raw input"));
         List<ItemStack> result = transform(List.of(input), ignored -> new ItemStack(Items.IRON_INGOT));
 
-        assertFalse(result.get(0).hasCustomHoverName());
+        assertFalse(result.get(0).has(DataComponents.CUSTOM_NAME));
     }
 
     @Test

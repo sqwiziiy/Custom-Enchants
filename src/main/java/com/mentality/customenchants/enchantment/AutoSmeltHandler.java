@@ -6,11 +6,12 @@ import com.mentality.customenchants.util.AutoSmeltDropTransformer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,10 +54,10 @@ public final class AutoSmeltHandler {
     }
 
     private static ItemStack resolveSmelting(ServerLevel level, ItemStack input) {
-        SimpleContainer recipeInput = new SimpleContainer(input.copy());
-        Optional<SmeltingRecipe> recipe = level.getRecipeManager()
+        SingleRecipeInput recipeInput = new SingleRecipeInput(input.copy());
+        Optional<RecipeHolder<SmeltingRecipe>> recipe = level.getRecipeManager()
                 .getRecipeFor(RecipeType.SMELTING, recipeInput, level);
-        return recipe.map(value -> value.assemble(recipeInput, level.registryAccess()))
+        return recipe.map(holder -> holder.value().assemble(recipeInput, level.registryAccess()))
                 .orElse(ItemStack.EMPTY);
     }
 

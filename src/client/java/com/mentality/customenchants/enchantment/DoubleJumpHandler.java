@@ -1,10 +1,10 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.net.DoubleJumpPayload;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
@@ -53,7 +53,7 @@ public class DoubleJumpHandler {
 
                 spawnJumpParticles(client, player);
 
-                ClientPlayNetworking.send(DoubleJumpServerHandler.DOUBLE_JUMP_PACKET, PacketByteBufs.empty());
+                ClientPlayNetworking.send(DoubleJumpPayload.INSTANCE);
             }
 
             if (!player.onGround()) {

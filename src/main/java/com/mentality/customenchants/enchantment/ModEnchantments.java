@@ -14,7 +14,7 @@ import java.util.List;
  * <p>On Minecraft 1.21.1 enchantments are a data-driven (datapack) registry. The actual
  * definitions ship as JSON under {@code data/custom-enchants/enchantment/}. These
  * {@link ResourceKey} constants are the stable code-side identity used for holder lookups,
- * trades and gameplay handlers. No runtime {@code Registry.register(...)} is performed.
+ * trades and gameplay handlers. No runtime code registration is performed.
  */
 public final class ModEnchantments {
 

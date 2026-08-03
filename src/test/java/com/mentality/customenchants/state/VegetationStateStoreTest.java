@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class VegetationStateStoreTest {
     private static final ResourceKey<Level> OVERWORLD = ResourceKey.create(
             Registries.DIMENSION,
-            new ResourceLocation("test", "overworld"));
+            ResourceLocation.fromNamespaceAndPath("test", "overworld"));
     private static final ResourceKey<Level> NETHER = ResourceKey.create(
             Registries.DIMENSION,
-            new ResourceLocation("test", "nether"));
+            ResourceLocation.fromNamespaceAndPath("test", "nether"));
 
     @Test
     void positionIdentityIncludesDimensionAndExpires() {

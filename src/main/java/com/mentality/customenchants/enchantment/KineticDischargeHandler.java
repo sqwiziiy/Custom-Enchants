@@ -155,7 +155,7 @@ public class KineticDischargeHandler {
         // At level III: 90 % chance to skip the cost (enchantment bonus).
         boolean consumeDurability = level < 3 || player.getRandom().nextFloat() < 0.10f;
         if (consumeDurability && !elytra.isEmpty()) {
-            elytra.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.CHEST));
+            elytra.hurtAndBreak(1, player, EquipmentSlot.CHEST);
         }
     }
 

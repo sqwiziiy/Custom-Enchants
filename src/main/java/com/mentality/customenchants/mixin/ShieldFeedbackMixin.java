@@ -37,7 +37,7 @@ public abstract class ShieldFeedbackMixin {
 
         for (net.minecraft.world.effect.MobEffectInstance effect :
                 new java.util.ArrayList<>(player.getActiveEffects())) {
-            if (effect.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
+            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
                 player.removeEffect(effect.getEffect());
             }
         }

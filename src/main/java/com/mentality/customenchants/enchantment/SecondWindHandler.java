@@ -2,7 +2,8 @@ package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.CustomEnchantsMod;
 import com.mentality.customenchants.config.ModConfig;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import com.mentality.customenchants.net.SecondWindPayload;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,12 +18,15 @@ import java.util.UUID;
 
 public class SecondWindHandler {
 
-    public static final ResourceLocation SECOND_WIND_PACKET = new ResourceLocation(CustomEnchantsMod.MOD_ID, "second_wind");
+    /** Stable id for the Second Wind knockback-resistance attribute modifier. */
+    private static final ResourceLocation KNOCKBACK_MODIFIER_ID =
+            ResourceLocation.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, "second_wind_knockback");
 
     // Cooldown tracking: player UUID -> game time when effect was last triggered
     private static final Map<UUID, Long> cooldowns = new HashMap<>();
 
     public static void register() {
+        PayloadTypeRegistry.playS2C().register(SecondWindPayload.TYPE, SecondWindPayload.CODEC);
         net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(server -> {
             if (!ModConfig.get().secondWindEnabled) return;
 
@@ -66,19 +69,18 @@ public class SecondWindHandler {
                 var knockbackAttr = player.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE);
                 if (knockbackAttr != null) {
                     var modifier = new net.minecraft.world.entity.ai.attributes.AttributeModifier(
-                            java.util.UUID.fromString("b3f7c466-7c2a-4c3f-9e1a-1d2f3a4b5c6d"),
-                            "Second Wind knockback resistance",
+                            KNOCKBACK_MODIFIER_ID,
                             1.0,
-                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE
                     );
-                    knockbackAttr.removeModifier(modifier);
+                    knockbackAttr.removeModifier(KNOCKBACK_MODIFIER_ID);
                     knockbackAttr.addTransientModifier(modifier);
 
                     server.execute(() -> scheduleKnockbackRemoval(player, modifier, speedTicks));
                 }
 
-                // Send visual effect packet to client
-                ServerPlayNetworking.send(player, SECOND_WIND_PACKET, PacketByteBufs.empty());
+                // Send visual effect payload to client
+                ServerPlayNetworking.send(player, SecondWindPayload.INSTANCE);
             }
         });
     }
