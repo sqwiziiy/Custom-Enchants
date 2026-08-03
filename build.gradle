@@ -1,5 +1,5 @@
 plugins {
-	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -8,6 +8,14 @@ group = project.maven_group
 
 base {
 	archivesName = project.archives_base_name
+}
+
+sourceSets {
+	testmod
+}
+
+configurations {
+	testmodImplementation.extendsFrom implementation
 }
 
 repositories {
@@ -22,6 +30,31 @@ loom {
 		"custom-enchants" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
+		}
+		"custom-enchants-testmod" {
+			sourceSet sourceSets.testmod
+		}
+	}
+
+	runs {
+		testmodServer {
+			server()
+			name "Testmod Server"
+			source sourceSets.testmod
+			runDir "build/testmod-server"
+		}
+		gametest {
+			inherit testmodServer
+			name "Fabric GameTest"
+			runDir "build/gametest"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/reports/gametest/results.xml"
+		}
+		dedicatedServerSmoke {
+			server()
+			name "Dedicated Server Smoke"
+			source sourceSets.main
+			runDir "build/dedicated-server-smoke"
 		}
 	}
 }
@@ -45,6 +78,12 @@ dependencies {
 
 	// Mod Menu
 	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+
+	testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.11.0")
+	testmodImplementation sourceSets.main.output
+	testmodCompileOnly files(sourceSets.main.compileClasspath)
+	testmodRuntimeOnly files(sourceSets.main.runtimeClasspath)
 }
 
 processResources {
@@ -56,14 +95,82 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 17
+}
+
+tasks.withType(Test).configureEach {
+	useJUnitPlatform()
+	systemProperty "projectDir", project.projectDir.absolutePath
+}
+
+tasks.register("gameTest") {
+	group = "verification"
+	description = "Runs the Fabric GameTest server and validates its XML report."
+	dependsOn "runGametest"
+	doLast {
+		def report = file("${project.buildDir}/reports/gametest/results.xml")
+		if (!report.isFile()) {
+			throw new GradleException("GameTest did not produce ${report}")
+		}
+		def text = report.getText("UTF-8")
+		if (!text.contains("<failure") && !text.contains("<error") && text.contains("<testcase")) {
+			logger.lifecycle("GameTest XML report: all tests passed")
+		} else {
+			throw new GradleException("GameTest report contains failures: ${report}")
+		}
+	}
+}
+
+tasks.register("verifyReleaseJar") {
+	group = "verification"
+	description = "Verifies the remapped release JAR packaging contract."
+	dependsOn remapJar
+	doLast {
+		def release = tasks.named("remapJar").get().archiveFile.get().asFile
+		def archive = new java.util.zip.ZipFile(release)
+		def entries = archive.entries().findAll { !it.isDirectory() }.collect { it.name } as Set
+		archive.close()
+		def required = [
+			"fabric.mod.json",
+			"LICENSE_custom-enchants",
+			"assets/custom-enchants/icon.png",
+			"assets/custom-enchants/lang/en_us.json",
+			"assets/custom-enchants/lang/ru_ru.json",
+			"custom-enchants.mixins.json",
+			"custom-enchants.client.mixins.json"
+		]
+		def missing = required.findAll { !entries.contains(it) }
+		if (!missing.isEmpty()) throw new GradleException("Release JAR missing: ${missing}")
+		def forbidden = entries.findAll { it.endsWith(".java") || it.startsWith("docs/") || it.startsWith(".git/") || it.startsWith("build/") || it.startsWith("run/") || it.startsWith("logs/") || it.startsWith("test/") || it.contains("/test/") }
+		if (!forbidden.isEmpty()) throw new GradleException("Release JAR contains forbidden entries: ${forbidden}")
+		def absolute = entries.findAll { it.startsWith("/") || it.contains(":\\") || it.contains("/home/") }
+		if (!absolute.isEmpty()) throw new GradleException("Release JAR contains absolute paths: ${absolute}")
+		if (entries.count { it.endsWith(".class") } == 0) throw new GradleException("Release JAR contains no production classes")
+		logger.lifecycle("Release JAR contract passed: ${release.name}")
+	}
+}
+
+tasks.register("dedicatedServerSmoke") {
+	group = "verification"
+	description = "Runs an isolated dedicated server smoke and validates the EULA gate marker."
+	dependsOn "runDedicatedServerSmoke"
+	doLast {
+		def log = file("${project.buildDir}/dedicated-server-smoke/logs/latest.log")
+		if (!log.isFile()) throw new GradleException("Dedicated smoke log missing: ${log}")
+		def text = log.getText("UTF-8")
+		if (!text.contains("Mentalitys | Custom Enchantments initialized!")) throw new GradleException("Dedicated smoke did not initialize the mod")
+		if (!text.contains("You need to agree to the EULA")) throw new GradleException("Dedicated smoke did not reach the expected EULA gate")
+		if (text.contains("client.mixins.json") && text.contains("Env=SERVER")) throw new GradleException("Dedicated smoke attempted to load client mixins")
+		logger.lifecycle("Dedicated server smoke passed: initialization and EULA gate")
+	}
 }
 
 java {
-	withSourcesJar()
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	withSourcesJar()
 }
 
 jar {

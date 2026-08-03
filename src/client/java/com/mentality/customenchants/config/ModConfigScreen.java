@@ -12,7 +12,7 @@ public class ModConfigScreen {
         ModConfig config = ModConfig.get();
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Component.translatable("config.custom-enchants.title"));
+                .setTitle(Component.translatable("config.custom-enchants.title.local"));
 
         builder.setSavingRunnable(ModConfig::save);
 

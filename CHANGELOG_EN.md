@@ -3,6 +3,12 @@
 
 All notable changes to the **Mentalitys | Custom Enchantments** mod are documented here.
 
+## [Unreleased]
+
+- Repository and Fabric metadata now follow the Minecraft 1.20.1/Java 17 baseline.
+- Public documentation is synchronized with all 19 enchantments, configuration fields, and current librarian offers.
+- Project links and generated-output hygiene rules were corrected.
+
 ## [3.0.0] - 2026-04-30
 
 ### Added
@@ -11,21 +17,6 @@ All notable changes to the **Mentalitys | Custom Enchantments** mod are document
   - Level I: small sculk bloom (8 charges, 12 spread steps, radius ≈2–3 blocks).
   - Level II: large sculk bloom (20 charges, 28 spread steps, radius ≈4–5 blocks). Can generate sculk veins, sensors, and shriekers following natural sculk propagation rules.
 - Librarian trades: Sculk Bloom I (tier 4, 30 emeralds), II (tier 5, 50 emeralds).
-
----
-
-[2.9.0] - 2026-03-28
-Added
-
-    Steady Footing — new boots enchantment (uncommon, max level 3). Reduces slipping on ice.
-        Level I: −30% slipperiness.
-        Level II: −60% slipperiness.
-        Level III: Full control (ice = normal ground).
-
-Fixed
-
-    Feedback — critical fix: hurt() interception moved from RETURN to HEAD. Magic damage (e.g. Instant Damage from a Harming potion) is now fully blocked while blocking, and the player heals.
-
 
 ---
 
@@ -360,4 +351,4 @@ Fixed
 - Effect triggers only when attacker is a Player and target is a LivingEntity.
 - Librarian villager trades (tiers 1, 3, 5).
 - Localization: English (`en_us.json`) and Russian (`ru_ru.json`).
-- Built for Minecraft 1.20.1, Fabric API, Java 21.
+- Built for Minecraft 1.20.1, Fabric API and Java 17.

@@ -1,90 +1,67 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import com.mentality.customenchants.util.AutoSmeltBreakContext;
+import com.mentality.customenchants.util.AutoSmeltDropTransformer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-public class AutoSmeltHandler {
+public final class AutoSmeltHandler {
 
-    private static final Set<Block> SMELTABLE_ORES = Set.of(
-            Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE,
-            Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE,
-            Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE
-    );
-
-    /**
-     * Tries to smelt a block drop. Does NOT remove the block or damage the tool — caller must do that.
-     * Returns true if the smelted item was dropped (block should be removed without normal drops).
-     */
-    public static boolean trySmeltBlock(ServerLevel level, ServerPlayer player, BlockPos pos, BlockState state, ItemStack tool) {
-        if (!ModConfig.get().autoSmeltEnabled) return false;
-        if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.AUTO_SMELT, tool) <= 0) return false;
-        if (!SMELTABLE_ORES.contains(state.getBlock())) return false;
-
-        ItemStack blockDrop = new ItemStack(state.getBlock().asItem());
-        Optional<SmeltingRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(blockDrop), level);
-
-        if (recipe.isPresent()) {
-            ItemStack smeltedResult = recipe.get().getResultItem(level.registryAccess()).copy();
-            Block.popResource(level, pos, smeltedResult);
-            float xp = recipe.get().getExperience();
-            if (xp > 0) {
-                int xpAmount = (int) xp;
-                if (xpAmount < 1 && player.getRandom().nextFloat() < xp) {
-                    xpAmount = 1;
-                }
-                if (xpAmount > 0) {
-                    player.giveExperiencePoints(xpAmount);
-                }
-            }
-            return true;
-        }
-        return false;
+    private AutoSmeltHandler() {
     }
 
-    public static void register() {
-        PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
-            if (!(player instanceof ServerPlayer serverPlayer)) return true;
-            if (!(world instanceof ServerLevel serverLevel)) return true;
+    /**
+     * Transforms the already computed vanilla drops. The block, block entity and tool are
+     * the exact context supplied by Block.getDrops during the standard playerDestroy path.
+     * No block, item entity, XP or durability side effect is performed here.
+     */
+    public static List<ItemStack> transformDrops(
+            ServerLevel level,
+            BlockState state,
+            BlockPos pos,
+            BlockEntity blockEntity,
+            Entity breaker,
+            ItemStack tool,
+            List<ItemStack> drops
+    ) {
+        if (!(breaker instanceof ServerPlayer)) return drops;
+        if (!isEligible(tool)) return drops;
 
-            ItemStack tool = player.getMainHandItem();
-            if (tool.isEmpty()) return true;
+        return AutoSmeltDropTransformer.transform(drops, input -> resolveSmelting(level, input));
+    }
 
-            boolean smelted = trySmeltBlock(serverLevel, serverPlayer, pos, state, tool);
-            if (!smelted) return true;
+    public static boolean isEligible(ItemStack tool) {
+        if (!ModConfig.get().autoSmeltEnabled || tool.isEmpty()) return false;
+        if (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.AUTO_SMELT, tool) <= 0) return false;
 
-            // Remove the block without vanilla drops
-            serverLevel.removeBlock(pos, false);
-            tool.hurtAndBreak(1, serverPlayer, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        // Commands can create this combination even though the enchantment API rejects it.
+        // Silk Touch remains authoritative over the already generated block-item drop.
+        return !hasSilkTouch(tool);
+    }
 
-            // Trigger Drill for surrounding blocks (since AFTER won't fire)
-            if (!tool.isEmpty() && !player.isShiftKeyDown() && ModConfig.get().drillEnabled
-                    && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DRILL, tool) > 0) {
-                DrillHandler.drillAround(serverPlayer, pos);
-            }
+    private static ItemStack resolveSmelting(ServerLevel level, ItemStack input) {
+        SimpleContainer recipeInput = new SimpleContainer(input.copy());
+        Optional<SmeltingRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(RecipeType.SMELTING, recipeInput, level);
+        return recipe.map(value -> value.assemble(recipeInput, level.registryAccess()))
+                .orElse(ItemStack.EMPTY);
+    }
 
-            // Trigger Magnet pickup (since AFTER won't fire)
-            if (ModConfig.get().magnetEnabled
-                    && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.MAGNET, tool) > 0) {
-                MagnetHandler.collectNearby(serverLevel, serverPlayer, pos);
-            }
-
-            return false;
-        });
+    static boolean hasSilkTouch(ItemStack tool) {
+        return EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
     }
 }

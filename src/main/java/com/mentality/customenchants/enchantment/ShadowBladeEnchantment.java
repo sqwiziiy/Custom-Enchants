@@ -1,6 +1,7 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.shadowblade.SafeTeleportService;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -57,28 +58,19 @@ public class ShadowBladeEnchantment extends Enchantment {
 
         // Distance bonus: up to +10% at 30 blocks distance
         double distance = player.distanceTo(livingTarget);
+        if (!Double.isFinite(distance)) {
+            return;
+        }
         float distanceBonus = (float) (Math.min(distance / 30.0, 1.0) * 0.10);
         chance += distanceBonus;
 
         if (player.getRandom().nextFloat() < chance) {
-            double yawRad = Math.toRadians(livingTarget.getYRot());
-            double behindX = livingTarget.getX() + Math.sin(yawRad) * 1.5;
-            double behindZ = livingTarget.getZ() - Math.cos(yawRad) * 1.5;
-            double behindY = livingTarget.getY();
-
-            // Face the target from behind
-            double dx = livingTarget.getX() - behindX;
-            double dz = livingTarget.getZ() - behindZ;
-            float newYaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
-
             if (player instanceof ServerPlayer serverPlayer) {
-                serverPlayer.connection.teleport(behindX, behindY, behindZ, newYaw, 0);
-            } else {
-                player.teleportTo(behindX, behindY, behindZ);
-                player.setYRot(newYaw);
-                player.setXRot(0);
+                SafeTeleportService.tryTeleportBehind(serverPlayer, livingTarget);
             }
 
+            // Preserve the historical effect timing: a successful chance roll slows the target
+            // even when every destination is rejected as unsafe.
             livingTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, slownessDuration, 1));
         }
     }

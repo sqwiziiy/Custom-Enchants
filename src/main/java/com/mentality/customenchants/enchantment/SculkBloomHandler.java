@@ -1,6 +1,7 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.combat.KillingWeaponContext;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -19,11 +20,13 @@ public class SculkBloomHandler {
     private static void onEntityDeath(LivingEntity entity, DamageSource source) {
         if (!ModConfig.get().sculkBloomEnabled) return;
         if (!(entity.level() instanceof ServerLevel serverLevel)) return;
-        if (!(source.getEntity() instanceof Player player)) return;
+        KillingWeaponContext.Snapshot killing = KillingWeaponContext.current(entity);
+        if (!killing.isDirectPlayerHit()) return;
+        Player player = killing.player();
 
         int level = EnchantmentHelper.getItemEnchantmentLevel(
                 ModEnchantments.SCULK_BLOOM,
-                player.getMainHandItem()
+                killing.weapon()
         );
         if (level <= 0) return;
 

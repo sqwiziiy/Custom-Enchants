@@ -1,6 +1,8 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.state.VegetationStateStore;
+import com.mentality.customenchants.state.WorldPositionKey;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.TickTask;
@@ -13,28 +15,15 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 public class VegetationHandler {
 
-    // Track recently replanted positions (BlockPos.asLong -> game time) to prevent accidental breaking
-    private static final Map<Long, Long> recentlyPlanted = new ConcurrentHashMap<>();
-    private static final int PROTECTION_TICKS = 10;
+    private static final VegetationStateStore STATE = new VegetationStateStore();
 
     public static void register() {
         // Cancel breaking of recently replanted seedlings
         PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
             if (!(world instanceof ServerLevel serverLevel)) return true;
-            long key = pos.asLong();
-            Long plantedTime = recentlyPlanted.get(key);
-            if (plantedTime != null) {
-                if (serverLevel.getGameTime() - plantedTime < PROTECTION_TICKS) {
-                    return false; // Cancel break — seedling was just planted
-                }
-                recentlyPlanted.remove(key);
-            }
-            return true;
+            return !STATE.isProtected(new WorldPositionKey(serverLevel.dimension(), pos.asLong()), serverLevel.getGameTime());
         });
 
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
@@ -80,13 +69,27 @@ public class VegetationHandler {
                 BlockState finalSeedState = seedState;
                 BlockPos immutablePos = pos.immutable();
                 serverLevel.getServer().tell(new TickTask(
-                        serverLevel.getServer().getTickCount() + 1, () -> {
-                    if (serverLevel.getBlockState(immutablePos).isAir()) {
+                serverLevel.getServer().getTickCount() + 1, () -> {
+                    if (serverLevel.getServer().getLevel(serverLevel.dimension()) == serverLevel
+                            && serverLevel.getChunkSource().hasChunk(
+                            net.minecraft.core.SectionPos.blockToSectionCoord(immutablePos.getX()),
+                            net.minecraft.core.SectionPos.blockToSectionCoord(immutablePos.getZ()))
+                            && serverLevel.getBlockState(immutablePos).isAir()) {
                         serverLevel.setBlockAndUpdate(immutablePos, finalSeedState);
-                        recentlyPlanted.put(immutablePos.asLong(), serverLevel.getGameTime());
+                        STATE.mark(new WorldPositionKey(serverLevel.dimension(), immutablePos.asLong()), serverLevel.getGameTime());
                     }
                 }));
             }
         });
+
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(STATE::cleanup);
+    }
+
+    public static void clearState() {
+        STATE.clear();
+    }
+
+    static VegetationStateStore stateForTests() {
+        return STATE;
     }
 }
