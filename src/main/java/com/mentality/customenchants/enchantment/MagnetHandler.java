@@ -1,6 +1,7 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.magnet.MagnetPickupPolicy;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -17,18 +18,12 @@ public class MagnetHandler {
     public static void collectNearby(ServerLevel level, ServerPlayer player, BlockPos pos) {
         int radius = ModConfig.get().magnetRadius;
         level.getServer().execute(() -> {
-            if (!player.isAlive()) return;
+            if (!player.isAlive() || level != player.level()) return;
             AABB area = new AABB(pos).inflate(radius);
             List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, area);
             for (ItemEntity itemEntity : items) {
-                if (!itemEntity.isAlive()) continue;
-                ItemStack stack = itemEntity.getItem().copy();
-                boolean added = player.getInventory().add(stack);
-                if (stack.isEmpty()) {
-                    itemEntity.discard();
-                } else if (added) {
-                    itemEntity.setItem(stack);
-                }
+                if (!MagnetPickupPolicy.eligible(itemEntity, player, radius)) continue;
+                itemEntity.playerTouch(player);
             }
         });
     }

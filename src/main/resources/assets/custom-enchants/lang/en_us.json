@@ -5,6 +5,7 @@
   "enchantment.custom-enchants.poison_blade": "Poison Blade",
   "enchantment.custom-enchants.lumberjack": "Lumberjack",
   "config.custom-enchants.title": "Mentalitys | Custom Enchantments — Settings",
+  "config.custom-enchants.title.local": "Mentalitys | Custom Enchantments — Local Settings",
   "config.custom-enchants.category.glow_strike": "Glow Strike",
   "config.custom-enchants.category.double_jump": "Double Jump",
   "config.custom-enchants.category.drill": "Drill",

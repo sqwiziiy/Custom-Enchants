@@ -5,12 +5,13 @@ import com.mentality.customenchants.enchantment.DoubleJumpServerHandler;
 import com.mentality.customenchants.enchantment.DrillHandler;
 import com.mentality.customenchants.enchantment.LumberjackHandler;
 import com.mentality.customenchants.enchantment.MagnetHandler;
-import com.mentality.customenchants.enchantment.AutoSmeltHandler;
 import com.mentality.customenchants.enchantment.VegetationHandler;
 import com.mentality.customenchants.enchantment.SecondWindHandler;
 import com.mentality.customenchants.enchantment.KineticDischargeHandler;
+import com.mentality.customenchants.lifecycle.ServerStateLifecycle;
 import com.mentality.customenchants.enchantment.SculkBloomHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
+import com.mentality.customenchants.trade.ShieldTradeDefinition;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -35,11 +36,11 @@ public class CustomEnchantsMod implements ModInitializer {
         DrillHandler.register();
         LumberjackHandler.register();
         MagnetHandler.register();
-        AutoSmeltHandler.register();
         VegetationHandler.register();
         SecondWindHandler.register();
         KineticDischargeHandler.register();
         SculkBloomHandler.register();
+        ServerStateLifecycle.register();
         registerVillagerTrades();
         LOGGER.info("Mentalitys | Custom Enchantments initialized!");
     }
@@ -275,53 +276,10 @@ public class CustomEnchantsMod implements ModInitializer {
             });
         });
 
-        // Rebound I — Apprentice Librarian (tier 2)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.REBOUND, 1));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 16),
-                        book,
-                        12, 5, 0.2f);
-            });
-        });
-
-        // Rebound II — Expert Librarian (tier 4)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.REBOUND, 2));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 32),
-                        book,
-                        6, 15, 0.2f);
-            });
-        });
-
-        // Rebound III — Master Librarian (tier 5)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.REBOUND, 3));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 50),
-                        book,
-                        3, 30, 0.2f);
-            });
-        });
-
-        // Feedback I — Journeyman Librarian (tier 3)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 3, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.FEEDBACK, 1));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 22),
-                        book,
-                        6, 15, 0.2f);
-            });
-        });
+        for (ShieldTradeDefinition definition : ShieldTradeDefinition.all()) {
+            TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN,
+                    definition.villagerLevel(), factories -> factories.add((trader, random) -> definition.createOffer()));
+        }
 
         // Second Wind I — Master Librarian (tier 5)
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
@@ -332,42 +290,6 @@ public class CustomEnchantsMod implements ModInitializer {
                         new ItemStack(Items.EMERALD, 52),
                         book,
                         2, 30, 0.2f);
-            });
-        });
-
-        // Guardian's Grace I — Apprentice Librarian (tier 2)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 2, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.GUARDIANS_GRACE, 1));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 16),
-                        book,
-                        12, 5, 0.2f);
-            });
-        });
-
-        // Guardian's Grace II — Expert Librarian (tier 4)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 4, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.GUARDIANS_GRACE, 2));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 32),
-                        book,
-                        6, 15, 0.2f);
-            });
-        });
-
-        // Guardian's Grace III — Master Librarian (tier 5)
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 5, factories -> {
-            factories.add((trader, random) -> {
-                ItemStack book = EnchantedBookItem.createForEnchantment(
-                        new EnchantmentInstance(ModEnchantments.GUARDIANS_GRACE, 3));
-                return new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 50),
-                        book,
-                        3, 30, 0.2f);
             });
         });
 

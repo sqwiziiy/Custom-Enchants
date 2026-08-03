@@ -1,23 +1,11 @@
 # About
 
-**Mentalitys | Custom Enchantments** — мод для Minecraft 1.20.1 (Fabric API), добавляющий кастомные зачарования.
+**Mentalitys | Custom Enchantments** is a Minecraft 1.20.1 Fabric mod with 19
+custom enchantments, server-side gameplay handlers, optional client UI, and a
+JSON configuration file. See [README.md](README.md), the [enchantment
+reference](ENCHANTMENTS.md), and the [configuration reference](CONFIGURATION.md)
+for current behavior.
 
-## Зачарования
-
-- **Сияющий удар (Glow Strike)** — зачарование для мечей/топоров. При ударе цель начинает светиться сквозь стены. 3 уровня, несовместимо с Отбрасыванием.
-- **Двойной прыжок (Double Jump)** — зачарование для ботинок. Даёт второй прыжок в воздухе с белыми частицами. Тратит прочность ботинок (67% шанс, учитывает Unbreaking).
-- **Бур (Drill)** — зачарование для кирки. Ломает блоки в области 3×3. Не работает при Shift.
-- **Ядовитый клинок (Poison Blade)** — зачарование для мечей/топоров. При ударе отравляет цель. 3 уровня.
-- **Лесоруб (Lumberjack)** — зачарование для топоров. Срубает всё дерево. 3 уровня, работает с незер-деревьями.
-- **Теневой клинок (Shadow Blade)** — зачарование для тризубца. С шансом телепортирует игрока за спину цели и замедляет её. 3 уровня, несовместимо с Громоверзцем и Тягуном.
-
-## Технологии
-
-- Java 21, Fabric API, Cloth Config API
-- Mojang mappings, клиент-серверная архитектура (сетевые пакеты)
-- JSON-конфиг с GUI-экраном настроек
-- Локализация: русский, английский
-
-## Автор
-
-mentality
+Project: https://github.com/sqwiziiy/Custom-Enchants
+Issues: https://github.com/sqwiziiy/Custom-Enchants/issues
+License: CC0-1.0

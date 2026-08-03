@@ -3,14 +3,15 @@
 	"id": "custom-enchants",
 	"version": "${version}",
 	"name": "Mentalitys | Custom Enchantments",
-	"description": "Adds custom enchantments: Glow Strike, Double Jump, Drill, Poison Blade, Lumberjack, Shadow Blade, Magnet, Auto Smelt, Vegetation, Rebound, Feedback, and Second Wind. Configurable via Cloth Config.",
+	"description": "A configurable collection of gameplay enchantments for Minecraft 1.20.1 on Fabric.",
 	"authors": [
 		"mentality"
 	],
 	"license": "CC0-1.0",
 	"icon": "assets/custom-enchants/icon.png",
 	"contact": {
-		"sources": "https://github.com/sapexzzz/Custom-Enchants"
+		"sources": "https://github.com/sqwiziiy/Custom-Enchants",
+		"issues": "https://github.com/sqwiziiy/Custom-Enchants/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
@@ -27,15 +28,18 @@
 	"depends": {
 		"fabricloader": ">=0.18.4",
 		"minecraft": "~1.20.1",
-		"java": ">=21",
-		"fabric-api": "*"
+		"java": ">=17",
+		"fabric-api": ">=0.92.7+1.20.1",
+		"cloth-config": ">=11.1.118"
 	},
 	"suggests": {
-		"cloth-config": ">=11.0.0",
-		"modmenu": ">=7.0.0"
+		"modmenu": ">=7.2.2"
 	},
 	"mixins": [
 		"custom-enchants.mixins.json",
-		"custom-enchants.client.mixins.json"
+		{
+			"config": "custom-enchants.client.mixins.json",
+			"environment": "client"
+		}
 	]
 }
