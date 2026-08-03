@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - "3.0"
+      - "3.1"
   pull_request:
     branches:
-      - "3.0"
+      - "3.1"
   workflow_dispatch:
 
 permissions:
@@ -100,8 +100,8 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: custom-enchants-3.0.0-java17
-          path: build/libs/custom-enchants-3.0.0.jar
+          name: custom-enchants-3.1.0-java17
+          path: build/libs/custom-enchants-3.1.0.jar
           if-no-files-found: error
 
       - name: Upload validation diagnostics

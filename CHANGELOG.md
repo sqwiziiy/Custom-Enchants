@@ -10,6 +10,32 @@
 - Документация синхронизирована с 19 зачарованиями, конфигурацией и актуальными сделками библиотекарей.
 - Исправлены публичные ссылки проекта и добавлены hygiene-правила для generated output.
 
+## [3.1.0] - 2026-08-03
+
+### Сборка и совместимость
+
+- Синхронизированы baseline Java 17, Minecraft 1.20.1 и Fabric metadata.
+- Стабилизированы Gradle/Loom packaging, проверка release JAR и dedicated-server smoke.
+- Добавлен GitHub Actions CI с повтором разрешения зависимостей, unit/contract tests, GameTest и server smoke.
+
+### Корректность и безопасность
+
+- Усилены validation, нормализация и атомарное сохранение конфигурации.
+- Drill/Lumberjack используют безопасное стандартное разрушение, Auto Smelt — vanilla loot pipeline.
+- Добавлены shot-time projectile snapshots, корректные подтверждённые блоки щитом и безопасные позиции Shadow Blade.
+- Добавлены cleanup lifecycle/multiplayer state и bounded state/memory behavior.
+
+### Основные изменения поведения
+
+- Feedback требует реального фронтального блока активного щита; Rebound срабатывает только на подтверждённом блоке.
+- Magnet учитывает ownership и pickup delay; Kinetic Discharge не чинит старый урон элитр.
+- Sculk Bloom использует captured direct lethal weapon context.
+- Double Jump разрешается сервером и активируется один раз за airtime.
+
+### Тесты
+
+- 62 JUnit/contract tests, 2 official Fabric GameTests, release-JAR contract и dedicated-server smoke.
+
 ## [3.0.0] - 2026-04-30
 
 ### Добавлено
