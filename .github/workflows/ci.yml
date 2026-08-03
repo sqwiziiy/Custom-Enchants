@@ -38,7 +38,7 @@ jobs:
           java-version: "17"
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       # Use one runner so Fabric/Minecraft dependencies are resolved only once.
       - name: Resolve dependencies
