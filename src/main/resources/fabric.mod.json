@@ -3,7 +3,7 @@
 	"id": "custom-enchants",
 	"version": "${version}",
 	"name": "Mentalitys | Custom Enchantments",
-	"description": "A configurable collection of gameplay enchantments for Minecraft 1.20.1 on Fabric.",
+	"description": "A configurable collection of gameplay enchantments for Minecraft 1.21.1 on Fabric.",
 	"authors": [
 		"mentality"
 	],
@@ -26,14 +26,14 @@
 		]
 	},
 	"depends": {
-		"fabricloader": ">=0.18.4",
-		"minecraft": "~1.20.1",
-		"java": ">=17",
-		"fabric-api": ">=0.92.7+1.20.1",
-		"cloth-config": ">=11.1.118"
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": ">=0.116.15+1.21.1",
+		"cloth-config": ">=15.0.140"
 	},
 	"suggests": {
-		"modmenu": ">=7.2.2"
+		"modmenu": ">=11.0.4"
 	},
 	"mixins": [
 		"custom-enchants.mixins.json",

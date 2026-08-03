@@ -2,11 +2,16 @@
 
 > [Русская версия](README_RU.md)
 
-[![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1%2F1.20.1)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
+[![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1%2F1.21.1)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
 
-Version `3.1.0` · Minecraft `1.20.1` · Fabric · Java `17` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
+Version `3.1.0` · Minecraft `1.21.1` · Fabric · Java `21` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
 
-Minecraft 1.20.1 Fabric mod with 19 configurable gameplay enchantments. The
+> **Minecraft 1.21.1 port branch (`3.1/1.21.1`).** This branch ports the stable
+> `3.1.0` release from Minecraft 1.20.1 to 1.21.1 on Java 21. The 1.20.1 line
+> (`3.1/1.20.1`, tag `v3.1.0`) is unchanged. No 1.21.1 release asset is published
+> yet — see the port validation status below.
+
+Minecraft 1.21.1 Fabric mod with 19 configurable gameplay enchantments. The
 server owns gameplay state; Cloth Config and Mod Menu provide configuration UI
 when installed on the client.
 
@@ -20,12 +25,12 @@ when installed on the client.
 
 ## Compatibility
 
-- Minecraft `~1.20.1`
-- Java `>=17`
-- Fabric Loader `>=0.18.4`
-- Fabric API `>=0.92.7+1.20.1`
-- Cloth Config `>=11.1.118`
-- Mod Menu `>=7.2.2` (optional)
+- Minecraft `~1.21.1`
+- Java `>=21`
+- Fabric Loader `>=0.19.3`
+- Fabric API `>=0.116.15+1.21.1`
+- Cloth Config `>=15.0.140`
+- Mod Menu `>=11.0.4` (optional)
 
 All 19 enchantments, their supported items, levels, conflicts, librarian
 trades, configuration fields, and known limitations are documented in the
