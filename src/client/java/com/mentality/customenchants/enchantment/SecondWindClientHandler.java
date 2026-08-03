@@ -3,6 +3,7 @@ package com.mentality.customenchants.enchantment;
 import com.mentality.customenchants.CustomEnchantsMod;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,6 +16,7 @@ public class SecondWindClientHandler {
     private static int effectTicksRemaining = 0;
 
     public static void register() {
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> reset());
         // Receive server packet to trigger visual effect
         ClientPlayNetworking.registerGlobalReceiver(SECOND_WIND_PACKET, (client, handler, buf, responseSender) -> {
             client.execute(() -> {
@@ -80,5 +82,9 @@ public class SecondWindClientHandler {
 
     public static int getEffectTicksRemaining() {
         return effectTicksRemaining;
+    }
+
+    public static void reset() {
+        effectTicksRemaining = 0;
     }
 }

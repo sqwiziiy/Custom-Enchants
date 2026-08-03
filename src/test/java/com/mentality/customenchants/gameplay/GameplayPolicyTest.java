@@ -1,0 +1,67 @@
+package com.mentality.customenchants.gameplay;
+
+import com.mentality.customenchants.anvil.AnvilResultPolicy;
+import com.mentality.customenchants.combat.KillingWeaponPolicy;
+import com.mentality.customenchants.kinetic.KineticDischargeTargetPolicy;
+import com.mentality.customenchants.kinetic.KineticDischargeWearTracker;
+import com.mentality.customenchants.magnet.MagnetPickupPolicy;
+import com.mentality.customenchants.shield.FeedbackMagicBlockPolicy;
+import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GameplayPolicyTest {
+    @Test
+    void feedbackOnlyAllowsValidatedMagicAndFacingShield() {
+        assertTrue(FeedbackMagicBlockPolicy.allowedSource(true, false, false, false));
+        assertTrue(FeedbackMagicBlockPolicy.allowedSource(false, true, true, false));
+        assertFalse(FeedbackMagicBlockPolicy.allowedSource(false, false, false, false));
+        assertFalse(FeedbackMagicBlockPolicy.allowedSource(true, false, false, true));
+        assertTrue(FeedbackMagicBlockPolicy.shouldBlock(true, true, true, true));
+        assertFalse(FeedbackMagicBlockPolicy.shouldBlock(true, true, false, true));
+    }
+
+    @Test
+    void kineticRefundNeverRepairsPreExistingDamage() {
+        assertEquals(200, KineticDischargeWearTracker.refundOneNewWear(200, 200));
+        assertEquals(200, KineticDischargeWearTracker.refundOneNewWear(201, 200));
+        assertEquals(200, KineticDischargeWearTracker.refundOneNewWear(200, 200));
+        assertEquals(200, KineticDischargeWearTracker.refundOneNewWear(201, 200));
+        assertEquals(201, KineticDischargeWearTracker.refundOneNewWear(201, -1));
+    }
+
+    @Test
+    void kineticRadiusAndVectorPolicyIsFiniteAndExact() {
+        assertTrue(KineticDischargeTargetPolicy.withinRadius(3, 0, 4, 5));
+        assertFalse(KineticDischargeTargetPolicy.withinRadius(3, 0, 4.01, 5));
+        assertFalse(KineticDischargeTargetPolicy.withinRadius(Double.NaN, 0, 0, 5));
+        assertTrue(KineticDischargeTargetPolicy.finiteHorizontalVector(0, 0));
+        assertFalse(KineticDischargeTargetPolicy.finiteHorizontalVector(Double.NaN, 0));
+    }
+
+    @Test
+    void killingWeaponRequiresDirectPlayerDamage() {
+        assertTrue(KillingWeaponPolicy.directPlayerHit(true, true));
+        assertFalse(KillingWeaponPolicy.directPlayerHit(true, false));
+        assertFalse(KillingWeaponPolicy.directPlayerHit(false, true));
+    }
+
+    @Test
+    void magnetForeignOwnershipWindowIsRespected() {
+        UUID owner = UUID.randomUUID();
+        UUID other = UUID.randomUUID();
+        assertTrue(MagnetPickupPolicy.foreignThrowerAllowed(null, owner, 0));
+        assertTrue(MagnetPickupPolicy.foreignThrowerAllowed(owner, owner, 0));
+        assertFalse(MagnetPickupPolicy.foreignThrowerAllowed(other, owner, 5_999));
+        assertTrue(MagnetPickupPolicy.foreignThrowerAllowed(other, owner, 6_000));
+    }
+
+    @Test
+    void invalidAnvilResultIsRejectedButTridentResultIsValid() {
+        assertTrue(AnvilResultPolicy.rejectShadowBladeResult(true, false));
+        assertFalse(AnvilResultPolicy.rejectShadowBladeResult(true, true));
+        assertFalse(AnvilResultPolicy.rejectShadowBladeResult(false, false));
+    }
+}

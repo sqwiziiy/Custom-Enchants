@@ -1,8 +1,9 @@
 package com.mentality.customenchants.mixin;
 
 import com.mentality.customenchants.config.ModConfig;
-import com.mentality.customenchants.enchantment.ModEnchantments;
 import com.mentality.customenchants.enchantment.SkyRageEnchantment;
+import com.mentality.customenchants.projectile.ProjectileEnchantmentContext;
+import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -11,10 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -59,16 +56,9 @@ public abstract class SkyRageMixin {
         Entity owner = arrow.getOwner();
         if (!(owner instanceof Player player)) return;
 
-        // Find the enchantment level on bow/crossbow in either hand
-        int level = 0;
-        ItemStack mainHand = player.getMainHandItem();
-        if (mainHand.getItem() instanceof BowItem || mainHand.getItem() instanceof CrossbowItem) {
-            level = Math.max(level, EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SKY_RAGE, mainHand));
-        }
-        ItemStack offHand = player.getOffhandItem();
-        if (offHand.getItem() instanceof BowItem || offHand.getItem() instanceof CrossbowItem) {
-            level = Math.max(level, EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SKY_RAGE, offHand));
-        }
+        ProjectileEnchantmentContext context = arrow instanceof ProjectileEnchantmentContextHolder holder
+                ? holder.customEnchants$getProjectileContext() : ProjectileEnchantmentContext.EMPTY;
+        int level = context.skyRage();
         if (level <= 0) return;
 
         // Check per-player cooldown

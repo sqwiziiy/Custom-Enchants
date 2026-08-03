@@ -3,6 +3,7 @@ package com.mentality.customenchants.enchantment;
 import com.mentality.customenchants.config.ModConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -15,13 +16,23 @@ public class DoubleJumpHandler {
     private static boolean wasOnGround = true;
     private static boolean canDoubleJump = false;
     private static boolean jumpKeyWasPressed = false;
+    private static LocalPlayer trackedPlayer;
 
     public static void register() {
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> reset());
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (!ModConfig.get().doubleJumpEnabled) return;
 
             LocalPlayer player = client.player;
-            if (player == null || player.isCreative() || player.isSpectator()) return;
+            if (player == null) {
+                reset();
+                return;
+            }
+            if (player != trackedPlayer) {
+                reset();
+                trackedPlayer = player;
+            }
+            if (player.isCreative() || player.isSpectator()) return;
 
             if (!hasDoubleJumpEnchant(player)) {
                 canDoubleJump = false;
@@ -69,5 +80,12 @@ public class DoubleJumpHandler {
     private static boolean hasDoubleJumpEnchant(LocalPlayer player) {
         ItemStack boots = player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.FEET);
         return !boots.isEmpty() && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DOUBLE_JUMP, boots) > 0;
+    }
+
+    private static void reset() {
+        wasOnGround = true;
+        canDoubleJump = false;
+        jumpKeyWasPressed = false;
+        trackedPlayer = null;
     }
 }

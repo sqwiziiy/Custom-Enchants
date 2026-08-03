@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "3.0"
+  pull_request:
+    branches:
+      - "3.0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Print tool versions
+        run: |
+          java -version
+          javac -version
+          ./gradlew --version
+
+      - name: Unit and contract tests
+        run: ./gradlew --no-daemon --console=plain clean test --stacktrace
+
+      - name: Gradle check
+        run: ./gradlew --no-daemon --console=plain check --stacktrace --warning-mode all
+
+      - name: Gradle build
+        run: ./gradlew --no-daemon --console=plain build --stacktrace --warning-mode all
+
+      - name: Verify release JAR
+        run: ./gradlew --no-daemon --console=plain verifyReleaseJar --stacktrace
+
+      - name: List release artifacts and hashes
+        run: |
+          find build/libs -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
+          sha256sum build/libs/*.jar
+
+      - name: Upload release JAR artifact
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: custom-enchants-3.0.0-java17
+          path: build/libs/custom-enchants-3.0.0.jar
+          if-no-files-found: error
+
+      - name: Upload validation diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: validation-diagnostics
+          path: |
+            build/reports/tests/**
+            build/test-results/**
+            build/logs/**
+          if-no-files-found: ignore
+
+  gametest:
+    name: gametest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Run official Fabric GameTest
+        run: ./gradlew --no-daemon --console=plain gameTest --stacktrace
+
+      - name: Upload GameTest diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: gametest-diagnostics
+          path: |
+            build/reports/gametest/**
+            build/gametest/**
+            build/reports/tests/**
+            build/test-results/**
+          if-no-files-found: ignore
+
+  server-smoke:
+    name: server-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Run isolated dedicated server smoke
+        run: ./gradlew --no-daemon --console=plain dedicatedServerSmoke --stacktrace
+
+      - name: Upload dedicated smoke diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dedicated-server-smoke-diagnostics
+          path: |
+            build/dedicated-server-smoke/**
+            build/logs/**
+            build/reports/tests/**
+          if-no-files-found: ignore

@@ -1,6 +1,8 @@
 package com.mentality.customenchants.enchantment;
 
 import com.mentality.customenchants.config.ModConfig;
+import com.mentality.customenchants.kinetic.KineticDischargeTargetPolicy;
+import com.mentality.customenchants.kinetic.KineticDischargeWearTracker;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -12,25 +14,31 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.HashMap;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 
 public class KineticDischargeHandler {
 
     /** Per-player tracking: was the player fall-flying on the previous tick? */
-    private static final Map<UUID, Boolean> wasGliding = new HashMap<>();
+    private static final Map<UUID, PlayerState> states = new HashMap<>();
 
-    /** Per-player tracking: velocity on the previous tick (to measure landing speed). */
-    private static final Map<UUID, Vec3> lastVelocity = new HashMap<>();
+    private record PlayerState(boolean wasGliding, Vec3 lastVelocity, ResourceKey<Level> dimension,
+                               int activationBaselineDamage, ItemStack trackedElytra) {
+    }
 
     public static void register() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             if (!ModConfig.get().kineticDischargeEnabled) return;
 
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                if (player.isDeadOrDying() || player.isSpectator()) continue;
+                if (player.isDeadOrDying() || player.isSpectator()) {
+                    states.remove(player.getUUID());
+                    continue;
+                }
 
                 ItemStack elytra = player.getItemBySlot(EquipmentSlot.CHEST);
                 int level = elytra.isEmpty()
@@ -38,21 +46,29 @@ public class KineticDischargeHandler {
                         : EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.KINETIC_DISCHARGE, elytra);
 
                 if (level <= 0) {
-                    wasGliding.remove(player.getUUID());
-                    lastVelocity.remove(player.getUUID());
+                    states.remove(player.getUUID());
                     continue;
                 }
 
-                boolean wasFlying = wasGliding.getOrDefault(player.getUUID(), false);
-                Vec3 lastVel    = lastVelocity.getOrDefault(player.getUUID(), Vec3.ZERO);
+                PlayerState previous = states.get(player.getUUID());
+                boolean sameDimension = previous != null && previous.dimension().equals(player.level().dimension());
+                boolean wasFlying = sameDimension && previous.wasGliding();
+                Vec3 lastVel = sameDimension ? previous.lastVelocity() : Vec3.ZERO;
                 boolean isFlying = player.isFallFlying();
+                int baselineDamage = wasFlying ? previous.activationBaselineDamage() : elytra.getDamageValue();
+                ItemStack trackedElytra = wasFlying ? previous.trackedElytra() : elytra;
+                if (isFlying && !wasFlying) {
+                    baselineDamage = elytra.getDamageValue();
+                    trackedElytra = elytra;
+                }
 
                 // Level III passive: counteract vanilla elytra durability consumption (90% of ticks).
-                // Vanilla damages the elytra by 1 every 10 ticks during flight; we repair 1 back
-                // 90 % of those ticks, resulting in net ~-90 % durability drain.
+                // Refund only wear above the damage snapshot taken at this flight cycle's start.
                 if (level == 3 && isFlying && player.tickCount % 10 == 0) {
-                    if (player.getRandom().nextFloat() < 0.90f && elytra.getDamageValue() > 0) {
-                        elytra.setDamageValue(elytra.getDamageValue() - 1);
+                    if (player.getRandom().nextFloat() < 0.90f && trackedElytra == elytra
+                            && elytra.getDamageValue() > baselineDamage) {
+                        elytra.setDamageValue(KineticDischargeWearTracker.refundOneNewWear(
+                                elytra.getDamageValue(), baselineDamage));
                     }
                 }
 
@@ -65,8 +81,8 @@ public class KineticDischargeHandler {
                     }
                 }
 
-                wasGliding.put(player.getUUID(), isFlying);
-                lastVelocity.put(player.getUUID(), player.getDeltaMovement());
+                states.put(player.getUUID(), new PlayerState(isFlying, player.getDeltaMovement(),
+                        player.level().dimension(), baselineDamage, trackedElytra));
             }
         });
     }
@@ -88,15 +104,17 @@ public class KineticDischargeHandler {
         List<LivingEntity> targets = player.level().getEntitiesOfClass(
                 LivingEntity.class,
                 new AABB(player.position(), player.position()).inflate(radius),
-                e -> e != player && e.isAlive()
+                e -> KineticDischargeTargetPolicy.isEligible(player, e, radius)
         );
 
         for (LivingEntity target : targets) {
-            if (target.distanceToSqr(player) > radius * radius) continue;
+            if (!KineticDischargeTargetPolicy.withinRadius(target.getX() - player.getX(),
+                    target.getY() - player.getY(), target.getZ() - player.getZ(), radius)) continue;
 
             // Knock the entity away from the player
             double dx = target.getX() - player.getX();
             double dz = target.getZ() - player.getZ();
+            if (!KineticDischargeTargetPolicy.finiteHorizontalVector(dx, dz)) continue;
             double dist = Math.sqrt(dx * dx + dz * dz);
             if (dist < 0.001) { dx = 1.0; dz = 0.0; dist = 1.0; }
             target.knockback(knockbackStrength, -dx / dist, -dz / dist);
@@ -139,5 +157,13 @@ public class KineticDischargeHandler {
         if (consumeDurability && !elytra.isEmpty()) {
             elytra.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.CHEST));
         }
+    }
+
+    public static void clear(UUID playerId) {
+        states.remove(playerId);
+    }
+
+    public static void clearAll() {
+        states.clear();
     }
 }

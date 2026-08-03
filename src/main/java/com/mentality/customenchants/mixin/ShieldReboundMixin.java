@@ -1,15 +1,14 @@
 package com.mentality.customenchants.mixin;
 
 import com.mentality.customenchants.config.ModConfig;
-import com.mentality.customenchants.enchantment.ModEnchantments;
+import com.mentality.customenchants.shield.ShieldBlockContext;
+import com.mentality.customenchants.shield.ShieldEnchantmentsPolicy;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,54 +17,36 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class ShieldReboundMixin {
-
     @Inject(method = "hurt", at = @At("RETURN"))
-    private void onShieldBlock(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        LivingEntity self = (LivingEntity) (Object) this;
-        if (!(self instanceof Player player)) return;
-        if (!player.isBlocking()) return;
-        if (!ModConfig.get().reboundEnabled) return;
-
-        Entity attacker = source.getEntity();
-        if (!(attacker instanceof LivingEntity livingAttacker)) return;
-
-        // Check for Rebound enchantment on the active shield
-        ItemStack shield = player.getUseItem();
-        if (shield.isEmpty() || !(shield.getItem() instanceof ShieldItem)) return;
-
-        int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.REBOUND, shield);
+    private void customEnchants$onConfirmedBlock(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        LivingEntity defender = (LivingEntity) (Object) this;
+        if (!(defender instanceof Player player) || !ModConfig.get().reboundEnabled) return;
+        ShieldBlockContext.Evidence evidence = ShieldBlockContext.current(defender, source);
+        if (!evidence.vanillaBlocked()) return;
+        ItemStack shield = evidence.shield();
+        int level = ShieldEnchantmentsPolicy.reboundLevel(shield);
         if (level <= 0) return;
 
-        // Knockback strength: L1=0.5, L2=1.0, L3=2.0
-        double knockbackStrength = switch (level) {
+        // Rebound is melee-only: never substitute a distant projectile shooter for the direct attacker.
+        Entity direct = evidence.directEntity();
+        if (!(direct instanceof LivingEntity attacker) || direct instanceof Projectile
+                || attacker.isRemoved() || attacker.level() != defender.level()) return;
+        Vec3 delta = attacker.position().subtract(defender.position());
+        double horizontal = Math.sqrt(delta.x * delta.x + delta.z * delta.z);
+        if (!Double.isFinite(horizontal) || horizontal < 0.01) return;
+
+        double strength = switch (level) {
             case 1 -> ModConfig.get().reboundKnockbackL1 / 10.0;
             case 2 -> ModConfig.get().reboundKnockbackL2 / 10.0;
-            case 3 -> ModConfig.get().reboundKnockbackL3 / 10.0;
-            default -> ModConfig.get().reboundKnockbackL1 / 10.0;
+            default -> ModConfig.get().reboundKnockbackL3 / 10.0;
         };
-
-        // Calculate direction from player to attacker
-        double dx = livingAttacker.getX() - player.getX();
-        double dz = livingAttacker.getZ() - player.getZ();
-        double dist = Math.sqrt(dx * dx + dz * dz);
-        if (dist < 0.01) return;
-        double nx = dx / dist;
-        double nz = dz / dist;
-
-        // Knock the attacker away from the player
-        livingAttacker.setDeltaMovement(livingAttacker.getDeltaMovement().add(
-                nx * knockbackStrength, 0.1, nz * knockbackStrength));
-        livingAttacker.hurtMarked = true;
-
-        // Slight self-knockback (player pushed back)
-        double selfKnockback = knockbackStrength * 0.15;
-        player.setDeltaMovement(player.getDeltaMovement().add(
-                -nx * selfKnockback, 0.02, -nz * selfKnockback));
+        if (!Double.isFinite(strength) || strength <= 0) return;
+        double nx = delta.x / horizontal;
+        double nz = delta.z / horizontal;
+        attacker.setDeltaMovement(attacker.getDeltaMovement().add(nx * strength, 0.1, nz * strength));
+        attacker.hurtMarked = true;
+        double selfStrength = strength * 0.15;
+        player.setDeltaMovement(player.getDeltaMovement().add(-nx * selfStrength, 0.02, -nz * selfStrength));
         player.hurtMarked = true;
-
-        // Extra shield durability cost
-        shield.hurtAndBreak(level, player, p -> p.broadcastBreakEvent(
-                player.getUsedItemHand() == net.minecraft.world.InteractionHand.MAIN_HAND
-                        ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
     }
 }

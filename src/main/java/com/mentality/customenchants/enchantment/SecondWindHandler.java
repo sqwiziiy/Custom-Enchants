@@ -44,7 +44,7 @@ public class SecondWindHandler {
                 if (player.getHealth() > 2.0f) continue;
 
                 // Check cooldown
-                long currentTime = player.level().getGameTime();
+                long currentTime = server.getTickCount();
                 int cooldownTicks = ModConfig.get().secondWindCooldown * 20;
                 Long lastTriggered = cooldowns.get(player.getUUID());
                 if (lastTriggered != null && (currentTime - lastTriggered) < cooldownTicks) continue;
@@ -53,12 +53,7 @@ public class SecondWindHandler {
                 cooldowns.put(player.getUUID(), currentTime);
 
                 // Speed: 1→2s, 2→3s, 3→3s, 4→4s
-                int speedTicks = switch (pieces) {
-                    case 1 -> 40;
-                    case 2 -> 60;
-                    case 3 -> 60;
-                    default -> 80;
-                };
+                int speedTicks = calculateSpeedTicks(ModConfig.get().secondWindSpeedDuration, pieces);
                 // Resistance: 1→1s, 2→1s, 3+→2s
                 int resistanceTicks = (pieces >= 3) ? 40 : 20;
 
@@ -97,5 +92,23 @@ public class SecondWindHandler {
                 knockbackAttr.removeModifier(modifier);
             }
         }));
+    }
+
+    public static int calculateSpeedTicks(int baseDurationSeconds, int pieces) {
+        double multiplier = switch (Math.max(1, Math.min(4, pieces))) {
+            case 1 -> 0.4d;
+            case 2, 3 -> 0.6d;
+            default -> 0.8d;
+        };
+        long ticks = Math.round(baseDurationSeconds * 20.0d * multiplier);
+        return (int) Math.max(1L, Math.min(Integer.MAX_VALUE, ticks));
+    }
+
+    public static void clear(UUID playerId) {
+        cooldowns.remove(playerId);
+    }
+
+    public static void clearAll() {
+        cooldowns.clear();
     }
 }

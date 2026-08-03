@@ -63,4 +63,12 @@ public class SkyRageEnchantment extends Enchantment {
             default -> 0.30f;
         };
     }
+
+    public static void clear(UUID playerId) {
+        lastLightningTime.remove(playerId);
+    }
+
+    public static void clearAll() {
+        lastLightningTime.clear();
+    }
 }
