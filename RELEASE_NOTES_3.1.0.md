@@ -7,6 +7,14 @@
 - Fabric API `>=0.92.7+1.20.1`
 - Java `>=17`
 
+## Release coordinates
+
+- Release line: 3.1
+- Minecraft branch: `3.1/1.20.1`
+- Minecraft version: 1.20.1
+- Mod version: 3.1.0
+- Release tag: `v3.1.0`
+
 ## Highlights
 
 Custom Enchants 3.1.0 consolidates the Java 17/Fabric 1.20.1 baseline with safer

@@ -2,7 +2,7 @@
 
 > [English version](README.md)
 
-[![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
+[![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1%2F1.20.1)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
 
 Версия `3.1.0` · Minecraft `1.20.1` · Fabric · Java `17` · [Релизы](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Ошибки](https://github.com/sqwiziiy/Custom-Enchants/issues)
 
