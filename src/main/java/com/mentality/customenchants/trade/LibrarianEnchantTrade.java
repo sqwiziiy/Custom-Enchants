@@ -5,10 +5,10 @@ import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -33,7 +33,7 @@ public record LibrarianEnchantTrade(ResourceKey<Enchantment> enchantment, int bo
         if (holder.isEmpty()) {
             return null;
         }
-        ItemStack book = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(holder.get(), bookLevel));
+        ItemStack book = EnchantmentHelper.createBook(new EnchantmentInstance(holder.get(), bookLevel));
         return new MerchantOffer(new ItemCost(Items.EMERALD, emeralds), Optional.empty(), book,
                 maxUses, villagerXp, priceMultiplier);
     }

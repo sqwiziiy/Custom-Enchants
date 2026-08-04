@@ -46,7 +46,7 @@ public class DoubleJumpServerHandler {
         UUID playerId = player.getUUID();
         DoubleJumpServerValidator.State previous = states.getOrDefault(playerId, DoubleJumpServerValidator.State.initial());
         DoubleJumpServerValidator.Decision decision = DoubleJumpServerValidator.accept(
-                previous, player.getServer().getTickCount(), true);
+                previous, player.level().getServer().getTickCount(), true);
         if (!decision.accepted()) return;
         states.put(playerId, decision.state());
 

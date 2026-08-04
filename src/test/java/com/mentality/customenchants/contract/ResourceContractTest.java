@@ -43,12 +43,12 @@ class ResourceContractTest {
         JsonObject metadata = JsonParser.parseString(text).getAsJsonObject();
         assertEquals("custom-enchants", metadata.get("id").getAsString());
         assertEquals("${version}", metadata.get("version").getAsString());
-        assertEquals("~1.21.1", metadata.getAsJsonObject("depends").get("minecraft").getAsString());
+        assertEquals("~1.21.11", metadata.getAsJsonObject("depends").get("minecraft").getAsString());
         assertEquals(">=21", metadata.getAsJsonObject("depends").get("java").getAsString());
-        assertEquals(">=0.116.15+1.21.1", metadata.getAsJsonObject("depends").get("fabric-api").getAsString());
+        assertEquals(">=0.141.6+1.21.11", metadata.getAsJsonObject("depends").get("fabric-api").getAsString());
         assertFalse(metadata.getAsJsonObject("depends").get("fabric-api").getAsString().equals("*"));
-        assertEquals(">=15.0.140", metadata.getAsJsonObject("depends").get("cloth-config").getAsString());
-        assertEquals(">=11.0.4", metadata.getAsJsonObject("suggests").get("modmenu").getAsString());
+        assertEquals(">=21.11.153", metadata.getAsJsonObject("depends").get("cloth-config").getAsString());
+        assertEquals(">=17.0.0", metadata.getAsJsonObject("suggests").get("modmenu").getAsString());
         assertEquals("https://github.com/sqwiziiy/Custom-Enchants", metadata.getAsJsonObject("contact").get("sources").getAsString());
         assertEquals("https://github.com/sqwiziiy/Custom-Enchants/issues", metadata.getAsJsonObject("contact").get("issues").getAsString());
         assertEquals("client", metadata.getAsJsonArray("mixins").get(1).getAsJsonObject().get("environment").getAsString());

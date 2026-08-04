@@ -28,7 +28,7 @@ public final class AdditionalBlockBreakService {
         if (scope == null) return 0;
 
         try (scope) {
-            ServerLevel level = player.serverLevel();
+            ServerLevel level = player.level();
             int destroyed = 0;
             Set<BlockPos> attempted = new HashSet<>();
             for (BlockPos position : plannedPositions) {
@@ -44,15 +44,13 @@ public final class AdditionalBlockBreakService {
 
     private static boolean isSafeTarget(ServerPlayer player, ServerLevel level, BlockPos position) {
         if (player.isRemoved() || !player.isAlive() || position == null || position.equals(BlockPos.ZERO)) return false;
-        if (player.serverLevel() != level || !level.getWorldBorder().isWithinBounds(position)) return false;
+        if (player.level() != level || !level.getWorldBorder().isWithinBounds(position)) return false;
         if (!level.getChunkSource().hasChunk(position.getX() >> 4, position.getZ() >> 4)) return false;
 
         BlockState state = level.getBlockState(position);
         if (state.isAir() || state.getDestroySpeed(level, position) < 0) return false;
         if (level.getBlockEntity(position) != null) return false;
-        ItemStack tool = player.getMainHandItem();
-        if (!hasUsableTool(player) || !player.hasCorrectToolForDrops(state)) return false;
-        return tool.getItem().canAttackBlock(state, level, position, player);
+        return hasUsableTool(player) && player.hasCorrectToolForDrops(state);
     }
 
     private static boolean hasUsableTool(ServerPlayer player) {

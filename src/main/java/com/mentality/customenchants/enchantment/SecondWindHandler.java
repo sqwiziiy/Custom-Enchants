@@ -5,7 +5,7 @@ import com.mentality.customenchants.config.ModConfig;
 import com.mentality.customenchants.net.SecondWindPayload;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,8 +19,8 @@ import java.util.UUID;
 public class SecondWindHandler {
 
     /** Stable id for the Second Wind knockback-resistance attribute modifier. */
-    private static final ResourceLocation KNOCKBACK_MODIFIER_ID =
-            ResourceLocation.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, "second_wind_knockback");
+    private static final Identifier KNOCKBACK_MODIFIER_ID =
+            Identifier.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, "second_wind_knockback");
 
     // Cooldown tracking: player UUID -> game time when effect was last triggered
     private static final Map<UUID, Long> cooldowns = new HashMap<>();
@@ -61,9 +61,9 @@ public class SecondWindHandler {
                 int resistanceTicks = (pieces >= 3) ? 40 : 20;
 
                 // Speed II
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, speedTicks, 1, false, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.SPEED, speedTicks, 1, false, true, true));
                 // Resistance I
-                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, resistanceTicks, 0, false, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, resistanceTicks, 0, false, true, true));
 
                 // Knockback resistance 100% for speed duration
                 var knockbackAttr = player.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE);
@@ -87,8 +87,9 @@ public class SecondWindHandler {
 
     private static void scheduleKnockbackRemoval(ServerPlayer player, net.minecraft.world.entity.ai.attributes.AttributeModifier modifier, int ticks) {
         // Use a simple tick counter approach
-        player.getServer().tell(new net.minecraft.server.TickTask(
-                player.getServer().getTickCount() + ticks, () -> {
+        net.minecraft.server.MinecraftServer server = player.level().getServer();
+        server.schedule(new net.minecraft.server.TickTask(
+                server.getTickCount() + ticks, () -> {
             var knockbackAttr = player.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE);
             if (knockbackAttr != null) {
                 knockbackAttr.removeModifier(modifier);

@@ -32,7 +32,7 @@ public abstract class ShieldFeedbackMixin {
         boolean canBlock = FeedbackMagicBlockPolicy.shouldBlock(
                 ModConfig.get().feedbackEnabled,
                 ShieldEnchantmentsPolicy.feedbackLevel(shield) > 0,
-                player.isDamageSourceBlocked(source), allowed);
+                ShieldEnchantmentsPolicy.wouldBlockDamage(player, source, amount), allowed);
         if (!canBlock) return;
 
         for (net.minecraft.world.effect.MobEffectInstance effect :

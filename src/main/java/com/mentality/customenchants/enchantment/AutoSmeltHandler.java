@@ -55,7 +55,7 @@ public final class AutoSmeltHandler {
 
     private static ItemStack resolveSmelting(ServerLevel level, ItemStack input) {
         SingleRecipeInput recipeInput = new SingleRecipeInput(input.copy());
-        Optional<RecipeHolder<SmeltingRecipe>> recipe = level.getRecipeManager()
+        Optional<RecipeHolder<SmeltingRecipe>> recipe = level.recipeAccess()
                 .getRecipeFor(RecipeType.SMELTING, recipeInput, level);
         return recipe.map(holder -> holder.value().assemble(recipeInput, level.registryAccess()))
                 .orElse(ItemStack.EMPTY);

@@ -50,7 +50,7 @@ public final class ShadowBladeEnchantment {
 
             // Preserve the historical effect timing: a successful chance roll slows the target
             // even when every destination is rejected as unsafe.
-            livingTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, slownessDuration, 1));
+            livingTarget.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, slownessDuration, 1));
         }
     }
 }

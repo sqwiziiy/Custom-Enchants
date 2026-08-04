@@ -4,7 +4,7 @@ import com.mentality.customenchants.projectile.ProjectileEnchantmentContext;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextNbt;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

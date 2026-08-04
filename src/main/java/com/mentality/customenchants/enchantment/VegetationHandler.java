@@ -68,7 +68,7 @@ public class VegetationHandler {
                 // Replant on next server tick to ensure block break is fully processed
                 BlockState finalSeedState = seedState;
                 BlockPos immutablePos = pos.immutable();
-                serverLevel.getServer().tell(new TickTask(
+                serverLevel.getServer().schedule(new TickTask(
                 serverLevel.getServer().getTickCount() + 1, () -> {
                     if (serverLevel.getServer().getLevel(serverLevel.dimension()) == serverLevel
                             && serverLevel.getChunkSource().hasChunk(

@@ -45,6 +45,6 @@ public final class EnchantmentAccess {
         if (key == null || access == null) {
             return Optional.empty();
         }
-        return access.registryOrThrow(Registries.ENCHANTMENT).getHolder(key);
+        return access.lookupOrThrow(Registries.ENCHANTMENT).get(key);
     }
 }

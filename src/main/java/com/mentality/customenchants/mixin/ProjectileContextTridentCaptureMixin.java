@@ -3,7 +3,7 @@ package com.mentality.customenchants.mixin;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContext;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;

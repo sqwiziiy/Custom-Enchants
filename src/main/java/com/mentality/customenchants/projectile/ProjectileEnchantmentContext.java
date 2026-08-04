@@ -79,10 +79,11 @@ public record ProjectileEnchantmentContext(
     }
 
     public static ProjectileEnchantmentContext load(CompoundTag parent) {
-        if (parent == null || !parent.contains(NBT_KEY, 10)) return EMPTY;
-        CompoundTag tag = parent.getCompound(NBT_KEY);
-        if (tag.getInt("version") != SCHEMA_VERSION) return EMPTY;
-        return new ProjectileEnchantmentContext(tag.getInt("sky_rage"), tag.getInt("vulnerability"),
-                tag.getInt("shadow_blade"), tag.getInt("glow_strike"), tag.getString("weapon_type"));
+        if (parent == null) return EMPTY;
+        CompoundTag tag = parent.getCompoundOrEmpty(NBT_KEY);
+        if (tag.getInt("version").orElse(-1) != SCHEMA_VERSION) return EMPTY;
+        return new ProjectileEnchantmentContext(tag.getInt("sky_rage").orElse(0), tag.getInt("vulnerability").orElse(0),
+                tag.getInt("shadow_blade").orElse(0), tag.getInt("glow_strike").orElse(0),
+                tag.getString("weapon_type").orElse("none"));
     }
 }

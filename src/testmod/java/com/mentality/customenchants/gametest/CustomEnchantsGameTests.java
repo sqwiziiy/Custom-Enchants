@@ -3,11 +3,10 @@ package com.mentality.customenchants.gametest;
 import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
@@ -15,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArrowItem;
-import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -25,9 +23,9 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 
-public final class CustomEnchantsGameTests implements FabricGameTest {
+public final class CustomEnchantsGameTests {
 
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
+    @GameTest(maxTicks = 100)
     public void registryAndRealWorldAreAvailable(GameTestHelper helper) {
         helper.assertTrue(
                 EnchantmentAccess.resolve(ModEnchantments.AUTO_SMELT, helper.getLevel().registryAccess()).isPresent(),
@@ -38,12 +36,12 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
         helper.succeed();
     }
 
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
+    @GameTest(maxTicks = 100)
     public void realEnchantedBookUsesRegisteredEnchantments(GameTestHelper helper) {
         Holder<Enchantment> holder = EnchantmentAccess
                 .resolve(ModEnchantments.AUTO_SMELT, helper.getLevel().registryAccess())
                 .orElseThrow();
-        ItemStack book = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(holder, 1));
+        ItemStack book = EnchantmentHelper.createBook(new EnchantmentInstance(holder, 1));
         ItemEnchantments stored = book.get(DataComponents.STORED_ENCHANTMENTS);
         helper.assertTrue(stored != null
                         && stored.getLevel(holder) == 1
@@ -53,13 +51,13 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
     }
 
     /** Runtime proof that all 19 custom enchantment keys resolve in the real server registry. */
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
+    @GameTest(maxTicks = 100)
     public void allNineteenEnchantmentsResolveInRuntimeRegistry(GameTestHelper helper) {
         var access = helper.getLevel().registryAccess();
         helper.assertTrue(ModEnchantments.ALL.size() == 19, "expected exactly 19 declared keys");
         for (var key : ModEnchantments.ALL) {
             helper.assertTrue(EnchantmentAccess.resolve(key, access).isPresent(),
-                    "missing runtime registry entry for " + key.location());
+                    "missing runtime registry entry for " + key.identifier());
         }
         helper.succeed();
     }
@@ -69,7 +67,7 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
      * {@code EnchantmentHelper.doPostAttackEffectsWithItemSource} — the exact call vanilla makes
      * from {@code Player.attack} — and asserts Poison Blade's deterministic on-hit effect lands.
      */
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
+    @GameTest(maxTicks = 100)
     public void meleeHookAppliesPoisonBladeOnConfirmedHit(GameTestHelper helper) {
         var level = helper.getLevel();
         Holder<Enchantment> poisonBlade = EnchantmentAccess
@@ -97,7 +95,7 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
      * entity must keep the weapon context it was created with even after the shooter's held item
      * changes before impact (no re-reading the current held item on hit).
      */
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
+    @GameTest(maxTicks = 100)
     public void projectileContextSurvivesWeaponSwitchBeforeImpact(GameTestHelper helper) {
         var level = helper.getLevel();
         Holder<Enchantment> vulnerability = EnchantmentAccess

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -73,9 +73,9 @@ public abstract class SkyRageMixin {
         // Update cooldown and spawn lightning
         SkyRageEnchantment.lastLightningTime.put(playerUUID, currentTime);
 
-        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(serverLevel);
+        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(serverLevel, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
         if (bolt == null) return;
-        bolt.moveTo(pos.x, pos.y, pos.z);
+        bolt.setPos(pos.x, pos.y, pos.z);
         serverLevel.addFreshEntity(bolt);
     }
 }

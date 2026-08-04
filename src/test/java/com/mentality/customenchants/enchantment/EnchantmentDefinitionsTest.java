@@ -37,11 +37,11 @@ class EnchantmentDefinitionsTest {
     void exactlyNineteenResourceKeysWithStableNamespaceAndPaths() {
         assertEquals(19, ModEnchantments.ALL.size());
         Set<String> paths = ModEnchantments.ALL.stream()
-                .map(k -> k.location().getPath()).collect(Collectors.toSet());
+                .map(k -> k.identifier().getPath()).collect(Collectors.toSet());
         assertEquals(IDS, paths, "resource key paths must be exactly the stable nineteen");
         assertEquals(19, paths.size(), "no duplicate resource keys");
         for (ResourceKey<Enchantment> key : ModEnchantments.ALL) {
-            assertEquals("custom-enchants", key.location().getNamespace());
+            assertEquals("custom-enchants", key.identifier().getNamespace());
         }
     }
 

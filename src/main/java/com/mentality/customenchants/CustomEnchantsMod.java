@@ -13,7 +13,7 @@ import com.mentality.customenchants.enchantment.SculkBloomHandler;
 import com.mentality.customenchants.trade.LibrarianEnchantTrade;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ public class CustomEnchantsMod implements ModInitializer {
         for (LibrarianEnchantTrade offer : LibrarianEnchantTrade.all()) {
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, offer.villagerLevel(),
                     factories -> factories.add(
-                            (trader, random) -> offer.createOffer(trader.level().registryAccess())));
+                            (level, trader, random) -> offer.createOffer(level.registryAccess())));
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.mentality.customenchants.state;
 
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.Level;
 import org.junit.jupiter.api.Test;
@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class VegetationStateStoreTest {
     private static final ResourceKey<Level> OVERWORLD = ResourceKey.create(
             Registries.DIMENSION,
-            ResourceLocation.fromNamespaceAndPath("test", "overworld"));
+            Identifier.fromNamespaceAndPath("test", "overworld"));
     private static final ResourceKey<Level> NETHER = ResourceKey.create(
             Registries.DIMENSION,
-            ResourceLocation.fromNamespaceAndPath("test", "nether"));
+            Identifier.fromNamespaceAndPath("test", "nether"));
 
     @Test
     void positionIdentityIncludesDimensionAndExpires() {

@@ -6,7 +6,7 @@ import com.mentality.customenchants.util.LumberjackBlockPlanner;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -85,7 +85,7 @@ public class LumberjackHandler {
 
     static boolean isNaturalLog(BlockState state) {
         if (state == null || !state.is(BlockTags.LOGS)) return false;
-        ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        Identifier id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         String path = id.getPath();
         return path.endsWith("_log") || path.endsWith("_stem");
     }

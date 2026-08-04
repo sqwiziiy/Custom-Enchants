@@ -41,7 +41,7 @@ public final class SafeTeleportService {
 
     private static boolean safe(ServerLevel level, ServerPlayer attacker, LivingEntity target,
                                 ShadowBladeTeleportPlanner.Candidate candidate, AABB box) {
-        if (!candidate.isFinite() || box.minY < level.getMinBuildHeight() || box.maxY > level.getMaxBuildHeight()
+        if (!candidate.isFinite() || box.minY < level.getMinY() || box.maxY > level.getMaxY()
                 || !level.getWorldBorder().isWithinBounds(box) || !loaded(level, box)
                 || box.intersects(target.getBoundingBox()) || !level.noCollision(attacker, box)) {
             return false;

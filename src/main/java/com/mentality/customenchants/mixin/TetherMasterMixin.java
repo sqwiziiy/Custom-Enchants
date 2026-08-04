@@ -63,6 +63,6 @@ public abstract class TetherMasterMixin {
                 current.y + dy * 0.1 * bonus + 0.1 * bonus,
                 current.z + dz * 0.1 * bonus
         );
-        caught.hasImpulse = true;
+        caught.needsSync = true;
     }
 }

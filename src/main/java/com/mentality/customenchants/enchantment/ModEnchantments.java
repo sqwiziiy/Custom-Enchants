@@ -3,7 +3,7 @@ package com.mentality.customenchants.enchantment;
 import com.mentality.customenchants.CustomEnchantsMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.List;
@@ -49,6 +49,6 @@ public final class ModEnchantments {
 
     public static ResourceKey<Enchantment> key(String path) {
         return ResourceKey.create(Registries.ENCHANTMENT,
-                ResourceLocation.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, path));
+                Identifier.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, path));
     }
 }

@@ -2,15 +2,19 @@ package com.mentality.customenchants.shield;
 
 import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.ModEnchantments;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.phys.Vec3;
 
 public final class ShieldEnchantmentsPolicy {
     private ShieldEnchantmentsPolicy() {}
@@ -35,8 +39,33 @@ public final class ShieldEnchantmentsPolicy {
                 source.is(DamageTypeTags.BYPASSES_SHIELD));
     }
 
-    public static boolean customFeedbackBlock(Player player, DamageSource source) {
-        return player != null && source != null && feedbackDamage(source) && player.isDamageSourceBlocked(source);
+    /**
+     * Read-only equivalent of the pre-1.21.11 {@code LivingEntity.isDamageSourceBlocked(DamageSource)}
+     * predicate. Mirrors the blocking-decision steps of {@code LivingEntity.applyItemBlocking}
+     * (bypass tag, piercing arrows, facing angle, {@link BlocksAttacks#resolveBlockedDamage})
+     * without its side effects (item damage, knockback), so it is safe to call speculatively
+     * before vanilla's own {@code hurt} has run.
+     */
+    public static boolean wouldBlockDamage(LivingEntity defender, DamageSource source, float amount) {
+        if (defender == null || source == null || amount <= 0f || !defender.isBlocking()) return false;
+        ItemStack blockingWith = defender.getItemBlockingWith();
+        if (blockingWith == null || blockingWith.isEmpty()) return false;
+        BlocksAttacks blocksAttacks = blockingWith.get(DataComponents.BLOCKS_ATTACKS);
+        if (blocksAttacks == null) return false;
+        if (blocksAttacks.bypassedBy().map(source::is).orElse(false)) return false;
+        if (source.getDirectEntity() instanceof AbstractArrow arrow && arrow.getPierceLevel() > 0) return false;
+
+        double angle;
+        Vec3 sourcePos = source.getSourcePosition();
+        if (sourcePos != null) {
+            Vec3 view = defender.calculateViewVector(0f, defender.getYHeadRot());
+            Vec3 diff = sourcePos.subtract(defender.position());
+            Vec3 flat = new Vec3(diff.x, 0.0, diff.z).normalize();
+            angle = Math.acos(flat.dot(view));
+        } else {
+            angle = Math.PI;
+        }
+        return blocksAttacks.resolveBlockedDamage(source, amount, angle) > 0f;
     }
 
     private static int level(ResourceKey<Enchantment> key, ItemStack shield) {
