@@ -100,8 +100,8 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: custom-enchants-3.1.0-mc1.21.11-java21
-          path: build/libs/custom-enchants-3.1.0-mc1.21.11.jar
+          name: custom-enchants-3.1.1-mc1.21.11-java21
+          path: build/libs/custom-enchants-3.1.1-mc1.21.11.jar
           if-no-files-found: error
 
       - name: Upload validation diagnostics
