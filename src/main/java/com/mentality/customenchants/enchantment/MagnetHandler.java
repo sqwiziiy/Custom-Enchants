@@ -30,6 +30,7 @@ public class MagnetHandler {
 
     private static final List<PendingPickup> PENDING = new ArrayList<>();
     private static final Map<UUID, Set<UUID>> PRE_BREAK_ITEMS = new HashMap<>();
+    private static final Set<UUID> BATCH_CAPTURE = new HashSet<>();
     private static final long REQUEST_EXPIRY_TICKS = 20L;
     private static final boolean DEBUG = Boolean.getBoolean("customenchants.debug.magnet");
 
@@ -40,8 +41,8 @@ public class MagnetHandler {
     private static void collectNearby(ServerLevel level, ServerPlayer player, BlockPos pos, Set<UUID> existingItems) {
         long now = level.getServer().getTickCount();
         synchronized (PENDING) {
-            PENDING.add(new PendingPickup(player.getUUID(), level.dimension(), pos.immutable(),
-                    now, now + 1L, now + REQUEST_EXPIRY_TICKS, new HashSet<>(existingItems)));
+            PENDING.add(new PendingPickup(player.getUUID(), level.dimension(), List.of(pos.immutable()),
+                    now, now + 1L, now + REQUEST_EXPIRY_TICKS, new HashSet<>(existingItems), new HashSet<>()));
         }
         debug("break request player={} tick={} pos={} existingItems={} expiry={}",
                 player.getUUID(), now, pos, existingItems.size(), now + REQUEST_EXPIRY_TICKS);
@@ -73,11 +74,11 @@ public class MagnetHandler {
                     continue;
                 }
                 int radius = ModConfig.get().magnetRadius;
-                AABB area = new AABB(request.pos()).inflate(radius);
                 boolean collected = false;
-                for (ItemEntity itemEntity : level.getEntitiesOfClass(ItemEntity.class, area)) {
-                    if (request.existingItems().contains(itemEntity.getUUID())
-                            || itemEntity.getAge() > now - request.startTick() + 2L) continue;
+                for (BlockPos pos : request.positions()) {
+                    AABB area = new AABB(pos).inflate(radius);
+                    for (ItemEntity itemEntity : level.getEntitiesOfClass(ItemEntity.class, area)) {
+                    if (request.existingItems().contains(itemEntity.getUUID()) || request.processedItems().contains(itemEntity.getUUID())) continue;
                     boolean eligible = MagnetPickupPolicy.eligibleCurrentDrop(itemEntity, player, radius);
                     debug("candidate tick={} uuid={} stack={} age={} pickupDelay={} eligible={} removedBefore={}",
                             now, itemEntity.getUUID(), itemEntity.getItem(), itemEntity.getAge(),
@@ -94,11 +95,12 @@ public class MagnetHandler {
                     ItemStack before = itemEntity.getItem().copy();
                     itemEntity.playerTouch(player);
                     collected = collected || itemEntity.isRemoved() || !ItemStack.matches(before, itemEntity.getItem());
+                    request.processedItems().add(itemEntity.getUUID());
                     debug("pickup result tick={} uuid={} before={} after={} removedAfter={}",
                             now, itemEntity.getUUID(), before, itemEntity.getItem(), itemEntity.isRemoved());
                 }
-                if (collected) iterator.remove();
-                else request = request.withDueTick(now + 1L);
+                }
+                request = request.withDueTick(now + 1L);
             }
         }
     }
@@ -127,6 +129,10 @@ public class MagnetHandler {
             if (tool.isEmpty()) return;
             if (EnchantmentAccess.getLevel(tool, ModEnchantments.MAGNET) <= 0) return;
 
+            synchronized (PENDING) {
+                if (BATCH_CAPTURE.contains(serverPlayer.getUUID())) return;
+            }
+
             Set<UUID> existing;
             synchronized (PENDING) {
                 existing = PRE_BREAK_ITEMS.remove(serverPlayer.getUUID());
@@ -139,6 +145,7 @@ public class MagnetHandler {
         synchronized (PENDING) {
             PENDING.removeIf(request -> request.playerId().equals(playerId));
             PRE_BREAK_ITEMS.remove(playerId);
+            BATCH_CAPTURE.remove(playerId);
         }
     }
 
@@ -146,6 +153,7 @@ public class MagnetHandler {
         synchronized (PENDING) {
             PENDING.clear();
             PRE_BREAK_ITEMS.clear();
+            BATCH_CAPTURE.clear();
         }
     }
 
@@ -154,10 +162,40 @@ public class MagnetHandler {
         process(server, testPlayer);
     }
 
-    private record PendingPickup(UUID playerId, ResourceKey<Level> dimension, BlockPos pos,
-                                 long startTick, long dueTick, long expiryTick, Set<UUID> existingItems) {
+    public static Set<UUID> takePreBreakItems(ServerPlayer player) {
+        synchronized (PENDING) {
+            return PRE_BREAK_ITEMS.remove(player.getUUID());
+        }
+    }
+
+    public static void beginBatch(ServerPlayer player) {
+        synchronized (PENDING) {
+            BATCH_CAPTURE.add(player.getUUID());
+        }
+    }
+
+    public static void completeBatch(ServerLevel level, ServerPlayer player,
+                                     List<BlockPos> successfulPositions, Set<UUID> existingItems) {
+        synchronized (PENDING) {
+            BATCH_CAPTURE.remove(player.getUUID());
+            if (successfulPositions == null || successfulPositions.isEmpty()) return;
+            long now = level.getServer().getTickCount();
+            Set<UUID> known = new HashSet<>(existingItems == null ? Set.of() : existingItems);
+            for (BlockPos position : successfulPositions) {
+                PENDING.add(new PendingPickup(player.getUUID(), level.dimension(), List.of(position.immutable()),
+                        now, now + 1L, now + REQUEST_EXPIRY_TICKS, new HashSet<>(known), new HashSet<>()));
+            }
+        }
+        debug("batch break request player={} positions={} existingItems={}", player.getUUID(),
+                successfulPositions.size(), existingItems == null ? 0 : existingItems.size());
+    }
+
+    private record PendingPickup(UUID playerId, ResourceKey<Level> dimension, List<BlockPos> positions,
+                                 long startTick, long dueTick, long expiryTick, Set<UUID> existingItems,
+                                 Set<UUID> processedItems) {
         private PendingPickup withDueTick(long nextDueTick) {
-            return new PendingPickup(playerId, dimension, pos, startTick, nextDueTick, expiryTick, existingItems);
+            return new PendingPickup(playerId, dimension, positions, startTick, nextDueTick, expiryTick,
+                    existingItems, processedItems);
         }
     }
 
