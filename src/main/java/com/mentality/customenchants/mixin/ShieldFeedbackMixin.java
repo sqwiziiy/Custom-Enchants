@@ -58,6 +58,12 @@ public abstract class ShieldFeedbackMixin {
         ItemStack shield = evidence.shield();
         if (ShieldEnchantmentsPolicy.feedbackLevel(shield) <= 0) return;
 
+        for (net.minecraft.world.effect.MobEffectInstance effect :
+                new java.util.ArrayList<>(player.getActiveEffects())) {
+            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                player.removeEffect(effect.getEffect());
+            }
+        }
         player.heal(Math.max(0.0f, ModConfig.get().feedbackHealAmount));
         int repair = Math.max(0, ModConfig.get().feedbackRepairAmount);
         if (repair > 0) shield.setDamageValue(Math.max(0, shield.getDamageValue() - repair));

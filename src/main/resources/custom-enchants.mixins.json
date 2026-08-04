@@ -16,6 +16,7 @@
 		"AnvilMenuMixin",
 		"ShieldReboundMixin",
 		"ShieldFeedbackMixin",
+		"FeedbackEffectApplicationMixin",
 		"ShieldGuardianGraceMixin",
 		"VulnerabilityArrowMixin",
 		"VulnerabilityArmorMixin",

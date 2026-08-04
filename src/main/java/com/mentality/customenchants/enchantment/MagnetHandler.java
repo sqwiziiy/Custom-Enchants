@@ -31,7 +31,7 @@ public class MagnetHandler {
     private static final List<PendingPickup> PENDING = new ArrayList<>();
     private static final Map<UUID, Set<UUID>> PRE_BREAK_ITEMS = new HashMap<>();
     private static final Set<UUID> BATCH_CAPTURE = new HashSet<>();
-    private static final long REQUEST_EXPIRY_TICKS = 20L;
+    private static final long REQUEST_EXPIRY_TICKS = 100L;
     private static final boolean DEBUG = Boolean.getBoolean("customenchants.debug.magnet");
 
     public static void collectNearby(ServerLevel level, ServerPlayer player, BlockPos pos) {

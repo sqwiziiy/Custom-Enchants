@@ -217,7 +217,6 @@ public final class CustomEnchantsGameTests {
                 "Sky Rage must be rejected on swords by the standard enchantment path");
         helper.succeed();
     }
-
     @GameTest(maxTicks = 100)
     public void shadowBladeUsesOpenFloorCandidateWithRealServerPlayerHarness(GameTestHelper helper) {
         var level = helper.getLevel();
