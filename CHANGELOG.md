@@ -6,6 +6,12 @@
 
 ## [Unreleased]
 
+### 3.1.1 gameplay fixes (подготовлено, не опубликовано)
+
+- Исправлены задержанный Magnet pickup, серверная авторизация Double Jump и drops Auto Smelt.
+- Исправлен server-side teleport Shadow Blade и ограничена anvil-совместимость Sky Rage луком/арбалетом.
+- Исправлены Feedback magic-block validation и детерминированная XP Syphon policy.
+
 - Репозиторий и Fabric metadata приведены к Minecraft 1.20.1/Java 17 baseline.
 - Документация синхронизирована с 19 зачарованиями, конфигурацией и актуальными сделками библиотекарей.
 - Исправлены публичные ссылки проекта и добавлены hygiene-правила для generated output.

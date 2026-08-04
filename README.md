@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1%2F1.20.1)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
 
-Version `3.1.0` · Minecraft `1.20.1` · Fabric · Java `17` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
+Version `3.1.1` · Minecraft `1.20.1` · Fabric · Java `17` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
 
 Minecraft 1.20.1 Fabric mod with 19 configurable gameplay enchantments. The
 server owns gameplay state; Cloth Config and Mod Menu provide configuration UI
@@ -33,4 +33,4 @@ reference files above. The project is licensed under CC0-1.0.
 
 ## Installation
 
-Download `custom-enchants-3.1.0.jar` from the [3.1.0 release](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.0) and place it in the Fabric `mods/` directory. Required dependencies are Fabric Loader `>=0.18.4`, Fabric API `>=0.92.7+1.20.1`, Cloth Config `>=11.1.118`, and Java `>=17`; Mod Menu `>=7.2.2` is optional.
+Download `custom-enchants-3.1.1.jar` from the [3.1.1 release](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1) and place it in the Fabric `mods/` directory. Required dependencies are Fabric Loader `>=0.18.4`, Fabric API `>=0.92.7+1.20.1`, Cloth Config `>=11.1.118`, and Java `>=17`; Mod Menu `>=7.2.2` is optional.
