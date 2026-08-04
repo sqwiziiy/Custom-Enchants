@@ -15,29 +15,86 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Contract-level evidence (source-text analysis, same approach as {@code ResourceContractTest})
- * for the "Simplify enchantment configuration UI" change: the per-enchantment "Enabled" toggle
- * moved out of each individual tab into one compact "Enchantment Availability" category, while
- * every backend {@code *Enabled} field, JSON schema and default stayed untouched.
+ * for the config screen structure: the per-enchantment "Enabled" toggle lives only in one compact
+ * "Enchantment Availability" category; individual enchantment tabs exist only for enchantments
+ * with real tunable parameters (empty tabs were removed entirely, not padded with a placeholder
+ * notice); every backend {@code *Enabled} field, JSON schema and default stayed untouched.
  */
 class ConfigScreenStructureTest {
 
-    private static final Set<String> IDS = new LinkedHashSet<>(List.of(
+    /** All 19 stable enchantment IDs — every one gets an availability toggle. */
+    private static final Set<String> ALL_IDS = new LinkedHashSet<>(List.of(
             "glow_strike", "double_jump", "drill", "poison_blade", "lumberjack", "shadow_blade",
             "magnet", "auto_smelt", "vegetation", "rebound", "feedback", "second_wind",
             "guardians_grace", "vulnerability", "tether_master", "sky_rage", "xp_syphon",
             "kinetic_discharge", "sculk_bloom"));
 
-    /** The 6 enchantments with no tunable parameters other than enable/disable. */
+    /** The 13 enchantments with real tunable parameters — the only ones with an individual tab. */
+    private static final Set<String> INDIVIDUAL_CATEGORY_IDS = new LinkedHashSet<>(List.of(
+            "glow_strike", "poison_blade", "lumberjack", "shadow_blade", "magnet", "vegetation",
+            "rebound", "feedback", "second_wind", "guardians_grace", "vulnerability", "sky_rage",
+            "kinetic_discharge"));
+
+    /**
+     * The 6 enchantments with no tunable parameter beyond enable/disable — none of these may have
+     * an individual tab; they are managed only through the availability category.
+     */
     private static final Set<String> NO_PARAMETER_IDS = Set.of(
-            "double_jump", "drill", "auto_smelt", "tether_master", "xp_syphon");
+            "double_jump", "drill", "auto_smelt", "tether_master", "xp_syphon", "sculk_bloom");
 
     @Test
-    void individualCategoriesDoNotAddAnEnabledToggle() throws IOException {
+    void nineteenTotalIdsSplitIntoThirteenIndividualPlusSixParameterless() {
+        assertEquals(19, ALL_IDS.size());
+        assertEquals(13, INDIVIDUAL_CATEGORY_IDS.size());
+        assertEquals(6, NO_PARAMETER_IDS.size());
+        Set<String> union = new LinkedHashSet<>(INDIVIDUAL_CATEGORY_IDS);
+        union.addAll(NO_PARAMETER_IDS);
+        assertEquals(ALL_IDS, union, "every enchantment is exactly one of: has an individual tab, or availability-only");
+    }
+
+    @Test
+    void fourteenCategoriesExistInTotal() throws IOException {
+        String source = screenSource();
+        int categories = countOccurrences(source, "builder.getOrCreateCategory(");
+        assertEquals(14, categories, "13 enchantment tabs with real parameters + 1 availability tab");
+    }
+
+    @Test
+    void individualCategorySetIsExactlyTheThirteenWithParameters() throws IOException {
+        String source = screenSource();
+        String body = source.substring(source.indexOf("ConfigCategory glowStrike"), source.indexOf("private static"));
+        Matcher m = Pattern.compile(
+                "ConfigCategory [a-zA-Z]+ = builder\\.getOrCreateCategory\\(\\s*Component\\.translatable\\(\"config\\.custom-enchants\\.category\\.([a-z0-9_]+)\"\\)\\);")
+                .matcher(body);
+        Set<String> found = new LinkedHashSet<>();
+        while (m.find()) {
+            found.add(m.group(1));
+        }
+        assertEquals(INDIVIDUAL_CATEGORY_IDS, found, "individual tabs must exist for exactly the 13 enchantments with real parameters");
+    }
+
+    @Test
+    void removedEnchantmentsHaveNoIndividualCategory() throws IOException {
+        String source = screenSource();
+        for (String id : NO_PARAMETER_IDS) {
+            assertFalse(source.contains("category." + id + "\""),
+                    id + " must not have its own category (it is availability-only)");
+        }
+    }
+
+    @Test
+    void noParametersEntryHelperIsGone() throws IOException {
+        String source = screenSource();
+        assertFalse(source.contains("noParametersEntry"),
+                "the placeholder 'no configurable parameters' entry must be removed, not just unused");
+    }
+
+    @Test
+    void individualCategoriesDoNotContainBooleanToggles() throws IOException {
         String source = screenSource();
         String individualCategoriesBody = source.substring(
                 source.indexOf("ConfigCategory glowStrike"), source.indexOf("private static"));
@@ -58,7 +115,7 @@ class ConfigScreenStructureTest {
             foundIds.add(m.group(1));
         }
         assertEquals(19, foundIds.size(), "availability category must expose exactly 19 toggles");
-        assertEquals(IDS, foundIds, "availability toggles must cover exactly the stable nineteen enchantment IDs");
+        assertEquals(ALL_IDS, foundIds, "availability toggles must cover exactly the stable nineteen enchantment IDs");
     }
 
     @Test
@@ -85,7 +142,7 @@ class ConfigScreenStructureTest {
     @Test
     void noConfigEnabledFieldIsBoundMoreThanOnce() throws IOException {
         String source = screenSource();
-        for (String id : IDS) {
+        for (String id : ALL_IDS) {
             String field = toEnabledFieldName(id);
             int assignments = countOccurrences(source, "config." + field + " = val");
             assertEquals(1, assignments, field + " must be written by exactly one save consumer (no duplicate binding)");
@@ -97,29 +154,8 @@ class ConfigScreenStructureTest {
         String source = screenSource();
         String helper = source.substring(source.indexOf(
                 "static me.shedaniel.clothconfig2.api.AbstractConfigListEntry<Boolean> availabilityToggle"));
-        String helperBody = helper.substring(0, helper.indexOf("noParametersEntry"));
-        assertTrue(helperBody.contains(".setDefaultValue(true)"),
+        assertTrue(helper.contains(".setDefaultValue(true)"),
                 "the shared availability-toggle helper must default every toggle to enabled=true (matches ModConfig defaults)");
-    }
-
-    @Test
-    void exactlyFiveCategoriesShowTheNoParametersNotice() throws IOException {
-        String source = screenSource();
-        Matcher m = Pattern.compile("ConfigCategory ([a-zA-Z]+) = builder\\.getOrCreateCategory\\(\\s*Component\\.translatable\\(\"config\\.custom-enchants\\.category\\.([a-z0-9_]+)\"\\)\\);\\s*\\n\\s*\\n\\s*\\1\\.addEntry\\(noParametersEntry\\(entryBuilder\\)\\);")
-                .matcher(source);
-        Set<String> found = new LinkedHashSet<>();
-        while (m.find()) {
-            found.add(m.group(2));
-        }
-        assertEquals(NO_PARAMETER_IDS, found,
-                "exactly the enchantments with no tunable parameters must show the neutral no-parameters notice");
-    }
-
-    @Test
-    void nineteenCategoriesExistInTotal() throws IOException {
-        String source = screenSource();
-        int categories = countOccurrences(source, "builder.getOrCreateCategory(");
-        assertEquals(19, categories, "18 enchantment tabs + 1 availability tab");
     }
 
     @Test
@@ -129,17 +165,40 @@ class ConfigScreenStructureTest {
         for (String key : List.of(
                 "config.custom-enchants.category.availability",
                 "config.custom-enchants.availability.description",
-                "config.custom-enchants.availability.toggle_tooltip",
-                "config.custom-enchants.common.no_parameters")) {
+                "config.custom-enchants.availability.toggle_tooltip")) {
             assertTrue(en.has(key), "missing EN key " + key);
             assertTrue(ru.has(key), "missing RU key " + key);
             assertFalse(en.get(key).getAsString().isBlank(), key + " EN value must not be blank");
             assertFalse(ru.get(key).getAsString().isBlank(), key + " RU value must not be blank");
         }
-        // English "Enabled" bare word must not be reused verbatim as the availability toggle
-        // description without qualification -- it must be the dedicated, disambiguated key.
         assertEquals("Enabled", en.get("config.custom-enchants.availability.toggle_tooltip").getAsString());
         assertEquals("Разрешено", ru.get("config.custom-enchants.availability.toggle_tooltip").getAsString());
+    }
+
+    @Test
+    void deadNoParametersTranslationKeyIsRemovedFromBothLanguages() throws IOException {
+        JsonObject en = readJson("src/main/resources/assets/custom-enchants/lang/en_us.json");
+        JsonObject ru = readJson("src/main/resources/assets/custom-enchants/lang/ru_ru.json");
+        assertFalse(en.has("config.custom-enchants.common.no_parameters"), "dead EN key must be removed");
+        assertFalse(ru.has("config.custom-enchants.common.no_parameters"), "dead RU key must be removed");
+    }
+
+    @Test
+    void deadPerEnchantmentEnabledTranslationKeysAreRemovedFromBothLanguages() throws IOException {
+        JsonObject en = readJson("src/main/resources/assets/custom-enchants/lang/en_us.json");
+        JsonObject ru = readJson("src/main/resources/assets/custom-enchants/lang/ru_ru.json");
+        for (String id : ALL_IDS) {
+            String key = "config.custom-enchants." + id + ".enabled";
+            assertFalse(en.has(key), "dead EN key must be removed: " + key);
+            assertFalse(ru.has(key), "dead RU key must be removed: " + key);
+        }
+    }
+
+    @Test
+    void languageFilesStayInParityAfterCleanup() throws IOException {
+        JsonObject en = readJson("src/main/resources/assets/custom-enchants/lang/en_us.json");
+        JsonObject ru = readJson("src/main/resources/assets/custom-enchants/lang/ru_ru.json");
+        assertEquals(en.keySet(), ru.keySet(), "EN/RU key sets must match exactly after removing dead keys");
     }
 
     private static String toEnabledFieldName(String id) {

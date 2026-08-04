@@ -95,18 +95,6 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.glowStrikeDurationL3 = val)
                 .build());
 
-        // Double Jump category — no tunable parameters beyond enable/disable.
-        ConfigCategory doubleJump = builder.getOrCreateCategory(
-                Component.translatable("config.custom-enchants.category.double_jump"));
-
-        doubleJump.addEntry(noParametersEntry(entryBuilder));
-
-        // Drill category — no tunable parameters beyond enable/disable.
-        ConfigCategory drill = builder.getOrCreateCategory(
-                Component.translatable("config.custom-enchants.category.drill"));
-
-        drill.addEntry(noParametersEntry(entryBuilder));
-
         // Poison Blade category
         ConfigCategory poisonBlade = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.poison_blade"));
@@ -226,12 +214,6 @@ public class ModConfigScreen {
                 .setMin(1).setMax(20)
                 .setSaveConsumer(val -> config.magnetRadius = val)
                 .build());
-
-        // Auto Smelt category — no tunable parameters beyond enable/disable.
-        ConfigCategory autoSmelt = builder.getOrCreateCategory(
-                Component.translatable("config.custom-enchants.category.auto_smelt"));
-
-        autoSmelt.addEntry(noParametersEntry(entryBuilder));
 
         // Vegetation category
         ConfigCategory vegetation = builder.getOrCreateCategory(
@@ -385,12 +367,6 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.vulnerabilityIgnoreL3 = val)
                 .build());
 
-        // Tether Master (Крепкая нить) category — no tunable parameters beyond enable/disable.
-        ConfigCategory tetherMaster = builder.getOrCreateCategory(
-                Component.translatable("config.custom-enchants.category.tether_master"));
-
-        tetherMaster.addEntry(noParametersEntry(entryBuilder));
-
         // Sky Rage (Ярость Неба) category
         ConfigCategory skyRage = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.sky_rage"));
@@ -402,12 +378,6 @@ public class ModConfigScreen {
                 .setMin(0).setMax(600)
                 .setSaveConsumer(val -> config.skyRageCooldownTicks = val)
                 .build());
-
-        // XP Syphon (Собиратель искр) category — no tunable parameters beyond enable/disable.
-        ConfigCategory xpSyphon = builder.getOrCreateCategory(
-                Component.translatable("config.custom-enchants.category.xp_syphon"));
-
-        xpSyphon.addEntry(noParametersEntry(entryBuilder));
 
         // Kinetic Discharge (Кинетический разряд) category
         ConfigCategory kineticDischarge = builder.getOrCreateCategory(
@@ -463,12 +433,6 @@ public class ModConfigScreen {
                 .setDefaultValue(true)
                 .setTooltip(Component.translatable("config.custom-enchants.availability.toggle_tooltip"))
                 .setSaveConsumer(saveConsumer::accept)
-                .build();
-    }
-
-    private static me.shedaniel.clothconfig2.api.AbstractConfigListEntry<?> noParametersEntry(ConfigEntryBuilder entryBuilder) {
-        return entryBuilder.startTextDescription(
-                        Component.translatable("config.custom-enchants.common.no_parameters"))
                 .build();
     }
 }
