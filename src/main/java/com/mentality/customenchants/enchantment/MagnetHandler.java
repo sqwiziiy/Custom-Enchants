@@ -12,6 +12,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -36,6 +37,24 @@ public class MagnetHandler {
 
     public static void collectNearby(ServerLevel level, ServerPlayer player, BlockPos pos) {
         collectNearby(level, player, pos, Set.of());
+    }
+
+    /** Captures a final ItemEntity at the actual vanilla spawn point of a block drop. */
+    public static void captureFinalSpawn(ServerLevel level, ItemEntity item) {
+        com.mentality.customenchants.magnet.MagnetBreakDropContext.Context context =
+                com.mentality.customenchants.magnet.MagnetBreakDropContext.current(level);
+        if (context == null || !ModConfig.get().magnetEnabled
+                || EnchantmentAccess.getLevel(context.tool(), ModEnchantments.MAGNET) <= 0) return;
+
+        ServerPlayer player = context.player();
+        if (item.isRemoved() || item.getItem().isEmpty() || item.level() != level) return;
+        int radius = ModConfig.get().magnetRadius;
+        if (!MagnetPickupPolicy.eligibleCurrentDrop(item, player, radius)) return;
+        item.setPickUpDelay(0);
+        ItemStack before = item.getItem().copy();
+        item.playerTouch(player);
+        debug("spawn capture block={} uuid={} stackBefore={} stackAfter={} removed={} depth=1",
+                context.pos(), item.getUUID(), before, item.getItem(), item.isRemoved());
     }
 
     private static void collectNearby(ServerLevel level, ServerPlayer player, BlockPos pos, Set<UUID> existingItems) {

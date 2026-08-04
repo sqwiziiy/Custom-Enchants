@@ -22,7 +22,9 @@
 		"VulnerabilityArmorMixin",
 		"TetherMasterMixin",
 		"SkyRageMixin",
-		"AutoSmeltBlockDropsMixin"
+		"AutoSmeltBlockDropsMixin",
+		"MagnetBlockDropContextMixin",
+		"MagnetFinalItemSpawnMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
