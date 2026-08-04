@@ -8,6 +8,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -57,6 +58,10 @@ public final class ShieldEnchantmentsPolicy {
 
         double angle;
         Vec3 sourcePos = source.getSourcePosition();
+        if (sourcePos == null) {
+            Entity sourceEntity = source.getDirectEntity() != null ? source.getDirectEntity() : source.getEntity();
+            if (sourceEntity != null) sourcePos = sourceEntity.position();
+        }
         if (sourcePos != null) {
             Vec3 view = defender.calculateViewVector(0f, defender.getYHeadRot());
             Vec3 diff = sourcePos.subtract(defender.position());

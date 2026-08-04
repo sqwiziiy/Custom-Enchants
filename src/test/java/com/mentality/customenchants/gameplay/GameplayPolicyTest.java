@@ -6,6 +6,7 @@ import com.mentality.customenchants.kinetic.KineticDischargeTargetPolicy;
 import com.mentality.customenchants.kinetic.KineticDischargeWearTracker;
 import com.mentality.customenchants.magnet.MagnetPickupPolicy;
 import com.mentality.customenchants.shield.FeedbackMagicBlockPolicy;
+import com.mentality.customenchants.enchantment.XpSyphonPolicy;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
@@ -63,5 +64,27 @@ class GameplayPolicyTest {
         assertTrue(AnvilResultPolicy.rejectShadowBladeResult(true, false));
         assertFalse(AnvilResultPolicy.rejectShadowBladeResult(true, true));
         assertFalse(AnvilResultPolicy.rejectShadowBladeResult(false, false));
+    }
+
+    @Test
+    void skyRageAnvilResultOnlyAllowsBowAndCrossbow() {
+        assertFalse(AnvilResultPolicy.rejectSkyRageResult(false,
+                new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.TRIDENT)));
+        assertTrue(AnvilResultPolicy.rejectSkyRageResult(true,
+                new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.TRIDENT)));
+        assertFalse(AnvilResultPolicy.rejectSkyRageResult(true,
+                new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.BOW)));
+        assertFalse(AnvilResultPolicy.rejectSkyRageResult(true,
+                new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.CROSSBOW)));
+    }
+
+    @Test
+    void xpSyphonUsesDocumentedDeterministicChanceAndAmount() {
+        assertEquals(0.05f, XpSyphonPolicy.chance(1));
+        assertEquals(0.10f, XpSyphonPolicy.chance(2));
+        assertEquals(0.15f, XpSyphonPolicy.chance(3));
+        assertEquals(3, XpSyphonPolicy.orbValue(3));
+        assertTrue(XpSyphonPolicy.triggers(3, 0.149f));
+        assertFalse(XpSyphonPolicy.triggers(3, 0.15f));
     }
 }

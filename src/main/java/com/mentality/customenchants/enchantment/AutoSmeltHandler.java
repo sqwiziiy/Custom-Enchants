@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -38,7 +39,7 @@ public final class AutoSmeltHandler {
             ItemStack tool,
             List<ItemStack> drops
     ) {
-        if (!(breaker instanceof ServerPlayer)) return drops;
+        if (!(breaker instanceof Player)) return drops;
         if (!isEligible(tool)) return drops;
 
         return AutoSmeltDropTransformer.transform(drops, input -> resolveSmelting(level, input));

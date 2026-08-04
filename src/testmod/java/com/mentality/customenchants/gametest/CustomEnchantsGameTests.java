@@ -1,6 +1,7 @@
 package com.mentality.customenchants.gametest;
 
 import com.mentality.customenchants.enchantment.EnchantmentAccess;
+import com.mentality.customenchants.enchantment.AutoSmeltHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
@@ -22,6 +23,8 @@ import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.List;
 
 public final class CustomEnchantsGameTests {
 
@@ -121,4 +124,23 @@ public final class CustomEnchantsGameTests {
 
         helper.succeed();
     }
+
+    @GameTest(maxTicks = 100)
+    public void autoSmeltResolvesOreRecipeWithoutDuplicateDrop(GameTestHelper helper) {
+        var level = helper.getLevel();
+        Holder<Enchantment> autoSmelt = EnchantmentAccess
+                .resolve(ModEnchantments.AUTO_SMELT, level.registryAccess()).orElseThrow();
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
+        pickaxe.enchant(autoSmelt, 1);
+
+        List<ItemStack> drops = AutoSmeltHandler.transformDrops(
+                level, Blocks.IRON_ORE.defaultBlockState(), new BlockPos(1, 1, 1), null,
+                player, pickaxe, List.of(new ItemStack(Items.RAW_IRON)));
+        helper.assertTrue(drops.size() == 1 && drops.get(0).is(Items.IRON_INGOT)
+                        && drops.get(0).getCount() == 1,
+                "Auto Smelt must replace raw iron with exactly one iron ingot");
+        helper.succeed();
+    }
+
 }

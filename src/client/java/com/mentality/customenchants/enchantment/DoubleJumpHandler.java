@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
@@ -47,12 +46,9 @@ public class DoubleJumpHandler {
                 canDoubleJump = true;
                 wasOnGround = true;
             } else if (!wasOnGround && canDoubleJump && jumpKeyDown && !jumpKeyWasPressed
-                    && !player.isInWater() && !player.isInLava()) {
-                player.jumpFromGround();
+                    && !player.isInWater() && !player.isSwimming() && !player.isUnderWater()
+                    && !player.isInLava() && !player.isFallFlying()) {
                 canDoubleJump = false;
-
-                spawnJumpParticles(client, player);
-
                 ClientPlayNetworking.send(DoubleJumpPayload.INSTANCE);
             }
 
@@ -62,19 +58,6 @@ public class DoubleJumpHandler {
 
             jumpKeyWasPressed = jumpKeyDown;
         });
-    }
-
-    private static void spawnJumpParticles(Minecraft client, LocalPlayer player) {
-        if (client.level == null) return;
-        double x = player.getX();
-        double y = player.getY();
-        double z = player.getZ();
-        for (int i = 0; i < 12; i++) {
-            double offsetX = (player.getRandom().nextDouble() - 0.5) * 0.6;
-            double offsetZ = (player.getRandom().nextDouble() - 0.5) * 0.6;
-            double speedY = player.getRandom().nextDouble() * -0.1;
-            client.level.addParticle(ParticleTypes.CLOUD, x + offsetX, y + 0.1, z + offsetZ, 0, speedY, 0);
-        }
     }
 
     private static boolean hasDoubleJumpEnchant(LocalPlayer player) {
