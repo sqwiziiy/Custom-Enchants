@@ -5,6 +5,19 @@ All notable changes to the **Mentalitys | Custom Enchantments** mod are document
 
 ## [Unreleased]
 
+### Minecraft 1.21.11 port (`3.1/1.21.11`, in development)
+
+- Toolchain updated: Minecraft 1.21.11, Java 21, Fabric Loader 0.19.3, Fabric API 0.141.6+1.21.11,
+  Cloth Config 21.11.153, Mod Menu 17.0.0, Loom plugin `net.fabricmc.fabric-loom-remap`.
+- Every API change between 1.21.1 and 1.21.11 has been ported (renames, Registry/Holder type
+  changes, the shield-blocking rework onto the `BlocksAttacks` data component, the new
+  `ValueOutput`/`ValueInput` entity save/load API, the updated Fabric GameTest API) — see
+  `docs/ports/1.21.11/API_MIGRATION_MATRIX.md` in the source tree for the full breakdown.
+- Local pipeline is green: 84/84 unit/contract tests, 6 GameTests, `check`, `build`,
+  `verifyReleaseJar`, `dedicatedServerSmoke`.
+- No 1.21.11 release has been published yet; the `3.1/1.21.1` and `3.1/1.20.1` branches are
+  unchanged.
+
 - Repository and Fabric metadata now follow the Minecraft 1.20.1/Java 17 baseline.
 - Public documentation is synchronized with all 19 enchantments, configuration fields, and current librarian offers.
 - Project links and generated-output hygiene rules were corrected.

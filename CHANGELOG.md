@@ -6,6 +6,18 @@
 
 ## [Unreleased]
 
+### Порт на Minecraft 1.21.11 (`3.1/1.21.11`, в разработке)
+
+- Toolchain обновлён: Minecraft 1.21.11, Java 21, Fabric Loader 0.19.3, Fabric API 0.141.6+1.21.11,
+  Cloth Config 21.11.153, Mod Menu 17.0.0, Loom plugin `net.fabricmc.fabric-loom-remap`.
+- Все API-изменения между 1.21.1 и 1.21.11 портированы (переименования, смена типов Registry/Holder,
+  переработка блокирования щитом через компонент `BlocksAttacks`, новые API `ValueOutput`/`ValueInput`
+  для сохранения сущностей, обновлённый Fabric GameTest API) — подробности в
+  `docs/ports/1.21.11/API_MIGRATION_MATRIX.md` в исходном дереве.
+- Локальный pipeline зелёный: 84/84 unit/contract-теста, 6 GameTest, `check`, `build`,
+  `verifyReleaseJar`, `dedicatedServerSmoke`.
+- Релиз для 1.21.11 ещё не опубликован; ветки `3.1/1.21.1` и `3.1/1.20.1` не изменены.
+
 - Репозиторий и Fabric metadata приведены к Minecraft 1.20.1/Java 17 baseline.
 - Документация синхронизирована с 19 зачарованиями, конфигурацией и актуальными сделками библиотекарей.
 - Исправлены публичные ссылки проекта и добавлены hygiene-правила для generated output.
