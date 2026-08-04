@@ -49,6 +49,8 @@ public class LumberjackHandler {
             Set<java.util.UUID> existing = magnet ? MagnetHandler.takePreBreakItems(serverPlayer) : Set.of();
             if (magnet) MagnetHandler.beginBatch(serverPlayer);
             try {
+                // Each destroyBlock call enters its own Magnet child drop context through
+                // MagnetBlockDropContextMixin; the batch only coordinates diagnostics/cleanup.
                 var successful = new java.util.ArrayList<BlockPos>();
                 successful.add(pos.immutable());
                 successful.addAll(AdditionalBlockBreakService.destroyPlannedPositions(serverPlayer, planned));
