@@ -179,6 +179,30 @@ public final class CustomEnchantsGameTests {
     }
 
     @GameTest(maxTicks = 100)
+    public void autoSmeltAndMagnetCaptureFinalIngot(GameTestHelper helper) {
+        var level = helper.getLevel();
+        Holder<Enchantment> autoSmelt = EnchantmentAccess.resolve(ModEnchantments.AUTO_SMELT,
+                level.registryAccess()).orElseThrow();
+        Holder<Enchantment> magnet = EnchantmentAccess.resolve(ModEnchantments.MAGNET,
+                level.registryAccess()).orElseThrow();
+        BlockPos pos = helper.absolutePos(new BlockPos(1, 1, 1));
+        level.setBlock(pos, Blocks.IRON_ORE.defaultBlockState(), 3);
+        ServerPlayer player = realServerPlayer(helper, new BlockPos(1, 2, 1));
+        ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
+        pickaxe.enchant(autoSmelt, 1);
+        pickaxe.enchant(magnet, 1);
+        player.setItemInHand(InteractionHand.MAIN_HAND, pickaxe);
+        Blocks.IRON_ORE.playerDestroy(level, player, pos, Blocks.IRON_ORE.defaultBlockState(), null, pickaxe);
+        helper.onEachTick(() -> {
+            helper.assertTrue(player.getInventory().countItem(Items.IRON_INGOT) == 1,
+                    "Auto Smelt + Magnet must capture the final ingot stack");
+            helper.assertTrue(player.getInventory().countItem(Items.RAW_IRON) == 0,
+                    "Auto Smelt + Magnet must never capture raw iron");
+            helper.succeed();
+        });
+    }
+
+    @GameTest(maxTicks = 100)
     public void magnetCollectsCurrentDropDespiteVanillaPickupDelay(GameTestHelper helper) {
         var level = helper.getLevel();
         BlockPos localPos = new BlockPos(1, 1, 1);
