@@ -2,7 +2,11 @@ package com.mentality.customenchants.gametest;
 
 import com.mentality.customenchants.enchantment.EnchantmentAccess;
 import com.mentality.customenchants.enchantment.AutoSmeltHandler;
+import com.mentality.customenchants.enchantment.MagnetHandler;
 import com.mentality.customenchants.enchantment.ModEnchantments;
+import com.mentality.customenchants.shadowblade.SafeTeleportService;
+import com.mentality.customenchants.mixin.ItemEntityPickupDelayAccessor;
+import com.mojang.authlib.GameProfile;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
@@ -14,6 +18,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ClientInformation;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,6 +32,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
+import java.util.UUID;
 
 public final class CustomEnchantsGameTests {
 
@@ -141,6 +149,60 @@ public final class CustomEnchantsGameTests {
                         && drops.get(0).getCount() == 1,
                 "Auto Smelt must replace raw iron with exactly one iron ingot");
         helper.succeed();
+    }
+
+    @GameTest(maxTicks = 100)
+    public void magnetCollectsCurrentDropDespiteVanillaPickupDelay(GameTestHelper helper) {
+        var level = helper.getLevel();
+        BlockPos localPos = new BlockPos(1, 1, 1);
+        BlockPos absolutePos = helper.absolutePos(localPos);
+        ServerPlayer player = realServerPlayer(helper, localPos);
+        ItemEntity drop = new ItemEntity(level, absolutePos.getX() + 0.5D, absolutePos.getY(),
+                absolutePos.getZ() + 0.5D, new ItemStack(Items.COBBLESTONE));
+        drop.setThrower(player);
+        drop.setPickUpDelay(10);
+        level.addFreshEntity(drop);
+
+        MagnetHandler.collectNearby(level, player, absolutePos);
+        helper.assertTrue(((ItemEntityPickupDelayAccessor) drop).customEnchants$getPickupDelay() > 0,
+                "test fixture must start with a vanilla pickup delay");
+        helper.onEachTick(() -> {
+            MagnetHandler.processPendingForTest(level.getServer(), player);
+            if (drop.isRemoved()) {
+                helper.assertTrue(player.getInventory().countItem(Items.COBBLESTONE) == 1,
+                        "collected drop must enter the real ServerPlayer inventory");
+                helper.succeed();
+            }
+        });
+    }
+
+    @GameTest(maxTicks = 100)
+    public void shadowBladeUsesOpenFloorCandidateWithRealServerPlayerHarness(GameTestHelper helper) {
+        var level = helper.getLevel();
+        for (int x = -4; x <= 4; x++) {
+            for (int z = -4; z <= 4; z++) helper.setBlock(new BlockPos(x, 1, z), Blocks.STONE);
+        }
+        ServerPlayer attacker = realServerPlayer(helper, new BlockPos(3, 2, 0));
+        LivingEntity target = helper.spawn(EntityType.PIG, new BlockPos(0, 2, 0));
+        target.setYRot(0.0F);
+        double beforeX = attacker.getX();
+        double beforeZ = attacker.getZ();
+
+        SafeTeleportService.TeleportResult result = SafeTeleportService.diagnoseTeleportBehind(attacker, target);
+
+        helper.assertTrue(result.candidates().stream().anyMatch(d -> d.reason() == SafeTeleportService.FailureReason.TELEPORT_API_REJECTED),
+                "diagnostic result must retain the candidate rejected by teleport API");
+        helper.assertTrue(attacker.distanceToSqr(beforeX, attacker.getY(), beforeZ) < 1.0E-4D,
+                "disconnected harness must not claim that teleport succeeded");
+        helper.succeed();
+    }
+
+    private static ServerPlayer realServerPlayer(GameTestHelper helper, BlockPos pos) {
+        BlockPos absolutePos = helper.absolutePos(pos);
+        ServerPlayer player = new ServerPlayer(helper.getLevel().getServer(), helper.getLevel(),
+                new GameProfile(UUID.randomUUID(), "game-test-player"), ClientInformation.createDefault());
+        player.setPos(absolutePos.getX() + 0.5D, absolutePos.getY(), absolutePos.getZ() + 0.5D);
+        return player;
     }
 
 }
