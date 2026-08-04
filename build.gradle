@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -173,9 +173,9 @@ java {
 	withSourcesJar()
 }
 
-// Branch-local archive naming: the 1.21.1 build must not collide with the published
-// 1.20.1 asset. The mod version stays 3.1.0 (fabric.mod.json); only the file name carries
-// the Minecraft suffix, e.g. custom-enchants-3.1.0-mc1.21.1.jar.
+// Branch-local archive naming: the 1.21.11 build must not collide with the published
+// 1.20.1/1.21.1 assets. The mod version stays 3.1.0 (fabric.mod.json); only the file name
+// carries the Minecraft suffix, e.g. custom-enchants-3.1.0-mc1.21.11.jar.
 def mcArchiveVersion = "${project.mod_version}-${project.archive_minecraft_suffix}"
 tasks.matching { it.name in ["jar", "sourcesJar", "remapJar", "remapSourcesJar"] }.configureEach {
 	archiveVersion = mcArchiveVersion

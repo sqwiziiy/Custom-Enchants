@@ -11,8 +11,8 @@
   },
   "depends": {
     "fabricloader": ">=0.19.3",
-    "minecraft": "~1.21.1",
-    "fabric-api": ">=0.116.15+1.21.1",
+    "minecraft": "~1.21.11",
+    "fabric-api": ">=0.141.6+1.21.11",
     "custom-enchants": "*"
   }
 }
