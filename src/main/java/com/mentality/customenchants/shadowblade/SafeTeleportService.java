@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
+import java.util.Set;
 
 /** Server-only, fail-closed teleportation used by both Shadow Blade hit paths. */
 public final class SafeTeleportService {
@@ -33,7 +34,8 @@ public final class SafeTeleportService {
             double dx = target.getX() - candidate.x();
             double dz = target.getZ() - candidate.z();
             float yaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
-            attacker.connection.teleport(candidate.x(), candidate.y(), candidate.z(), yaw, 0.0F);
+            attacker.teleportTo(level, candidate.x(), candidate.y(), candidate.z(), Set.of(), yaw,
+                    attacker.getXRot());
             return true;
         }
         return false;

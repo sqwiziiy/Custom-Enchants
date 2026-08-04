@@ -38,5 +38,10 @@ public abstract class AnvilMenuMixin {
             EnchantmentHelper.updateEnchantments(result,
                     mutable -> mutable.removeIf(holder -> holder.is(ModEnchantments.SHADOW_BLADE)));
         }
+        if (!result.isEmpty() && AnvilResultPolicy.rejectSkyRageResult(
+                EnchantmentAccess.getLevel(result, ModEnchantments.SKY_RAGE) > 0, result)) {
+            EnchantmentHelper.updateEnchantments(result,
+                    mutable -> mutable.removeIf(holder -> holder.is(ModEnchantments.SKY_RAGE)));
+        }
     }
 }
