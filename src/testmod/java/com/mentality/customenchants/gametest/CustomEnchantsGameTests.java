@@ -30,6 +30,7 @@ import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 import java.util.UUID;
@@ -152,6 +153,32 @@ public final class CustomEnchantsGameTests {
     }
 
     @GameTest(maxTicks = 100)
+    public void autoSmeltPlayerDestroySpawnsSmeltedOreDrop(GameTestHelper helper) {
+        var level = helper.getLevel();
+        Holder<Enchantment> autoSmelt = EnchantmentAccess.resolve(ModEnchantments.AUTO_SMELT,
+                level.registryAccess()).orElseThrow();
+        BlockPos pos = helper.absolutePos(new BlockPos(1, 1, 1));
+        level.setBlock(pos, Blocks.IRON_ORE.defaultBlockState(), 3);
+        ServerPlayer player = realServerPlayer(helper, new BlockPos(1, 2, 1));
+        ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
+        pickaxe.enchant(autoSmelt, 1);
+        player.setItemInHand(InteractionHand.MAIN_HAND, pickaxe);
+        Blocks.IRON_ORE.playerDestroy(level, player, pos, Blocks.IRON_ORE.defaultBlockState(), null, pickaxe);
+        helper.onEachTick(() -> {
+            boolean ingot = !level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(2.0D)).stream()
+                    .filter(entity -> entity.getItem().is(Items.IRON_INGOT))
+                    .toList().isEmpty();
+            boolean raw = !level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(2.0D)).stream()
+                    .filter(entity -> entity.getItem().is(Items.RAW_IRON))
+                    .toList().isEmpty();
+            if (ingot || raw) {
+                helper.assertTrue(ingot && !raw, "playerDestroy must spawn one smelted ingot and no raw iron");
+                helper.succeed();
+            }
+        });
+    }
+
+    @GameTest(maxTicks = 100)
     public void magnetCollectsCurrentDropDespiteVanillaPickupDelay(GameTestHelper helper) {
         var level = helper.getLevel();
         BlockPos localPos = new BlockPos(1, 1, 1);
@@ -174,6 +201,21 @@ public final class CustomEnchantsGameTests {
                 helper.succeed();
             }
         });
+    }
+
+    @GameTest(maxTicks = 100)
+    public void skyRageRuntimeDefinitionRejectsStandardTridentAndSword(GameTestHelper helper) {
+        Holder<Enchantment> skyRage = EnchantmentAccess.resolve(ModEnchantments.SKY_RAGE,
+                helper.getLevel().registryAccess()).orElseThrow();
+        helper.assertTrue(skyRage.value().canEnchant(new ItemStack(Items.BOW)),
+                "Sky Rage must remain applicable to bows");
+        helper.assertTrue(skyRage.value().canEnchant(new ItemStack(Items.CROSSBOW)),
+                "Sky Rage must remain applicable to crossbows");
+        helper.assertFalse(skyRage.value().canEnchant(new ItemStack(Items.TRIDENT)),
+                "Sky Rage must be rejected on tridents by the standard enchantment path");
+        helper.assertFalse(skyRage.value().canEnchant(new ItemStack(Items.IRON_SWORD)),
+                "Sky Rage must be rejected on swords by the standard enchantment path");
+        helper.succeed();
     }
 
     @GameTest(maxTicks = 100)
