@@ -12,6 +12,7 @@
 		"MeleeEnchantmentEffectsMixin",
 		"KillingWeaponContextMixin",
 		"ItemEntityOwnershipAccessor",
+		"ItemEntityPickupDelayAccessor",
 		"AnvilMenuMixin",
 		"ShieldReboundMixin",
 		"ShieldFeedbackMixin",

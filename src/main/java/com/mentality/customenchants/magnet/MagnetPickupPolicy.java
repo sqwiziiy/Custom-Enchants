@@ -14,14 +14,25 @@ public final class MagnetPickupPolicy {
     }
 
     public static boolean eligible(ItemEntity item, Player player, double radius) {
+        return eligible(item, player, radius, false, false);
+    }
+
+    /** Eligibility for the drop associated with the current block break. */
+    public static boolean eligibleCurrentDrop(ItemEntity item, Player player, double radius) {
+        return eligible(item, player, radius, true, true);
+    }
+
+    private static boolean eligible(ItemEntity item, Player player, double radius,
+                                    boolean allowPickupDelay, boolean requireCurrentOwner) {
         if (item == null || player == null || item.level() != player.level()
-                || !item.isAlive() || item.getItem().isEmpty() || item.hasPickUpDelay()
+                || !item.isAlive() || item.getItem().isEmpty() || (!allowPickupDelay && item.hasPickUpDelay())
                 || !Double.isFinite(radius) || radius < 0.0D
                 || !Double.isFinite(item.distanceToSqr(player))
                 || item.distanceToSqr(player) > radius * radius) return false;
 
         UUID thrower = item instanceof ItemEntityOwnershipAccessor accessor && accessor.customEnchants$getThrower() != null
                 ? accessor.customEnchants$getThrower().getUUID() : null;
+        if (requireCurrentOwner) return thrower == null || thrower.equals(player.getUUID());
         return foreignThrowerAllowed(thrower, player.getUUID(), item.getAge());
     }
 
