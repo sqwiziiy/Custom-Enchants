@@ -11,6 +11,8 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 /** Immutable, shot-time snapshot of the custom enchantments on a projectile's weapon. */
 public record ProjectileEnchantmentContext(
@@ -85,5 +87,24 @@ public record ProjectileEnchantmentContext(
         return new ProjectileEnchantmentContext(tag.getInt("sky_rage").orElse(0), tag.getInt("vulnerability").orElse(0),
                 tag.getInt("shadow_blade").orElse(0), tag.getInt("glow_strike").orElse(0),
                 tag.getString("weapon_type").orElse("none"));
+    }
+
+    public void save(ValueOutput parent) {
+        ValueOutput tag = parent.child(NBT_KEY);
+        tag.putInt("version", SCHEMA_VERSION);
+        tag.putInt("sky_rage", skyRage);
+        tag.putInt("vulnerability", vulnerability);
+        tag.putInt("shadow_blade", shadowBlade);
+        tag.putInt("glow_strike", glowStrike);
+        tag.putString("weapon_type", weaponType);
+    }
+
+    public static ProjectileEnchantmentContext load(ValueInput parent) {
+        if (parent == null) return EMPTY;
+        ValueInput tag = parent.childOrEmpty(NBT_KEY);
+        if (tag.getIntOr("version", -1) != SCHEMA_VERSION) return EMPTY;
+        return new ProjectileEnchantmentContext(tag.getIntOr("sky_rage", 0), tag.getIntOr("vulnerability", 0),
+                tag.getIntOr("shadow_blade", 0), tag.getIntOr("glow_strike", 0),
+                tag.getStringOr("weapon_type", "none"));
     }
 }

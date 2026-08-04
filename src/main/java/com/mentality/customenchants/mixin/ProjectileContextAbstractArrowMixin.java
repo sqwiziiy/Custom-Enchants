@@ -2,9 +2,9 @@ package com.mentality.customenchants.mixin;
 
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContext;
 import com.mentality.customenchants.projectile.ProjectileEnchantmentContextHolder;
-import com.mentality.customenchants.projectile.ProjectileEnchantmentContextNbt;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,8 +21,8 @@ public abstract class ProjectileContextAbstractArrowMixin implements ProjectileE
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void customEnchants$save(CompoundTag tag, CallbackInfo ci) { ProjectileEnchantmentContextNbt.save(tag, customEnchants$context); }
+    private void customEnchants$save(ValueOutput output, CallbackInfo ci) { customEnchants$context.save(output); }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void customEnchants$load(CompoundTag tag, CallbackInfo ci) { customEnchants$context = ProjectileEnchantmentContextNbt.load(tag); }
+    private void customEnchants$load(ValueInput input, CallbackInfo ci) { customEnchants$context = ProjectileEnchantmentContext.load(input); }
 }
