@@ -18,16 +18,58 @@ public class ModConfigScreen {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
+        // Enchantment Availability category — one compact list of all 19 enable/disable
+        // toggles, kept separate from each enchantment's own tab so that tab only shows
+        // its real tunable parameters.
+        ConfigCategory availability = builder.getOrCreateCategory(
+                Component.translatable("config.custom-enchants.category.availability"));
+
+        availability.addEntry(entryBuilder.startTextDescription(
+                        Component.translatable("config.custom-enchants.availability.description"))
+                .build());
+
+        availability.addEntry(availabilityToggle(entryBuilder, "glow_strike", config.glowStrikeEnabled,
+                val -> config.glowStrikeEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "double_jump", config.doubleJumpEnabled,
+                val -> config.doubleJumpEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "drill", config.drillEnabled,
+                val -> config.drillEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "poison_blade", config.poisonBladeEnabled,
+                val -> config.poisonBladeEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "lumberjack", config.lumberjackEnabled,
+                val -> config.lumberjackEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "shadow_blade", config.shadowBladeEnabled,
+                val -> config.shadowBladeEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "magnet", config.magnetEnabled,
+                val -> config.magnetEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "auto_smelt", config.autoSmeltEnabled,
+                val -> config.autoSmeltEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "vegetation", config.vegetationEnabled,
+                val -> config.vegetationEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "rebound", config.reboundEnabled,
+                val -> config.reboundEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "feedback", config.feedbackEnabled,
+                val -> config.feedbackEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "second_wind", config.secondWindEnabled,
+                val -> config.secondWindEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "guardians_grace", config.guardiansGraceEnabled,
+                val -> config.guardiansGraceEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "vulnerability", config.vulnerabilityEnabled,
+                val -> config.vulnerabilityEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "tether_master", config.tetherMasterEnabled,
+                val -> config.tetherMasterEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "sky_rage", config.skyRageEnabled,
+                val -> config.skyRageEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "xp_syphon", config.xpSyphonEnabled,
+                val -> config.xpSyphonEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "kinetic_discharge", config.kineticDischargeEnabled,
+                val -> config.kineticDischargeEnabled = val));
+        availability.addEntry(availabilityToggle(entryBuilder, "sculk_bloom", config.sculkBloomEnabled,
+                val -> config.sculkBloomEnabled = val));
+
         // Glow Strike category
         ConfigCategory glowStrike = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.glow_strike"));
-
-        glowStrike.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.glow_strike.enabled"),
-                        config.glowStrikeEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.glowStrikeEnabled = val)
-                .build());
 
         glowStrike.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.glow_strike.duration_l1"),
@@ -53,38 +95,21 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.glowStrikeDurationL3 = val)
                 .build());
 
-        // Double Jump category
+        // Double Jump category — no tunable parameters beyond enable/disable.
         ConfigCategory doubleJump = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.double_jump"));
 
-        doubleJump.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.double_jump.enabled"),
-                        config.doubleJumpEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.doubleJumpEnabled = val)
-                .build());
+        doubleJump.addEntry(noParametersEntry(entryBuilder));
 
-        // Drill category
+        // Drill category — no tunable parameters beyond enable/disable.
         ConfigCategory drill = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.drill"));
 
-        drill.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.drill.enabled"),
-                        config.drillEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.drillEnabled = val)
-                .build());
+        drill.addEntry(noParametersEntry(entryBuilder));
 
         // Poison Blade category
         ConfigCategory poisonBlade = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.poison_blade"));
-
-        poisonBlade.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.poison_blade.enabled"),
-                        config.poisonBladeEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.poisonBladeEnabled = val)
-                .build());
 
         poisonBlade.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.poison_blade.duration_l1"),
@@ -114,13 +139,6 @@ public class ModConfigScreen {
         ConfigCategory lumberjack = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.lumberjack"));
 
-        lumberjack.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.lumberjack.enabled"),
-                        config.lumberjackEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.lumberjackEnabled = val)
-                .build());
-
         lumberjack.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.lumberjack.max_blocks_l1"),
                         config.lumberjackMaxBlocksL1)
@@ -148,13 +166,6 @@ public class ModConfigScreen {
         // Shadow Blade category
         ConfigCategory shadowBlade = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.shadow_blade"));
-
-        shadowBlade.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.shadow_blade.enabled"),
-                        config.shadowBladeEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.shadowBladeEnabled = val)
-                .build());
 
         shadowBlade.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.shadow_blade.chance_l1"),
@@ -208,13 +219,6 @@ public class ModConfigScreen {
         ConfigCategory magnet = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.magnet"));
 
-        magnet.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.magnet.enabled"),
-                        config.magnetEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.magnetEnabled = val)
-                .build());
-
         magnet.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.magnet.radius"),
                         config.magnetRadius)
@@ -223,27 +227,15 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.magnetRadius = val)
                 .build());
 
-        // Auto Smelt category
+        // Auto Smelt category — no tunable parameters beyond enable/disable.
         ConfigCategory autoSmelt = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.auto_smelt"));
 
-        autoSmelt.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.auto_smelt.enabled"),
-                        config.autoSmeltEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.autoSmeltEnabled = val)
-                .build());
+        autoSmelt.addEntry(noParametersEntry(entryBuilder));
 
         // Vegetation category
         ConfigCategory vegetation = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.vegetation"));
-
-        vegetation.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.vegetation.enabled"),
-                        config.vegetationEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.vegetationEnabled = val)
-                .build());
 
         vegetation.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.vegetation.chance_l1"),
@@ -273,13 +265,6 @@ public class ModConfigScreen {
         ConfigCategory rebound = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.rebound"));
 
-        rebound.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.rebound.enabled"),
-                        config.reboundEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.reboundEnabled = val)
-                .build());
-
         rebound.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.rebound.knockback_l1"),
                         config.reboundKnockbackL1)
@@ -308,13 +293,6 @@ public class ModConfigScreen {
         ConfigCategory feedback = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.feedback"));
 
-        feedback.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.feedback.enabled"),
-                        config.feedbackEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.feedbackEnabled = val)
-                .build());
-
         feedback.addEntry(entryBuilder.startFloatField(
                         Component.translatable("config.custom-enchants.feedback.heal_amount"),
                         config.feedbackHealAmount)
@@ -335,13 +313,6 @@ public class ModConfigScreen {
         ConfigCategory secondWind = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.second_wind"));
 
-        secondWind.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.second_wind.enabled"),
-                        config.secondWindEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.secondWindEnabled = val)
-                .build());
-
         secondWind.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.second_wind.speed_duration"),
                         config.secondWindSpeedDuration)
@@ -361,13 +332,6 @@ public class ModConfigScreen {
         // Guardian's Grace category
         ConfigCategory guardiansGrace = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.guardians_grace"));
-
-        guardiansGrace.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.guardians_grace.enabled"),
-                        config.guardiansGraceEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.guardiansGraceEnabled = val)
-                .build());
 
         guardiansGrace.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.guardians_grace.chance_l1"),
@@ -397,13 +361,6 @@ public class ModConfigScreen {
         ConfigCategory vulnerability = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.vulnerability"));
 
-        vulnerability.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.vulnerability.enabled"),
-                        config.vulnerabilityEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.vulnerabilityEnabled = val)
-                .build());
-
         vulnerability.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.vulnerability.ignore_l1"),
                         config.vulnerabilityIgnoreL1)
@@ -428,27 +385,15 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.vulnerabilityIgnoreL3 = val)
                 .build());
 
-        // Tether Master (Крепкая нить) category
+        // Tether Master (Крепкая нить) category — no tunable parameters beyond enable/disable.
         ConfigCategory tetherMaster = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.tether_master"));
 
-        tetherMaster.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.tether_master.enabled"),
-                        config.tetherMasterEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.tetherMasterEnabled = val)
-                .build());
+        tetherMaster.addEntry(noParametersEntry(entryBuilder));
 
         // Sky Rage (Ярость Неба) category
         ConfigCategory skyRage = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.sky_rage"));
-
-        skyRage.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.sky_rage.enabled"),
-                        config.skyRageEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.skyRageEnabled = val)
-                .build());
 
         skyRage.addEntry(entryBuilder.startIntField(
                         Component.translatable("config.custom-enchants.sky_rage.cooldown_ticks"),
@@ -458,27 +403,15 @@ public class ModConfigScreen {
                 .setSaveConsumer(val -> config.skyRageCooldownTicks = val)
                 .build());
 
-        // XP Syphon (Собиратель искр) category
+        // XP Syphon (Собиратель искр) category — no tunable parameters beyond enable/disable.
         ConfigCategory xpSyphon = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.xp_syphon"));
 
-        xpSyphon.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.xp_syphon.enabled"),
-                        config.xpSyphonEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.xpSyphonEnabled = val)
-                .build());
+        xpSyphon.addEntry(noParametersEntry(entryBuilder));
 
         // Kinetic Discharge (Кинетический разряд) category
         ConfigCategory kineticDischarge = builder.getOrCreateCategory(
                 Component.translatable("config.custom-enchants.category.kinetic_discharge"));
-
-        kineticDischarge.addEntry(entryBuilder.startBooleanToggle(
-                        Component.translatable("config.custom-enchants.kinetic_discharge.enabled"),
-                        config.kineticDischargeEnabled)
-                .setDefaultValue(true)
-                .setSaveConsumer(val -> config.kineticDischargeEnabled = val)
-                .build());
 
         kineticDischarge.addEntry(entryBuilder.startFloatField(
                         Component.translatable("config.custom-enchants.kinetic_discharge.min_speed"),
@@ -521,5 +454,21 @@ public class ModConfigScreen {
                 .build());
 
         return builder.build();
+    }
+
+    private static me.shedaniel.clothconfig2.api.AbstractConfigListEntry<Boolean> availabilityToggle(
+            ConfigEntryBuilder entryBuilder, String id, boolean current, java.util.function.Consumer<Boolean> saveConsumer) {
+        return entryBuilder.startBooleanToggle(
+                        Component.translatable("config.custom-enchants.category." + id), current)
+                .setDefaultValue(true)
+                .setTooltip(Component.translatable("config.custom-enchants.availability.toggle_tooltip"))
+                .setSaveConsumer(saveConsumer::accept)
+                .build();
+    }
+
+    private static me.shedaniel.clothconfig2.api.AbstractConfigListEntry<?> noParametersEntry(ConfigEntryBuilder entryBuilder) {
+        return entryBuilder.startTextDescription(
+                        Component.translatable("config.custom-enchants.common.no_parameters"))
+                .build();
     }
 }
