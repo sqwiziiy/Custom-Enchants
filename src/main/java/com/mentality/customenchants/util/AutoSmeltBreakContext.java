@@ -36,11 +36,16 @@ public final class AutoSmeltBreakContext {
                 || !context.pos.equals(pos)
                 || !Objects.equals(context.state, state)
                 || context.blockEntity != blockEntity
-                || context.tool != tool) {
+                || !sameTool(context.tool, tool)) {
             return false;
         }
         context.consumed = true;
         return true;
+    }
+
+    private static boolean sameTool(ItemStack expected, ItemStack actual) {
+        if (expected == null || actual == null) return expected == actual;
+        return ItemStack.matches(expected, actual);
     }
 
     public static final class Scope implements AutoCloseable {

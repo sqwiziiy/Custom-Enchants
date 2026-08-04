@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
+import net.minecraft.core.particles.ParticleTypes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,10 @@ public class DoubleJumpServerHandler {
             return;
         }
 
+        player.jumpFromGround();
+        player.serverLevel().sendParticles(ParticleTypes.CLOUD, player.getX(), player.getY() + 0.1D,
+                player.getZ(), 12, 0.3D, 0.05D, 0.3D, 0.0D);
+
         // 67% chance to consume 1 durability (Unbreaking is handled by hurt())
         if (player.getRandom().nextFloat() < 0.67f) {
             boots.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.FEET));
@@ -64,7 +69,8 @@ public class DoubleJumpServerHandler {
     private static boolean eligible(ServerPlayer player) {
         return player.isAlive() && !player.isRemoved() && !player.isCreative() && !player.isSpectator()
                 && !player.isPassenger() && !player.isVehicle() && !player.onGround()
-                && !player.isInWater() && !player.isInLava()
+                && !player.isInWater() && !player.isSwimming() && !player.isUnderWater()
+                && !player.isInLava() && !player.isFallFlying()
                 && Double.isFinite(player.getX()) && Double.isFinite(player.getY()) && Double.isFinite(player.getZ());
     }
 

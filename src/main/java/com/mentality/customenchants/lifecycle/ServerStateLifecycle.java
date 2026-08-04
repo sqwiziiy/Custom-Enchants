@@ -2,6 +2,7 @@ package com.mentality.customenchants.lifecycle;
 
 import com.mentality.customenchants.enchantment.DoubleJumpServerHandler;
 import com.mentality.customenchants.enchantment.KineticDischargeHandler;
+import com.mentality.customenchants.enchantment.MagnetHandler;
 import com.mentality.customenchants.enchantment.SecondWindHandler;
 import com.mentality.customenchants.enchantment.SkyRageEnchantment;
 import com.mentality.customenchants.enchantment.VegetationHandler;
@@ -20,6 +21,7 @@ public final class ServerStateLifecycle {
             DoubleJumpServerHandler.clear(player.getUUID());
             SecondWindHandler.clear(player.getUUID());
             KineticDischargeHandler.clear(player.getUUID());
+            MagnetHandler.clear(player.getUUID());
             SkyRageEnchantment.clear(player.getUUID());
         });
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
@@ -27,6 +29,7 @@ public final class ServerStateLifecycle {
             DoubleJumpServerHandler.clearAll();
             SecondWindHandler.clearAll();
             KineticDischargeHandler.clearAll();
+            MagnetHandler.clearAll();
             SkyRageEnchantment.clearAll();
         });
     }

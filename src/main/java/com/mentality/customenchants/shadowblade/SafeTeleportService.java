@@ -33,7 +33,7 @@ public final class SafeTeleportService {
             double dx = target.getX() - candidate.x();
             double dz = target.getZ() - candidate.z();
             float yaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
-            attacker.connection.teleport(candidate.x(), candidate.y(), candidate.z(), yaw, 0.0F);
+            attacker.teleportTo(level, candidate.x(), candidate.y(), candidate.z(), yaw, attacker.getXRot());
             return true;
         }
         return false;

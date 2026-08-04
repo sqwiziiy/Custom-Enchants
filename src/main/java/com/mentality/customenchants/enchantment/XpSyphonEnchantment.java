@@ -38,19 +38,13 @@ public class XpSyphonEnchantment extends Enchantment {
         if (!(target instanceof LivingEntity)) return;
         if (!(attacker.level() instanceof ServerLevel serverLevel)) return;
 
-        float chance = switch (level) {
-            case 1 -> 0.05f;
-            case 2 -> 0.10f;
-            default -> 0.15f;
-        };
-
-        if (serverLevel.getRandom().nextFloat() >= chance) return;
+        if (!XpSyphonPolicy.triggers(level, serverLevel.getRandom().nextFloat())) return;
 
         // Drop XP orbs at the target's position (1/2/3 XP per level)
         serverLevel.addFreshEntity(new ExperienceOrb(
                 serverLevel,
                 target.getX(), target.getY() + 0.5, target.getZ(),
-                level
+                XpSyphonPolicy.orbValue(level)
         ));
     }
 }

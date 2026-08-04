@@ -41,5 +41,10 @@ public abstract class AnvilMenuMixin {
                 EnchantmentHelper.setEnchantments(enchants, result);
             }
         }
+        if (!result.isEmpty() && AnvilResultPolicy.rejectSkyRageResult(
+                EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.SKY_RAGE, result) > 0, result)) {
+            Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(result);
+            if (enchants.remove(ModEnchantments.SKY_RAGE) != null) EnchantmentHelper.setEnchantments(enchants, result);
+        }
     }
 }
