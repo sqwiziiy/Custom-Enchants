@@ -1,6 +1,11 @@
 package com.mentality.customenchants.shield;
 
-/** Pure allowlist and validation policy for Feedback's independent magic block. */
+/**
+ * Pure allowlist and validation policy for Feedback's independent magic block.
+ * This policy applies to damage sources only; it intentionally does not claim
+ * universal immunity to potion effect application (including splash/lingering
+ * Poison or already-applied Instant Damage effects).
+ */
 public final class FeedbackMagicBlockPolicy {
     private FeedbackMagicBlockPolicy() {
     }
