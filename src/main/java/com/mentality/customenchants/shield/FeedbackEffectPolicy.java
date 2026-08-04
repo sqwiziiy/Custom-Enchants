@@ -9,7 +9,7 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.phys.Vec3;
 
-/** Front-facing, source-scoped harmful-effect protection for Feedback. */
+/** Front-facing, source-scoped harmful-effect protection for Feedback impact paths. */
 public final class FeedbackEffectPolicy {
     private FeedbackEffectPolicy() {
     }
