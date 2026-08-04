@@ -4,6 +4,7 @@ import com.mentality.customenchants.config.ModConfig;
 import com.mentality.customenchants.shield.ShieldBlockContext;
 import com.mentality.customenchants.shield.FeedbackMagicBlockPolicy;
 import com.mentality.customenchants.shield.ShieldEnchantmentsPolicy;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -19,8 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class ShieldFeedbackMixin {
-    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    private void customEnchants$blockAllowlistedMagic(DamageSource source, float amount,
+    @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
+    private void customEnchants$blockAllowlistedMagic(ServerLevel level, DamageSource source, float amount,
                                                        CallbackInfoReturnable<Boolean> cir) {
         LivingEntity defender = (LivingEntity) (Object) this;
         if (!(defender instanceof Player player)) return;
@@ -47,8 +48,8 @@ public abstract class ShieldFeedbackMixin {
         cir.setReturnValue(false);
     }
 
-    @Inject(method = "hurt", at = @At("RETURN"))
-    private void customEnchants$onConfirmedMagicBlock(DamageSource source, float amount,
+    @Inject(method = "hurtServer", at = @At("RETURN"))
+    private void customEnchants$onConfirmedMagicBlock(ServerLevel level, DamageSource source, float amount,
                                                        CallbackInfoReturnable<Boolean> cir) {
         LivingEntity defender = (LivingEntity) (Object) this;
         if (!(defender instanceof Player player) || !ModConfig.get().feedbackEnabled) return;

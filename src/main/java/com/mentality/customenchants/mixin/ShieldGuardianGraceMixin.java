@@ -3,6 +3,7 @@ package com.mentality.customenchants.mixin;
 import com.mentality.customenchants.config.ModConfig;
 import com.mentality.customenchants.shield.ShieldBlockContext;
 import com.mentality.customenchants.shield.ShieldEnchantmentsPolicy;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class ShieldGuardianGraceMixin {
-    @Inject(method = "hurt", at = @At("RETURN"))
-    private void customEnchants$onConfirmedBlock(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "hurtServer", at = @At("RETURN"))
+    private void customEnchants$onConfirmedBlock(ServerLevel serverLevel, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity defender = (LivingEntity) (Object) this;
         if (!(defender instanceof Player player) || !ModConfig.get().guardiansGraceEnabled) return;
         ShieldBlockContext.Evidence evidence = ShieldBlockContext.current(defender, source);

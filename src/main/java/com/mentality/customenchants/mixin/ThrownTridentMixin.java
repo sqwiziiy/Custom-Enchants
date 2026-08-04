@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ThrownTrident.class)
 public abstract class ThrownTridentMixin {
-    @WrapOperation(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    @WrapOperation(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurtOrSimulate(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     private boolean customEnchants$applyAfterDamage(Entity target, DamageSource source, float damage, Operation<Boolean> original) {
         boolean successful = original.call(target, source, damage);
         if (!successful || !(target instanceof LivingEntity livingTarget)) return false;

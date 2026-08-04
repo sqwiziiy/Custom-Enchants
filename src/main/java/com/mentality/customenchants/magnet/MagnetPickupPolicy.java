@@ -20,8 +20,8 @@ public final class MagnetPickupPolicy {
                 || !Double.isFinite(item.distanceToSqr(player))
                 || item.distanceToSqr(player) > radius * radius) return false;
 
-        UUID thrower = item instanceof ItemEntityOwnershipAccessor accessor
-                ? accessor.customEnchants$getThrowerUuid() : null;
+        UUID thrower = item instanceof ItemEntityOwnershipAccessor accessor && accessor.customEnchants$getThrower() != null
+                ? accessor.customEnchants$getThrower().getUUID() : null;
         return foreignThrowerAllowed(thrower, player.getUUID(), item.getAge());
     }
 
