@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1%2F1.21.11)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
 
-Version `3.1.0` · Minecraft `1.21.11` · Fabric · Java `21` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
+Version `3.1.1` · Minecraft `1.21.11` · Fabric · Java `21` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Wiki](https://github.com/sqwiziiy/Custom-Enchants/wiki) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
 
 > **Minecraft 1.21.11 port branch (`3.1/1.21.11`), in development.** This branch ports the
 > stable `3.1.0` release from Minecraft 1.21.1 to 1.21.11 on Java 21. Validation is in

@@ -6,6 +6,12 @@
 
 ## [Unreleased]
 
+### 3.1.1 gameplay fixes (подготовлено, не опубликовано)
+
+- Исправлены задержанный Magnet pickup, серверная авторизация Double Jump и drops Auto Smelt.
+- Исправлен server-side teleport Shadow Blade и ограничена anvil-совместимость Sky Rage луком/арбалетом.
+- Исправлены Feedback magic-block validation и детерминированная XP Syphon policy.
+
 ### Порт на Minecraft 1.21.11 (`3.1/1.21.11`, в разработке)
 
 - Toolchain обновлён: Minecraft 1.21.11, Java 21, Fabric Loader 0.19.3, Fabric API 0.141.6+1.21.11,
@@ -16,7 +22,7 @@
   `docs/ports/1.21.11/API_MIGRATION_MATRIX.md` в исходном дереве.
 - Локальный pipeline зелёный: 84/84 unit/contract-теста, 6 GameTest, `check`, `build`,
   `verifyReleaseJar`, `dedicatedServerSmoke`.
-- Релиз для 1.21.11 ещё не опубликован; ветки `3.1/1.21.1` и `3.1/1.20.1` не изменены.
+- Релиз для 1.21.11 ещё не опубликован; gameplay fixes подготовлены во всех трёх локальных release lines.
 
 - Репозиторий и Fabric metadata приведены к Minecraft 1.20.1/Java 17 baseline.
 - Документация синхронизирована с 19 зачарованиями, конфигурацией и актуальными сделками библиотекарей.

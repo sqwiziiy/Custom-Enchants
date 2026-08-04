@@ -5,6 +5,12 @@ All notable changes to the **Mentalitys | Custom Enchantments** mod are document
 
 ## [Unreleased]
 
+### 3.1.1 gameplay fixes (prepared, not published)
+
+- Fixed one-tick-late Magnet pickup, server-authoritative Double Jump and Auto Smelt drops.
+- Fixed Shadow Blade server teleport and restricted Sky Rage anvil compatibility to bows/crossbows.
+- Fixed Feedback magic-block validation and made the XP Syphon policy deterministic for regression tests.
+
 ### Minecraft 1.21.11 port (`3.1/1.21.11`, in development)
 
 - Toolchain updated: Minecraft 1.21.11, Java 21, Fabric Loader 0.19.3, Fabric API 0.141.6+1.21.11,
