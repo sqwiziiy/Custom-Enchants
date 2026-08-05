@@ -64,13 +64,9 @@ public class ShadowBladeEnchantment extends Enchantment {
         float distanceBonus = (float) (Math.min(distance / 30.0, 1.0) * 0.10);
         chance += distanceBonus;
 
-        if (player.getRandom().nextFloat() < chance) {
-            if (player instanceof ServerPlayer serverPlayer) {
-                SafeTeleportService.tryTeleportBehind(serverPlayer, livingTarget);
-            }
-
-            // Preserve the historical effect timing: a successful chance roll slows the target
-            // even when every destination is rejected as unsafe.
+        if (player.getRandom().nextFloat() < chance && player instanceof ServerPlayer serverPlayer
+                && SafeTeleportService.tryTeleportBehind(serverPlayer, livingTarget)) {
+            // A proc is successful only when the authoritative server teleport succeeds.
             livingTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, slownessDuration, 1));
         }
     }

@@ -25,6 +25,18 @@ public final class MagnetPickupPolicy {
         return foreignThrowerAllowed(thrower, player.getUUID(), item.getAge());
     }
 
+    /** Linked current-break drops may still have vanilla's initial pickup delay. */
+    public static boolean eligibleCurrentDrop(ItemEntity item, Player player, double radius) {
+        if (item == null || player == null || item.level() != player.level()
+                || !item.isAlive() || item.getItem().isEmpty()
+                || !Double.isFinite(radius) || radius < 0.0D
+                || !Double.isFinite(item.distanceToSqr(player))
+                || item.distanceToSqr(player) > radius * radius) return false;
+        UUID thrower = item instanceof ItemEntityOwnershipAccessor accessor
+                ? accessor.customEnchants$getThrowerUuid() : null;
+        return thrower == null || thrower.equals(player.getUUID());
+    }
+
     public static boolean foreignThrowerAllowed(UUID thrower, UUID player, int age) {
         if (thrower == null || thrower.equals(player)) return true;
         return age >= FOREIGN_OWNERSHIP_WINDOW_TICKS;

@@ -25,6 +25,19 @@ public class MagnetHandler {
     private static final List<PendingPickup> PENDING = new ArrayList<>();
     private static final long REQUEST_EXPIRY_TICKS = 2L;
 
+    /** Primary path: consume the ItemEntity emitted by the active block-drop pipeline. */
+    public static void captureFinalSpawn(ServerLevel level, ItemEntity item) {
+        com.mentality.customenchants.magnet.MagnetBreakDropContext.Context context =
+                com.mentality.customenchants.magnet.MagnetBreakDropContext.current(level);
+        if (context == null || !ModConfig.get().magnetEnabled
+                || EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.MAGNET, context.tool()) <= 0) return;
+        ServerPlayer player = context.player();
+        if (item.isRemoved() || item.getItem().isEmpty() || item.level() != level
+                || !MagnetPickupPolicy.eligibleCurrentDrop(item, player, ModConfig.get().magnetRadius)) return;
+        item.setPickUpDelay(0);
+        item.playerTouch(player);
+    }
+
     public static void collectNearby(ServerLevel level, ServerPlayer player, BlockPos pos) {
         long now = level.getServer().getTickCount();
         synchronized (PENDING) {

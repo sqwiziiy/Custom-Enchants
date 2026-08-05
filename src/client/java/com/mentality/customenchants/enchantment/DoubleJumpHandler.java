@@ -10,6 +10,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.phys.Vec3;
 
 public class DoubleJumpHandler {
 
@@ -17,9 +18,18 @@ public class DoubleJumpHandler {
     private static boolean canDoubleJump = false;
     private static boolean jumpKeyWasPressed = false;
     private static LocalPlayer trackedPlayer;
+    private static long lastApprovalSequence = Long.MIN_VALUE;
 
     public static void register() {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> reset());
+        ClientPlayNetworking.registerGlobalReceiver(DoubleJumpServerHandler.DOUBLE_JUMP_APPROVED_PACKET,
+                (client, handler, buf, responseSender) -> {
+                    long sequence = buf.readLong();
+                    double y = buf.readDouble();
+                    double x = buf.readDouble();
+                    double z = buf.readDouble();
+                    client.execute(() -> applyServerApproval(client.player, sequence, y, x, z));
+                });
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (!ModConfig.get().doubleJumpEnabled) return;
 
@@ -61,6 +71,18 @@ public class DoubleJumpHandler {
         });
     }
 
+    /** Merge only a fresh, server-approved jump impulse with predicted client movement. */
+    static void applyServerApproval(LocalPlayer player, long sequence, double verticalVelocity,
+                                    double horizontalImpulseX, double horizontalImpulseZ) {
+        if (player == null || sequence <= lastApprovalSequence
+                || !Double.isFinite(verticalVelocity) || !Double.isFinite(horizontalImpulseX)
+                || !Double.isFinite(horizontalImpulseZ)) return;
+        lastApprovalSequence = sequence;
+        Vec3 current = player.getDeltaMovement();
+        player.setDeltaMovement(current.x + horizontalImpulseX, Math.max(current.y, verticalVelocity),
+                current.z + horizontalImpulseZ);
+    }
+
     private static boolean hasDoubleJumpEnchant(LocalPlayer player) {
         ItemStack boots = player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.FEET);
         return !boots.isEmpty() && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DOUBLE_JUMP, boots) > 0;
@@ -71,5 +93,6 @@ public class DoubleJumpHandler {
         canDoubleJump = false;
         jumpKeyWasPressed = false;
         trackedPlayer = null;
+        lastApprovalSequence = Long.MIN_VALUE;
     }
 }
