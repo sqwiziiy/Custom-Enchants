@@ -40,8 +40,11 @@ public abstract class AnvilMenuMixin {
         }
         if (!result.isEmpty() && AnvilResultPolicy.rejectSkyRageResult(
                 EnchantmentAccess.getLevel(result, ModEnchantments.SKY_RAGE) > 0, result)) {
-            EnchantmentHelper.updateEnchantments(result,
-                    mutable -> mutable.removeIf(holder -> holder.is(ModEnchantments.SKY_RAGE)));
+            // Do not silently turn an invalid combine into a paid result. Standard anvil
+            // paths must reject Sky Rage on non-bow items altogether.
+            self.getSlot(2).set(ItemStack.EMPTY);
+            cost.set(0);
+            repairItemCountCost = 0;
         }
     }
 }

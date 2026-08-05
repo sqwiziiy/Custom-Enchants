@@ -44,7 +44,20 @@ public class LumberjackHandler {
                     target -> isNaturalLog(serverLevel.getBlockState(target))
                             && serverLevel.getBlockState(target).getBlock() == logBlock,
                     target -> serverLevel.getChunkSource().hasChunk(target.getX() >> 4, target.getZ() >> 4));
-            AdditionalBlockBreakService.destroyPlanned(serverPlayer, planned);
+            boolean magnet = ModConfig.get().magnetEnabled
+                    && EnchantmentAccess.getLevel(tool, ModEnchantments.MAGNET) > 0;
+            Set<java.util.UUID> existing = magnet ? MagnetHandler.takePreBreakItems(serverPlayer) : Set.of();
+            if (magnet) MagnetHandler.beginBatch(serverPlayer);
+            try {
+                // Each destroyBlock call enters its own Magnet child drop context through
+                // MagnetBlockDropContextMixin; the batch only coordinates diagnostics/cleanup.
+                var successful = new java.util.ArrayList<BlockPos>();
+                successful.add(pos.immutable());
+                successful.addAll(AdditionalBlockBreakService.destroyPlannedPositions(serverPlayer, planned));
+                if (magnet) MagnetHandler.completeBatch(serverLevel, serverPlayer, successful, existing);
+            } finally {
+                if (magnet) MagnetHandler.completeBatch(serverLevel, serverPlayer, java.util.List.of(), existing);
+            }
         });
     }
 

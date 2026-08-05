@@ -23,19 +23,23 @@ public final class AdditionalBlockBreakService {
     }
 
     public static int destroyPlanned(ServerPlayer player, List<BlockPos> plannedPositions) {
-        if (player == null || plannedPositions == null || plannedPositions.isEmpty()) return 0;
+        return destroyPlannedPositions(player, plannedPositions).size();
+    }
+
+    public static List<BlockPos> destroyPlannedPositions(ServerPlayer player, List<BlockPos> plannedPositions) {
+        if (player == null || plannedPositions == null || plannedPositions.isEmpty()) return List.of();
         ScopedReentrancyGuard<UUID>.Scope scope = GUARD.tryEnter(player.getUUID());
-        if (scope == null) return 0;
+        if (scope == null) return List.of();
 
         try (scope) {
             ServerLevel level = player.serverLevel();
-            int destroyed = 0;
+            List<BlockPos> destroyed = new java.util.ArrayList<>();
             Set<BlockPos> attempted = new HashSet<>();
             for (BlockPos position : plannedPositions) {
                 if (!attempted.add(position)) continue;
                 if (!isSafeTarget(player, level, position)) break;
                 if (!player.gameMode.destroyBlock(position)) break;
-                destroyed++;
+                destroyed.add(position.immutable());
                 if (!hasUsableTool(player)) break;
             }
             return destroyed;
@@ -50,9 +54,7 @@ public final class AdditionalBlockBreakService {
         BlockState state = level.getBlockState(position);
         if (state.isAir() || state.getDestroySpeed(level, position) < 0) return false;
         if (level.getBlockEntity(position) != null) return false;
-        ItemStack tool = player.getMainHandItem();
-        if (!hasUsableTool(player) || !player.hasCorrectToolForDrops(state)) return false;
-        return tool.getItem().canAttackBlock(state, level, position, player);
+        return hasUsableTool(player) && player.hasCorrectToolForDrops(state);
     }
 
     private static boolean hasUsableTool(ServerPlayer player) {

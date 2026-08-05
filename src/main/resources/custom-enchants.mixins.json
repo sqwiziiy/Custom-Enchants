@@ -12,15 +12,19 @@
 		"MeleeEnchantmentEffectsMixin",
 		"KillingWeaponContextMixin",
 		"ItemEntityOwnershipAccessor",
+		"ItemEntityPickupDelayAccessor",
 		"AnvilMenuMixin",
 		"ShieldReboundMixin",
 		"ShieldFeedbackMixin",
+		"FeedbackEffectApplicationMixin",
 		"ShieldGuardianGraceMixin",
 		"VulnerabilityArrowMixin",
 		"VulnerabilityArmorMixin",
 		"TetherMasterMixin",
 		"SkyRageMixin",
-		"AutoSmeltBlockDropsMixin"
+		"AutoSmeltBlockDropsMixin",
+		"MagnetBlockDropContextMixin",
+		"MagnetFinalItemSpawnMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
