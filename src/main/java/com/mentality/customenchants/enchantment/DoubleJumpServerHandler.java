@@ -3,12 +3,12 @@ package com.mentality.customenchants.enchantment;
 import com.mentality.customenchants.config.ModConfig;
 import com.mentality.customenchants.CustomEnchantsMod;
 import com.mentality.customenchants.net.DoubleJumpPayload;
+import com.mentality.customenchants.net.DoubleJumpApprovedPayload;
 import com.mentality.customenchants.state.DoubleJumpServerValidator;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -32,6 +32,7 @@ public class DoubleJumpServerHandler {
 
     public static void register() {
         PayloadTypeRegistry.playC2S().register(DoubleJumpPayload.TYPE, DoubleJumpPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(DoubleJumpApprovedPayload.TYPE, DoubleJumpApprovedPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(DoubleJumpPayload.TYPE, (payload, context) -> {
             context.server().execute(() -> handleDoubleJump(context.player()));
         });
@@ -76,13 +77,15 @@ public class DoubleJumpServerHandler {
         Vec3 before = player.getDeltaMovement();
         applyAirborneJumpVelocity(player);
         Vec3 after = player.getDeltaMovement();
-        // A player's client is not a normal entity tracker recipient for its own motion.
-        // Send the authoritative velocity explicitly so client prediction cannot erase it.
-        player.connection.send(new ClientboundSetEntityMotionPacket(player));
+        // Do not send a full motion vector: its server-side X/Z may lag behind the owner's
+        // predicted sprint movement. The client receives only this accepted Y component and
+        // retains its current horizontal momentum while server reconciliation stays authoritative.
+        ServerPlayNetworking.send(player, new DoubleJumpApprovedPayload(after.y));
         player.serverLevel().sendParticles(ParticleTypes.CLOUD, player.getX(), player.getY() + 0.1D,
                 player.getZ(), 12, 0.3D, 0.05D, 0.3D, 0.0D);
-        trace("accepted player={} velocityBefore={} velocityAfter={} impulse={} hurtMarked={} particles=true",
-                playerId, before, after, player.hasImpulse, player.hurtMarked);
+        trace("accepted player={} sprint={} velocityBefore={} velocityAfter={} horizontalBefore={} horizontalAfter={} impulse={} hurtMarked={} yApproval={}",
+                playerId, player.isSprinting(), before, after, horizontalSpeed(before), horizontalSpeed(after),
+                player.hasImpulse, player.hurtMarked, after.y);
 
         // 67% chance to consume 1 durability (Unbreaking is handled by hurtAndBreak)
         if (player.getRandom().nextFloat() < 0.67f) {
@@ -109,6 +112,10 @@ public class DoubleJumpServerHandler {
 
     private static void trace(String message, Object... args) {
         if (TRACE) CustomEnchantsMod.LOGGER.info("[Double Jump trace] " + message, args);
+    }
+
+    private static double horizontalSpeed(Vec3 velocity) {
+        return Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
     }
 
     public static void clear(UUID playerId) {

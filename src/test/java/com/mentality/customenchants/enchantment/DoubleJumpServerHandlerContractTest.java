@@ -20,8 +20,10 @@ class DoubleJumpServerHandlerContractTest {
         assertTrue(source.contains("player.setDeltaMovement("));
         assertTrue(source.contains("player.hasImpulse = true"));
         assertTrue(source.contains("player.hurtMarked = true"));
-        assertTrue(source.contains("new ClientboundSetEntityMotionPacket(player)"));
-        assertTrue(source.indexOf("new ClientboundSetEntityMotionPacket(player)")
+        assertFalse(source.contains("ClientboundSetEntityMotionPacket"),
+                "a stale full-vector owner packet can overwrite sprint X/Z prediction");
+        assertTrue(source.contains("new DoubleJumpApprovedPayload(after.y)"));
+        assertTrue(source.indexOf("new DoubleJumpApprovedPayload(after.y)")
                         < source.indexOf("sendParticles(ParticleTypes.CLOUD"),
                 "particles are emitted only after the authoritative velocity is synchronized");
     }
