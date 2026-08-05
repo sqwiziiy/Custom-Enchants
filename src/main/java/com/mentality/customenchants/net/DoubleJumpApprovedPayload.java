@@ -8,11 +8,17 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
 /** Server authorization for the local client's vertical Double Jump prediction. */
-public record DoubleJumpApprovedPayload(double verticalVelocity) implements CustomPacketPayload {
+/** All values are server-authoritative; horizontal values are a delta, never a stale full vector. */
+public record DoubleJumpApprovedPayload(long sequence, double verticalVelocity,
+                                        double horizontalImpulseX, double horizontalImpulseZ) implements CustomPacketPayload {
     public static final Type<DoubleJumpApprovedPayload> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, "double_jump_approved"));
     public static final StreamCodec<RegistryFriendlyByteBuf, DoubleJumpApprovedPayload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.DOUBLE, DoubleJumpApprovedPayload::verticalVelocity, DoubleJumpApprovedPayload::new);
+            ByteBufCodecs.VAR_LONG, DoubleJumpApprovedPayload::sequence,
+            ByteBufCodecs.DOUBLE, DoubleJumpApprovedPayload::verticalVelocity,
+            ByteBufCodecs.DOUBLE, DoubleJumpApprovedPayload::horizontalImpulseX,
+            ByteBufCodecs.DOUBLE, DoubleJumpApprovedPayload::horizontalImpulseZ,
+            DoubleJumpApprovedPayload::new);
 
     @Override
     public Type<DoubleJumpApprovedPayload> type() {

@@ -19,6 +19,7 @@ public class DoubleJumpHandler {
     private static boolean canDoubleJump = false;
     private static boolean jumpKeyWasPressed = false;
     private static LocalPlayer trackedPlayer;
+    private static long lastApprovalSequence = Long.MIN_VALUE;
 
     public static void register() {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> reset());
@@ -68,8 +69,12 @@ public class DoubleJumpHandler {
     /** Runs only after a server-approved S2C payload; horizontal client prediction is preserved. */
     static void applyServerApprovedVerticalVelocity(LocalPlayer player, DoubleJumpApprovedPayload payload) {
         if (player == null || payload == null || !Double.isFinite(payload.verticalVelocity())) return;
+        if (payload.sequence() <= lastApprovalSequence) return;
+        if (!Double.isFinite(payload.horizontalImpulseX()) || !Double.isFinite(payload.horizontalImpulseZ())) return;
+        lastApprovalSequence = payload.sequence();
         Vec3 current = player.getDeltaMovement();
-        player.setDeltaMovement(current.x, Math.max(current.y, payload.verticalVelocity()), current.z);
+        player.setDeltaMovement(current.x + payload.horizontalImpulseX(), Math.max(current.y, payload.verticalVelocity()),
+                current.z + payload.horizontalImpulseZ());
     }
 
     private static boolean hasDoubleJumpEnchant(LocalPlayer player) {
@@ -82,5 +87,6 @@ public class DoubleJumpHandler {
         canDoubleJump = false;
         jumpKeyWasPressed = false;
         trackedPlayer = null;
+        lastApprovalSequence = Long.MIN_VALUE;
     }
 }
