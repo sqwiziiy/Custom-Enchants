@@ -90,6 +90,13 @@ class ResourceContractTest {
     }
 
     @Test
+    void autoSmeltDropHookCanReplaceTheVanillaReturnValue() throws IOException {
+        String source = read("src/main/java/com/mentality/customenchants/mixin/AutoSmeltBlockDropsMixin.java");
+        assertTrue(source.contains("at = @At(\"RETURN\"),\n            cancellable = true"));
+        assertTrue(source.contains("cir.setReturnValue(transformed)"));
+    }
+
+    @Test
     void librarianTradeSourceHasUniquePositiveDefinitions() throws IOException {
         String source = read("src/main/java/com/mentality/customenchants/CustomEnchantsMod.java");
         Set<String> comments = findAll(source, "// ([^\\n]+Librarian[^\\n]*)");
