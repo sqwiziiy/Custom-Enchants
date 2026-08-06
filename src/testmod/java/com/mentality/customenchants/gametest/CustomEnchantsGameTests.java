@@ -47,7 +47,7 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
     }
 
     @GameTest(template = FabricGameTest.EMPTY_STRUCTURE, timeoutTicks = 100)
-    public void magnetCollectsEveryDropFromActualLumberjackSecondaryBreaks(GameTestHelper helper) {
+    public void magnetCollectsEveryDropFromActualBranchedOakLumberjackBreaks(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();
         player.gameMode.changeGameModeForPlayer(GameType.SURVIVAL);
         ItemStack tool = new ItemStack(Items.IRON_AXE);
@@ -56,8 +56,15 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
         player.setItemInHand(InteractionHand.MAIN_HAND, tool);
 
         for (int y = 1; y <= 5; y++) helper.setBlock(new BlockPos(3, y, 3), Blocks.OAK_LOG);
+        helper.setBlock(new BlockPos(4, 4, 3), Blocks.OAK_LOG);
+        helper.setBlock(new BlockPos(5, 4, 3), Blocks.OAK_LOG);
+        helper.setBlock(new BlockPos(2, 4, 3), Blocks.OAK_LOG);
+        helper.setBlock(new BlockPos(1, 5, 3), Blocks.OAK_LOG);
+        helper.setBlock(new BlockPos(4, 5, 4), Blocks.OAK_LOG);
         helper.setBlock(new BlockPos(3, 6, 3), Blocks.OAK_LEAVES);
         helper.setBlock(new BlockPos(4, 6, 3), Blocks.OAK_LEAVES);
+        helper.setBlock(new BlockPos(1, 6, 3), Blocks.OAK_LEAVES);
+        helper.setBlock(new BlockPos(5, 5, 3), Blocks.OAK_LEAVES);
         player.setPos(Vec3.atCenterOf(helper.absolutePos(new BlockPos(1, 1, 3))));
 
         helper.assertTrue(player.gameMode.destroyBlock(helper.absolutePos(new BlockPos(3, 1, 3))),
@@ -67,10 +74,10 @@ public final class CustomEnchantsGameTests implements FabricGameTest {
             int remainder = helper.getLevel().getEntitiesOfClass(ItemEntity.class,
                             new AABB(helper.absolutePos(new BlockPos(3, 3, 3))).inflate(8.0D))
                     .stream().map(ItemEntity::getItem).filter(stack -> stack.is(Items.OAK_LOG)).mapToInt(ItemStack::getCount).sum();
-            helper.assertTrue(collected + remainder == 5,
-                    "Five-log accounting invariant failed: picked=" + collected + ", remainder=" + remainder);
-            helper.assertTrue(collected == 5 && remainder == 0,
-                    "Magnet must pick all five drops from initial and Lumberjack secondary breaks with a free inventory");
+            helper.assertTrue(collected + remainder == 10,
+                    "Branched-oak accounting invariant failed: picked=" + collected + ", remainder=" + remainder);
+            helper.assertTrue(collected == 10 && remainder == 0,
+                    "Magnet must pick every branched-oak drop from the initial and all Lumberjack secondary breaks with a free inventory");
             helper.succeed();
         });
     }

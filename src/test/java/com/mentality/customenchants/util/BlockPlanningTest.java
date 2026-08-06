@@ -78,6 +78,21 @@ class BlockPlanningTest {
     }
 
     @Test
+    void lumberjackSkipsOnlyTheUnloadedBranchOfABranchedTree() {
+        BlockPos origin = new BlockPos(0, 64, 0);
+        BlockPos unloadedBranch = origin.above().west();
+        BlockPos loadedBranch = origin.above().east();
+        BlockPos loadedTip = loadedBranch.east();
+        Set<BlockPos> logs = Set.of(unloadedBranch, loadedBranch, loadedTip);
+
+        List<BlockPos> plan = LumberjackBlockPlanner.plan(origin, 10, logs::contains,
+                pos -> !pos.equals(unloadedBranch));
+
+        assertEquals(List.of(loadedBranch, loadedTip), plan);
+        assertFalse(plan.contains(unloadedBranch));
+    }
+
+    @Test
     void lumberjackCycleIsBoundedByVisitedSet() {
         BlockPos origin = new BlockPos(0, 64, 0);
         Set<BlockPos> cycle = Set.of(origin.above(), origin.above().east(), origin.above().east().below());
