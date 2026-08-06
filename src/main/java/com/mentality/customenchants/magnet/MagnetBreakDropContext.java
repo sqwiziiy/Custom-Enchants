@@ -16,7 +16,7 @@ public final class MagnetBreakDropContext {
     }
 
     public static Scope open(ServerLevel level, ServerPlayer player, BlockPos pos, ItemStack tool) {
-        Context context = new Context(level, player, pos.immutable(), tool.copy());
+        Context context = new Context(level, player, pos.immutable(), tool == null ? null : tool.copy());
         STACK.get().push(context);
         return () -> {
             Deque<Context> stack = STACK.get();
