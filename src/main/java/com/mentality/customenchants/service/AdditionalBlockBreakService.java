@@ -33,8 +33,10 @@ public final class AdditionalBlockBreakService {
             Set<BlockPos> attempted = new HashSet<>();
             for (BlockPos position : plannedPositions) {
                 if (!attempted.add(position)) continue;
-                if (!isSafeTarget(player, level, position)) break;
-                if (!player.gameMode.destroyBlock(position)) break;
+                // Planning is a snapshot. A single branch may disappear or become invalid
+                // during this batch; continue with the remaining independent positions.
+                if (!isSafeTarget(player, level, position)) continue;
+                if (!player.gameMode.destroyBlock(position)) continue;
                 destroyed++;
                 if (!hasUsableTool(player)) break;
             }

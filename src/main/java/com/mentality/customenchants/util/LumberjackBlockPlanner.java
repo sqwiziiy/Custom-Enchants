@@ -32,7 +32,9 @@ public final class LumberjackBlockPlanner {
 
         while (!queue.isEmpty() && planned.size() < maxBlocks) {
             BlockPos current = queue.remove();
-            if (!isLoaded.test(current)) break;
+            // An unloaded branch is not safe to traverse, but it must not discard already
+            // discovered loaded branches of the same real tree.
+            if (!isLoaded.test(current)) continue;
             if (!isMatching.test(current)) continue;
             planned.add(current);
             enqueueNeighbors(current, origin, queue, visited, isMatching, isLoaded);
