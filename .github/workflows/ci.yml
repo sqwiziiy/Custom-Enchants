@@ -96,12 +96,28 @@ jobs:
           find build/libs -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
           sha256sum build/libs/*.jar
 
+      - name: Resolve release artifact metadata
+        id: release_meta
+        shell: bash
+        run: |
+          mod_version="$(sed -n 's/^mod_version=//p' gradle.properties)"
+          archive_suffix="$(sed -n 's/^archive_minecraft_suffix=//p' gradle.properties)"
+          release_jar="build/libs/custom-enchants-${mod_version}-${archive_suffix}.jar"
+          artifact_name="custom-enchants-${mod_version}-${archive_suffix}-java21"
+
+          test -n "$mod_version"
+          test -n "$archive_suffix"
+          test -f "$release_jar"
+
+          echo "jar=$release_jar" >> "$GITHUB_OUTPUT"
+          echo "name=$artifact_name" >> "$GITHUB_OUTPUT"
+
       - name: Upload release JAR artifact
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: custom-enchants-3.1.1-mc1.21.1-java21
-          path: build/libs/custom-enchants-3.1.1-mc1.21.1.jar
+          name: ${{ steps.release_meta.outputs.name }}
+          path: ${{ steps.release_meta.outputs.jar }}
           if-no-files-found: error
 
       - name: Upload validation diagnostics
