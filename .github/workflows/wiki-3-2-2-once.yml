@@ -1,0 +1,143 @@
+name: One-time 3.2.2 wiki update
+
+on:
+  push:
+    branches:
+      - wiki
+
+permissions:
+  contents: write
+
+jobs:
+  update-wiki:
+    if: github.event.head_commit.message == 'Prepare one-time 3.2.2 wiki update'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout wiki branch
+        uses: actions/checkout@v4
+        with:
+          ref: wiki
+          fetch-depth: 0
+
+      - name: Patch wiki for 3.2.2
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          def replace_once(old: str, new: str, label: str):
+              global text
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly 1 match, got {count}')
+              text = text.replace(old, new, 1)
+
+          replace_once(
+              '<p class="site-subtitle">Fabric · Minecraft 1.20.1, 1.21.1 &amp; 1.21.11 · v3.1.1</p>',
+              '<p class="site-subtitle">Fabric · Minecraft 1.20.1, 1.21.1 &amp; 1.21.11 · v3.2.2</p>',
+              'header version',
+          )
+          replace_once(
+              '<span class="badge badge-version">v3.1.1</span>',
+              '<span class="badge badge-version">v3.2.2</span>',
+              'version badge',
+          )
+          replace_once(
+              '<span data-en>Custom Enchants 3.1.1 is prepared for three Minecraft versions from separate branches. Pick the release that matches your server/client.</span>',
+              '<span data-en>Custom Enchants 3.2.2 is released for three Minecraft versions from separate branches. Pick the release that matches your server/client.</span>',
+              'compatibility intro EN',
+          )
+          replace_once(
+              '<span data-ru hidden>Custom Enchants 3.1.1 подготовлен для трёх версий Minecraft из отдельных веток. Выберите релиз, который соответствует вашему серверу/клиенту.</span>',
+              '<span data-ru hidden>Custom Enchants 3.2.2 выпущен для трёх версий Minecraft из отдельных веток. Выберите релиз, который соответствует вашему серверу/клиенту.</span>',
+              'compatibility intro RU',
+          )
+          replace_once(
+              '<span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.1/1.20.1</code> ·\n              <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1" target="_blank">v3.1.1</a>',
+              '<span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.2/1.20.1</code> ·\n              <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2" target="_blank">v3.2.2</a>',
+              '1.20.1 release card',
+          )
+          replace_once(
+              '<span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.1/1.21.1</code> ·\n              <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1-mc1.21.1" target="_blank">v3.1.1-mc1.21.1</a>',
+              '<span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.2/1.21.1</code> ·\n              <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2-mc1.21.1" target="_blank">v3.2.2-mc1.21.1</a>',
+              '1.21.1 release card',
+          )
+          replace_once(
+              '<div class="req-ver"><span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.1/1.21.11</code> · <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1-mc1.21.11" target="_blank">v3.1.1-mc1.21.11</a></div>',
+              '<div class="req-ver"><span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.2/1.21.11</code> · <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2-mc1.21.11" target="_blank">v3.2.2-mc1.21.11</a></div>',
+              '1.21.11 release card',
+          )
+          replace_once(
+              '<p class="intro-text"><span data-en>The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.1.1 line. Always install the JAR and dependencies for your exact Minecraft version.</span><span data-ru hidden>Справочник зачарований, конфигурации и сделки библиотекарей ниже — общая документация поддерживаемой линии 3.1.1. Всегда устанавливайте JAR и зависимости для вашей точной версии Minecraft.</span></p>',
+              '<p class="intro-text"><span data-en>The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.2.2 line. Always install the JAR and dependencies for your exact Minecraft version.</span><span data-ru hidden>Справочник зачарований, конфигурации и сделки библиотекарей ниже — общая документация поддерживаемой линии 3.2.2. Всегда устанавливайте JAR и зависимости для вашей точной версии Minecraft.</span></p>',
+              'maintained line text',
+          )
+          replace_once(
+              '<span data-en>Breaks blocks in a <strong>3×3 area</strong>. The plane is determined by the mined face.</span>\n            <span data-ru hidden>Ломает блоки в области <strong>3×3</strong>. Плоскость определяется по стороне блока.</span>',
+              '<span data-en>Breaks blocks in a <strong>3×3 area</strong>. The plane follows the actual block face hit by the player\'s view ray, including diagonal and edge/corner camera angles.</span>\n            <span data-ru hidden>Ломает блоки в области <strong>3×3</strong>. Плоскость определяется по фактической грани, в которую попадает луч взгляда игрока, включая диагональные углы и наведение около рёбер/углов блока.</span>',
+              'Drill description',
+          )
+          replace_once(
+              '<li><span data-en>Compatible with <em>Magnet</em></span><span data-ru hidden>Совместим с <em>Магнитом</em></span></li>\n          </ul>\n        </article>\n\n        <!-- ── Poison Blade ── -->',
+              '<li><span data-en>Air, protected, unloaded, or otherwise unavailable cells are skipped without aborting the rest of the 3×3 plane</span><span data-ru hidden>Воздух, защищённые, непрогруженные или иные недоступные ячейки пропускаются, не прерывая обработку остальной области 3×3</span></li>\n            <li><span data-en>Compatible with <em>Magnet</em></span><span data-ru hidden>Совместим с <em>Магнитом</em></span></li>\n          </ul>\n        </article>\n\n        <!-- ── Poison Blade ── -->',
+              'Drill notes',
+          )
+
+          changelog_anchor = '        <details class="cl-entry" open>\n          <summary class="cl-summary">\n            <span class="cl-ver">v3.1.1</span>'
+          changelog_new = '''        <details class="cl-entry" open>
+          <summary class="cl-summary">
+            <span class="cl-ver">v3.2.2</span>
+            <span class="cl-date">2026-08-08</span>
+            <span class="cl-new" data-en>Drill geometry fix</span><span class="cl-new" data-ru hidden>Исправление геометрии Бура</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Compatibility:</strong> Fabric builds for Minecraft 1.20.1 (Java 17), 1.21.1 and 1.21.11 (Java 21).</span><span data-ru hidden><strong>Совместимость:</strong> Fabric-сборки для Minecraft 1.20.1 (Java 17), 1.21.1 и 1.21.11 (Java 21).</span></p>
+            <p><span data-en><strong>Fixed:</strong> Drill now resolves its 3×3 plane from the actual block face hit by the player's view ray, so diagonal camera angles and edge/corner aiming no longer select the wrong plane. Invalid cells inside the planned area are skipped instead of aborting the remaining 3×3 blocks.</span><span data-ru hidden><strong>Исправлено:</strong> Бур теперь определяет плоскость 3×3 по фактической грани, в которую попадает луч взгляда игрока, поэтому диагональные углы камеры и наведение около рёбер/углов больше не выбирают неправильную плоскость. Недоступные ячейки внутри области пропускаются вместо остановки обработки остальных блоков 3×3.</span></p>
+            <p><span data-en><strong>Validation:</strong> manually verified in-game on all three supported Minecraft versions; no enchantment balance or configuration changes.</span><span data-ru hidden><strong>Проверка:</strong> вручную проверено в игре на всех трёх поддерживаемых версиях Minecraft; баланс зачарований и конфигурация не менялись.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v3.1.2</span>
+            <span class="cl-date">2026-08-08</span>
+            <span class="cl-new" data-en>Double Jump fix</span><span class="cl-new" data-ru hidden>Исправление Двойного прыжка</span>
+          </summary>
+          <div class="cl-body">
+            <p><span data-en><strong>Minecraft 1.21.1 / 1.21.11:</strong> fixed Double Jump losing its forward sprint impulse. Minecraft 1.21.11 also received the missing actual airborne second-jump movement fix.</span><span data-ru hidden><strong>Minecraft 1.21.1 / 1.21.11:</strong> исправлена потеря горизонтального импульса спринта при Двойном прыжке. На Minecraft 1.21.11 также исправлено отсутствие реального второго импульса движения в воздухе.</span></p>
+            <p><span data-en>No 3.1.2 build was published for Minecraft 1.20.1; its previous stable release remained 3.1.1 until 3.2.2.</span><span data-ru hidden>Для Minecraft 1.20.1 сборка 3.1.2 не публиковалась; предыдущим стабильным релизом оставался 3.1.1 до выхода 3.2.2.</span></p>
+          </div>
+        </details>
+
+        <details class="cl-entry">
+          <summary class="cl-summary">
+            <span class="cl-ver">v3.1.1</span>'''
+          replace_once(changelog_anchor, changelog_new, 'changelog insertion')
+
+          replace_once(
+              '<p><span data-en><strong>Fixed:</strong> linked Magnet drop collection, resolved-loot Auto Smelt, safe Shadow Blade teleport, Sky Rage item restrictions, authoritative Double Jump movement and sprint impulse, Feedback protection, XP Syphon verification, and runtime/mixin compatibility.</span><span data-ru hidden><strong>Исправлено:</strong> сбор связанных дропов Магнитом, Автопечка через рассчитанный лут, безопасная телепортация Теневого клинка, ограничения предметов Ярости Неба, серверное движение и импульс спринта Двойного прыжка, защита Эхо-удара, проверка Собирателя искр и совместимость runtime/mixin.</span></p>',
+              '<p><span data-en><strong>Fixed:</strong> linked Magnet drop collection, resolved-loot Auto Smelt, safe Shadow Blade teleport, Sky Rage item restrictions, Feedback protection, XP Syphon verification, and runtime/mixin compatibility. Later Double Jump corrections are documented separately in 3.1.2.</span><span data-ru hidden><strong>Исправлено:</strong> сбор связанных дропов Магнитом, Автопечка через рассчитанный лут, безопасная телепортация Теневого клинка, ограничения предметов Ярости Неба, защита Эхо-удара, проверка Собирателя искр и совместимость runtime/mixin. Последующие исправления Двойного прыжка отдельно описаны в 3.1.2.</span></p>',
+              '3.1.1 changelog correction',
+          )
+          replace_once(
+              '<p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.1.1</p>',
+              '<p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.2.2</p>',
+              'footer version',
+          )
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit wiki update and remove one-time workflow
+        shell: bash
+        run: |
+          git config user.name "Mentality"
+          git config user.email "186711264+sqwiziiy@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/wiki-3-2-2-once.yml
+          git diff --cached --check
+          git commit -m "Update wiki for 3.2.2 release"
+          git push origin HEAD:wiki
