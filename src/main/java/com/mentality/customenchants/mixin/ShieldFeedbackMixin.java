@@ -10,7 +10,6 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,13 +38,8 @@ public abstract class ShieldFeedbackMixin {
         if (!canBlock) return;
 
         // Feedback's magic guard is deliberately independent of vanilla shield-facing/bypass
-        // resolution. This is what lets a raised Feedback shield cancel Harming-style magic.
-        for (net.minecraft.world.effect.MobEffectInstance effect :
-                new java.util.ArrayList<>(player.getActiveEffects())) {
-            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
-                player.removeEffect(effect.getEffect());
-            }
-        }
+        // resolution. It blocks incoming Harming-style magic, but never mutates effects that were
+        // already active before the shield was raised.
         player.heal(Math.max(0.0f, ModConfig.get().feedbackHealAmount));
         int repair = Math.max(0, ModConfig.get().feedbackRepairAmount);
         if (repair > 0) shield.setDamageValue(Math.max(0, shield.getDamageValue() - repair));
@@ -62,14 +56,8 @@ public abstract class ShieldFeedbackMixin {
         ItemStack shield = evidence.shield();
         if (ShieldEnchantmentsPolicy.feedbackLevel(shield) <= 0) return;
 
-        // Any confirmed physical/vanilla shield block clears harmful effects. Magic sources
-        // handled above return early from hurtServer and never reach this path.
-        for (net.minecraft.world.effect.MobEffectInstance effect :
-                new java.util.ArrayList<>(player.getActiveEffects())) {
-            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
-                player.removeEffect(effect.getEffect());
-            }
-        }
+        // Existing effects are intentionally untouched. New harmful effects are rejected by
+        // FeedbackEffectApplicationMixin while the shield is actively blocking.
         if (!ShieldEnchantmentsPolicy.feedbackDamage(source)) return;
 
         player.heal(Math.max(0.0f, ModConfig.get().feedbackHealAmount));
