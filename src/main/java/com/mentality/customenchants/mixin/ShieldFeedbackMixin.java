@@ -7,18 +7,32 @@ import com.mentality.customenchants.shield.ShieldEnchantmentsPolicy;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class ShieldFeedbackMixin {
+    @Unique
+    private boolean customEnchants$hasActiveFeedbackShield() {
+        LivingEntity defender = (LivingEntity) (Object) this;
+        if (!(defender instanceof Player player) || !ModConfig.get().feedbackEnabled || !player.isBlocking()) return false;
+        ItemStack shield = player.getUseItem();
+        return shield != null && !shield.isEmpty() && shield.getItem() instanceof ShieldItem
+                && ShieldEnchantmentsPolicy.feedbackLevel(shield) > 0;
+    }
+
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     private void customEnchants$blockAllowlistedMagic(DamageSource source, float amount,
                                                        CallbackInfoReturnable<Boolean> cir) {
@@ -35,8 +49,7 @@ public abstract class ShieldFeedbackMixin {
                 player.isDamageSourceBlocked(source), allowed);
         if (!canBlock) return;
 
-        for (net.minecraft.world.effect.MobEffectInstance effect :
-                new java.util.ArrayList<>(player.getActiveEffects())) {
+        for (MobEffectInstance effect : new java.util.ArrayList<>(player.getActiveEffects())) {
             if (effect.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
                 player.removeEffect(effect.getEffect());
             }
@@ -48,17 +61,46 @@ public abstract class ShieldFeedbackMixin {
     }
 
     @Inject(method = "hurt", at = @At("RETURN"))
-    private void customEnchants$onConfirmedMagicBlock(DamageSource source, float amount,
-                                                       CallbackInfoReturnable<Boolean> cir) {
+    private void customEnchants$onConfirmedBlock(DamageSource source, float amount,
+                                                  CallbackInfoReturnable<Boolean> cir) {
         LivingEntity defender = (LivingEntity) (Object) this;
         if (!(defender instanceof Player player) || !ModConfig.get().feedbackEnabled) return;
         ShieldBlockContext.Evidence evidence = ShieldBlockContext.current(defender, source);
-        if (!evidence.vanillaBlocked() || !ShieldEnchantmentsPolicy.feedbackDamage(source)) return;
+        if (!evidence.vanillaBlocked()) return;
         ItemStack shield = evidence.shield();
         if (ShieldEnchantmentsPolicy.feedbackLevel(shield) <= 0) return;
+
+        // Any confirmed Feedback block clears harmful effects that were already active.
+        for (MobEffectInstance effect : new java.util.ArrayList<>(player.getActiveEffects())) {
+            if (effect.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
+                player.removeEffect(effect.getEffect());
+            }
+        }
+        if (!ShieldEnchantmentsPolicy.feedbackDamage(source)) return;
 
         player.heal(Math.max(0.0f, ModConfig.get().feedbackHealAmount));
         int repair = Math.max(0, ModConfig.get().feedbackRepairAmount);
         if (repair > 0) shield.setDamageValue(Math.max(0, shield.getDamageValue() - repair));
+    }
+
+    /** Reject harmful effects from every source while an enchanted Feedback shield is actively raised. */
+    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",
+            at = @At("HEAD"), cancellable = true)
+    private void customEnchants$blockHarmfulEffectWhileFeedbackActive(
+            MobEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
+        if (effect != null && effect.getEffect().getCategory() == MobEffectCategory.HARMFUL
+                && customEnchants$hasActiveFeedbackShield()) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    /** 1.20.1 still has a force-add path that must not bypass Feedback protection. */
+    @Inject(method = "forceAddEffect", at = @At("HEAD"), cancellable = true)
+    private void customEnchants$blockForcedHarmfulEffectWhileFeedbackActive(
+            MobEffectInstance effect, Entity source, CallbackInfo ci) {
+        if (effect != null && effect.getEffect().getCategory() == MobEffectCategory.HARMFUL
+                && customEnchants$hasActiveFeedbackShield()) {
+            ci.cancel();
+        }
     }
 }
