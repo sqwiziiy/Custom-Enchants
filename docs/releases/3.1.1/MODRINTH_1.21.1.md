@@ -1,2 +1,0 @@
-# Modrinth draft — 3.1.1 / 1.21.1
-Version `3.1.1+mc1.21.1`; release channel: Release; loader: Fabric; Java 21. Upload `custom-enchants-3.1.1-mc1.21.1.jar`. Dependencies: Fabric API and Cloth Config; Mod Menu optional. Use the 1.21.1 GitHub release changelog. Website: https://sqwiziiy.github.io/Custom-Enchants/ · Source: https://github.com/sqwiziiy/Custom-Enchants · Issues: https://github.com/sqwiziiy/Custom-Enchants/issues
