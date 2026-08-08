@@ -5,6 +5,7 @@ import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -19,10 +20,11 @@ import java.util.Optional;
 /**
  * Canonical, single-source librarian enchanted-book offers.
  *
- * <p>Ported to the Minecraft 1.21.1 {@link MerchantOffer}/{@link ItemCost} API. Every offer keeps
- * its exact 1.20.1 tier, emerald cost, book level, max uses, villager XP and price multiplier.
- * The enchantment holder is resolved from the server registry at offer-build time and the offer
- * is fail-closed: a missing registry entry yields {@code null} (no empty/broken book offer).
+ * <p>The legacy villager-level field is kept as economy metadata, but 3.2.4 no longer gates
+ * custom enchanted books behind that tier. A single random custom-book factory is registered at
+ * every librarian tier, so any defined custom enchantment level can roll from a novice onward,
+ * matching vanilla enchanted-book availability more closely without flooding each tier with all
+ * 44 factories.
  */
 public record LibrarianEnchantTrade(ResourceKey<Enchantment> enchantment, int bookLevel, int villagerLevel,
                                     int emeralds, int maxUses, int villagerXp, float priceMultiplier) {
@@ -34,8 +36,15 @@ public record LibrarianEnchantTrade(ResourceKey<Enchantment> enchantment, int bo
             return null;
         }
         ItemStack book = EnchantmentHelper.createBook(new EnchantmentInstance(holder.get(), bookLevel));
-        return new MerchantOffer(new ItemCost(Items.EMERALD, emeralds), Optional.empty(), book,
+        return new MerchantOffer(new ItemCost(Items.EMERALD, emeralds),
+                Optional.of(new ItemCost(Items.BOOK, 1)), book,
                 maxUses, villagerXp, priceMultiplier);
+    }
+
+    /** Picks one custom enchanted-book definition for the current librarian trade roll. */
+    public static LibrarianEnchantTrade random(RandomSource random) {
+        List<LibrarianEnchantTrade> offers = all();
+        return offers.get(random.nextInt(offers.size()));
     }
 
     private static LibrarianEnchantTrade t(ResourceKey<Enchantment> e, int bookLevel, int villagerLevel,
@@ -43,7 +52,7 @@ public record LibrarianEnchantTrade(ResourceKey<Enchantment> enchantment, int bo
         return new LibrarianEnchantTrade(e, bookLevel, villagerLevel, emeralds, maxUses, villagerXp, 0.2f);
     }
 
-    /** The complete librarian offer table (44 offers), preserving 1.20.1 economy exactly. */
+    /** The complete librarian offer table (44 offers), preserving the existing 3.2.x economy. */
     public static List<LibrarianEnchantTrade> all() {
         return List.of(
                 t(ModEnchantments.GLOW_STRIKE, 1, 1, 10, 12, 5),
@@ -65,7 +74,6 @@ public record LibrarianEnchantTrade(ResourceKey<Enchantment> enchantment, int bo
                 t(ModEnchantments.VEGETATION, 1, 2, 14, 12, 5),
                 t(ModEnchantments.VEGETATION, 2, 4, 30, 6, 15),
                 t(ModEnchantments.VEGETATION, 3, 5, 48, 3, 30),
-                // Shield trio (mutually exclusive)
                 t(ModEnchantments.REBOUND, 1, 2, 16, 12, 5),
                 t(ModEnchantments.REBOUND, 2, 4, 32, 6, 15),
                 t(ModEnchantments.REBOUND, 3, 5, 50, 3, 30),
@@ -93,7 +101,6 @@ public record LibrarianEnchantTrade(ResourceKey<Enchantment> enchantment, int bo
                 t(ModEnchantments.SCULK_BLOOM, 2, 5, 50, 3, 30));
     }
 
-    /** The 7 shield-enchantment offers (Rebound, Feedback, Guardian's Grace). */
     public static List<LibrarianEnchantTrade> shieldOffers() {
         return all().stream()
                 .filter(o -> o.enchantment().equals(ModEnchantments.REBOUND)
