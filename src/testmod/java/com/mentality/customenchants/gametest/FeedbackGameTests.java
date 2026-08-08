@@ -9,6 +9,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -21,7 +22,7 @@ import net.minecraft.world.level.GameType;
 
 public final class FeedbackGameTests {
     @GameTest(maxTicks = 100)
-    public void feedbackBlocksNewHarmfulEffectsWhenAnotherHarmfulEffectIsAlreadyActive(GameTestHelper helper) {
+    public void feedbackBlocksOnlyNewHarmfulEffectsWhileRaised(GameTestHelper helper) {
         Holder<Enchantment> feedback = EnchantmentAccess
                 .resolve(ModEnchantments.FEEDBACK, helper.getLevel().registryAccess())
                 .orElseThrow();
@@ -42,26 +43,50 @@ public final class FeedbackGameTests {
             player.tick();
             if (!player.isBlocking()) return;
 
+            MobEffectInstance existingPoison = player.getEffect(MobEffects.POISON);
+            helper.assertTrue(existingPoison != null,
+                    "raising Feedback must not remove a harmful effect that was already active");
+            int poisonDuration = existingPoison.getDuration();
+            int poisonAmplifier = existingPoison.getAmplifier();
+
             boolean sourceLessApplied = player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200));
             helper.assertFalse(sourceLessApplied,
-                    "Feedback must reject a source-less harmful effect while another harmful effect is already active");
-            helper.assertTrue(player.hasEffect(MobEffects.POISON),
-                    "pre-existing Poison must remain until Feedback actually blocks an attack");
+                    "Feedback must reject a new source-less harmful effect while raised");
             helper.assertFalse(player.hasEffect(MobEffects.WEAKNESS),
-                    "Weakness must not become active through the source-less addEffect path");
+                    "Weakness must not become active while Feedback is raised");
 
             boolean sourcedApplied = player.addEffect(new MobEffectInstance(MobEffects.WITHER, 200), player);
             helper.assertFalse(sourcedApplied,
-                    "Feedback must reject a sourced harmful effect while another harmful effect is already active");
+                    "Feedback must reject a new sourced harmful effect while raised");
             helper.assertFalse(player.hasEffect(MobEffects.WITHER),
-                    "Wither must not become active through the sourced addEffect path");
+                    "Wither must not become active while Feedback is raised");
+
+            MobEffectInstance poisonAfterRejectedEffects = player.getEffect(MobEffects.POISON);
+            helper.assertTrue(poisonAfterRejectedEffects != null,
+                    "rejecting new harmful effects must not remove the pre-existing Poison");
+            helper.assertTrue(poisonAfterRejectedEffects.getDuration() == poisonDuration,
+                    "Feedback must not change the duration of a pre-existing harmful effect");
+            helper.assertTrue(poisonAfterRejectedEffects.getAmplifier() == poisonAmplifier,
+                    "Feedback must not change the amplifier of a pre-existing harmful effect");
+
+            helper.assertTrue(MobEffects.REGENERATION.value().getCategory() == MobEffectCategory.BENEFICIAL,
+                    "fixture must use a beneficial effect");
+            boolean beneficialApplied = player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200));
+            helper.assertTrue(beneficialApplied && player.hasEffect(MobEffects.REGENERATION),
+                    "Feedback must not interfere with beneficial effects");
+
+            helper.assertTrue(MobEffects.GLOWING.value().getCategory() == MobEffectCategory.NEUTRAL,
+                    "fixture must use a neutral effect");
+            boolean neutralApplied = player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200));
+            helper.assertTrue(neutralApplied && player.hasEffect(MobEffects.GLOWING),
+                    "Feedback must not interfere with neutral effects");
 
             helper.succeed();
         });
     }
 
     @GameTest(maxTicks = 100)
-    public void feedbackCancelsActualInstantDamageWithPreExistingPoison(GameTestHelper helper) {
+    public void feedbackCancelsActualInstantDamageWithoutTouchingExistingPoison(GameTestHelper helper) {
         var level = helper.getLevel();
         Holder<Enchantment> feedback = EnchantmentAccess
                 .resolve(ModEnchantments.FEEDBACK, level.registryAccess())
@@ -84,6 +109,12 @@ public final class FeedbackGameTests {
             player.tick();
             if (!player.isBlocking()) return;
 
+            MobEffectInstance poisonBeforeBlock = player.getEffect(MobEffects.POISON);
+            helper.assertTrue(poisonBeforeBlock != null,
+                    "pre-existing Poison must still exist after Feedback becomes active");
+            int poisonDuration = poisonBeforeBlock.getDuration();
+            int poisonAmplifier = poisonBeforeBlock.getAmplifier();
+
             // Exercise the actual vanilla Instant Damage implementation used by Harming potions,
             // rather than only manufacturing a magic DamageSource directly.
             float beforeHarming = player.getHealth();
@@ -93,11 +124,17 @@ public final class FeedbackGameTests {
             helper.assertTrue(afterHarming >= beforeHarming,
                     "Harming must not reduce health while Feedback is raised: before="
                             + beforeHarming + ", after=" + afterHarming);
-            helper.assertFalse(player.hasEffect(MobEffects.POISON),
-                    "a blocked Harming hit must purge the Poison that existed before the shield was raised");
+
+            MobEffectInstance poisonAfterHarming = player.getEffect(MobEffects.POISON);
+            helper.assertTrue(poisonAfterHarming != null,
+                    "blocking Harming must not remove a harmful effect that already existed");
+            helper.assertTrue(poisonAfterHarming.getDuration() == poisonDuration,
+                    "blocking Harming must not change the existing Poison duration");
+            helper.assertTrue(poisonAfterHarming.getAmplifier() == poisonAmplifier,
+                    "blocking Harming must not change the existing Poison amplifier");
 
             // Keep a direct MAGIC source covered too. Feedback may heal on a successful block, so
-            // the contract is non-decreasing health, not strict equality.
+            // the health contract is non-decreasing rather than strict equality.
             float beforeDirect = player.getHealth();
             DamageSource directMagic = level.damageSources().magic();
             helper.assertTrue(directMagic.is(DamageTypes.MAGIC),
@@ -109,6 +146,14 @@ public final class FeedbackGameTests {
             helper.assertTrue(afterDirect >= beforeDirect,
                     "direct magic must not reduce health while Feedback is raised: before="
                             + beforeDirect + ", after=" + afterDirect);
+
+            MobEffectInstance poisonAfterDirectMagic = player.getEffect(MobEffects.POISON);
+            helper.assertTrue(poisonAfterDirectMagic != null,
+                    "blocking direct magic must not remove the existing Poison");
+            helper.assertTrue(poisonAfterDirectMagic.getDuration() == poisonDuration,
+                    "blocking direct magic must not change the existing Poison duration");
+            helper.assertTrue(poisonAfterDirectMagic.getAmplifier() == poisonAmplifier,
+                    "blocking direct magic must not change the existing Poison amplifier");
 
             helper.succeed();
         });
