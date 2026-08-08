@@ -6,7 +6,7 @@
 
 ## Текущий релиз
 
-**3.1.1**
+**3.2.3**
 
 Поддерживаемые версии Minecraft: **1.20.1**, **1.21.1** и **1.21.11**.
 
@@ -23,9 +23,9 @@
 
 | Minecraft | Ветка исходников | Java | Релиз |
 | --- | --- | --- | --- |
-| 1.21.11 | [`3.1/1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.1/1.21.11) | 21 | [`v3.1.1-mc1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1-mc1.21.11) |
-| 1.21.1 | [`3.1/1.21.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.1/1.21.1) | 21 | [`v3.1.1-mc1.21.1`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1-mc1.21.1) |
-| 1.20.1 | [`3.1/1.20.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.1/1.20.1) | 17 | [`v3.1.1`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1) |
+| 1.21.11 | [`3.2/1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.21.11) | 21 | [`v3.2.3-mc1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.3-mc1.21.11) |
+| 1.21.1 | [`3.2/1.21.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.21.1) | 21 | [`v3.2.3-mc1.21.1`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.3-mc1.21.1) |
+| 1.20.1 | [`3.2/1.20.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.20.1) | 17 | [`v3.2.3`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.3) |
 
 ## Ветки
 
@@ -34,4 +34,4 @@
 или ветку исходников для своей версии Minecraft: один JAR не поддерживает все
 версии.
 
-Схема репозитория приведена в [карте веток](docs/BRANCHES.md).
+Схема репозитория и архивные линии сопровождения приведены в [карте веток](docs/BRANCHES.md).
