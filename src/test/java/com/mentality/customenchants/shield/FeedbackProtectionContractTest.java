@@ -10,28 +10,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FeedbackProtectionContractTest {
     @Test
-    void feedbackRestoresSourceIndependentHarmfulEffectInterception() throws Exception {
+    void feedbackInterceptsEveryHarmfulEffectApplicationPath() throws Exception {
         String mixin = Files.readString(Path.of(
                 "src/main/java/com/mentality/customenchants/mixin/ShieldFeedbackMixin.java"));
 
         assertTrue(mixin.contains("customEnchants$hasActiveFeedbackShield()"));
-        assertTrue(mixin.contains("@Inject(method = \"addEffect"));
+        assertTrue(mixin.contains("addEffect(Lnet/minecraft/world/effect/MobEffectInstance;)Z"));
+        assertTrue(mixin.contains("addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z"));
         assertTrue(mixin.contains("@Inject(method = \"forceAddEffect\""));
         assertTrue(mixin.contains("effect.getEffect().getCategory() == MobEffectCategory.HARMFUL"));
         assertFalse(mixin.contains("source.position()"));
     }
 
     @Test
-    void confirmedBlockClearsExistingHarmfulEffectsBeforeMagicRewardGate() throws Exception {
+    void feedbackPreservesEffectsThatWereAlreadyActive() throws Exception {
         String mixin = Files.readString(Path.of(
                 "src/main/java/com/mentality/customenchants/mixin/ShieldFeedbackMixin.java"));
 
-        int confirmedBlock = mixin.indexOf("if (!evidence.vanillaBlocked()) return;");
-        int purge = mixin.indexOf("player.removeEffect(effect.getEffect())", confirmedBlock);
-        int rewardGate = mixin.indexOf("if (!ShieldEnchantmentsPolicy.feedbackDamage(source)) return;", confirmedBlock);
-
-        assertTrue(confirmedBlock >= 0);
-        assertTrue(purge > confirmedBlock);
-        assertTrue(rewardGate > purge);
+        assertTrue(mixin.contains("if (!evidence.vanillaBlocked()) return;"));
+        assertFalse(mixin.contains("player.removeEffect("));
+        assertTrue(mixin.contains("if (!ShieldEnchantmentsPolicy.feedbackDamage(source)) return;"));
     }
 }

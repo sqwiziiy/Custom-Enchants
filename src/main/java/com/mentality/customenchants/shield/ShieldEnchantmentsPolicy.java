@@ -3,7 +3,6 @@ package com.mentality.customenchants.shield;
 import com.mentality.customenchants.enchantment.ModEnchantments;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.item.ItemStack;
@@ -27,10 +26,11 @@ public final class ShieldEnchantmentsPolicy {
     public static int guardiansGraceLevel(ItemStack shield) { return validShield(shield) ? level(ModEnchantments.GUARDIANS_GRACE, shield) : 0; }
 
     public static boolean feedbackDamage(DamageSource source) {
-        if (source == null || source.is(DamageTypeTags.BYPASSES_SHIELD)) return false;
-        return FeedbackMagicBlockPolicy.allowedSource(source.is(DamageTypes.MAGIC),
-                source.is(DamageTypes.INDIRECT_MAGIC), source.getDirectEntity() instanceof ShulkerBullet,
-                source.is(DamageTypeTags.BYPASSES_SHIELD));
+        if (source == null) return false;
+        return FeedbackMagicBlockPolicy.allowedSource(
+                source.is(DamageTypes.MAGIC),
+                source.is(DamageTypes.INDIRECT_MAGIC),
+                source.getDirectEntity() instanceof ShulkerBullet);
     }
 
     public static boolean customFeedbackBlock(Player player, DamageSource source) {

@@ -4,7 +4,6 @@ import com.mentality.customenchants.config.ModConfig;
 import com.mentality.customenchants.shield.ShieldBlockContext;
 import com.mentality.customenchants.shield.FeedbackMagicBlockPolicy;
 import com.mentality.customenchants.shield.ShieldEnchantmentsPolicy;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -39,21 +38,18 @@ public abstract class ShieldFeedbackMixin {
         LivingEntity defender = (LivingEntity) (Object) this;
         if (!(defender instanceof Player player)) return;
         ItemStack shield = player.getUseItem();
+        boolean activeFeedbackShield = customEnchants$hasActiveFeedbackShield();
         boolean allowed = FeedbackMagicBlockPolicy.allowedSource(
-                source.is(DamageTypes.MAGIC), source.is(DamageTypes.INDIRECT_MAGIC),
-                source.getDirectEntity() instanceof ShulkerBullet,
-                source.is(DamageTypeTags.BYPASSES_SHIELD));
+                source.is(DamageTypes.MAGIC),
+                source.is(DamageTypes.INDIRECT_MAGIC),
+                source.getDirectEntity() instanceof ShulkerBullet);
         boolean canBlock = FeedbackMagicBlockPolicy.shouldBlock(
                 ModConfig.get().feedbackEnabled,
-                ShieldEnchantmentsPolicy.feedbackLevel(shield) > 0,
-                player.isDamageSourceBlocked(source), allowed);
+                activeFeedbackShield,
+                allowed);
         if (!canBlock) return;
 
-        for (MobEffectInstance effect : new java.util.ArrayList<>(player.getActiveEffects())) {
-            if (effect.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
-                player.removeEffect(effect.getEffect());
-            }
-        }
+        // Block incoming Harming-style magic without changing effects that were active beforehand.
         player.heal(Math.max(0.0f, ModConfig.get().feedbackHealAmount));
         int repair = Math.max(0, ModConfig.get().feedbackRepairAmount);
         if (repair > 0) shield.setDamageValue(Math.max(0, shield.getDamageValue() - repair));
@@ -70,12 +66,7 @@ public abstract class ShieldFeedbackMixin {
         ItemStack shield = evidence.shield();
         if (ShieldEnchantmentsPolicy.feedbackLevel(shield) <= 0) return;
 
-        // Any confirmed Feedback block clears harmful effects that were already active.
-        for (MobEffectInstance effect : new java.util.ArrayList<>(player.getActiveEffects())) {
-            if (effect.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
-                player.removeEffect(effect.getEffect());
-            }
-        }
+        // Existing effects are intentionally untouched. Only new harmful effects are rejected.
         if (!ShieldEnchantmentsPolicy.feedbackDamage(source)) return;
 
         player.heal(Math.max(0.0f, ModConfig.get().feedbackHealAmount));
@@ -83,10 +74,21 @@ public abstract class ShieldFeedbackMixin {
         if (repair > 0) shield.setDamageValue(Math.max(0, shield.getDamageValue() - repair));
     }
 
-    /** Reject harmful effects from every source while an enchanted Feedback shield is actively raised. */
+    /** Reject new harmful effects with no explicit source while Feedback is actively raised. */
+    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;)Z",
+            at = @At("HEAD"), cancellable = true)
+    private void customEnchants$blockSourceLessHarmfulEffectWhileFeedbackActive(
+            MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
+        if (effect != null && effect.getEffect().getCategory() == MobEffectCategory.HARMFUL
+                && customEnchants$hasActiveFeedbackShield()) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    /** Reject new harmful effects that preserve their source entity. */
     @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",
             at = @At("HEAD"), cancellable = true)
-    private void customEnchants$blockHarmfulEffectWhileFeedbackActive(
+    private void customEnchants$blockSourcedHarmfulEffectWhileFeedbackActive(
             MobEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
         if (effect != null && effect.getEffect().getCategory() == MobEffectCategory.HARMFUL
                 && customEnchants$hasActiveFeedbackShield()) {
