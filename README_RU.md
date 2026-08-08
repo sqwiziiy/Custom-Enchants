@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.1%2F1.21.11)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
 
-Версия `3.1.1` · Minecraft `1.21.11` · Fabric · Java `21` · [Релизы](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Документация](https://sqwiziiy.github.io/Custom-Enchants/) · [Ошибки](https://github.com/sqwiziiy/Custom-Enchants/issues)
+Версия `3.1.2` · Minecraft `1.21.11` · Fabric · Java `21` · [Релизы](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Документация](https://sqwiziiy.github.io/Custom-Enchants/) · [Ошибки](https://github.com/sqwiziiy/Custom-Enchants/issues)
 
 Мод для Minecraft 1.21.11 на Fabric с 19 настраиваемыми зачарованиями.
 Игровая логика принадлежит серверу; Cloth Config и Mod Menu дают интерфейс
@@ -33,4 +33,4 @@
 
 ## Установка
 
-Скачайте `custom-enchants-3.1.1-mc1.21.11.jar` из [релиза для Minecraft 1.21.11](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.1-mc1.21.11) и поместите его в каталог `mods/` Fabric. Нужны Fabric Loader `>=0.19.3`, Fabric API `>=0.141.6+1.21.11`, Cloth Config `>=21.11.153` и Java `>=21`; Mod Menu `>=17.0.0` необязателен.
+Скачайте `custom-enchants-3.1.2-mc1.21.11.jar` из [релиза для Minecraft 1.21.11](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.1.2-mc1.21.11) и поместите его в каталог `mods/` Fabric. Нужны Fabric Loader `>=0.19.3`, Fabric API `>=0.141.6+1.21.11`, Cloth Config `>=21.11.153` и Java `>=21`; Mod Menu `>=17.0.0` необязателен.
