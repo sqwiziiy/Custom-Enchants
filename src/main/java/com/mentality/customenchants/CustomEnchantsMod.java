@@ -40,10 +40,13 @@ public class CustomEnchantsMod implements ModInitializer {
     }
 
     private void registerVillagerTrades() {
-        for (LibrarianEnchantTrade offer : LibrarianEnchantTrade.all()) {
-            TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, offer.villagerLevel(),
+        // Every librarian tier gets one custom-book roll; any defined custom enchantment level
+        // can be selected from the novice tier onward, like vanilla enchanted-book rolls.
+        for (int villagerLevel = 1; villagerLevel <= 5; villagerLevel++) {
+            TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, villagerLevel,
                     factories -> factories.add(
-                            (trader, random) -> offer.createOffer(trader.level().registryAccess())));
+                            (trader, random) -> LibrarianEnchantTrade.random(random)
+                                    .createOffer(trader.level().registryAccess())));
         }
     }
 }
