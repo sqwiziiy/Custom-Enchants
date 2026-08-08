@@ -4,16 +4,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -98,20 +94,37 @@ class ResourceContractTest {
 
     @Test
     void librarianTradeSourceHasUniquePositiveDefinitions() throws IOException {
-        String source = read("src/main/java/com/mentality/customenchants/CustomEnchantsMod.java");
-        Set<String> comments = findAll(source, "// ([^\\n]+Librarian[^\\n]*)");
-        assertEquals(37, comments.size());
-        assertEquals(37, count(source, "new MerchantOffer("));
-        assertEquals(37, count(source, "new EnchantmentInstance("));
-        Matcher levels = Pattern.compile("new EnchantmentInstance\\(ModEnchantments\\.[A-Z0-9_]+, (\\d+)\\)").matcher(source);
-        while (levels.find()) assertTrue(Integer.parseInt(levels.group(1)) >= 1 && Integer.parseInt(levels.group(1)) <= 3);
-        Matcher prices = Pattern.compile("new ItemStack\\(Items\\.EMERALD, (\\d+)\\)").matcher(source);
-        int priceCount = 0;
-        while (prices.find()) {
-            priceCount++;
-            assertTrue(Integer.parseInt(prices.group(1)) > 0);
+        String trades = read("src/main/java/com/mentality/customenchants/trade/LibrarianEnchantTrade.java");
+        String initializer = read("src/main/java/com/mentality/customenchants/CustomEnchantsMod.java");
+
+        Pattern definition = Pattern.compile(
+                "t\\(ModEnchantments\\.([A-Z0-9_]+), (\\d+), (\\d+), (\\d+), (\\d+), (\\d+)\\)");
+        Matcher matcher = definition.matcher(trades);
+        Set<String> uniqueBooks = new HashSet<>();
+        int definitions = 0;
+        while (matcher.find()) {
+            definitions++;
+            String enchantment = matcher.group(1);
+            int bookLevel = Integer.parseInt(matcher.group(2));
+            int legacyVillagerLevel = Integer.parseInt(matcher.group(3));
+            int emeralds = Integer.parseInt(matcher.group(4));
+            int maxUses = Integer.parseInt(matcher.group(5));
+            int villagerXp = Integer.parseInt(matcher.group(6));
+
+            assertTrue(uniqueBooks.add(enchantment + ":" + bookLevel),
+                    "duplicate librarian book definition: " + enchantment + " " + bookLevel);
+            assertTrue(bookLevel >= 1 && bookLevel <= 3);
+            assertTrue(legacyVillagerLevel >= 1 && legacyVillagerLevel <= 5);
+            assertTrue(emeralds > 0);
+            assertTrue(maxUses > 0);
+            assertTrue(villagerXp >= 0);
         }
-        assertEquals(37, priceCount);
+
+        assertEquals(44, definitions);
+        assertEquals(44, uniqueBooks.size());
+        assertTrue(trades.contains("new ItemStack(Items.BOOK, 1)"));
+        assertTrue(initializer.contains("for (int villagerLevel = 1; villagerLevel <= 5; villagerLevel++)"));
+        assertTrue(initializer.contains("LibrarianEnchantTrade.random(random)"));
     }
 
     @Test
@@ -157,16 +170,6 @@ class ResourceContractTest {
         Set<String> result = new LinkedHashSet<>();
         while (matcher.find()) result.add(matcher.group(1));
         return result;
-    }
-
-    private static int count(String source, String needle) {
-        int count = 0;
-        int from = 0;
-        while ((from = source.indexOf(needle, from)) >= 0) {
-            count++;
-            from += needle.length();
-        }
-        return count;
     }
 
     private static void assertNoDuplicateKeys(String json) throws IOException {
