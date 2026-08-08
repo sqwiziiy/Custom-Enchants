@@ -32,6 +32,9 @@ public final class FeedbackGameTests {
         player.startUsingItem(InteractionHand.OFF_HAND);
 
         helper.onEachTick(() -> {
+            // GameTest's mock player is not part of the normal player tick list, so advance its
+            // item-use state explicitly until the vanilla shield activation delay has elapsed.
+            player.tick();
             if (!player.isBlocking()) return;
 
             boolean sourceLessApplied = player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200));
