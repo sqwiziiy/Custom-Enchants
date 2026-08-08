@@ -12,7 +12,7 @@ class DoubleJumpMovementRegressionTest {
     void acceptedPathAppliesRealAirborneVerticalMotionBeforeVisuals() throws Exception {
         String server = Files.readString(Path.of("src/main/java/com/mentality/customenchants/enchantment/DoubleJumpServerHandler.java"));
 
-        int velocityCall = server.indexOf("applyAirborneJumpVelocity(player)");
+        int velocityCall = server.indexOf("applyAirborneJumpVelocity(player, sprinting)");
         int approval = server.indexOf("ServerPlayNetworking.send(player, new DoubleJumpApprovedPayload(");
         int particles = server.indexOf("sendParticles(ParticleTypes.CLOUD");
 
@@ -20,5 +20,7 @@ class DoubleJumpMovementRegressionTest {
         assertTrue(approval > velocityCall, "server approval must follow authoritative motion");
         assertTrue(particles > approval, "particles must not be the only accepted-jump effect");
         assertTrue(server.contains("Math.max(velocity.y, DOUBLE_JUMP_Y_VELOCITY)"));
+        assertTrue(server.contains("sprintRequested || player.isSprinting()"),
+                "sprint state must survive airborne server/client timing differences");
     }
 }
