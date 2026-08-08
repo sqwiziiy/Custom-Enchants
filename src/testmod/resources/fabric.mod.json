@@ -6,7 +6,8 @@
   "environment": "*",
   "entrypoints": {
     "fabric-gametest": [
-      "com.mentality.customenchants.gametest.CustomEnchantsGameTests"
+      "com.mentality.customenchants.gametest.CustomEnchantsGameTests",
+      "com.mentality.customenchants.gametest.FeedbackGameTests"
     ]
   },
   "depends": {
