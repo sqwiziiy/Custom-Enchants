@@ -5,7 +5,6 @@ import com.mentality.customenchants.shield.ShieldBlockContext;
 import com.mentality.customenchants.shield.FeedbackMagicBlockPolicy;
 import com.mentality.customenchants.shield.ShieldEnchantmentsPolicy;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,21 +20,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class ShieldFeedbackMixin {
     @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
-    private void customEnchants$blockAllowlistedMagic(ServerLevel level, DamageSource source, float amount,
-                                                       CallbackInfoReturnable<Boolean> cir) {
+    private void customEnchants$blockFeedbackMagic(ServerLevel level, DamageSource source, float amount,
+                                                    CallbackInfoReturnable<Boolean> cir) {
         LivingEntity defender = (LivingEntity) (Object) this;
         if (!(defender instanceof Player player)) return;
+
         ItemStack shield = player.getUseItem();
+        boolean activeFeedbackShield = player.isBlocking()
+                && ShieldEnchantmentsPolicy.feedbackLevel(shield) > 0;
         boolean allowed = FeedbackMagicBlockPolicy.allowedSource(
-                source.is(DamageTypes.MAGIC), source.is(DamageTypes.INDIRECT_MAGIC),
-                source.getDirectEntity() instanceof ShulkerBullet,
-                source.is(DamageTypeTags.BYPASSES_SHIELD));
+                source.is(DamageTypes.MAGIC),
+                source.is(DamageTypes.INDIRECT_MAGIC),
+                source.getDirectEntity() instanceof ShulkerBullet);
         boolean canBlock = FeedbackMagicBlockPolicy.shouldBlock(
                 ModConfig.get().feedbackEnabled,
-                ShieldEnchantmentsPolicy.feedbackLevel(shield) > 0,
-                ShieldEnchantmentsPolicy.wouldBlockDamage(player, source, amount), allowed);
+                activeFeedbackShield,
+                allowed);
         if (!canBlock) return;
 
+        // Feedback's magic guard is deliberately independent of vanilla shield-facing/bypass
+        // resolution. This is what lets a raised Feedback shield cancel Harming-style magic.
         for (net.minecraft.world.effect.MobEffectInstance effect :
                 new java.util.ArrayList<>(player.getActiveEffects())) {
             if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
@@ -58,8 +62,8 @@ public abstract class ShieldFeedbackMixin {
         ItemStack shield = evidence.shield();
         if (ShieldEnchantmentsPolicy.feedbackLevel(shield) <= 0) return;
 
-        // Feedback's original contract clears pre-existing harmful effects on any confirmed block,
-        // not only on magic damage. Rewards remain scoped to Feedback's magic damage paths.
+        // Any confirmed physical/vanilla shield block clears harmful effects. Magic sources
+        // handled above return early from hurtServer and never reach this path.
         for (net.minecraft.world.effect.MobEffectInstance effect :
                 new java.util.ArrayList<>(player.getActiveEffects())) {
             if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
