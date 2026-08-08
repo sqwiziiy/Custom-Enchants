@@ -37,8 +37,10 @@ public final class AdditionalBlockBreakService {
             Set<BlockPos> attempted = new HashSet<>();
             for (BlockPos position : plannedPositions) {
                 if (!attempted.add(position)) continue;
-                if (!isSafeTarget(player, level, position)) break;
-                if (!player.gameMode.destroyBlock(position)) break;
+                // A 3x3 Drill plane and independent Lumberjack branches must not abort just
+                // because one planned position is air, protected, unloaded, or otherwise unsafe.
+                if (!isSafeTarget(player, level, position)) continue;
+                if (!player.gameMode.destroyBlock(position)) continue;
                 destroyed.add(position.immutable());
                 if (!hasUsableTool(player)) break;
             }
