@@ -1,5 +1,6 @@
 docs/
-.grandle
+.grandle/
 *.txt
 *.log
 *.txt
+build/
