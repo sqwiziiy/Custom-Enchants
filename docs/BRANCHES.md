@@ -13,8 +13,8 @@
 
 Current release tags are immutable published snapshots:
 
-- `v3.2.3` — Minecraft 1.20.1
-- `v3.2.3-mc1.21.1` — Minecraft 1.21.1
-- `v3.2.3-mc1.21.11` — Minecraft 1.21.11
+- `v3.2.4` — Minecraft 1.20.1
+- `v3.2.4-mc1.21.1` — Minecraft 1.21.1
+- `v3.2.4-mc1.21.11` — Minecraft 1.21.11
 
-Previous 3.2.2, 3.1.x, and older tags remain available as archived release snapshots and must not be moved or overwritten.
+Previous 3.2.3, 3.2.2, 3.1.x, and older tags remain available as archived release snapshots and must not be moved or overwritten.
