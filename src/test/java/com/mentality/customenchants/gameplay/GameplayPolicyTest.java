@@ -15,13 +15,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameplayPolicyTest {
     @Test
-    void feedbackOnlyAllowsValidatedMagicAndFacingShield() {
-        assertTrue(FeedbackMagicBlockPolicy.allowedSource(true, false, false, false));
-        assertTrue(FeedbackMagicBlockPolicy.allowedSource(false, true, true, false));
-        assertFalse(FeedbackMagicBlockPolicy.allowedSource(false, false, false, false));
-        assertFalse(FeedbackMagicBlockPolicy.allowedSource(true, false, false, true));
-        assertTrue(FeedbackMagicBlockPolicy.shouldBlock(true, true, true, true));
-        assertFalse(FeedbackMagicBlockPolicy.shouldBlock(true, true, false, true));
+    void feedbackMagicGuardIsIndependentOfVanillaShieldBypassAndFacingRules() {
+        assertTrue(FeedbackMagicBlockPolicy.allowedSource(true, false, false));
+        assertTrue(FeedbackMagicBlockPolicy.allowedSource(false, true, false));
+        assertTrue(FeedbackMagicBlockPolicy.allowedSource(false, false, true));
+        assertFalse(FeedbackMagicBlockPolicy.allowedSource(false, false, false));
+
+        assertTrue(FeedbackMagicBlockPolicy.shouldBlock(true, true, true));
+        assertFalse(FeedbackMagicBlockPolicy.shouldBlock(false, true, true));
+        assertFalse(FeedbackMagicBlockPolicy.shouldBlock(true, false, true));
+        assertFalse(FeedbackMagicBlockPolicy.shouldBlock(true, true, false));
     }
 
     @Test
