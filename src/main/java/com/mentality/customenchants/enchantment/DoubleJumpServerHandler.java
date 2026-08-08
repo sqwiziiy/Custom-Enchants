@@ -93,7 +93,6 @@ public class DoubleJumpServerHandler {
                 velocity.x + sprintImpulse.x,
                 Math.max(velocity.y, DOUBLE_JUMP_Y_VELOCITY),
                 velocity.z + sprintImpulse.z);
-        player.hasImpulse = true;
         player.hurtMarked = true;
         player.resetFallDistance();
         return sprintImpulse;

@@ -18,7 +18,6 @@ class DoubleJumpServerHandlerContractTest {
         assertFalse(source.contains("player.jumpFromGround()"),
                 "jumpFromGround is grounded-only and cannot implement an airborne second jump");
         assertTrue(source.contains("player.setDeltaMovement("));
-        assertTrue(source.contains("player.hasImpulse = true"));
         assertTrue(source.contains("player.hurtMarked = true"));
         assertTrue(source.contains("player.resetFallDistance()"));
         assertFalse(source.contains("ClientboundSetEntityMotionPacket"),
