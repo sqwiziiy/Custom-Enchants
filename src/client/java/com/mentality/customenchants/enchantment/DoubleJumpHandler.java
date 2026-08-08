@@ -53,7 +53,9 @@ public class DoubleJumpHandler {
                     && !player.isInWater() && !player.isSwimming() && !player.isUnderWater()
                     && !player.isInLava() && !player.isFallFlying()) {
                 canDoubleJump = false;
-                ClientPlayNetworking.send(DoubleJumpPayload.INSTANCE);
+                // Preserve the local sprint state explicitly. The server can briefly observe
+                // sprint=false during airborne packet handling even while the owner is sprinting.
+                ClientPlayNetworking.send(new DoubleJumpPayload(player.isSprinting()));
             }
 
             if (!player.onGround()) {

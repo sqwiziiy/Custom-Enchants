@@ -36,7 +36,7 @@ public class DoubleJumpServerHandler {
         PayloadTypeRegistry.playC2S().register(DoubleJumpPayload.TYPE, DoubleJumpPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(DoubleJumpApprovedPayload.TYPE, DoubleJumpApprovedPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(DoubleJumpPayload.TYPE, (payload, context) -> {
-            context.server().execute(() -> handleDoubleJump(context.player()));
+            context.server().execute(() -> handleDoubleJump(context.player(), payload.sprinting()));
         });
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
@@ -51,7 +51,7 @@ public class DoubleJumpServerHandler {
         });
     }
 
-    private static void handleDoubleJump(ServerPlayer player) {
+    private static void handleDoubleJump(ServerPlayer player, boolean sprintRequested) {
         if (!ModConfig.get().doubleJumpEnabled || !eligible(player)) return;
 
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
@@ -66,7 +66,11 @@ public class DoubleJumpServerHandler {
         if (!decision.accepted()) return;
         states.put(playerId, decision.state());
 
-        Vec3 sprintImpulse = applyAirborneJumpVelocity(player);
+        // The owner's local sprint flag is carried with the activation because the server can
+        // briefly observe sprint=false during airborne reconciliation. Server sprint=true still
+        // takes precedence if the local hint happens to be stale in the other direction.
+        boolean sprinting = sprintRequested || player.isSprinting();
+        Vec3 sprintImpulse = applyAirborneJumpVelocity(player, sprinting);
         Vec3 after = player.getDeltaMovement();
 
         // Only send the authoritative vertical component plus the sprint impulse delta.
@@ -86,9 +90,9 @@ public class DoubleJumpServerHandler {
     }
 
     /** Applies an airborne jump impulse directly instead of using grounded-only jumpFromGround(). */
-    static Vec3 applyAirborneJumpVelocity(ServerPlayer player) {
+    static Vec3 applyAirborneJumpVelocity(ServerPlayer player, boolean sprinting) {
         Vec3 velocity = player.getDeltaMovement();
-        Vec3 sprintImpulse = sprintJumpImpulse(player.getYRot(), player.isSprinting());
+        Vec3 sprintImpulse = sprintJumpImpulse(player.getYRot(), sprinting);
         player.setDeltaMovement(
                 velocity.x + sprintImpulse.x,
                 Math.max(velocity.y, DOUBLE_JUMP_Y_VELOCITY),

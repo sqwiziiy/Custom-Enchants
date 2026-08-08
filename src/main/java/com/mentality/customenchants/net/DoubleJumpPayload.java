@@ -2,23 +2,24 @@ package com.mentality.customenchants.net;
 
 import com.mentality.customenchants.CustomEnchantsMod;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 
 /**
- * Empty client&rarr;server payload signalling a client-detected double-jump activation.
- * The server independently validates the activation; the payload carries no trusted state.
+ * Client-to-server Double Jump activation request.
+ * The sprint flag is only a movement hint; the server still validates every activation.
  */
-public record DoubleJumpPayload() implements CustomPacketPayload {
-
-    public static final DoubleJumpPayload INSTANCE = new DoubleJumpPayload();
+public record DoubleJumpPayload(boolean sprinting) implements CustomPacketPayload {
 
     public static final Type<DoubleJumpPayload> TYPE = new Type<>(
             Identifier.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, "double_jump"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DoubleJumpPayload> CODEC =
-            StreamCodec.unit(INSTANCE);
+            StreamCodec.composite(
+                    ByteBufCodecs.BOOL, DoubleJumpPayload::sprinting,
+                    DoubleJumpPayload::new);
 
     @Override
     public Type<DoubleJumpPayload> type() {
