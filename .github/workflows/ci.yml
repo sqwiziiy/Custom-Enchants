@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - "3.1/1.20.1"
+      - "3.2/1.20.1"
   pull_request:
     branches:
-      - "3.1/1.20.1"
+      - "3.2/1.20.1"
   workflow_dispatch:
 
 permissions:
@@ -40,7 +40,6 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      # Use one runner so Fabric/Minecraft dependencies are resolved only once.
       - name: Resolve dependencies
         shell: bash
         run: |
@@ -96,12 +95,26 @@ jobs:
           find build/libs -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
           sha256sum build/libs/*.jar
 
+      - name: Resolve release artifact metadata
+        id: release_meta
+        shell: bash
+        run: |
+          mod_version="$(sed -n 's/^mod_version=//p' gradle.properties)"
+          release_jar="build/libs/custom-enchants-${mod_version}.jar"
+          artifact_name="custom-enchants-${mod_version}-mc1.20.1-java17"
+
+          test -n "$mod_version"
+          test -f "$release_jar"
+
+          echo "jar=$release_jar" >> "$GITHUB_OUTPUT"
+          echo "name=$artifact_name" >> "$GITHUB_OUTPUT"
+
       - name: Upload release JAR artifact
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: custom-enchants-3.1.1-mc1.20.1-java17
-          path: build/libs/custom-enchants-3.1.1.jar
+          name: ${{ steps.release_meta.outputs.name }}
+          path: ${{ steps.release_meta.outputs.jar }}
           if-no-files-found: error
 
       - name: Upload validation diagnostics
