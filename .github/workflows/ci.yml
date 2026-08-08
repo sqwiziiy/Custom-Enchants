@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - "3.1/1.21.1"
+      - "3.2/1.21.1"
   pull_request:
     branches:
-      - "3.1/1.21.1"
+      - "3.2/1.21.1"
   workflow_dispatch:
 
 permissions:
@@ -40,7 +40,6 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      # Use one runner so Fabric/Minecraft dependencies are resolved only once.
       - name: Resolve dependencies
         shell: bash
         run: |
