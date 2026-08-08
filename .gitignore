@@ -1,5 +1,5 @@
 docs/
-.grandle/
+.gradle/
 *.txt
 *.log
 *.txt
