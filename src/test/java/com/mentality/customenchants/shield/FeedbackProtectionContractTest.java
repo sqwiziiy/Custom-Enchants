@@ -19,7 +19,7 @@ class FeedbackProtectionContractTest {
     }
 
     @Test
-    void effectApplicationAndConfirmedBlockKeepOriginalFeedbackContract() throws Exception {
+    void effectApplicationBlocksOnlyNewHarmfulEffectsAndPreservesExistingEffects() throws Exception {
         String effectMixin = Files.readString(Path.of(
                 "src/main/java/com/mentality/customenchants/mixin/FeedbackEffectApplicationMixin.java"));
         String policy = Files.readString(Path.of(
@@ -27,12 +27,13 @@ class FeedbackProtectionContractTest {
         String shieldMixin = Files.readString(Path.of(
                 "src/main/java/com/mentality/customenchants/mixin/ShieldFeedbackMixin.java"));
 
+        assertTrue(effectMixin.contains("MobEffectCategory.HARMFUL"));
         assertTrue(effectMixin.contains("FeedbackEffectPolicy.shouldBlock((LivingEntity) (Object) this)"));
         assertFalse(effectMixin.contains("FeedbackEffectPolicy.shouldBlock((LivingEntity) (Object) this, source)"));
         assertFalse(policy.contains("source == null"));
         assertFalse(policy.contains("source.position()"));
         assertTrue(shieldMixin.contains("if (!evidence.vanillaBlocked()) return;"));
-        assertTrue(shieldMixin.contains("player.removeEffect(effect.getEffect())"));
+        assertFalse(shieldMixin.contains("player.removeEffect("));
         assertTrue(shieldMixin.contains("if (!ShieldEnchantmentsPolicy.feedbackDamage(source)) return;"));
     }
 }
