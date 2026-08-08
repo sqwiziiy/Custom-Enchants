@@ -6,7 +6,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
@@ -34,10 +33,11 @@ public final class ShieldEnchantmentsPolicy {
     public static int guardiansGraceLevel(ItemStack shield) { return validShield(shield) ? level(ModEnchantments.GUARDIANS_GRACE, shield) : 0; }
 
     public static boolean feedbackDamage(DamageSource source) {
-        if (source == null || source.is(DamageTypeTags.BYPASSES_SHIELD)) return false;
-        return FeedbackMagicBlockPolicy.allowedSource(source.is(DamageTypes.MAGIC),
-                source.is(DamageTypes.INDIRECT_MAGIC), source.getDirectEntity() instanceof ShulkerBullet,
-                source.is(DamageTypeTags.BYPASSES_SHIELD));
+        if (source == null) return false;
+        return FeedbackMagicBlockPolicy.allowedSource(
+                source.is(DamageTypes.MAGIC),
+                source.is(DamageTypes.INDIRECT_MAGIC),
+                source.getDirectEntity() instanceof ShulkerBullet);
     }
 
     /**
@@ -46,6 +46,10 @@ public final class ShieldEnchantmentsPolicy {
      * (bypass tag, piercing arrows, facing angle, {@link BlocksAttacks#resolveBlockedDamage})
      * without its side effects (item damage, knockback), so it is safe to call speculatively
      * before vanilla's own {@code hurt} has run.
+     *
+     * This helper is for vanilla-style shield mechanics. Feedback's independent magic guard must
+     * not use it, because Feedback intentionally cancels allowlisted magic that vanilla shields
+     * may classify as bypassing or otherwise unblockable.
      */
     public static boolean wouldBlockDamage(LivingEntity defender, DamageSource source, float amount) {
         if (defender == null || source == null || amount <= 0f || !defender.isBlocking()) return false;
