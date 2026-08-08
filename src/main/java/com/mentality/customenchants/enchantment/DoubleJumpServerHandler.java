@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.particles.ParticleTypes;
@@ -38,7 +37,7 @@ public class DoubleJumpServerHandler {
         PayloadTypeRegistry.playC2S().register(DoubleJumpPayload.TYPE, DoubleJumpPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(DoubleJumpApprovedPayload.TYPE, DoubleJumpApprovedPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(DoubleJumpPayload.TYPE, (payload, context) -> {
-            context.server().execute(() -> handleDoubleJump(context.player()));
+            context.server().execute(() -> handleDoubleJump(context.player(), payload.sprinting()));
         });
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
@@ -53,10 +52,11 @@ public class DoubleJumpServerHandler {
         });
     }
 
-    private static void handleDoubleJump(ServerPlayer player) {
-        trace("received player={} pos={} velocity={} ground={} water={} swimming={} lava={} flying={} passenger={}",
+    private static void handleDoubleJump(ServerPlayer player, boolean sprintRequested) {
+        trace("received player={} pos={} velocity={} ground={} water={} swimming={} lava={} flying={} passenger={} sprintRequested={} serverSprint={}",
                 player.getUUID(), player.position(), player.getDeltaMovement(), player.onGround(), player.isInWater(),
-                player.isSwimming(), player.isInLava(), player.isFallFlying(), player.isPassenger());
+                player.isSwimming(), player.isInLava(), player.isFallFlying(), player.isPassenger(), sprintRequested,
+                player.isSprinting());
         if (!ModConfig.get().doubleJumpEnabled || !eligible(player)) {
             trace("rejected player={} reason=ineligible", player.getUUID());
             return;
@@ -78,8 +78,9 @@ public class DoubleJumpServerHandler {
         }
         states.put(playerId, decision.state());
 
+        boolean sprinting = sprintRequested || player.isSprinting();
         Vec3 before = player.getDeltaMovement();
-        Vec3 sprintImpulse = applyAirborneJumpVelocity(player);
+        Vec3 sprintImpulse = applyAirborneJumpVelocity(player, sprinting);
         Vec3 after = player.getDeltaMovement();
         // Do not send a full motion vector: its server-side X/Z may lag behind the owner's
         // predicted sprint movement. The client receives only this accepted Y component and
@@ -90,7 +91,7 @@ public class DoubleJumpServerHandler {
         player.serverLevel().sendParticles(ParticleTypes.CLOUD, player.getX(), player.getY() + 0.1D,
                 player.getZ(), 12, 0.3D, 0.05D, 0.3D, 0.0D);
         trace("accepted player={} sequence={} sprint={} yaw={} velocityBefore={} sprintImpulse={} velocityAfter={} horizontalBefore={} horizontalAfter={} impulse={} hurtMarked={} yApproval={}",
-                playerId, sequence, player.isSprinting(), player.getYRot(), before, sprintImpulse, after, horizontalSpeed(before), horizontalSpeed(after),
+                playerId, sequence, sprinting, player.getYRot(), before, sprintImpulse, after, horizontalSpeed(before), horizontalSpeed(after),
                 player.hasImpulse, player.hurtMarked, after.y);
 
         // 67% chance to consume 1 durability (Unbreaking is handled by hurtAndBreak)
@@ -100,9 +101,9 @@ public class DoubleJumpServerHandler {
     }
 
     /** Applies an authoritative jump impulse without relying on the grounded-only vanilla helper. */
-    static Vec3 applyAirborneJumpVelocity(ServerPlayer player) {
+    static Vec3 applyAirborneJumpVelocity(ServerPlayer player, boolean sprinting) {
         Vec3 velocity = player.getDeltaMovement();
-        Vec3 sprintImpulse = sprintJumpImpulse(player.getYRot(), player.isSprinting());
+        Vec3 sprintImpulse = sprintJumpImpulse(player.getYRot(), sprinting);
         player.setDeltaMovement(velocity.x + sprintImpulse.x, Math.max(velocity.y, DOUBLE_JUMP_Y_VELOCITY),
                 velocity.z + sprintImpulse.z);
         player.hasImpulse = true;

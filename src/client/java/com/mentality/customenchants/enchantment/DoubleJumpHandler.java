@@ -6,11 +6,8 @@ import com.mentality.customenchants.net.DoubleJumpApprovedPayload;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
 
 public class DoubleJumpHandler {
@@ -55,7 +52,9 @@ public class DoubleJumpHandler {
                     && !player.isInWater() && !player.isSwimming() && !player.isUnderWater()
                     && !player.isInLava() && !player.isFallFlying()) {
                 canDoubleJump = false;
-                ClientPlayNetworking.send(DoubleJumpPayload.INSTANCE);
+                // Preserve the owner's current sprint state explicitly instead of relying on
+                // the server observing the same sprint flag during airborne reconciliation.
+                ClientPlayNetworking.send(new DoubleJumpPayload(player.isSprinting()));
             }
 
             if (!player.onGround()) {
