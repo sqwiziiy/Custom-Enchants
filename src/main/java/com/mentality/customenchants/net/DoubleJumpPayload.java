@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
  * Client-to-server Double Jump activation request.
  * The sprint flag is only a movement hint; the server still validates every activation.
  */
-public record DoubleJumpPayload(boolean sprinting) implements CustomPacketPayload {
+public record DoubleJumpPayload(boolean sprinting, float yawDegrees) implements CustomPacketPayload {
 
     public static final Type<DoubleJumpPayload> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(CustomEnchantsMod.MOD_ID, "double_jump"));
@@ -19,6 +19,7 @@ public record DoubleJumpPayload(boolean sprinting) implements CustomPacketPayloa
     public static final StreamCodec<RegistryFriendlyByteBuf, DoubleJumpPayload> CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.BOOL, DoubleJumpPayload::sprinting,
+                    ByteBufCodecs.FLOAT, DoubleJumpPayload::yawDegrees,
                     DoubleJumpPayload::new);
 
     @Override
