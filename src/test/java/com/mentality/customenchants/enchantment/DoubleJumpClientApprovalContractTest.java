@@ -17,9 +17,9 @@ class DoubleJumpClientApprovalContractTest {
         assertTrue(client.contains("!Double.isFinite(payload.verticalVelocity())"));
         assertTrue(client.contains("!Double.isFinite(payload.horizontalImpulseX())"));
         assertTrue(client.contains("!Double.isFinite(payload.horizontalImpulseZ())"));
-        assertTrue(client.contains("current.x + payload.horizontalImpulseX()"));
-        assertTrue(client.contains("Math.max(current.y, payload.verticalVelocity())"));
-        assertTrue(client.contains("current.z + payload.horizontalImpulseZ()"));
+        assertTrue(client.contains("applyLocalPrediction(player, sprinting, yawDegrees)"));
+        assertTrue(client.contains("Do not add the same horizontal or vertical impulse after RTT"));
+        assertFalse(client.contains("current.x + payload.horizontalImpulseX()"));
         assertTrue(client.contains("lastApprovalSequence = Long.MIN_VALUE"));
         assertFalse(client.contains("player.jumpFromGround()"));
     }

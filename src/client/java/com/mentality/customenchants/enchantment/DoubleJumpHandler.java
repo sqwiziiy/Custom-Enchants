@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -53,9 +54,10 @@ public class DoubleJumpHandler {
                     && !player.isInWater() && !player.isSwimming() && !player.isUnderWater()
                     && !player.isInLava() && !player.isFallFlying()) {
                 canDoubleJump = false;
-                // Preserve the local sprint state explicitly. The server can briefly observe
-                // sprint=false during airborne packet handling even while the owner is sprinting.
-                ClientPlayNetworking.send(new DoubleJumpPayload(player.isSprinting()));
+                boolean sprinting = player.isSprinting();
+                float yawDegrees = player.getYRot();
+                applyLocalPrediction(player, sprinting, yawDegrees);
+                ClientPlayNetworking.send(new DoubleJumpPayload(sprinting, yawDegrees));
             }
 
             if (!player.onGround()) {
@@ -66,18 +68,24 @@ public class DoubleJumpHandler {
         });
     }
 
-    /** Applies only server-approved movement; current client X/Z prediction is preserved. */
+    /** Approval is acknowledgement-only because the local input tick already predicted the impulse. */
     static void applyServerApprovedVelocity(LocalPlayer player, DoubleJumpApprovedPayload payload) {
         if (player == null || payload == null || !Double.isFinite(payload.verticalVelocity())) return;
         if (payload.sequence() <= lastApprovalSequence) return;
         if (!Double.isFinite(payload.horizontalImpulseX()) || !Double.isFinite(payload.horizontalImpulseZ())) return;
 
         lastApprovalSequence = payload.sequence();
+        // Do not add the same horizontal or vertical impulse after RTT.
+    }
+
+    static void applyLocalPrediction(LocalPlayer player, boolean sprinting, float yawDegrees) {
+        if (player == null || !Float.isFinite(yawDegrees)) return;
         Vec3 current = player.getDeltaMovement();
-        player.setDeltaMovement(
-                current.x + payload.horizontalImpulseX(),
-                Math.max(current.y, payload.verticalVelocity()),
-                current.z + payload.horizontalImpulseZ());
+        float yawRadians = yawDegrees * ((float) Math.PI / 180.0F);
+        double impulseX = sprinting ? -Mth.sin(yawRadians) * DoubleJumpServerHandler.VANILLA_SPRINT_JUMP_IMPULSE : 0.0D;
+        double impulseZ = sprinting ? Mth.cos(yawRadians) * DoubleJumpServerHandler.VANILLA_SPRINT_JUMP_IMPULSE : 0.0D;
+        player.setDeltaMovement(current.x + impulseX, Math.max(current.y, DoubleJumpServerHandler.DOUBLE_JUMP_Y_VELOCITY), current.z + impulseZ);
+        player.resetFallDistance();
     }
 
     private static boolean hasDoubleJumpEnchant(LocalPlayer player) {
