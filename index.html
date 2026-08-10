@@ -10,26 +10,26 @@
   <script>
   (async () => {
     try {
-      const response = await fetch('wiki-base-3.2.2.html?v=3.2.4', { cache: 'no-cache' });
+      const response = await fetch('wiki-base-3.2.2.html?v=3.2.5', { cache: 'no-cache' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       let html = await response.text();
 
-      // Current release metadata and links.
+      // Current release metadata. 3.2.5 is a targeted 1.21.x hotfix; 1.20.1 stays on 3.2.4.
       html = html.replace(
         'Fabric · Minecraft 1.20.1, 1.21.1 &amp; 1.21.11 · v3.2.2</p>',
-        'Fabric · Minecraft 1.20.1, 1.21.1 &amp; 1.21.11 · v3.2.4</p>'
+        'Fabric · Minecraft 1.20.1, 1.21.1 &amp; 1.21.11 · v3.2.5 / 3.2.4</p>'
       );
       html = html.replace(
         '<span class="badge badge-version">v3.2.2</span>',
-        '<span class="badge badge-version">v3.2.4</span>'
+        '<span class="badge badge-version">v3.2.5</span>'
       );
       html = html.replace(
         'Custom Enchants 3.2.2 is released for three Minecraft versions from separate branches. Pick the release that matches your server/client.',
-        'Custom Enchants 3.2.4 is released for three Minecraft versions from separate branches. Pick the release that matches your server/client.'
+        'Custom Enchants 3.2.5 is the current release for Minecraft 1.21.1 and 1.21.11. Minecraft 1.20.1 remains on 3.2.4 because the Double Jump hotfix is not required there. Pick the release that matches your server/client.'
       );
       html = html.replace(
         'Custom Enchants 3.2.2 выпущен для трёх версий Minecraft из отдельных веток. Выберите релиз, который соответствует вашему серверу/клиенту.',
-        'Custom Enchants 3.2.4 выпущен для трёх версий Minecraft из отдельных веток. Выберите релиз, который соответствует вашему серверу/клиенту.'
+        'Custom Enchants 3.2.5 — текущий релиз для Minecraft 1.21.1 и 1.21.11. Minecraft 1.20.1 остаётся на 3.2.4, потому что хотфикс Double Jump для него не требуется. Выберите релиз, соответствующий вашему серверу/клиенту.'
       );
       html = html.replace(
         '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2" target="_blank">v3.2.2</a>',
@@ -37,22 +37,22 @@
       );
       html = html.replace(
         '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2-mc1.21.1" target="_blank">v3.2.2-mc1.21.1</a>',
-        '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4-mc1.21.1" target="_blank">v3.2.4-mc1.21.1</a>'
+        '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.1" target="_blank">v3.2.5-mc1.21.1</a>'
       );
       html = html.replace(
         '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2-mc1.21.11" target="_blank">v3.2.2-mc1.21.11</a>',
-        '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4-mc1.21.11" target="_blank">v3.2.4-mc1.21.11</a>'
+        '<a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11" target="_blank">v3.2.5-mc1.21.11</a>'
       );
       html = html.replace(
         'The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.2.2 line. Always install the JAR and dependencies for your exact Minecraft version.',
-        'The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.2.4 line. Always install the JAR and dependencies for your exact Minecraft version.'
+        'The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.2.x line. Minecraft 1.21.1/1.21.11 are on 3.2.5; Minecraft 1.20.1 remains on 3.2.4. Always install the JAR and dependencies for your exact Minecraft version.'
       );
       html = html.replace(
         'Справочник зачарований, конфигурации и сделки библиотекарей ниже — общая документация поддерживаемой линии 3.2.2. Всегда устанавливайте JAR и зависимости для вашей точной версии Minecraft.',
-        'Справочник зачарований, конфигурации и сделки библиотекарей ниже — общая документация поддерживаемой линии 3.2.4. Всегда устанавливайте JAR и зависимости для вашей точной версии Minecraft.'
+        'Справочник зачарований, конфигурации и сделки библиотекарей ниже — общая документация поддерживаемой линии 3.2.x. Minecraft 1.21.1/1.21.11 используют 3.2.5; Minecraft 1.20.1 остаётся на 3.2.4. Всегда устанавливайте JAR и зависимости для вашей точной версии Minecraft.'
       );
 
-      // Feedback's current contract, introduced in 3.2.3 and retained in 3.2.4.
+      // Feedback current contract (3.2.3+).
       html = html.replace(
         '<span data-en>When blocking a <strong>magical attack</strong> (harming potions, shulker bullets, evoker fangs), <strong>fully cancels damage</strong>, clears all harmful effects, and restores shield durability.</span>\n            <span data-ru hidden>При блокировании <strong>магической атаки</strong> (зелья вреда, снаряды шалкера) <strong>полностью отменяет урон</strong>, очищает негативные эффекты и восстанавливает прочность щита.</span>',
         '<span data-en>While a Feedback shield is <strong>actively raised</strong>, newly applied harmful status effects are rejected and supported magical damage such as <strong>Harming / Instant Damage</strong> is cancelled. Harmful effects that were already active before raising the shield are left unchanged; beneficial and neutral effects are unaffected.</span>\n            <span data-ru hidden>Пока щит с <strong>Эхо-ударом активно поднят</strong>, новые негативные эффекты не накладываются, а поддерживаемый магический урон, включая <strong>Зелье вреда / мгновенный урон</strong>, блокируется. Негативные эффекты, которые уже действовали до поднятия щита, не изменяются; положительные и нейтральные эффекты не затрагиваются.</span>'
@@ -62,7 +62,7 @@
         '<li><span data-en>Blocks newly applied harmful status effects only while the shield is actively raised</span><span data-ru hidden>Блокирует новые негативные эффекты только пока щит активно поднят</span></li>\n            <li><span data-en>Existing harmful effects are preserved without removal, refresh, extension, or replacement</span><span data-ru hidden>Уже действующие негативные эффекты сохраняются без удаления, обновления, продления или замены</span></li>\n            <li><span data-en>Beneficial and neutral effects pass through normally</span><span data-ru hidden>Положительные и нейтральные эффекты проходят без изменений</span></li>\n            <li><span data-en>Supported magical damage, including Harming / Instant Damage, is cancelled</span><span data-ru hidden>Поддерживаемый магический урон, включая Зелье вреда / мгновенный урон, блокируется</span></li>\n            <li><span data-en>Durability restoration amount is configurable</span><span data-ru hidden>Количество восстановленной прочности настраивается</span></li>'
       );
 
-      // Librarian trade contract in 3.2.4.
+      // Librarian trade contract introduced in 3.2.4.
       html = html.replace(
         '<span data-en>All enchanted books can be purchased from a <strong>Librarian</strong> villager. All enchantments are also obtainable from the <strong>enchanting table</strong>.</span>\n        <span data-ru hidden>Все зачарованные книги можно купить у жителя-<strong>Библиотекаря</strong>. Также все зачарования доступны через <strong>стол зачарований</strong>.</span>',
         '<span data-en>Custom enchanted books can be purchased from a <strong>Librarian</strong> villager. Every custom-book trade always costs its configured emerald price <strong>plus one regular book</strong>. Any defined custom enchantment level can roll at <strong>any librarian tier, including Novice</strong>, matching vanilla enchanted-book availability more closely. All enchantments are also obtainable from the <strong>enchanting table</strong>.</span>\n        <span data-ru hidden>Кастомные зачарованные книги можно купить у жителя-<strong>Библиотекаря</strong>. Каждая такая сделка всегда требует заданную цену в изумрудах <strong>плюс одну обычную книгу</strong>. Любой существующий уровень кастомного зачарования может выпасть на <strong>любом уровне библиотекаря, включая Новичка</strong>, что ближе к ванильной торговле зачарованными книгами. Все зачарования также доступны через <strong>стол зачарований</strong>.</span>'
@@ -71,7 +71,6 @@
         '<th data-en>Villager Tier</th><th data-ru hidden>Тир жителя</th>',
         '<th data-en>Availability</th><th data-ru hidden>Доступность</th>'
       );
-
       const tierCells = [
         ['Novice (1)', 'Новичок (1)'],
         ['Apprentice (2)', 'Ученик (2)'],
@@ -85,14 +84,18 @@
           '<td><span data-en>Any tier (1–5)</span><span data-ru hidden>Любой уровень (1–5)</span></td>'
         );
       });
-
-      // Preserve the configured emerald amount, but show the mandatory plain-book input as well.
       html = html.replace(
         /<td><span data-en>(\d+) Emeralds?<\/span><span data-ru hidden>(\d+) изумруд(?:а|ов)<\/span><\/td>/g,
         '<td><span data-en>$1 Emeralds + 1 Book</span><span data-ru hidden>$2 изумрудов + 1 книга</span></td>'
       );
 
-      // Keep the project structure description in sync with the extracted trade factory.
+      // Double Jump 3.2.5 movement hotfix documentation for 1.21.x.
+      html = html.replace(
+        '<span data-en>Allows a <strong>second jump in mid-air</strong>. White cloud particles appear on double jump.</span>\n            <span data-ru hidden>Позволяет совершить <strong>второй прыжок в воздухе</strong>. При активации появляются белые частицы.</span>',
+        '<span data-en>Allows a <strong>second jump in mid-air</strong>. On Minecraft 1.21.1 and 1.21.11, 3.2.5 predicts the movement impulse immediately on the activation tick and then validates it server-side, avoiding the delayed RTT kick/stutter from 3.2.4. White cloud particles appear on double jump.</span>\n            <span data-ru hidden>Позволяет совершить <strong>второй прыжок в воздухе</strong>. На Minecraft 1.21.1 и 1.21.11 версия 3.2.5 сразу прогнозирует импульс движения в тик нажатия, после чего сервер его проверяет — без запоздалого толчка/рывка после RTT, который был в 3.2.4. При активации появляются белые частицы.</span>'
+      );
+
+      // Keep project structure documentation in sync with the 3.2 line.
       html = html.replace(
         '├── CustomEnchantsMod.java              — Main mod class, trade registration\n├── config/',
         '├── CustomEnchantsMod.java              — Main mod class, trade registration\n├── trade/\n│   └── LibrarianEnchantTrade.java      — Random custom-book offers; emeralds + one book\n├── config/'
@@ -102,14 +105,14 @@
         '├── CustomEnchantsMod.java              — Главный класс мода, регистрация торговли\n├── trade/\n│   └── LibrarianEnchantTrade.java      — Случайные сделки книг; изумруды + одна книга\n├── config/'
       );
 
-      // Add 3.2.4 and 3.2.3 above the archived 3.2.2 changelog entry.
+      // Current changelog entries above the archived 3.2.2 entry.
       const changelogMarker = '      <div class="changelog-list">\n\n        <details class="cl-entry" open>';
-      const currentChangelog = `      <div class="changelog-list">\n\n        <details class="cl-entry" open>\n          <summary class="cl-summary">\n            <span class="cl-ver">v3.2.4</span>\n            <span class="cl-date">2026-08-08</span>\n            <span class="cl-new" data-en>Librarian trade fix</span><span class="cl-new" data-ru hidden>Исправление торговли библиотекарей</span>\n          </summary>\n          <div class="cl-body">\n            <p><span data-en><strong>Compatibility:</strong> Fabric builds for Minecraft 1.20.1 (Java 17), 1.21.1 and 1.21.11 (Java 21).</span><span data-ru hidden><strong>Совместимость:</strong> Fabric-сборки для Minecraft 1.20.1 (Java 17), 1.21.1 и 1.21.11 (Java 21).</span></p>\n            <p><span data-en><strong>Fixed:</strong> every custom enchanted-book trade now always requires its configured emerald price plus one regular book. Custom enchantment levels are no longer locked behind specific librarian tiers: any defined custom-book level can roll from Novice onward, while existing emerald prices, enchantment levels, max uses, villager XP rewards and price multipliers are preserved.</span><span data-ru hidden><strong>Исправлено:</strong> каждая сделка кастомной зачарованной книги теперь всегда требует заданную цену в изумрудах плюс одну обычную книгу. Уровни кастомных зачарований больше не привязаны к определённым уровням библиотекаря: любой существующий уровень книги может выпасть уже у Новичка, при этом цены в изумрудах, уровни зачарований, лимиты сделок, опыт жителя и множители цены сохранены.</span></p>\n            <p><span data-en><strong>Validation:</strong> librarian trade behavior was accepted after in-game testing; unit/contract tests, Fabric GameTests, release-JAR verification and dedicated-server smoke tests pass on all supported versions.</span><span data-ru hidden><strong>Проверка:</strong> поведение торговли библиотекарей принято после проверки в игре; unit/contract tests, Fabric GameTests, проверка release-JAR и dedicated-server smoke успешно проходят на всех поддерживаемых версиях.</span></p>\n          </div>\n        </details>\n\n        <details class="cl-entry">\n          <summary class="cl-summary">\n            <span class="cl-ver">v3.2.3</span>\n            <span class="cl-date">2026-08-08</span>\n            <span class="cl-new" data-en>Feedback protection fix</span><span class="cl-new" data-ru hidden>Исправление защиты Эхо-удара</span>\n          </summary>\n          <div class="cl-body">\n            <p><span data-en><strong>Compatibility:</strong> Fabric builds for Minecraft 1.20.1 (Java 17), 1.21.1 and 1.21.11 (Java 21).</span><span data-ru hidden><strong>Совместимость:</strong> Fabric-сборки для Minecraft 1.20.1 (Java 17), 1.21.1 и 1.21.11 (Java 21).</span></p>\n            <p><span data-en><strong>Fixed:</strong> while Feedback is actively raised, newly applied harmful effects are rejected and supported magical damage such as Harming / Instant Damage is cancelled independently of vanilla shield-facing and shield-bypass rules. Harmful effects that were already active before raising the shield are preserved unchanged; beneficial and neutral effects remain unaffected.</span><span data-ru hidden><strong>Исправлено:</strong> пока Эхо-удар активно поднят, новые негативные эффекты не накладываются, а поддерживаемый магический урон вроде Зелья вреда / мгновенного урона блокируется независимо от ванильных правил направления и обхода щита. Негативные эффекты, действовавшие до поднятия щита, сохраняются без изменений; положительные и нейтральные эффекты не затрагиваются.</span></p>\n            <p><span data-en><strong>Validation:</strong> final behavior was accepted in-game; unit/contract tests, Fabric GameTests, release-JAR verification and dedicated-server smoke tests pass on all supported versions.</span><span data-ru hidden><strong>Проверка:</strong> финальное поведение принято после проверки в игре; unit/contract tests, Fabric GameTests, проверка release-JAR и dedicated-server smoke успешно проходят на всех поддерживаемых версиях.</span></p>\n          </div>\n        </details>\n\n        <details class="cl-entry">`;
+      const currentChangelog = `      <div class="changelog-list">\n\n        <details class="cl-entry" open>\n          <summary class="cl-summary">\n            <span class="cl-ver">v3.2.5</span>\n            <span class="cl-date">2026-08-10</span>\n            <span class="cl-new" data-en>Double Jump smoothness hotfix</span><span class="cl-new" data-ru hidden>Хотфикс плавности Двойного прыжка</span>\n          </summary>\n          <div class="cl-body">\n            <p><span data-en><strong>Compatibility:</strong> released for Minecraft 1.21.1 and 1.21.11 (Java 21). Minecraft 1.20.1 remains on 3.2.4 because its Double Jump behavior was already correct.</span><span data-ru hidden><strong>Совместимость:</strong> релиз для Minecraft 1.21.1 и 1.21.11 (Java 21). Minecraft 1.20.1 остаётся на 3.2.4, потому что его Double Jump уже работал корректно.</span></p>\n            <p><span data-en><strong>Root cause:</strong> the 1.21.x owner client waited for the complete server approval round trip before receiving the Double Jump impulse, creating a late horizontal/vertical kick and allowing direction to drift if yaw changed while the request was in flight.</span><span data-ru hidden><strong>Причина:</strong> на 1.21.x клиент владельца ждал полный round trip серверного подтверждения перед применением импульса Double Jump, из-за чего появлялся запоздалый горизонтальный/вертикальный толчок, а направление могло разойтись с моментом нажатия при изменении yaw.</span></p>\n            <p><span data-en><strong>Fixed:</strong> movement is predicted immediately on the input tick; C2S carries sprint + activation-yaw snapshots; the server remains authoritative and applies the equivalent snapshot-based impulse; S2C approval is acknowledgement-only and cannot add a second delayed impulse. Minecraft 1.21.11 uses its valid <code>hurtMarked</code> synchronization path.</span><span data-ru hidden><strong>Исправлено:</strong> движение прогнозируется сразу в тик нажатия; C2S передаёт snapshot спринта и yaw момента активации; сервер остаётся авторитетным и применяет эквивалентный импульс; S2C-подтверждение не добавляет второй запоздалый импульс. Minecraft 1.21.11 использует корректный механизм синхронизации <code>hurtMarked</code>.</span></p>\n            <p><span data-en><strong>Validation:</strong> both 1.21.1 and 1.21.11 builds passed automated validation and were manually accepted in-game.</span><span data-ru hidden><strong>Проверка:</strong> сборки 1.21.1 и 1.21.11 прошли автоматическую проверку и были вручную подтверждены в игре.</span></p>\n          </div>\n        </details>\n\n        <details class="cl-entry">\n          <summary class="cl-summary">\n            <span class="cl-ver">v3.2.4</span>\n            <span class="cl-date">2026-08-08</span>\n            <span class="cl-new" data-en>Librarian trade fix</span><span class="cl-new" data-ru hidden>Исправление торговли библиотекарей</span>\n          </summary>\n          <div class="cl-body">\n            <p><span data-en><strong>Compatibility:</strong> Fabric builds for Minecraft 1.20.1 (Java 17), 1.21.1 and 1.21.11 (Java 21).</span><span data-ru hidden><strong>Совместимость:</strong> Fabric-сборки для Minecraft 1.20.1 (Java 17), 1.21.1 и 1.21.11 (Java 21).</span></p>\n            <p><span data-en><strong>Fixed:</strong> every custom enchanted-book trade now always requires its configured emerald price plus one regular book. Custom enchantment levels are no longer locked behind specific librarian tiers: any defined custom-book level can roll from Novice onward, while existing emerald prices, enchantment levels, max uses, villager XP rewards and price multipliers are preserved.</span><span data-ru hidden><strong>Исправлено:</strong> каждая сделка кастомной зачарованной книги теперь всегда требует заданную цену в изумрудах плюс одну обычную книгу. Уровни кастомных зачарований больше не привязаны к определённым уровням библиотекаря: любой существующий уровень книги может выпасть уже у Новичка, при этом цены в изумрудах, уровни зачарований, лимиты сделок, опыт жителя и множители цены сохранены.</span></p>\n            <p><span data-en><strong>Validation:</strong> librarian trade behavior was accepted after in-game testing; unit/contract tests, Fabric GameTests, release-JAR verification and dedicated-server smoke tests pass on all supported versions.</span><span data-ru hidden><strong>Проверка:</strong> поведение торговли библиотекарей принято после проверки в игре; unit/contract tests, Fabric GameTests, проверка release-JAR и dedicated-server smoke успешно проходят на всех поддерживаемых версиях.</span></p>\n          </div>\n        </details>\n\n        <details class="cl-entry">\n          <summary class="cl-summary">\n            <span class="cl-ver">v3.2.3</span>\n            <span class="cl-date">2026-08-08</span>\n            <span class="cl-new" data-en>Feedback protection fix</span><span class="cl-new" data-ru hidden>Исправление защиты Эхо-удара</span>\n          </summary>\n          <div class="cl-body">\n            <p><span data-en><strong>Compatibility:</strong> Fabric builds for Minecraft 1.20.1 (Java 17), 1.21.1 and 1.21.11 (Java 21).</span><span data-ru hidden><strong>Совместимость:</strong> Fabric-сборки для Minecraft 1.20.1 (Java 17), 1.21.1 и 1.21.11 (Java 21).</span></p>\n            <p><span data-en><strong>Fixed:</strong> while a Feedback shield is actively raised, newly applied harmful status effects are rejected and supported magical damage such as Harming is blocked independently of vanilla shield-facing/bypass rules. Harmful effects that were active beforehand continue normally without being removed or rewritten; beneficial and neutral effects are unaffected.</span><span data-ru hidden><strong>Исправлено:</strong> при активно поднятом щите с Эхо-ударом новые негативные эффекты отклоняются, а поддерживаемый магический урон, включая зелья вреда, блокируется независимо от ванильных правил направления/обхода щита. Негативные эффекты, действовавшие заранее, продолжаются без удаления или изменения; положительные и нейтральные эффекты не затрагиваются.</span></p>\n            <p><span data-en><strong>Validation:</strong> final behavior was accepted in-game; unit/contract tests, Fabric GameTests, release-JAR verification and dedicated-server smoke tests pass on all supported versions.</span><span data-ru hidden><strong>Проверка:</strong> финальное поведение принято после проверки в игре; unit/contract tests, Fabric GameTests, проверка release-JAR и dedicated-server smoke успешно проходят на всех поддерживаемых версиях.</span></p>\n          </div>\n        </details>\n\n        <details class="cl-entry">`;
       html = html.replace(changelogMarker, currentChangelog);
 
       html = html.replace(
         '<p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.2.2</p>',
-        '<p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.2.4</p>'
+        '<p class="footer-copy"><span data-en>Author: mentality</span><span data-ru hidden>Автор: mentality</span> · v3.2.5 (1.21.x) / v3.2.4 (1.20.1)</p>'
       );
 
       document.open();
