@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=3.2%2F1.21.11)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
 
-Version `3.2.4` · Minecraft `1.21.11` · Fabric · Java `21` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Documentation](https://sqwiziiy.github.io/Custom-Enchants/) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
+Version `3.2.5` · Minecraft `1.21.11` · Fabric · Java `21` · [Releases](https://github.com/sqwiziiy/Custom-Enchants/releases) · [Documentation](https://sqwiziiy.github.io/Custom-Enchants/) · [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
 
 Minecraft 1.21.11 Fabric mod with 19 configurable gameplay enchantments. The
 server owns gameplay state; Cloth Config and Mod Menu provide configuration UI
@@ -14,7 +14,7 @@ when installed on the client.
 
 - [Enchantment reference](ENCHANTMENTS.md)
 - [Configuration reference](CONFIGURATION.md)
-- [3.2.4 release notes](RELEASE_NOTES_3.2.4.md)
+- [3.2.5 release notes](RELEASE_NOTES_3.2.5.md)
 - [Changelog](CHANGELOG_EN.md)
 - [Source repository](https://github.com/sqwiziiy/Custom-Enchants)
 - [Issues](https://github.com/sqwiziiy/Custom-Enchants/issues)
@@ -34,4 +34,6 @@ reference files above. The project is licensed under CC0-1.0.
 
 ## Installation
 
-Download `custom-enchants-3.2.4-mc1.21.11.jar` from the [Minecraft 1.21.11 release](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4-mc1.21.11) and place it in the Fabric `mods/` directory. Required dependencies are Fabric Loader `>=0.19.3`, Fabric API `>=0.141.6+1.21.11`, Cloth Config `>=21.11.153`, and Java `>=21`; Mod Menu `>=17.0.0` is optional.
+Download `custom-enchants-3.2.5-mc1.21.11.jar` from the [Minecraft 1.21.11 release](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11) and place it in the Fabric `mods/` directory. Required dependencies are Fabric Loader `>=0.19.3`, Fabric API `>=0.141.6+1.21.11`, Cloth Config `>=21.11.153`, and Java `>=21`; Mod Menu `>=17.0.0` is optional.
+
+For Minecraft 1.20.1, use the [v3.2.4 release](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4) from the [`3.2/1.20.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.20.1) branch instead.
