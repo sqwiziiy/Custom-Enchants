@@ -1,1 +1,5 @@
-PROJECT_LANGUAGE linguist-language=Java linguist-detectable=true
+* text=auto
+*.bat text eol=crlf
+*.sh text eol=lf
+*.json text
+*.md text

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "custom-enchants:glow_strike",
+    "custom-enchants:double_jump",
+    "custom-enchants:drill",
+    "custom-enchants:poison_blade",
+    "custom-enchants:lumberjack",
+    "custom-enchants:shadow_blade",
+    "custom-enchants:magnet",
+    "custom-enchants:auto_smelt",
+    "custom-enchants:vegetation",
+    "custom-enchants:rebound",
+    "custom-enchants:feedback",
+    "custom-enchants:second_wind",
+    "custom-enchants:guardians_grace",
+    "custom-enchants:vulnerability",
+    "custom-enchants:tether_master",
+    "custom-enchants:sky_rage",
+    "custom-enchants:xp_syphon",
+    "custom-enchants:kinetic_discharge",
+    "custom-enchants:sculk_bloom"
+  ]
+}

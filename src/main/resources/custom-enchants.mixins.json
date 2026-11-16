@@ -1,0 +1,32 @@
+{
+	"required": true,
+	"package": "com.mentality.customenchants.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ShieldBlockContextMixin",
+		"ProjectileContextAbstractArrowMixin",
+		"ProjectileContextThrownTridentMixin",
+		"ArrowItemProjectileContextMixin",
+		"ProjectileContextTridentCaptureMixin",
+		"ThrownTridentMixin",
+		"MeleeEnchantmentEffectsMixin",
+		"KillingWeaponContextMixin",
+		"ItemEntityOwnershipAccessor",
+		"ItemEntityPickupDelayAccessor",
+		"AnvilMenuMixin",
+		"ShieldReboundMixin",
+		"ShieldFeedbackMixin",
+		"FeedbackEffectApplicationMixin",
+		"ShieldGuardianGraceMixin",
+		"VulnerabilityArrowMixin",
+		"VulnerabilityArmorMixin",
+		"TetherMasterMixin",
+		"SkyRageMixin",
+		"AutoSmeltBlockDropsMixin",
+		"MagnetBlockDropContextMixin",
+		"MagnetFinalItemSpawnMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

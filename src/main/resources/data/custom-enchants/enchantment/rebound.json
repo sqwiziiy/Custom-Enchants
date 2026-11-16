@@ -1,0 +1,22 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.custom-enchants.rebound"
+  },
+  "exclusive_set": "#custom-enchants:exclusive_set/shield",
+  "max_cost": {
+    "base": 16,
+    "per_level_above_first": 10
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 11,
+    "per_level_above_first": 10
+  },
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "supported_items": "#custom-enchants:enchantable/shield",
+  "weight": 2
+}
