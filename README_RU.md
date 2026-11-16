@@ -24,15 +24,16 @@ Minecraft **1.20.1** остаётся на **3.2.4**, потому что это
 
 | Minecraft | Ветка исходников | Java | Релиз |
 | --- | --- | --- | --- |
-| 1.21.11 | [`3.2/1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.21.11) | 21 | [`v3.2.5-mc1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11) |
+| 1.21.11 | [`main`](https://github.com/sqwiziiy/Custom-Enchants/tree/main) | 21 | [`v3.2.5-mc1.21.11`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11) |
 | 1.21.1 | [`3.2/1.21.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.21.1) | 21 | [`v3.2.5-mc1.21.1`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.1) |
 | 1.20.1 | [`3.2/1.20.1`](https://github.com/sqwiziiy/Custom-Enchants/tree/3.2/1.20.1) | 17 | [`v3.2.4`](https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4) |
 
 ## Ветки
 
-Ветка `main` содержит только информацию о проекте. Исходный код мода находится
-в отдельных ветках для соответствующих версий Minecraft. Выбирайте файл релиза
-или ветку исходников для своей версии Minecraft: один JAR не поддерживает все
-версии.
+Ветка `main` содержит актуальные исходники для Minecraft 1.21.11. Для других поддерживаемых версий Minecraft существуют отдельные ветки. Выбирайте JAR для своей версии Minecraft: один JAR не поддерживает все версии.
 
 Схема репозитория и архивные линии сопровождения приведены в [карте веток](docs/BRANCHES.md).
+
+## Лицензия
+
+Новые оригинальные изменения распространяются по [GNU GPL-3.0-only](LICENSE). Ранее опубликованный под CC0 код остаётся доступным на прежних условиях: новая лицензия не отменяет уже предоставленные разрешения.
