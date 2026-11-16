@@ -2,10 +2,10 @@
 
 | Branch | Purpose |
 | --- | --- |
-| `main` | Project landing page and documentation only |
+| `main` | Current Minecraft 1.21.11 source and development |
 | `3.2/1.20.1` | Current Minecraft 1.20.1 source and maintenance |
 | `3.2/1.21.1` | Current Minecraft 1.21.1 source and maintenance |
-| `3.2/1.21.11` | Current Minecraft 1.21.11 source and maintenance |
+| `3.2/1.21.11` | Historical 3.2.5 source line; superseded by `main` |
 | `3.1/1.20.1` | Archived 3.1.x maintenance line for Minecraft 1.20.1 |
 | `3.1/1.21.1` | Archived 3.1.x maintenance line for Minecraft 1.21.1 |
 | `3.1/1.21.11` | Archived 3.1.x maintenance line for Minecraft 1.21.11 |
