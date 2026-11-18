@@ -2,6 +2,14 @@
 
 > [Русская версия](README_RU.md)
 
+[![Build](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sqwiziiy/Custom-Enchants/actions/workflows/ci.yml)
+![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-3C8527)
+![Minecraft 1.21.1](https://img.shields.io/badge/Minecraft-1.21.1-3C8527)
+![Minecraft 1.20.1](https://img.shields.io/badge/Minecraft-1.20.1-3C8527)
+![Fabric](https://img.shields.io/badge/Loader-Fabric-DBD0B4)
+![Java 17 / 21](https://img.shields.io/badge/Java-17%20%7C%2021-E76F00)
+![GPL-3.0-only](https://img.shields.io/badge/License-GPL--3.0--only-3B57A6)
+
 Custom Fabric enchantments for Minecraft.
 
 ## Current release
