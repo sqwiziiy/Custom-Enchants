@@ -12,7 +12,9 @@
 <header class="site-header">
   <div class="header-inner">
     <div class="header-title-block">
-      <div class="header-icon">✦</div>
+      <div class="header-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18V5a1 1 0 0 1 1-1h4a4 4 0 0 1 4 4 4 4 0 0 1 4-4h4a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-4a4 4 0 0 0-4 2 4 4 0 0 0-4-2H4a1 1 0 0 1-1-1Z"/></svg>
+      </div>
       <div>
         <h1 class="site-title">Mentalitys | Custom Enchantments</h1>
         <p class="site-subtitle">Fabric · Minecraft 1.20.1, 1.21.1 &amp; 1.21.11 · v3.2.2</p>
@@ -42,15 +44,15 @@
 <nav class="sticky-nav" id="sticky-nav">
   <div class="sticky-nav-inner">
     <!-- enchant filters -->
-    <button class="filter-btn active" data-filter="all"      data-en="All"           data-ru="Все">All</button>
-    <button class="filter-btn"        data-filter="weapon"   data-en="⚔️ Weapon"     data-ru="⚔️ Оружие">⚔️ Weapon</button>
-    <button class="filter-btn"        data-filter="tool"     data-en="⛏️ Tools"      data-ru="⛏️ Инструменты">⛏️ Tools</button>
-    <button class="filter-btn"        data-filter="armor"    data-en="🛡️ Armor"      data-ru="🛡️ Броня">🛡️ Armor</button>
-    <button class="filter-btn"        data-filter="ranged"   data-en="🏹 Ranged"     data-ru="🏹 Дальний бой">🏹 Ranged</button>
+    <button class="filter-btn active" data-filter="all" data-en="All" data-ru="Все"><span class="filter-label">All</span></button>
+    <button class="filter-btn" data-filter="weapon" data-en="Weapon" data-ru="Оружие"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m14.5 17.5 3-3L22 10V2l-8 4-3 3"/><path d="m2 22 8-4 3-3-3-3-3 3z"/><path d="m9 15-3-3"/></svg><span class="filter-label">Weapon</span></button>
+    <button class="filter-btn" data-filter="tool" data-en="Tools" data-ru="Инструменты"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 12-8.8 8.8a2.1 2.1 0 0 1-3-3L12 9"/><path d="m18 15 4-4-6-6-4 4"/><path d="m2.5 8.5 5-5"/><path d="m14 4 6 6"/></svg><span class="filter-label">Tools</span></button>
+    <button class="filter-btn" data-filter="armor" data-en="Armor" data-ru="Броня"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11"/></svg><span class="filter-label">Armor</span></button>
+    <button class="filter-btn" data-filter="ranged" data-en="Ranged" data-ru="Дальний бой"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span class="filter-label">Ranged</span></button>
     <!-- trades tab -->
-    <button class="filter-btn tab-trades" data-filter="trades" data-en="🧑‍🌾 Trades" data-ru="🧑‍🌾 Торговля">🧑‍🌾 Trades</button>
+    <button class="filter-btn tab-trades" data-filter="trades" data-en="Trades" data-ru="Торговля"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="filter-label">Trades</span></button>
     <!-- structure tab -->
-    <button class="filter-btn tab-structure" data-filter="structure" data-en="📂 Structure" data-ru="📂 Структура">📂 Structure</button>
+    <button class="filter-btn tab-structure" data-filter="structure" data-en="Structure" data-ru="Структура"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h8v6H3z"/><path d="M13 15h8v6h-8z"/><path d="M13 3h8v6h-8z"/><path d="M7 9v4a2 2 0 0 0 2 2h4"/><path d="M17 9v6"/></svg><span class="filter-label">Structure</span></button>
   </div>
 </nav>
 
@@ -96,7 +98,7 @@
       </p>
       <div class="req-grid">
         <div class="req-card">
-          <span class="req-icon">🟢</span>
+          <span class="req-icon req-icon-current" aria-hidden="true"></span>
           <div>
             <div class="req-name">Minecraft 1.20.1 · Java 17</div>
             <div class="req-ver">
@@ -106,7 +108,7 @@
           </div>
         </div>
         <div class="req-card">
-          <span class="req-icon">🆕</span>
+          <span class="req-icon req-status">New</span>
           <div>
             <div class="req-name">Minecraft 1.21.1 · Java 21</div>
             <div class="req-ver">
@@ -116,7 +118,7 @@
           </div>
         </div>
         <div class="req-card">
-          <span class="req-icon">🆕</span>
+          <span class="req-icon req-status">New</span>
           <div>
             <div class="req-name">Minecraft 1.21.11 · Java 21</div>
             <div class="req-ver"><span data-en>Branch </span><span data-ru hidden>Ветка </span><code>3.2/1.21.11</code> · <a href="https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.2-mc1.21.11" target="_blank">v3.2.2-mc1.21.11</a></div>
@@ -130,9 +132,9 @@
     <section class="requirements-section">
       <h2 class="section-title" data-en="Requirements (Minecraft 1.20.1)" data-ru="Зависимости (Minecraft 1.20.1)">Requirements (Minecraft 1.20.1)</h2>
       <div class="req-grid">
-        <div class="req-card"><span class="req-icon">🧩</span><div><div class="req-name">Fabric API</div><div class="req-ver">0.92.7+1.20.1</div></div></div>
-        <div class="req-card"><span class="req-icon">⚙️</span><div><div class="req-name">Cloth Config API</div><div class="req-ver">11.1.118</div></div></div>
-        <div class="req-card"><span class="req-icon">📋</span><div><div class="req-name">Mod Menu</div><div class="req-ver">7.2.2</div></div></div>
+        <div class="req-card req-card-compact"><div><div class="req-name">Fabric API</div><div class="req-ver">0.92.7+1.20.1</div></div></div>
+        <div class="req-card req-card-compact"><div><div class="req-name">Cloth Config API</div><div class="req-ver">11.1.118</div></div></div>
+        <div class="req-card req-card-compact"><div><div class="req-name">Mod Menu</div><div class="req-ver">7.2.2</div></div></div>
       </div>
       <p class="intro-text">
         <span data-en>Minecraft 1.21.1 requires Fabric API <code>&gt;=0.116.15+1.21.1</code>, Cloth Config <code>&gt;=15.0.140</code> and Mod Menu <code>&gt;=11.0.4</code>. Minecraft 1.21.11 requires Fabric API <code>&gt;=0.141.6+1.21.11</code>, Cloth Config <code>&gt;=21.11.153</code> and Mod Menu <code>&gt;=17.0.0</code>. Both require Java 21.</span>
@@ -148,7 +150,6 @@
         <!-- ── Glow Strike ── -->
         <article class="enchant-card" data-category="weapon">
           <div class="card-header">
-            <span class="card-emoji">⚔️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Glow Strike</span>
@@ -167,8 +168,8 @@
             <span data-ru hidden>При ударе накладывает <strong>Свечение</strong> — цель видна сквозь стены. Работает на мечах, топорах и тризубцах.</span>
           </p>
           <div class="card-slots">
-            <span data-en>📦 Sword · Axe · Trident</span>
-            <span data-ru hidden>📦 Меч · Топор · Тризубец</span>
+            <span data-en>Sword · Axe · Trident</span>
+            <span data-ru hidden>Меч · Топор · Тризубец</span>
           </div>
           <table class="stat-table">
             <thead><tr>
@@ -190,7 +191,6 @@
         <!-- ── Double Jump ── -->
         <article class="enchant-card" data-category="armor">
           <div class="card-header">
-            <span class="card-emoji">🦘</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Double Jump</span><span data-ru hidden>Двойной прыжок</span>
@@ -207,7 +207,7 @@
             <span data-en>Allows a <strong>second jump in mid-air</strong>. White cloud particles appear on double jump.</span>
             <span data-ru hidden>Позволяет совершить <strong>второй прыжок в воздухе</strong>. При активации появляются белые частицы.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Boots</span><span data-ru hidden>📦 Ботинки</span></div>
+          <div class="card-slots"><span data-en>Boots</span><span data-ru hidden>Ботинки</span></div>
           <ul class="card-notes">
             <li><span data-en>67% chance to consume 1 durability (<em>Unbreaking</em> reduces this)</span><span data-ru hidden>67% шанс потратить 1 прочность (<em>Прочность</em> снижает шанс)</span></li>
             <li><span data-en>Does not work in water or lava</span><span data-ru hidden>Не работает в воде и лаве</span></li>
@@ -217,7 +217,6 @@
         <!-- ── Drill ── -->
         <article class="enchant-card" data-category="tool">
           <div class="card-header">
-            <span class="card-emoji">⛏️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Drill</span><span data-ru hidden>Бур</span>
@@ -234,7 +233,7 @@
             <span data-en>Breaks blocks in a <strong>3×3 area</strong>. The plane follows the actual block face hit by the player's view ray, including diagonal and edge/corner camera angles.</span>
             <span data-ru hidden>Ломает блоки в области <strong>3×3</strong>. Плоскость определяется по фактической грани, в которую попадает луч взгляда игрока, включая диагональные углы и наведение около рёбер/углов блока.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Pickaxe · Shovel</span><span data-ru hidden>📦 Кирка · Лопата</span></div>
+          <div class="card-slots"><span data-en>Pickaxe · Shovel</span><span data-ru hidden>Кирка · Лопата</span></div>
           <ul class="card-notes">
             <li><span data-en>Disabled while sneaking (<kbd>Shift</kbd>)</span><span data-ru hidden>Не работает при зажатом <kbd>Shift</kbd></span></li>
             <li><span data-en>1 durability per extra block (<em>Unbreaking</em> applies)</span><span data-ru hidden>1 прочность за доп. блок (<em>Прочность</em> учитывается)</span></li>
@@ -246,7 +245,6 @@
         <!-- ── Poison Blade ── -->
         <article class="enchant-card" data-category="weapon">
           <div class="card-header">
-            <span class="card-emoji">🗡️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Poison Blade</span><span data-ru hidden>Ядовитый клинок</span>
@@ -263,7 +261,7 @@
             <span data-en>On hit, applies the <strong>Poison</strong> effect to the target.</span>
             <span data-ru hidden>При ударе накладывает <strong>Отравление</strong> на цель.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Sword · Axe</span><span data-ru hidden>📦 Меч · Топор</span></div>
+          <div class="card-slots"><span data-en>Sword · Axe</span><span data-ru hidden>Меч · Топор</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -283,7 +281,6 @@
         <!-- ── Lumberjack ── -->
         <article class="enchant-card" data-category="tool">
           <div class="card-header">
-            <span class="card-emoji">🪵</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Lumberjack</span><span data-ru hidden>Лесоруб</span>
@@ -300,7 +297,7 @@
             <span data-en>Chops an entire <strong>tree</strong> by breaking one log. Smart detection — won't break player-built log structures. Works with Nether trees.</span>
             <span data-ru hidden>Срубает всё <strong>дерево</strong> за один удар. Умное определение — не ломает постройки из брёвен. Работает с деревьями Незера.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Axe</span><span data-ru hidden>📦 Топор</span></div>
+          <div class="card-slots"><span data-en>Axe</span><span data-ru hidden>Топор</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -322,7 +319,6 @@
         <!-- ── Shadow Blade ── -->
         <article class="enchant-card" data-category="weapon">
           <div class="card-header">
-            <span class="card-emoji">🗡️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Shadow Blade</span><span data-ru hidden>Теневой клинок</span>
@@ -339,7 +335,7 @@
             <span data-en>On hit, chance to <strong>teleport behind the target</strong> and apply <strong>Slowness II</strong>. Chance scales with throw distance (up to +10% from 30 blocks).</span>
             <span data-ru hidden>При броске шанс <strong>телепортироваться за спину цели</strong> и наложить <strong>Замедление II</strong>. Шанс растёт с расстояния (до +10% с 30 блоков).</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Trident</span><span data-ru hidden>📦 Тризубец</span></div>
+          <div class="card-slots"><span data-en>Trident</span><span data-ru hidden>Тризубец</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -361,7 +357,6 @@
         <!-- ── Magnet ── -->
         <article class="enchant-card" data-category="tool">
           <div class="card-header">
-            <span class="card-emoji">🧲</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Magnet</span><span data-ru hidden>Магнит</span>
@@ -378,7 +373,7 @@
             <span data-en>When mining, <strong>collects linked drops</strong> into the player's inventory and also uses a configurable nearby-item radius (default 5 blocks).</span>
             <span data-ru hidden>При добыче <strong>собирает связанные дропы</strong> в инвентарь игрока и также использует настраиваемый радиус ближайших предметов (по умолчанию 5 блоков).</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Pickaxe · Axe · Shovel · Hoe</span><span data-ru hidden>📦 Кирка · Топор · Лопата · Мотыга</span></div>
+          <div class="card-slots"><span data-en>Pickaxe · Axe · Shovel · Hoe</span><span data-ru hidden>Кирка · Топор · Лопата · Мотыга</span></div>
           <ul class="card-notes">
             <li><span data-en>Works with <em>Drill</em> and <em>Lumberjack</em></span><span data-ru hidden>Работает с <em>Буром</em> и <em>Лесорубом</em></span></li>
             <li><span data-en>Pickup radius is configurable; on 1.20.1, complex Lumberjack trees can leave some secondary drops nearby without loss or duplication</span><span data-ru hidden>Радиус подбора настраивается; на 1.20.1 сложные деревья Лесоруба могут оставить рядом часть вторичных дропов без потери или дублирования</span></li>
@@ -388,7 +383,6 @@
         <!-- ── Auto Smelt ── -->
         <article class="enchant-card" data-category="tool">
           <div class="card-header">
-            <span class="card-emoji">🔥</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Auto Smelt</span><span data-ru hidden>Автопечка</span>
@@ -405,7 +399,7 @@
             <span data-en>Automatically replaces eligible ore loot with the <strong>smelted result</strong> while preserving the relevant vanilla loot behavior.</span>
             <span data-ru hidden>Автоматически заменяет подходящий рудный лут на <strong>переплавленный результат</strong>, сохраняя применимое ванильное поведение лута.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Pickaxe</span><span data-ru hidden>📦 Кирка</span></div>
+          <div class="card-slots"><span data-en>Pickaxe</span><span data-ru hidden>Кирка</span></div>
           <ul class="card-notes">
             <li><span data-en>Works with the resolved vanilla loot path, including Silk Touch and Fortune behavior where applicable</span><span data-ru hidden>Работает через рассчитанный ванильный лут, включая поведение Шёлкового касания и Удачи, где это применимо</span></li>
           </ul>
@@ -414,7 +408,6 @@
         <!-- ── Vegetation ── -->
         <article class="enchant-card" data-category="tool">
           <div class="card-header">
-            <span class="card-emoji">🌱</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Vegetation</span><span data-ru hidden>Вегетация</span>
@@ -431,7 +424,7 @@
             <span data-en>Breaking a mature crop has a chance to <strong>auto-replant</strong> it. Works with wheat, carrots, potatoes, beetroot, nether wart.</span>
             <span data-ru hidden>При разрушении взрослого растения есть шанс <strong>автоматической посадки</strong>. Работает с пшеницей, морковью, картофелем, свёклой, адским наростом.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Hoe</span><span data-ru hidden>📦 Мотыга</span></div>
+          <div class="card-slots"><span data-en>Hoe</span><span data-ru hidden>Мотыга</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -451,7 +444,6 @@
         <!-- ── Rebound ── -->
         <article class="enchant-card" data-category="armor">
           <div class="card-header">
-            <span class="card-emoji">🛡️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Rebound</span><span data-ru hidden>Эластичность</span>
@@ -468,7 +460,7 @@
             <span data-en>When blocking a melee attack, <strong>knocks the attacker back</strong>. Player also gets a small backwards impulse (15%). Does not deal damage.</span>
             <span data-ru hidden>При блокировании удара <strong>отбрасывает атакующего</strong> назад. Игрок получает небольшой импульс назад (15%). Не наносит урона.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Shield</span><span data-ru hidden>📦 Щит</span></div>
+          <div class="card-slots"><span data-en>Shield</span><span data-ru hidden>Щит</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -489,7 +481,6 @@
         <!-- ── Feedback ── -->
         <article class="enchant-card" data-category="armor">
           <div class="card-header">
-            <span class="card-emoji">🛡️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Feedback</span><span data-ru hidden>Эхо-удар</span>
@@ -506,7 +497,7 @@
             <span data-en>When blocking a <strong>magical attack</strong> (harming potions, shulker bullets, evoker fangs), <strong>fully cancels damage</strong>, clears all harmful effects, and restores shield durability.</span>
             <span data-ru hidden>При блокировании <strong>магической атаки</strong> (зелья вреда, снаряды шалкера) <strong>полностью отменяет урон</strong>, очищает негативные эффекты и восстанавливает прочность щита.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Shield</span><span data-ru hidden>📦 Щит</span></div>
+          <div class="card-slots"><span data-en>Shield</span><span data-ru hidden>Щит</span></div>
           <ul class="card-notes">
             <li><span data-en>Cancels magic damage inside <code>hurt()</code> before it is applied</span><span data-ru hidden>Отменяет магический урон в <code>hurt()</code> до его применения</span></li>
             <li><span data-en>Durability restoration amount is configurable</span><span data-ru hidden>Количество восстановленной прочности настраивается</span></li>
@@ -517,7 +508,6 @@
         <!-- ── Second Wind ── -->
         <article class="enchant-card" data-category="armor">
           <div class="card-header">
-            <span class="card-emoji">🌀</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Second Wind</span><span data-ru hidden>Второе дыхание</span>
@@ -534,7 +524,7 @@
             <span data-en>When health drops below <strong>1 heart (2 HP)</strong>, instantly grants <strong>Speed II</strong>, <strong>Resistance I</strong>, and <strong>100% knockback resistance</strong>. Effect duration scales with enchanted armor pieces.</span>
             <span data-ru hidden>Когда здоровье падает ниже <strong>1 сердца (2 HP)</strong>, мгновенно даёт <strong>Скорость II</strong>, <strong>Сопротивление I</strong> и <strong>100% стойкость к отбрасыванию</strong>. Длительность масштабируется по числу экипированных предметов.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Helmet · Chestplate · Leggings · Boots</span><span data-ru hidden>📦 Шлем · Нагрудник · Поножи · Ботинки</span></div>
+          <div class="card-slots"><span data-en>Helmet · Chestplate · Leggings · Boots</span><span data-ru hidden>Шлем · Нагрудник · Поножи · Ботинки</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Pieces</th><th data-ru hidden>Предметов</th>
@@ -557,7 +547,6 @@
         <!-- ── Guardian's Grace ── -->
         <article class="enchant-card" data-category="armor">
           <div class="card-header">
-            <span class="card-emoji">🛡️</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Guardian's Grace</span><span data-ru hidden>Живой щит</span>
@@ -574,7 +563,7 @@
             <span data-en>On block, chance to <strong>restore 1 food point</strong>. Level III: extra 10% chance to <strong>heal 1 heart</strong>.</span>
             <span data-ru hidden>При блокировании шанс <strong>восстановить 1 ед. сытости</strong>. III уровень: доп. 10% шанс <strong>восстановить 1 сердце</strong>.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Shield</span><span data-ru hidden>📦 Щит</span></div>
+          <div class="card-slots"><span data-en>Shield</span><span data-ru hidden>Щит</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -595,7 +584,6 @@
         <!-- ── Vulnerability ── -->
         <article class="enchant-card" data-category="ranged">
           <div class="card-header">
-            <span class="card-emoji">🎯</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Vulnerability</span><span data-ru hidden>Аналитик</span>
@@ -612,7 +600,7 @@
             <span data-en>Arrows partially <strong>ignore the target's armor</strong>, piercing protection.</span>
             <span data-ru hidden>Стрелы частично <strong>игнорируют броню</strong> цели.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Bow · Crossbow</span><span data-ru hidden>📦 Лук · Арбалет</span></div>
+          <div class="card-slots"><span data-en>Bow · Crossbow</span><span data-ru hidden>Лук · Арбалет</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -629,7 +617,6 @@
         <!-- ── Tether Master ── -->
         <article class="enchant-card" data-category="tool">
           <div class="card-header">
-            <span class="card-emoji">🎣</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Tether Master</span><span data-ru hidden>Крепкая нить</span>
@@ -646,7 +633,7 @@
             <span data-en>Increases the <strong>pull strength</strong> when reeling in hooked mobs.</span>
             <span data-ru hidden>Увеличивает <strong>силу притяжения</strong> мобов при намотке удочки.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Fishing Rod</span><span data-ru hidden>📦 Удочка</span></div>
+          <div class="card-slots"><span data-en>Fishing Rod</span><span data-ru hidden>Удочка</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -663,7 +650,6 @@
         <!-- ── Sky Rage ── -->
         <article class="enchant-card" data-category="ranged">
           <div class="card-header">
-            <span class="card-emoji">⚡</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Sky Rage</span><span data-ru hidden>Ярость Неба</span>
@@ -680,7 +666,7 @@
             <span data-en>During a <strong>thunderstorm</strong>, arrows have a chance to summon a <strong>lightning strike</strong> at the hit location.</span>
             <span data-ru hidden>Во время <strong>грозы</strong> стрелы с шансом вызывают <strong>удар молнии</strong> в точку попадания.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Bow · Crossbow</span><span data-ru hidden>📦 Лук · Арбалет</span></div>
+          <div class="card-slots"><span data-en>Bow · Crossbow</span><span data-ru hidden>Лук · Арбалет</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -703,7 +689,6 @@
         <!-- ── XP Syphon ── -->
         <article class="enchant-card" data-category="weapon">
           <div class="card-header">
-            <span class="card-emoji">✨</span>
             <div>
               <h3 class="card-title">
                 <span data-en>XP Syphon</span><span data-ru hidden>Собиратель искр</span>
@@ -720,7 +705,7 @@
             <span data-en>Hits on mobs have a chance to <strong>drop XP orbs</strong> before the mob dies.</span>
             <span data-ru hidden>Удары по мобам с шансом <strong>выбивают сферы опыта</strong> до смерти моба.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Sword</span><span data-ru hidden>📦 Меч</span></div>
+          <div class="card-slots"><span data-en>Sword</span><span data-ru hidden>Меч</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -741,7 +726,6 @@
         <!-- ── Kinetic Discharge ── -->
         <article class="enchant-card" data-category="armor">
           <div class="card-header">
-            <span class="card-emoji">💥</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Kinetic Discharge</span><span data-ru hidden>Кинетический разряд</span>
@@ -758,7 +742,7 @@
             <span data-en>Landing after fast elytra flight creates a <strong>shockwave</strong> that knocks back nearby mobs. Level III passively reduces elytra durability loss by <strong>~90%</strong>.</span>
             <span data-ru hidden>Приземление после быстрого полёта на элитрах создаёт <strong>ударную волну</strong>. III уровень: пассивно снижает расход прочности элитры на <strong>~90%</strong>.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Elytra</span><span data-ru hidden>📦 Элитры</span></div>
+          <div class="card-slots"><span data-en>Elytra</span><span data-ru hidden>Элитры</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -780,7 +764,6 @@
         <!-- ── Sculk Bloom ── -->
         <article class="enchant-card" data-category="weapon">
           <div class="card-header">
-            <span class="card-emoji">🌑</span>
             <div>
               <h3 class="card-title">
                 <span data-en>Sculk Bloom</span><span data-ru hidden>Скалковое цветение</span>
@@ -797,7 +780,7 @@
             <span data-en>When killing a mob, <strong>sculk spreads</strong> at the death location — as if a <strong>Sculk Catalyst</strong> were placed there.</span>
             <span data-ru hidden>При убийстве моба на месте смерти <strong>распространяется скалк</strong> — как если бы рядом стоял <strong>скалк-катализатор</strong>.</span>
           </p>
-          <div class="card-slots"><span data-en>📦 Sword</span><span data-ru hidden>📦 Меч</span></div>
+          <div class="card-slots"><span data-en>Sword</span><span data-ru hidden>Меч</span></div>
           <table class="stat-table">
             <thead><tr>
               <th data-en>Level</th><th data-ru hidden>Уровень</th>
@@ -1266,22 +1249,25 @@ function applyLang(lang) {
   document.documentElement.lang = lang;
 
   // Show/hide [data-en] and [data-ru] elements
-  document.querySelectorAll('[data-en]').forEach(el => {
+  document.querySelectorAll('[data-en]:not(.filter-btn)').forEach(el => {
     el.hidden = (lang !== 'en');
   });
-  document.querySelectorAll('[data-ru]').forEach(el => {
+  document.querySelectorAll('[data-ru]:not(.filter-btn)').forEach(el => {
     el.hidden = (lang !== 'ru');
   });
 
   // Update section titles with data-en / data-ru attributes
-  document.querySelectorAll('[data-en][data-ru]').forEach(el => {
+  document.querySelectorAll('[data-en][data-ru]:not(.filter-btn)').forEach(el => {
     el.textContent = lang === 'ru' ? el.getAttribute('data-ru') : el.getAttribute('data-en');
     el.hidden = false;
   });
 
   // Update nav filter button labels
   document.querySelectorAll('.filter-btn[data-en][data-ru]').forEach(btn => {
-    btn.textContent = lang === 'ru' ? btn.getAttribute('data-ru') : btn.getAttribute('data-en');
+    const label = btn.querySelector('.filter-label');
+    const value = lang === 'ru' ? btn.getAttribute('data-ru') : btn.getAttribute('data-en');
+    if (label) label.textContent = value;
+    else btn.textContent = value;
   });
 
   // Update lang switcher active state

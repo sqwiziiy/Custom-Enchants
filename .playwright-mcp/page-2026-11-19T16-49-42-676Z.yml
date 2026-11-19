@@ -1,0 +1,907 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - generic [ref=f1e8]:
+        - heading "Mentalitys | Custom Enchantments" [level=1] [ref=f1e9]
+        - paragraph [ref=f1e10]: Fabric · Minecraft 1.20.1, 1.21.1 & 1.21.11 · v3.2.5 / 3.2.4
+      - generic [ref=f1e11]:
+        - generic "Language" [ref=f1e12]:
+          - button "EN" [active] [ref=f1e13] [cursor=pointer]
+          - button "RU" [ref=f1e14] [cursor=pointer]
+        - navigation [ref=f1e15]:
+          - link "GitHub" [ref=f1e16] [cursor=pointer]:
+            - /url: https://github.com/sqwiziiy/Custom-Enchants
+          - link "Modrinth" [ref=f1e19] [cursor=pointer]:
+            - /url: https://modrinth.com/project/NJPtH6f5
+  - navigation [ref=f1e22]:
+    - generic [ref=f1e23]:
+      - button "All" [ref=f1e854] [cursor=pointer]
+      - button "Weapon" [ref=f1e855] [cursor=pointer]
+      - button "Tools" [ref=f1e856] [cursor=pointer]
+      - button "Armor" [ref=f1e857] [cursor=pointer]
+      - button "Ranged" [ref=f1e858] [cursor=pointer]
+      - button "Trades" [ref=f1e859] [cursor=pointer]
+      - button "Structure" [ref=f1e860] [cursor=pointer]
+  - main [ref=f1e31]:
+    - generic [ref=f1e32]:
+      - generic [ref=f1e33]:
+        - heading "About" [level=2] [ref=f1e861]
+        - paragraph [ref=f1e35]:
+          - generic [ref=f1e862]:
+            - strong [ref=f1e863]: Mentalitys | Custom Enchantments
+            - text: is a
+            - strong [ref=f1e864]: Fabric
+            - text: mod for Minecraft 1.20.1, 1.21.1 and 1.21.11 that adds
+            - strong [ref=f1e865]: 19 unique enchantments
+            - text: "with flexible configuration via Cloth Config API. Each enchantment can be toggled individually, and all parameters — levels, chances, durations, radii — are tweakable via the GUI settings screen (Mod Menu) without restarting the server. Config file:"
+            - code [ref=f1e866]: config/custom-enchants.json
+            - text: .
+        - generic [ref=f1e41]:
+          - generic [ref=f1e42]: Minecraft 1.20.1 · 1.21.1 · 1.21.11
+          - generic [ref=f1e43]: Fabric API
+          - generic [ref=f1e44]: Cloth Config
+          - generic [ref=f1e45]: Java 17 / 21
+          - generic [ref=f1e46]: v3.2.5
+      - generic [ref=f1e47]:
+        - heading "Minecraft Compatibility" [level=2] [ref=f1e867]
+        - paragraph [ref=f1e49]: Custom Enchants 3.2.5 is the current release for Minecraft 1.21.1 and 1.21.11. Minecraft 1.20.1 remains on 3.2.4 because the Double Jump hotfix is not required there. Pick the release that matches your server/client.
+        - generic [ref=f1e50]:
+          - generic [ref=f1e53]:
+            - generic [ref=f1e54]: Minecraft 1.20.1 · Java 17
+            - generic [ref=f1e55]:
+              - text: Branch
+              - code [ref=f1e56]: 3.2/1.20.1
+              - text: ·
+              - link "v3.2.4" [ref=f1e57] [cursor=pointer]:
+                - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4
+          - generic [ref=f1e58]:
+            - generic [ref=f1e59]: New
+            - generic [ref=f1e60]:
+              - generic [ref=f1e61]: Minecraft 1.21.1 · Java 21
+              - generic [ref=f1e62]:
+                - text: Branch
+                - code [ref=f1e63]: 3.2/1.21.1
+                - text: ·
+                - link "v3.2.5-mc1.21.1" [ref=f1e64] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.1
+          - generic [ref=f1e65]:
+            - generic [ref=f1e66]: New
+            - generic [ref=f1e67]:
+              - generic [ref=f1e68]: Minecraft 1.21.11 · Java 21
+              - generic [ref=f1e69]:
+                - text: Branch
+                - code [ref=f1e70]: 3.2/1.21.11
+                - text: ·
+                - link "v3.2.5-mc1.21.11" [ref=f1e71] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11
+        - paragraph [ref=f1e72]: The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.2.x line. Minecraft 1.21.1/1.21.11 are on 3.2.5; Minecraft 1.20.1 remains on 3.2.4. Always install the JAR and dependencies for your exact Minecraft version.
+      - generic [ref=f1e73]:
+        - heading "Requirements (Minecraft 1.20.1)" [level=2] [ref=f1e868]
+        - generic [ref=f1e75]:
+          - generic [ref=f1e77]:
+            - generic [ref=f1e78]: Fabric API
+            - generic [ref=f1e79]: 0.92.7+1.20.1
+          - generic [ref=f1e81]:
+            - generic [ref=f1e82]: Cloth Config API
+            - generic [ref=f1e83]: 11.1.118
+          - generic [ref=f1e85]:
+            - generic [ref=f1e86]: Mod Menu
+            - generic [ref=f1e87]: 7.2.2
+        - paragraph [ref=f1e88]:
+          - generic [ref=f1e869]:
+            - text: Minecraft 1.21.1 requires Fabric API
+            - code [ref=f1e870]: ">=0.116.15+1.21.1"
+            - text: ", Cloth Config"
+            - code [ref=f1e871]: ">=15.0.140"
+            - text: and Mod Menu
+            - code [ref=f1e872]: ">=11.0.4"
+            - text: . Minecraft 1.21.11 requires Fabric API
+            - code [ref=f1e873]: ">=0.141.6+1.21.11"
+            - text: ", Cloth Config"
+            - code [ref=f1e874]: ">=21.11.153"
+            - text: and Mod Menu
+            - code [ref=f1e875]: ">=17.0.0"
+            - text: . Both require Java 21.
+      - generic [ref=f1e96]:
+        - heading "Enchantments" [level=2] [ref=f1e876]
+        - generic [ref=f1e98]:
+          - article [ref=f1e99]:
+            - generic [ref=f1e101]:
+              - heading "Glow Strike" [level=3] [ref=f1e877]
+              - generic [ref=f1e104]:
+                - generic [ref=f1e878]: Weapon
+                - generic [ref=f1e879]: Rare
+                - generic [ref=f1e880]: "Max level: III"
+            - paragraph [ref=f1e108]:
+              - generic [ref=f1e881]:
+                - text: On hit, applies
+                - strong [ref=f1e882]: Glowing
+                - text: to the target — makes them visible through walls. Works on swords, axes, and tridents.
+            - generic [ref=f1e111]: Sword · Axe · Trident
+            - table [ref=f1e112]:
+              - rowgroup [ref=f1e113]:
+                - row [ref=f1e883]:
+                  - columnheader "Level" [ref=f1e884]
+                  - columnheader "Duration" [ref=f1e885]
+              - rowgroup [ref=f1e117]:
+                - row [ref=f1e886]:
+                  - cell "I" [ref=f1e119]
+                  - cell "2 sec" [ref=f1e887]
+                - row [ref=f1e888]:
+                  - cell "II" [ref=f1e122]
+                  - cell "4 sec" [ref=f1e889]
+                - row [ref=f1e890]:
+                  - cell "III" [ref=f1e125]
+                  - cell "7 sec" [ref=f1e891]
+            - list [ref=f1e127]:
+              - listitem [ref=f1e128]:
+                - generic [ref=f1e892]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e893]: Knockback
+                  - text: ; on trident — also with
+                  - emphasis [ref=f1e894]: Shadow Blade
+              - listitem [ref=f1e132]:
+                - generic [ref=f1e895]: Duration per level is configurable
+          - article [ref=f1e134]:
+            - generic [ref=f1e136]:
+              - heading "Double Jump" [level=3] [ref=f1e896]
+              - generic [ref=f1e139]:
+                - generic [ref=f1e897]: Armor
+                - generic [ref=f1e898]: Very Rare
+                - generic [ref=f1e899]: "Max level: I"
+            - paragraph [ref=f1e143]:
+              - generic [ref=f1e900]:
+                - text: Allows a
+                - strong [ref=f1e901]: second jump in mid-air
+                - text: . On Minecraft 1.21.1 and 1.21.11, 3.2.5 predicts the movement impulse immediately on the activation tick and then validates it server-side, avoiding the delayed RTT kick/stutter from 3.2.4. White cloud particles appear on double jump.
+            - generic [ref=f1e146]: Boots
+            - list [ref=f1e147]:
+              - listitem [ref=f1e148]:
+                - generic [ref=f1e902]:
+                  - text: 67% chance to consume 1 durability (
+                  - emphasis [ref=f1e903]: Unbreaking
+                  - text: reduces this)
+              - listitem [ref=f1e151]:
+                - generic [ref=f1e904]: Does not work in water or lava
+          - article [ref=f1e153]:
+            - generic [ref=f1e155]:
+              - heading "Drill" [level=3] [ref=f1e905]
+              - generic [ref=f1e158]:
+                - generic [ref=f1e906]: Tool
+                - generic [ref=f1e907]: Very Rare
+                - generic [ref=f1e908]: "Max level: I"
+            - paragraph [ref=f1e162]:
+              - generic [ref=f1e909]:
+                - text: Breaks blocks in a
+                - strong [ref=f1e910]: 3×3 area
+                - text: . The plane follows the actual block face hit by the player's view ray, including diagonal and edge/corner camera angles.
+            - generic [ref=f1e165]: Pickaxe · Shovel
+            - list [ref=f1e166]:
+              - listitem [ref=f1e167]:
+                - generic [ref=f1e911]: Disabled while sneaking (Shift)
+              - listitem [ref=f1e169]:
+                - generic [ref=f1e912]:
+                  - text: 1 durability per extra block (
+                  - emphasis [ref=f1e913]: Unbreaking
+                  - text: applies)
+              - listitem [ref=f1e172]:
+                - generic [ref=f1e914]: Air, protected, unloaded, or otherwise unavailable cells are skipped without aborting the rest of the 3×3 plane
+              - listitem [ref=f1e174]:
+                - generic [ref=f1e915]:
+                  - text: Compatible with
+                  - emphasis [ref=f1e916]: Magnet
+          - article [ref=f1e177]:
+            - generic [ref=f1e179]:
+              - heading "Poison Blade" [level=3] [ref=f1e917]
+              - generic [ref=f1e182]:
+                - generic [ref=f1e918]: Weapon
+                - generic [ref=f1e919]: Rare
+                - generic [ref=f1e920]: "Max level: III"
+            - paragraph [ref=f1e186]:
+              - generic [ref=f1e921]:
+                - text: On hit, applies the
+                - strong [ref=f1e922]: Poison
+                - text: effect to the target.
+            - generic [ref=f1e189]: Sword · Axe
+            - table [ref=f1e190]:
+              - rowgroup [ref=f1e191]:
+                - row [ref=f1e923]:
+                  - columnheader "Level" [ref=f1e924]
+                  - columnheader "Duration" [ref=f1e925]
+              - rowgroup [ref=f1e195]:
+                - row [ref=f1e926]:
+                  - cell "I" [ref=f1e197]
+                  - cell "2 sec" [ref=f1e927]
+                - row [ref=f1e928]:
+                  - cell "II" [ref=f1e200]
+                  - cell "3 sec" [ref=f1e929]
+                - row [ref=f1e930]:
+                  - cell "III" [ref=f1e203]
+                  - cell "4 sec" [ref=f1e931]
+            - list [ref=f1e205]:
+              - listitem [ref=f1e206]:
+                - generic [ref=f1e932]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e933]: Fire Aspect
+          - article [ref=f1e209]:
+            - generic [ref=f1e211]:
+              - heading "Lumberjack" [level=3] [ref=f1e934]
+              - generic [ref=f1e214]:
+                - generic [ref=f1e935]: Tool
+                - generic [ref=f1e936]: Rare
+                - generic [ref=f1e937]: "Max level: III"
+            - paragraph [ref=f1e218]:
+              - generic [ref=f1e938]:
+                - text: Chops an entire
+                - strong [ref=f1e939]: tree
+                - text: by breaking one log. Smart detection — won't break player-built log structures. Works with Nether trees.
+            - generic [ref=f1e221]: Axe
+            - table [ref=f1e222]:
+              - rowgroup [ref=f1e223]:
+                - row [ref=f1e940]:
+                  - columnheader "Level" [ref=f1e941]
+                  - columnheader "Max blocks" [ref=f1e942]
+              - rowgroup [ref=f1e227]:
+                - row [ref=f1e228]:
+                  - cell "I" [ref=f1e229]
+                  - cell "16" [ref=f1e230]
+                - row [ref=f1e231]:
+                  - cell "II" [ref=f1e232]
+                  - cell "48" [ref=f1e233]
+                - row [ref=f1e234]:
+                  - cell "III" [ref=f1e235]
+                  - cell "128" [ref=f1e236]
+            - list [ref=f1e237]:
+              - listitem [ref=f1e238]:
+                - generic [ref=f1e943]:
+                  - text: Does not work on
+                  - code [ref=f1e944]: _wood
+                  - text: /
+                  - code [ref=f1e945]: hyphae
+                  - text: blocks
+              - listitem [ref=f1e242]:
+                - generic [ref=f1e946]: Does not break below the original block
+              - listitem [ref=f1e244]:
+                - generic [ref=f1e947]:
+                  - text: Compatible with
+                  - emphasis [ref=f1e948]: Magnet
+          - article [ref=f1e247]:
+            - generic [ref=f1e249]:
+              - heading "Shadow Blade" [level=3] [ref=f1e949]
+              - generic [ref=f1e252]:
+                - generic [ref=f1e950]: Weapon
+                - generic [ref=f1e951]: Very Rare
+                - generic [ref=f1e952]: "Max level: III"
+            - paragraph [ref=f1e256]:
+              - generic [ref=f1e953]:
+                - text: On hit, chance to
+                - strong [ref=f1e954]: teleport behind the target
+                - text: and apply
+                - strong [ref=f1e955]: Slowness II
+                - text: . Chance scales with throw distance (up to +10% from 30 blocks).
+            - generic [ref=f1e260]: Trident
+            - table [ref=f1e261]:
+              - rowgroup [ref=f1e262]:
+                - row [ref=f1e956]:
+                  - columnheader "Level" [ref=f1e957]
+                  - columnheader "Chance" [ref=f1e958]
+                  - columnheader "Slowness" [ref=f1e959]
+              - rowgroup [ref=f1e267]:
+                - row [ref=f1e960]:
+                  - cell "I" [ref=f1e269]
+                  - cell "15%" [ref=f1e270]
+                  - cell "1 sec" [ref=f1e961]
+                - row [ref=f1e962]:
+                  - cell "II" [ref=f1e273]
+                  - cell "25%" [ref=f1e274]
+                  - cell "2 sec" [ref=f1e963]
+                - row [ref=f1e964]:
+                  - cell "III" [ref=f1e277]
+                  - cell "35%" [ref=f1e278]
+                  - cell "3 sec" [ref=f1e965]
+            - list [ref=f1e280]:
+              - listitem [ref=f1e281]:
+                - generic [ref=f1e966]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e967]: Channeling
+                  - text: ","
+                  - emphasis [ref=f1e968]: Riptide
+                  - text: ","
+                  - emphasis [ref=f1e969]: Glow Strike
+              - listitem [ref=f1e286]:
+                - generic [ref=f1e970]:
+                  - text: Compatible with
+                  - emphasis [ref=f1e971]: Loyalty
+                  - text: — trident returns after teleport
+          - article [ref=f1e289]:
+            - generic [ref=f1e291]:
+              - heading "Magnet" [level=3] [ref=f1e972]
+              - generic [ref=f1e294]:
+                - generic [ref=f1e973]: Tool
+                - generic [ref=f1e974]: Rare
+                - generic [ref=f1e975]: "Max level: I"
+            - paragraph [ref=f1e298]:
+              - generic [ref=f1e976]:
+                - text: When mining,
+                - strong [ref=f1e977]: collects linked drops
+                - text: into the player's inventory and also uses a configurable nearby-item radius (default 5 blocks).
+            - generic [ref=f1e301]: Pickaxe · Axe · Shovel · Hoe
+            - list [ref=f1e302]:
+              - listitem [ref=f1e303]:
+                - generic [ref=f1e978]:
+                  - text: Works with
+                  - emphasis [ref=f1e979]: Drill
+                  - text: and
+                  - emphasis [ref=f1e980]: Lumberjack
+              - listitem [ref=f1e307]:
+                - generic [ref=f1e981]: Pickup radius is configurable; on 1.20.1, complex Lumberjack trees can leave some secondary drops nearby without loss or duplication
+          - article [ref=f1e309]:
+            - generic [ref=f1e311]:
+              - heading "Auto Smelt" [level=3] [ref=f1e982]
+              - generic [ref=f1e314]:
+                - generic [ref=f1e983]: Tool
+                - generic [ref=f1e984]: Rare
+                - generic [ref=f1e985]: "Max level: I"
+            - paragraph [ref=f1e318]:
+              - generic [ref=f1e986]:
+                - text: Automatically replaces eligible ore loot with the
+                - strong [ref=f1e987]: smelted result
+                - text: while preserving the relevant vanilla loot behavior.
+            - generic [ref=f1e321]: Pickaxe
+            - list [ref=f1e322]:
+              - listitem [ref=f1e323]:
+                - generic [ref=f1e988]: Works with the resolved vanilla loot path, including Silk Touch and Fortune behavior where applicable
+          - article [ref=f1e325]:
+            - generic [ref=f1e327]:
+              - heading "Vegetation" [level=3] [ref=f1e989]
+              - generic [ref=f1e330]:
+                - generic [ref=f1e990]: Tool
+                - generic [ref=f1e991]: Rare
+                - generic [ref=f1e992]: "Max level: III"
+            - paragraph [ref=f1e334]:
+              - generic [ref=f1e993]:
+                - text: Breaking a mature crop has a chance to
+                - strong [ref=f1e994]: auto-replant
+                - text: it. Works with wheat, carrots, potatoes, beetroot, nether wart.
+            - generic [ref=f1e337]: Hoe
+            - table [ref=f1e338]:
+              - rowgroup [ref=f1e339]:
+                - row [ref=f1e995]:
+                  - columnheader "Level" [ref=f1e996]
+                  - columnheader "Replant chance" [ref=f1e997]
+              - rowgroup [ref=f1e343]:
+                - row [ref=f1e344]:
+                  - cell "I" [ref=f1e345]
+                  - cell "30%" [ref=f1e346]
+                - row [ref=f1e347]:
+                  - cell "II" [ref=f1e348]
+                  - cell "60%" [ref=f1e349]
+                - row [ref=f1e350]:
+                  - cell "III" [ref=f1e351]
+                  - cell "100%" [ref=f1e352]
+            - list [ref=f1e353]:
+              - listitem [ref=f1e354]:
+                - generic [ref=f1e998]: Freshly planted crop is protected from breaking for 0.5 sec
+          - article [ref=f1e356]:
+            - generic [ref=f1e358]:
+              - heading "Rebound" [level=3] [ref=f1e999]
+              - generic [ref=f1e361]:
+                - generic [ref=f1e1000]: Armor
+                - generic [ref=f1e1001]: Rare
+                - generic [ref=f1e1002]: "Max level: III"
+            - paragraph [ref=f1e365]:
+              - generic [ref=f1e1003]:
+                - text: When blocking a melee attack,
+                - strong [ref=f1e1004]: knocks the attacker back
+                - text: . Player also gets a small backwards impulse (15%). Does not deal damage.
+            - generic [ref=f1e368]: Shield
+            - table [ref=f1e369]:
+              - rowgroup [ref=f1e370]:
+                - row [ref=f1e1005]:
+                  - columnheader "Level" [ref=f1e1006]
+                  - columnheader "Knockback" [ref=f1e1007]
+              - rowgroup [ref=f1e374]:
+                - row [ref=f1e375]:
+                  - cell "I" [ref=f1e376]
+                  - cell "0.5" [ref=f1e377]
+                - row [ref=f1e378]:
+                  - cell "II" [ref=f1e379]
+                  - cell "1.0" [ref=f1e380]
+                - row [ref=f1e381]:
+                  - cell "III" [ref=f1e382]
+                  - cell "2.0" [ref=f1e383]
+            - list [ref=f1e384]:
+              - listitem [ref=f1e385]:
+                - generic [ref=f1e1008]: Costs extra shield durability (1 per level)
+              - listitem [ref=f1e387]:
+                - generic [ref=f1e1009]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e1010]: Feedback
+                  - text: and
+                  - emphasis [ref=f1e1011]: Guardian's Grace
+          - article [ref=f1e391]:
+            - generic [ref=f1e393]:
+              - heading "Feedback" [level=3] [ref=f1e1012]
+              - generic [ref=f1e396]:
+                - generic [ref=f1e1013]: Armor
+                - generic [ref=f1e1014]: Rare
+                - generic [ref=f1e1015]: "Max level: I"
+            - paragraph [ref=f1e400]:
+              - generic [ref=f1e1016]:
+                - text: While a Feedback shield is
+                - strong [ref=f1e1017]: actively raised
+                - text: ", newly applied harmful status effects are rejected and supported magical damage such as"
+                - strong [ref=f1e1018]: Harming / Instant Damage
+                - text: is cancelled. Harmful effects that were already active before raising the shield are left unchanged; beneficial and neutral effects are unaffected.
+            - generic [ref=f1e404]: Shield
+            - list [ref=f1e405]:
+              - listitem [ref=f1e406]:
+                - generic [ref=f1e1019]: Blocks newly applied harmful status effects only while the shield is actively raised
+              - listitem [ref=f1e408]:
+                - generic [ref=f1e1020]: Existing harmful effects are preserved without removal, refresh, extension, or replacement
+              - listitem [ref=f1e410]:
+                - generic [ref=f1e1021]: Beneficial and neutral effects pass through normally
+              - listitem [ref=f1e412]:
+                - generic [ref=f1e1022]: Supported magical damage, including Harming / Instant Damage, is cancelled
+              - listitem [ref=f1e414]:
+                - generic [ref=f1e1023]: Durability restoration amount is configurable
+              - listitem [ref=f1e416]:
+                - generic [ref=f1e1024]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e1025]: Rebound
+                  - text: and
+                  - emphasis [ref=f1e1026]: Guardian's Grace
+          - article [ref=f1e420]:
+            - generic [ref=f1e422]:
+              - heading "Second Wind" [level=3] [ref=f1e1027]
+              - generic [ref=f1e425]:
+                - generic [ref=f1e1028]: Armor
+                - generic [ref=f1e1029]: Very Rare
+                - generic [ref=f1e1030]: "Max level: I"
+            - paragraph [ref=f1e429]:
+              - generic [ref=f1e1031]:
+                - text: When health drops below
+                - strong [ref=f1e1032]: 1 heart (2 HP)
+                - text: ", instantly grants"
+                - strong [ref=f1e1033]: Speed II
+                - text: ","
+                - strong [ref=f1e1034]: Resistance I
+                - text: ", and"
+                - strong [ref=f1e1035]: 100% knockback resistance
+                - text: . Effect duration scales with enchanted armor pieces.
+            - generic [ref=f1e435]: Helmet · Chestplate · Leggings · Boots
+            - table [ref=f1e436]:
+              - rowgroup [ref=f1e437]:
+                - row [ref=f1e1036]:
+                  - columnheader "Pieces" [ref=f1e1037]
+                  - columnheader "Speed II" [ref=f1e1038]
+                  - columnheader "Resistance I" [ref=f1e1039]
+              - rowgroup [ref=f1e442]:
+                - row [ref=f1e1040]:
+                  - cell "1" [ref=f1e444]
+                  - cell "2 sec" [ref=f1e1041]
+                  - cell "1 sec" [ref=f1e1042]
+                - row [ref=f1e1043]:
+                  - cell "2" [ref=f1e448]
+                  - cell "3 sec" [ref=f1e1044]
+                  - cell "1 sec" [ref=f1e1045]
+                - row [ref=f1e1046]:
+                  - cell "3" [ref=f1e452]
+                  - cell "3 sec" [ref=f1e1047]
+                  - cell "2 sec" [ref=f1e1048]
+                - row [ref=f1e1049]:
+                  - cell "4" [ref=f1e456]
+                  - cell "4 sec" [ref=f1e1050]
+                  - cell "2 sec" [ref=f1e1051]
+            - list [ref=f1e459]:
+              - listitem [ref=f1e460]:
+                - generic [ref=f1e1052]: "Cooldown: 60 seconds (configurable)"
+              - listitem [ref=f1e462]:
+                - generic [ref=f1e1053]: "Visual effects: smoke and cloud particles"
+          - article [ref=f1e464]:
+            - generic [ref=f1e466]:
+              - heading "Guardian's Grace" [level=3] [ref=f1e1054]
+              - generic [ref=f1e469]:
+                - generic [ref=f1e1055]: Armor
+                - generic [ref=f1e1056]: Rare
+                - generic [ref=f1e1057]: "Max level: III"
+            - paragraph [ref=f1e473]:
+              - generic [ref=f1e1058]:
+                - text: On block, chance to
+                - strong [ref=f1e1059]: restore 1 food point
+                - text: ". Level III: extra 10% chance to"
+                - strong [ref=f1e1060]: heal 1 heart
+                - text: .
+            - generic [ref=f1e477]: Shield
+            - table [ref=f1e478]:
+              - rowgroup [ref=f1e479]:
+                - row [ref=f1e1061]:
+                  - columnheader "Level" [ref=f1e1062]
+                  - columnheader "Food chance" [ref=f1e1063]
+                  - columnheader "Bonus" [ref=f1e1064]
+              - rowgroup [ref=f1e484]:
+                - row [ref=f1e485]:
+                  - cell "I" [ref=f1e486]
+                  - cell "10%" [ref=f1e487]
+                  - cell "—" [ref=f1e488]
+                - row [ref=f1e489]:
+                  - cell "II" [ref=f1e490]
+                  - cell "20%" [ref=f1e491]
+                  - cell "—" [ref=f1e492]
+                - row [ref=f1e1065]:
+                  - cell "III" [ref=f1e494]
+                  - cell "30%" [ref=f1e495]
+                  - cell "+10% heal (2 HP)" [ref=f1e1066]
+            - list [ref=f1e497]:
+              - listitem [ref=f1e498]:
+                - generic [ref=f1e1067]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e1068]: Rebound
+                  - text: and
+                  - emphasis [ref=f1e1069]: Feedback
+          - article [ref=f1e502]:
+            - generic [ref=f1e504]:
+              - heading "Vulnerability" [level=3] [ref=f1e1070]
+              - generic [ref=f1e507]:
+                - generic [ref=f1e1071]: Ranged
+                - generic [ref=f1e1072]: Rare
+                - generic [ref=f1e1073]: "Max level: III"
+            - paragraph [ref=f1e511]:
+              - generic [ref=f1e1074]:
+                - text: Arrows partially
+                - strong [ref=f1e1075]: ignore the target's armor
+                - text: ", piercing protection."
+            - generic [ref=f1e514]: Bow · Crossbow
+            - table [ref=f1e515]:
+              - rowgroup [ref=f1e516]:
+                - row [ref=f1e1076]:
+                  - columnheader "Level" [ref=f1e1077]
+                  - columnheader "Armor ignored" [ref=f1e1078]
+              - rowgroup [ref=f1e520]:
+                - row [ref=f1e521]:
+                  - cell "I" [ref=f1e522]
+                  - cell "10%" [ref=f1e523]
+                - row [ref=f1e524]:
+                  - cell "II" [ref=f1e525]
+                  - cell "20%" [ref=f1e526]
+                - row [ref=f1e527]:
+                  - cell "III" [ref=f1e528]
+                  - cell "30%" [ref=f1e529]
+          - article [ref=f1e530]:
+            - generic [ref=f1e532]:
+              - heading "Tether Master" [level=3] [ref=f1e1079]
+              - generic [ref=f1e535]:
+                - generic [ref=f1e1080]: Tool
+                - generic [ref=f1e1081]: Uncommon
+                - generic [ref=f1e1082]: "Max level: III"
+            - paragraph [ref=f1e539]:
+              - generic [ref=f1e1083]:
+                - text: Increases the
+                - strong [ref=f1e1084]: pull strength
+                - text: when reeling in hooked mobs.
+            - generic [ref=f1e542]: Fishing Rod
+            - table [ref=f1e543]:
+              - rowgroup [ref=f1e544]:
+                - row [ref=f1e1085]:
+                  - columnheader "Level" [ref=f1e1086]
+                  - columnheader "Pull strength" [ref=f1e1087]
+              - rowgroup [ref=f1e548]:
+                - row [ref=f1e549]:
+                  - cell "I" [ref=f1e550]
+                  - cell "+15%" [ref=f1e551]
+                - row [ref=f1e552]:
+                  - cell "II" [ref=f1e553]
+                  - cell "+25%" [ref=f1e554]
+                - row [ref=f1e555]:
+                  - cell "III" [ref=f1e556]
+                  - cell "+40%" [ref=f1e557]
+          - article [ref=f1e558]:
+            - generic [ref=f1e560]:
+              - heading "Sky Rage" [level=3] [ref=f1e1088]
+              - generic [ref=f1e563]:
+                - generic [ref=f1e1089]: Ranged
+                - generic [ref=f1e1090]: Rare
+                - generic [ref=f1e1091]: "Max level: III"
+            - paragraph [ref=f1e567]:
+              - generic [ref=f1e1092]:
+                - text: During a
+                - strong [ref=f1e1093]: thunderstorm
+                - text: ", arrows have a chance to summon a"
+                - strong [ref=f1e1094]: lightning strike
+                - text: at the hit location.
+            - generic [ref=f1e571]: Bow · Crossbow
+            - table [ref=f1e572]:
+              - rowgroup [ref=f1e573]:
+                - row [ref=f1e1095]:
+                  - columnheader "Level" [ref=f1e1096]
+                  - columnheader "Chance" [ref=f1e1097]
+              - rowgroup [ref=f1e577]:
+                - row [ref=f1e578]:
+                  - cell "I" [ref=f1e579]
+                  - cell "10%" [ref=f1e580]
+                - row [ref=f1e581]:
+                  - cell "II" [ref=f1e582]
+                  - cell "20%" [ref=f1e583]
+                - row [ref=f1e584]:
+                  - cell "III" [ref=f1e585]
+                  - cell "30%" [ref=f1e586]
+            - list [ref=f1e587]:
+              - listitem [ref=f1e588]:
+                - generic [ref=f1e1098]: Only during thunderstorm (not plain rain)
+              - listitem [ref=f1e590]:
+                - generic [ref=f1e1099]: Does not work under a roof
+              - listitem [ref=f1e592]:
+                - generic [ref=f1e1100]: "Per-player cooldown: 1.5 sec between strikes"
+              - listitem [ref=f1e594]:
+                - generic [ref=f1e1101]:
+                  - text: Incompatible with
+                  - emphasis [ref=f1e1102]: Flame
+                  - text: ","
+                  - emphasis [ref=f1e1103]: "Infinity"
+                  - text: ","
+                  - emphasis [ref=f1e1104]: Piercing
+          - article [ref=f1e599]:
+            - generic [ref=f1e601]:
+              - heading "XP Syphon" [level=3] [ref=f1e1105]
+              - generic [ref=f1e604]:
+                - generic [ref=f1e1106]: Weapon
+                - generic [ref=f1e1107]: Uncommon
+                - generic [ref=f1e1108]: "Max level: III"
+            - paragraph [ref=f1e608]:
+              - generic [ref=f1e1109]:
+                - text: Hits on mobs have a chance to
+                - strong [ref=f1e1110]: drop XP orbs
+                - text: before the mob dies.
+            - generic [ref=f1e611]: Sword
+            - table [ref=f1e612]:
+              - rowgroup [ref=f1e613]:
+                - row [ref=f1e1111]:
+                  - columnheader "Level" [ref=f1e1112]
+                  - columnheader "Chance" [ref=f1e1113]
+                  - columnheader "XP" [ref=f1e1114]
+              - rowgroup [ref=f1e618]:
+                - row [ref=f1e619]:
+                  - cell "I" [ref=f1e620]
+                  - cell "5%" [ref=f1e621]
+                  - cell "1" [ref=f1e622]
+                - row [ref=f1e623]:
+                  - cell "II" [ref=f1e624]
+                  - cell "10%" [ref=f1e625]
+                  - cell "2" [ref=f1e626]
+                - row [ref=f1e627]:
+                  - cell "III" [ref=f1e628]
+                  - cell "15%" [ref=f1e629]
+                  - cell "3" [ref=f1e630]
+            - list [ref=f1e631]:
+              - listitem [ref=f1e632]:
+                - generic [ref=f1e1115]: Works on any mob, including bosses
+          - article [ref=f1e634]:
+            - generic [ref=f1e636]:
+              - heading "Kinetic Discharge" [level=3] [ref=f1e1116]
+              - generic [ref=f1e639]:
+                - generic [ref=f1e1117]: Armor
+                - generic [ref=f1e1118]: Rare
+                - generic [ref=f1e1119]: "Max level: III"
+            - paragraph [ref=f1e643]:
+              - generic [ref=f1e1120]:
+                - text: Landing after fast elytra flight creates a
+                - strong [ref=f1e1121]: shockwave
+                - text: that knocks back nearby mobs. Level III passively reduces elytra durability loss by
+                - strong [ref=f1e1122]: ~90%
+                - text: .
+            - generic [ref=f1e647]: Elytra
+            - table [ref=f1e648]:
+              - rowgroup [ref=f1e649]:
+                - row [ref=f1e1123]:
+                  - columnheader "Level" [ref=f1e1124]
+                  - columnheader "Radius" [ref=f1e1125]
+                  - columnheader "Effect" [ref=f1e1126]
+              - rowgroup [ref=f1e654]:
+                - row [ref=f1e1127]:
+                  - cell "I" [ref=f1e656]
+                  - cell "3 blocks" [ref=f1e1128]
+                  - cell "Weak knockback" [ref=f1e1129]
+                - row [ref=f1e1130]:
+                  - cell "II" [ref=f1e660]
+                  - cell "5 blocks" [ref=f1e1131]
+                  - cell "Medium knockback" [ref=f1e1132]
+                - row [ref=f1e1133]:
+                  - cell "III" [ref=f1e664]
+                  - cell "7 blocks" [ref=f1e1134]
+                  - cell "Strong + 2 HP dmg" [ref=f1e1135]
+            - list [ref=f1e667]:
+              - listitem [ref=f1e668]:
+                - generic [ref=f1e1136]: Triggers at landing speed ≥ 0.4 blocks/tick
+              - listitem [ref=f1e670]:
+                - generic [ref=f1e1137]: "Level III: only 10% chance to cost durability on shockwave"
+          - article [ref=f1e672]:
+            - generic [ref=f1e674]:
+              - heading "Sculk Bloom" [level=3] [ref=f1e1138]
+              - generic [ref=f1e677]:
+                - generic [ref=f1e1139]: Weapon
+                - generic [ref=f1e1140]: Rare
+                - generic [ref=f1e1141]: "Max level: II"
+            - paragraph [ref=f1e681]:
+              - generic [ref=f1e1142]:
+                - text: When killing a mob,
+                - strong [ref=f1e1143]: sculk spreads
+                - text: at the death location — as if a
+                - strong [ref=f1e1144]: Sculk Catalyst
+                - text: were placed there.
+            - generic [ref=f1e685]: Sword
+            - table [ref=f1e686]:
+              - rowgroup [ref=f1e687]:
+                - row [ref=f1e1145]:
+                  - columnheader "Level" [ref=f1e1146]
+                  - columnheader "Effect" [ref=f1e1147]
+              - rowgroup [ref=f1e691]:
+                - row [ref=f1e1148]:
+                  - cell "I" [ref=f1e693]
+                  - cell "Small bloom (≈2–3 block radius)" [ref=f1e1149]
+                - row [ref=f1e1150]:
+                  - cell "II" [ref=f1e696]
+                  - cell "Large bloom (≈4–5 block radius)" [ref=f1e1151]
+            - list [ref=f1e698]:
+              - listitem [ref=f1e699]:
+                - generic [ref=f1e1152]: Works only on direct kills with the enchanted weapon
+              - listitem [ref=f1e701]:
+                - generic [ref=f1e1153]: May generate sculk veins, sensors, and shriekers
+      - generic [ref=f1e703]:
+        - heading "Changelog" [level=2] [ref=f1e1154]
+        - generic [ref=f1e705]:
+          - group [ref=f1e706]:
+            - generic "v3.2.5 2026-08-10 Double Jump smoothness hotfix" [ref=f1e1155] [cursor=pointer]:
+              - generic [ref=f1e708]: v3.2.5
+              - generic [ref=f1e709]: 2026-08-10
+              - generic [ref=f1e1156]: Double Jump smoothness hotfix
+            - generic [ref=f1e711]:
+              - paragraph [ref=f1e712]:
+                - generic [ref=f1e1157]:
+                  - strong [ref=f1e1158]: "Compatibility:"
+                  - text: released for Minecraft 1.21.1 and 1.21.11 (Java 21). Minecraft 1.20.1 remains on 3.2.4 because its Double Jump behavior was already correct.
+              - paragraph [ref=f1e715]:
+                - generic [ref=f1e1159]:
+                  - strong [ref=f1e1160]: "Root cause:"
+                  - text: the 1.21.x owner client waited for the complete server approval round trip before receiving the Double Jump impulse, creating a late horizontal/vertical kick and allowing direction to drift if yaw changed while the request was in flight.
+              - paragraph [ref=f1e718]:
+                - generic [ref=f1e1161]:
+                  - strong [ref=f1e1162]: "Fixed:"
+                  - text: movement is predicted immediately on the input tick; C2S carries sprint + activation-yaw snapshots; the server remains authoritative and applies the equivalent snapshot-based impulse; S2C approval is acknowledgement-only and cannot add a second delayed impulse. Minecraft 1.21.11 uses its valid
+                  - code [ref=f1e1163]: hurtMarked
+                  - text: synchronization path.
+              - paragraph [ref=f1e722]:
+                - generic [ref=f1e1164]:
+                  - strong [ref=f1e1165]: "Validation:"
+                  - text: both 1.21.1 and 1.21.11 builds passed automated validation and were manually accepted in-game.
+          - group [ref=f1e725]:
+            - generic "v3.2.4 2026-08-08 Librarian trade fix" [ref=f1e1166] [cursor=pointer]:
+              - generic [ref=f1e727]: v3.2.4
+              - generic [ref=f1e728]: 2026-08-08
+              - generic [ref=f1e1167]: Librarian trade fix
+          - group [ref=f1e730]:
+            - generic "v3.2.3 2026-08-08 Feedback protection fix" [ref=f1e1168] [cursor=pointer]:
+              - generic [ref=f1e732]: v3.2.3
+              - generic [ref=f1e733]: 2026-08-08
+              - generic [ref=f1e1169]: Feedback protection fix
+          - group [ref=f1e735]:
+            - generic "v3.2.2 2026-08-08 Drill geometry fix" [ref=f1e1170] [cursor=pointer]:
+              - generic [ref=f1e737]: v3.2.2
+              - generic [ref=f1e738]: 2026-08-08
+              - generic [ref=f1e1171]: Drill geometry fix
+          - group [ref=f1e740]:
+            - generic "v3.1.2 2026-08-08 Double Jump fix" [ref=f1e1172] [cursor=pointer]:
+              - generic [ref=f1e742]: v3.1.2
+              - generic [ref=f1e743]: 2026-08-08
+              - generic [ref=f1e1173]: Double Jump fix
+          - group [ref=f1e745]:
+            - generic "v3.1.1 2026-08-07 Stability & fixes" [ref=f1e1174] [cursor=pointer]:
+              - generic [ref=f1e747]: v3.1.1
+              - generic [ref=f1e748]: 2026-08-07
+              - generic [ref=f1e1175]: Stability & fixes
+          - group [ref=f1e750]:
+            - generic "v3.0.0 2026-04-30 +1 enchantment" [ref=f1e1176] [cursor=pointer]:
+              - generic [ref=f1e752]: v3.0.0
+              - generic [ref=f1e753]: 2026-04-30
+              - generic [ref=f1e1177]: +1 enchantment
+          - group [ref=f1e755]:
+            - generic "v2.9.0 2026-03-28 +1 enchantment" [ref=f1e1178] [cursor=pointer]:
+              - generic [ref=f1e757]: v2.9.0
+              - generic [ref=f1e758]: 2026-03-28
+              - generic [ref=f1e1179]: +1 enchantment
+          - group [ref=f1e760]:
+            - generic "v2.8.0 2026-03-28 +1 enchantment" [ref=f1e1180] [cursor=pointer]:
+              - generic [ref=f1e762]: v2.8.0
+              - generic [ref=f1e763]: 2026-03-28
+              - generic [ref=f1e1181]: +1 enchantment
+          - group [ref=f1e765]:
+            - generic "v2.7.0 2026-03-28 +1 enchantment" [ref=f1e1182] [cursor=pointer]:
+              - generic [ref=f1e767]: v2.7.0
+              - generic [ref=f1e768]: 2026-03-28
+              - generic [ref=f1e1183]: +1 enchantment
+          - group [ref=f1e770]:
+            - generic "v2.6.0 2026-03-28 +1 enchantment" [ref=f1e1184] [cursor=pointer]:
+              - generic [ref=f1e772]: v2.6.0
+              - generic [ref=f1e773]: 2026-03-28
+              - generic [ref=f1e1185]: +1 enchantment
+          - group [ref=f1e775]:
+            - generic "v2.5.0 2026-03-28 +1 enchantment" [ref=f1e1186] [cursor=pointer]:
+              - generic [ref=f1e777]: v2.5.0
+              - generic [ref=f1e778]: 2026-03-28
+              - generic [ref=f1e1187]: +1 enchantment
+          - group [ref=f1e780]:
+            - generic "v2.4.0 2026-03-28 +1 enchantment" [ref=f1e1188] [cursor=pointer]:
+              - generic [ref=f1e782]: v2.4.0
+              - generic [ref=f1e783]: 2026-03-28
+              - generic [ref=f1e1189]: +1 enchantment
+          - group [ref=f1e785]:
+            - generic "v2.3.0 2026-03-27 +1 enchantment" [ref=f1e1190] [cursor=pointer]:
+              - generic [ref=f1e787]: v2.3.0
+              - generic [ref=f1e788]: 2026-03-27
+              - generic [ref=f1e1191]: +1 enchantment
+          - group [ref=f1e790]:
+            - generic "v2.2.0 2026-03-27 +1 enchantment" [ref=f1e1192] [cursor=pointer]:
+              - generic [ref=f1e792]: v2.2.0
+              - generic [ref=f1e793]: 2026-03-27
+              - generic [ref=f1e1193]: +1 enchantment
+          - group [ref=f1e795]:
+            - generic "v2.1.0 2026-03-27 +1 enchantment" [ref=f1e1194] [cursor=pointer]:
+              - generic [ref=f1e797]: v2.1.0
+              - generic [ref=f1e798]: 2026-03-27
+              - generic [ref=f1e1195]: +1 enchantment
+          - group [ref=f1e800]:
+            - generic "v2.0.0 2026-03-27 +1 enchantment" [ref=f1e1196] [cursor=pointer]:
+              - generic [ref=f1e802]: v2.0.0
+              - generic [ref=f1e803]: 2026-03-27
+              - generic [ref=f1e1197]: +1 enchantment
+          - group [ref=f1e805]:
+            - generic "v1.9.0 2026-03-26 +1 enchantment" [ref=f1e1198] [cursor=pointer]:
+              - generic [ref=f1e807]: v1.9.0
+              - generic [ref=f1e808]: 2026-03-26
+              - generic [ref=f1e1199]: +1 enchantment
+          - group [ref=f1e810]:
+            - generic "v1.7.0 2026-03-26 +1 enchantment" [ref=f1e1200] [cursor=pointer]:
+              - generic [ref=f1e812]: v1.7.0
+              - generic [ref=f1e813]: 2026-03-26
+              - generic [ref=f1e1201]: +1 enchantment
+          - group [ref=f1e815]:
+            - generic "v1.6.0 2026-03-26 +1 enchantment" [ref=f1e1202] [cursor=pointer]:
+              - generic [ref=f1e817]: v1.6.0
+              - generic [ref=f1e818]: 2026-03-26
+              - generic [ref=f1e1203]: +1 enchantment
+          - group [ref=f1e820]:
+            - generic "v1.5.0 2026-03-26 +1 enchantment" [ref=f1e1204] [cursor=pointer]:
+              - generic [ref=f1e822]: v1.5.0
+              - generic [ref=f1e823]: 2026-03-26
+              - generic [ref=f1e1205]: +1 enchantment
+          - group [ref=f1e825]:
+            - generic "v1.4.0 2026-03-26 +1 enchantment" [ref=f1e1206] [cursor=pointer]:
+              - generic [ref=f1e827]: v1.4.0
+              - generic [ref=f1e828]: 2026-03-26
+              - generic [ref=f1e1207]: +1 enchantment
+          - group [ref=f1e830]:
+            - generic "v1.3.0 2026-03-26 +1 enchantment" [ref=f1e1208] [cursor=pointer]:
+              - generic [ref=f1e832]: v1.3.0
+              - generic [ref=f1e833]: 2026-03-26
+              - generic [ref=f1e1209]: +1 enchantment
+          - group [ref=f1e835]:
+            - generic "v1.1.0 2026-03-25 +1 enchantment" [ref=f1e1210] [cursor=pointer]:
+              - generic [ref=f1e837]: v1.1.0
+              - generic [ref=f1e838]: 2026-03-25
+              - generic [ref=f1e1211]: +1 enchantment
+          - group [ref=f1e840]:
+            - generic "v1.0.0 2026-03-25 Initial release" [ref=f1e1212] [cursor=pointer]:
+              - generic [ref=f1e842]: v1.0.0
+              - generic [ref=f1e843]: 2026-03-25
+              - generic [ref=f1e1213]: Initial release
+  - contentinfo [ref=f1e845]:
+    - generic [ref=f1e846]:
+      - paragraph [ref=f1e847]:
+        - strong [ref=f1e848]: Mentalitys | Custom Enchantments
+        - text: — Fabric for Minecraft 1.20.1, 1.21.1 and 1.21.11
+      - generic [ref=f1e849]:
+        - link "GitHub" [ref=f1e850] [cursor=pointer]:
+          - /url: https://github.com/sqwiziiy/Custom-Enchants
+        - generic [ref=f1e851]: ·
+        - link "Modrinth" [ref=f1e852] [cursor=pointer]:
+          - /url: https://modrinth.com/project/NJPtH6f5
+      - paragraph [ref=f1e853]: "Author: mentality · v3.2.5 (1.21.x) / v3.2.4 (1.20.1)"

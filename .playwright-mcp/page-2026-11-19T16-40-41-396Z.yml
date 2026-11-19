@@ -1,0 +1,946 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: ✦
+        - generic [ref=e6]:
+          - heading "Mentalitys | Custom Enchantments" [level=1] [ref=e7]
+          - paragraph [ref=e8]: Fabric · Minecraft 1.20.1, 1.21.1 & 1.21.11 · v3.2.5 / 3.2.4
+      - generic [ref=e9]:
+        - generic "Language" [ref=e10]:
+          - button "EN" [ref=e11] [cursor=pointer]
+          - button "RU" [active] [ref=e12] [cursor=pointer]
+        - navigation [ref=e13]:
+          - link "GitHub" [ref=e14] [cursor=pointer]:
+            - /url: https://github.com/sqwiziiy/Custom-Enchants
+          - link "Modrinth" [ref=e17] [cursor=pointer]:
+            - /url: https://modrinth.com/project/NJPtH6f5
+  - navigation [ref=e20]:
+    - generic [ref=e21]:
+      - button "Все" [ref=e832] [cursor=pointer]
+      - button "⚔️ Оружие" [ref=e833] [cursor=pointer]
+      - button "⛏️ Инструменты" [ref=e834] [cursor=pointer]
+      - button "🛡️ Броня" [ref=e835] [cursor=pointer]
+      - button "🏹 Дальний бой" [ref=e836] [cursor=pointer]
+      - button "🧑‍🌾 Торговля" [ref=e837] [cursor=pointer]
+      - button "📂 Структура" [ref=e838] [cursor=pointer]
+  - main [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - heading "О моде" [level=2] [ref=e839]
+        - paragraph [ref=e33]:
+          - generic [ref=e840]:
+            - strong [ref=e841]: Mentalitys | Custom Enchantments
+            - text: — мод на
+            - strong [ref=e842]: Fabric
+            - text: для Minecraft 1.20.1, 1.21.1 и 1.21.11, добавляющий
+            - strong [ref=e843]: 19 уникальных зачарований
+            - text: с гибкой настройкой через Cloth Config API. Все зачарования можно включать и выключать по отдельности в конфиг-файле
+            - code [ref=e844]: config/custom-enchants.json
+            - text: ", а параметры настраиваются через GUI (Mod Menu)."
+        - generic [ref=e39]:
+          - generic [ref=e40]: Minecraft 1.20.1 · 1.21.1 · 1.21.11
+          - generic [ref=e41]: Fabric API
+          - generic [ref=e42]: Cloth Config
+          - generic [ref=e43]: Java 17 / 21
+          - generic [ref=e44]: v3.2.5
+      - generic [ref=e45]:
+        - heading "Совместимость с Minecraft" [level=2] [ref=e845]
+        - paragraph [ref=e47]: Custom Enchants 3.2.5 — текущий релиз для Minecraft 1.21.1 и 1.21.11. Minecraft 1.20.1 остаётся на 3.2.4, потому что хотфикс Double Jump для него не требуется. Выберите релиз, соответствующий вашему серверу/клиенту.
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: 🟢
+            - generic [ref=e51]:
+              - generic [ref=e52]: Minecraft 1.20.1 · Java 17
+              - generic [ref=e53]:
+                - text: Ветка
+                - code [ref=e54]: 3.2/1.20.1
+                - text: ·
+                - link "v3.2.4" [ref=e55] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4
+          - generic [ref=e56]:
+            - generic [ref=e57]: 🆕
+            - generic [ref=e58]:
+              - generic [ref=e59]: Minecraft 1.21.1 · Java 21
+              - generic [ref=e60]:
+                - text: Ветка
+                - code [ref=e61]: 3.2/1.21.1
+                - text: ·
+                - link "v3.2.5-mc1.21.1" [ref=e62] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.1
+          - generic [ref=e63]:
+            - generic [ref=e64]: 🆕
+            - generic [ref=e65]:
+              - generic [ref=e66]: Minecraft 1.21.11 · Java 21
+              - generic [ref=e67]:
+                - text: Ветка
+                - code [ref=e68]: 3.2/1.21.11
+                - text: ·
+                - link "v3.2.5-mc1.21.11" [ref=e69] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11
+        - paragraph [ref=e70]: Справочник зачарований, конфигурации и сделки библиотекарей ниже — общая документация поддерживаемой линии 3.2.x. Minecraft 1.21.1/1.21.11 используют 3.2.5; Minecraft 1.20.1 остаётся на 3.2.4. Всегда устанавливайте JAR и зависимости для вашей точной версии Minecraft.
+      - generic [ref=e71]:
+        - heading "Зависимости (Minecraft 1.20.1)" [level=2] [ref=e846]
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: 🧩
+            - generic [ref=e76]:
+              - generic [ref=e77]: Fabric API
+              - generic [ref=e78]: 0.92.7+1.20.1
+          - generic [ref=e79]:
+            - generic [ref=e80]: ⚙️
+            - generic [ref=e81]:
+              - generic [ref=e82]: Cloth Config API
+              - generic [ref=e83]: 11.1.118
+          - generic [ref=e84]:
+            - generic [ref=e85]: 📋
+            - generic [ref=e86]:
+              - generic [ref=e87]: Mod Menu
+              - generic [ref=e88]: 7.2.2
+        - paragraph [ref=e89]:
+          - generic [ref=e847]:
+            - text: Для Minecraft 1.21.1 нужны Fabric API
+            - code [ref=e848]: ">=0.116.15+1.21.1"
+            - text: ", Cloth Config"
+            - code [ref=e849]: ">=15.0.140"
+            - text: и Mod Menu
+            - code [ref=e850]: ">=11.0.4"
+            - text: . Для Minecraft 1.21.11 нужны Fabric API
+            - code [ref=e851]: ">=0.141.6+1.21.11"
+            - text: ", Cloth Config"
+            - code [ref=e852]: ">=21.11.153"
+            - text: и Mod Menu
+            - code [ref=e853]: ">=17.0.0"
+            - text: . Для обеих нужен Java 21.
+      - generic [ref=e97]:
+        - heading "Зачарования" [level=2] [ref=e854]
+        - generic [ref=e99]:
+          - article [ref=e100]:
+            - generic [ref=e101]:
+              - generic [ref=e102]: ⚔️
+              - generic [ref=e103]:
+                - heading "Сияющий удар Glow Strike" [level=3] [ref=e855]
+                - generic [ref=e105]:
+                  - generic [ref=e856]: Оружие
+                  - generic [ref=e857]: Редкое
+                  - generic [ref=e858]: "Макс. уровень: III"
+            - paragraph [ref=e109]:
+              - generic [ref=e859]:
+                - text: При ударе накладывает
+                - strong [ref=e860]: Свечение
+                - text: — цель видна сквозь стены. Работает на мечах, топорах и тризубцах.
+            - generic [ref=e112]: 📦 Меч · Топор · Тризубец
+            - table [ref=e113]:
+              - rowgroup [ref=e114]:
+                - row [ref=e861]:
+                  - columnheader "Уровень" [ref=e862]
+                  - columnheader "Длительность" [ref=e863]
+              - rowgroup [ref=e118]:
+                - row [ref=e864]:
+                  - cell "I" [ref=e120]
+                  - cell "2 сек" [ref=e865]
+                - row [ref=e866]:
+                  - cell "II" [ref=e123]
+                  - cell "4 сек" [ref=e867]
+                - row [ref=e868]:
+                  - cell "III" [ref=e126]
+                  - cell "7 сек" [ref=e869]
+            - list [ref=e128]:
+              - listitem [ref=e129]:
+                - text: ›
+                - generic [ref=e870]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e871]: Отбрасыванием
+                  - text: ; на тризубце — также с
+                  - emphasis [ref=e872]: Теневым клинком
+              - listitem [ref=e133]: › Длительность каждого уровня настраивается
+          - article [ref=e134]:
+            - generic [ref=e135]:
+              - generic [ref=e136]: 🦘
+              - generic [ref=e137]:
+                - heading "Двойной прыжок Double Jump" [level=3] [ref=e873]
+                - generic [ref=e139]:
+                  - generic [ref=e874]: Броня
+                  - generic [ref=e875]: Очень редкое
+                  - generic [ref=e876]: "Макс. уровень: I"
+            - paragraph [ref=e143]:
+              - generic [ref=e877]:
+                - text: Позволяет совершить
+                - strong [ref=e878]: второй прыжок в воздухе
+                - text: . На Minecraft 1.21.1 и 1.21.11 версия 3.2.5 сразу прогнозирует импульс движения в тик нажатия, после чего сервер его проверяет — без запоздалого толчка/рывка после RTT, который был в 3.2.4. При активации появляются белые частицы.
+            - generic [ref=e146]: 📦 Ботинки
+            - list [ref=e147]:
+              - listitem [ref=e148]:
+                - text: ›
+                - generic [ref=e879]:
+                  - text: 67% шанс потратить 1 прочность (
+                  - emphasis [ref=e880]: Прочность
+                  - text: снижает шанс)
+              - listitem [ref=e151]: › Не работает в воде и лаве
+          - article [ref=e152]:
+            - generic [ref=e153]:
+              - generic [ref=e154]: ⛏️
+              - generic [ref=e155]:
+                - heading "Бур Drill" [level=3] [ref=e881]
+                - generic [ref=e157]:
+                  - generic [ref=e882]: Инструмент
+                  - generic [ref=e883]: Очень редкое
+                  - generic [ref=e884]: "Макс. уровень: I"
+            - paragraph [ref=e161]:
+              - generic [ref=e885]:
+                - text: Ломает блоки в области
+                - strong [ref=e886]: 3×3
+                - text: . Плоскость определяется по фактической грани, в которую попадает луч взгляда игрока, включая диагональные углы и наведение около рёбер/углов блока.
+            - generic [ref=e164]: 📦 Кирка · Лопата
+            - list [ref=e165]:
+              - listitem [ref=e166]:
+                - text: ›
+                - generic [ref=e887]: Не работает при зажатом Shift
+              - listitem [ref=e168]:
+                - text: ›
+                - generic [ref=e888]:
+                  - text: 1 прочность за доп. блок (
+                  - emphasis [ref=e889]: Прочность
+                  - text: учитывается)
+              - listitem [ref=e171]: › Воздух, защищённые, непрогруженные или иные недоступные ячейки пропускаются, не прерывая обработку остальной области 3×3
+              - listitem [ref=e172]:
+                - text: ›
+                - generic [ref=e890]:
+                  - text: Совместим с
+                  - emphasis [ref=e891]: Магнитом
+          - article [ref=e175]:
+            - generic [ref=e176]:
+              - generic [ref=e177]: 🗡️
+              - generic [ref=e178]:
+                - heading "Ядовитый клинок Poison Blade" [level=3] [ref=e892]
+                - generic [ref=e180]:
+                  - generic [ref=e893]: Оружие
+                  - generic [ref=e894]: Редкое
+                  - generic [ref=e895]: "Макс. уровень: III"
+            - paragraph [ref=e184]:
+              - generic [ref=e896]:
+                - text: При ударе накладывает
+                - strong [ref=e897]: Отравление
+                - text: на цель.
+            - generic [ref=e187]: 📦 Меч · Топор
+            - table [ref=e188]:
+              - rowgroup [ref=e189]:
+                - row [ref=e898]:
+                  - columnheader "Уровень" [ref=e899]
+                  - columnheader "Длительность" [ref=e900]
+              - rowgroup [ref=e193]:
+                - row [ref=e901]:
+                  - cell "I" [ref=e195]
+                  - cell "2 сек" [ref=e902]
+                - row [ref=e903]:
+                  - cell "II" [ref=e198]
+                  - cell "3 сек" [ref=e904]
+                - row [ref=e905]:
+                  - cell "III" [ref=e201]
+                  - cell "4 сек" [ref=e906]
+            - list [ref=e203]:
+              - listitem [ref=e204]:
+                - text: ›
+                - generic [ref=e907]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e908]: Заговором огня
+          - article [ref=e207]:
+            - generic [ref=e208]:
+              - generic [ref=e209]: 🪵
+              - generic [ref=e210]:
+                - heading "Лесоруб Lumberjack" [level=3] [ref=e909]
+                - generic [ref=e212]:
+                  - generic [ref=e910]: Инструмент
+                  - generic [ref=e911]: Редкое
+                  - generic [ref=e912]: "Макс. уровень: III"
+            - paragraph [ref=e216]:
+              - generic [ref=e913]:
+                - text: Срубает всё
+                - strong [ref=e914]: дерево
+                - text: за один удар. Умное определение — не ломает постройки из брёвен. Работает с деревьями Незера.
+            - generic [ref=e219]: 📦 Топор
+            - table [ref=e220]:
+              - rowgroup [ref=e221]:
+                - row [ref=e915]:
+                  - columnheader "Уровень" [ref=e916]
+                  - columnheader "Макс. блоков" [ref=e917]
+              - rowgroup [ref=e225]:
+                - row [ref=e226]:
+                  - cell "I" [ref=e227]
+                  - cell "16" [ref=e228]
+                - row [ref=e229]:
+                  - cell "II" [ref=e230]
+                  - cell "48" [ref=e231]
+                - row [ref=e232]:
+                  - cell "III" [ref=e233]
+                  - cell "128" [ref=e234]
+            - list [ref=e235]:
+              - listitem [ref=e236]:
+                - text: ›
+                - generic [ref=e918]:
+                  - text: Не работает c блоками
+                  - code [ref=e919]: _wood
+                  - text: /
+                  - code [ref=e920]: hyphae
+              - listitem [ref=e240]: › Не ломает блоки ниже исходного
+              - listitem [ref=e241]:
+                - text: ›
+                - generic [ref=e921]:
+                  - text: Совместим с
+                  - emphasis [ref=e922]: Магнитом
+          - article [ref=e244]:
+            - generic [ref=e245]:
+              - generic [ref=e246]: 🗡️
+              - generic [ref=e247]:
+                - heading "Теневой клинок Shadow Blade" [level=3] [ref=e923]
+                - generic [ref=e249]:
+                  - generic [ref=e924]: Оружие
+                  - generic [ref=e925]: Очень редкое
+                  - generic [ref=e926]: "Макс. уровень: III"
+            - paragraph [ref=e253]:
+              - generic [ref=e927]:
+                - text: При броске шанс
+                - strong [ref=e928]: телепортироваться за спину цели
+                - text: и наложить
+                - strong [ref=e929]: Замедление II
+                - text: . Шанс растёт с расстояния (до +10% с 30 блоков).
+            - generic [ref=e257]: 📦 Тризубец
+            - table [ref=e258]:
+              - rowgroup [ref=e259]:
+                - row [ref=e930]:
+                  - columnheader "Уровень" [ref=e931]
+                  - columnheader "Шанс" [ref=e932]
+                  - columnheader "Замедление" [ref=e933]
+              - rowgroup [ref=e264]:
+                - row [ref=e934]:
+                  - cell "I" [ref=e266]
+                  - cell "15%" [ref=e267]
+                  - cell "1 сек" [ref=e935]
+                - row [ref=e936]:
+                  - cell "II" [ref=e270]
+                  - cell "25%" [ref=e271]
+                  - cell "2 сек" [ref=e937]
+                - row [ref=e938]:
+                  - cell "III" [ref=e274]
+                  - cell "35%" [ref=e275]
+                  - cell "3 сек" [ref=e939]
+            - list [ref=e277]:
+              - listitem [ref=e278]:
+                - text: ›
+                - generic [ref=e940]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e941]: Громоверзцем
+                  - text: ","
+                  - emphasis [ref=e942]: Тягуном
+                  - text: ","
+                  - emphasis [ref=e943]: Сияющим ударом
+              - listitem [ref=e283]:
+                - text: ›
+                - generic [ref=e944]:
+                  - text: Совместимо с
+                  - emphasis [ref=e945]: Преданностью
+                  - text: — тризубец возвращается после телепорта
+          - article [ref=e286]:
+            - generic [ref=e287]:
+              - generic [ref=e288]: 🧲
+              - generic [ref=e289]:
+                - heading "Магнит Magnet" [level=3] [ref=e946]
+                - generic [ref=e291]:
+                  - generic [ref=e947]: Инструмент
+                  - generic [ref=e948]: Редкое
+                  - generic [ref=e949]: "Макс. уровень: I"
+            - paragraph [ref=e295]:
+              - generic [ref=e950]:
+                - text: При добыче
+                - strong [ref=e951]: собирает связанные дропы
+                - text: в инвентарь игрока и также использует настраиваемый радиус ближайших предметов (по умолчанию 5 блоков).
+            - generic [ref=e298]: 📦 Кирка · Топор · Лопата · Мотыга
+            - list [ref=e299]:
+              - listitem [ref=e300]:
+                - text: ›
+                - generic [ref=e952]:
+                  - text: Работает с
+                  - emphasis [ref=e953]: Буром
+                  - text: и
+                  - emphasis [ref=e954]: Лесорубом
+              - listitem [ref=e304]: › Радиус подбора настраивается; на 1.20.1 сложные деревья Лесоруба могут оставить рядом часть вторичных дропов без потери или дублирования
+          - article [ref=e305]:
+            - generic [ref=e306]:
+              - generic [ref=e307]: 🔥
+              - generic [ref=e308]:
+                - heading "Автопечка Auto Smelt" [level=3] [ref=e955]
+                - generic [ref=e310]:
+                  - generic [ref=e956]: Инструмент
+                  - generic [ref=e957]: Редкое
+                  - generic [ref=e958]: "Макс. уровень: I"
+            - paragraph [ref=e314]:
+              - generic [ref=e959]:
+                - text: Автоматически заменяет подходящий рудный лут на
+                - strong [ref=e960]: переплавленный результат
+                - text: ", сохраняя применимое ванильное поведение лута."
+            - generic [ref=e317]: 📦 Кирка
+            - list [ref=e318]:
+              - listitem [ref=e319]: › Работает через рассчитанный ванильный лут, включая поведение Шёлкового касания и Удачи, где это применимо
+          - article [ref=e320]:
+            - generic [ref=e321]:
+              - generic [ref=e322]: 🌱
+              - generic [ref=e323]:
+                - heading "Вегетация Vegetation" [level=3] [ref=e961]
+                - generic [ref=e325]:
+                  - generic [ref=e962]: Инструмент
+                  - generic [ref=e963]: Редкое
+                  - generic [ref=e964]: "Макс. уровень: III"
+            - paragraph [ref=e329]:
+              - generic [ref=e965]:
+                - text: При разрушении взрослого растения есть шанс
+                - strong [ref=e966]: автоматической посадки
+                - text: . Работает с пшеницей, морковью, картофелем, свёклой, адским наростом.
+            - generic [ref=e332]: 📦 Мотыга
+            - table [ref=e333]:
+              - rowgroup [ref=e334]:
+                - row [ref=e967]:
+                  - columnheader "Уровень" [ref=e968]
+                  - columnheader "Шанс посадки" [ref=e969]
+              - rowgroup [ref=e338]:
+                - row [ref=e339]:
+                  - cell "I" [ref=e340]
+                  - cell "30%" [ref=e341]
+                - row [ref=e342]:
+                  - cell "II" [ref=e343]
+                  - cell "60%" [ref=e344]
+                - row [ref=e345]:
+                  - cell "III" [ref=e346]
+                  - cell "100%" [ref=e347]
+            - list [ref=e348]:
+              - listitem [ref=e349]: › Свежепосаженное растение нельзя сломать 0.5 сек
+          - article [ref=e350]:
+            - generic [ref=e351]:
+              - generic [ref=e352]: 🛡️
+              - generic [ref=e353]:
+                - heading "Эластичность Rebound" [level=3] [ref=e970]
+                - generic [ref=e355]:
+                  - generic [ref=e971]: Броня
+                  - generic [ref=e972]: Редкое
+                  - generic [ref=e973]: "Макс. уровень: III"
+            - paragraph [ref=e359]:
+              - generic [ref=e974]:
+                - text: При блокировании удара
+                - strong [ref=e975]: отбрасывает атакующего
+                - text: назад. Игрок получает небольшой импульс назад (15%). Не наносит урона.
+            - generic [ref=e362]: 📦 Щит
+            - table [ref=e363]:
+              - rowgroup [ref=e364]:
+                - row [ref=e976]:
+                  - columnheader "Уровень" [ref=e977]
+                  - columnheader "Отбрасывание" [ref=e978]
+              - rowgroup [ref=e368]:
+                - row [ref=e369]:
+                  - cell "I" [ref=e370]
+                  - cell "0.5" [ref=e371]
+                - row [ref=e372]:
+                  - cell "II" [ref=e373]
+                  - cell "1.0" [ref=e374]
+                - row [ref=e375]:
+                  - cell "III" [ref=e376]
+                  - cell "2.0" [ref=e377]
+            - list [ref=e378]:
+              - listitem [ref=e379]: › Тратит дополнительную прочность щита (1 ед. за уровень)
+              - listitem [ref=e380]:
+                - text: ›
+                - generic [ref=e979]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e980]: Эхо-ударом
+                  - text: и
+                  - emphasis [ref=e981]: Живым щитом
+          - article [ref=e384]:
+            - generic [ref=e385]:
+              - generic [ref=e386]: 🛡️
+              - generic [ref=e387]:
+                - heading "Эхо-удар Feedback" [level=3] [ref=e982]
+                - generic [ref=e389]:
+                  - generic [ref=e983]: Броня
+                  - generic [ref=e984]: Редкое
+                  - generic [ref=e985]: "Макс. уровень: I"
+            - paragraph [ref=e393]:
+              - generic [ref=e986]:
+                - text: Пока щит с
+                - strong [ref=e987]: Эхо-ударом активно поднят
+                - text: ", новые негативные эффекты не накладываются, а поддерживаемый магический урон, включая"
+                - strong [ref=e988]: Зелье вреда / мгновенный урон
+                - text: ", блокируется. Негативные эффекты, которые уже действовали до поднятия щита, не изменяются; положительные и нейтральные эффекты не затрагиваются."
+            - generic [ref=e397]: 📦 Щит
+            - list [ref=e398]:
+              - listitem [ref=e399]: › Блокирует новые негативные эффекты только пока щит активно поднят
+              - listitem [ref=e400]: › Уже действующие негативные эффекты сохраняются без удаления, обновления, продления или замены
+              - listitem [ref=e401]: › Положительные и нейтральные эффекты проходят без изменений
+              - listitem [ref=e402]: › Поддерживаемый магический урон, включая Зелье вреда / мгновенный урон, блокируется
+              - listitem [ref=e403]: › Количество восстановленной прочности настраивается
+              - listitem [ref=e404]:
+                - text: ›
+                - generic [ref=e989]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e990]: Эластичностью
+                  - text: и
+                  - emphasis [ref=e991]: Живым щитом
+          - article [ref=e408]:
+            - generic [ref=e409]:
+              - generic [ref=e410]: 🌀
+              - generic [ref=e411]:
+                - heading "Второе дыхание Second Wind" [level=3] [ref=e992]
+                - generic [ref=e413]:
+                  - generic [ref=e993]: Броня
+                  - generic [ref=e994]: Очень редкое
+                  - generic [ref=e995]: "Макс. уровень: I"
+            - paragraph [ref=e417]:
+              - generic [ref=e996]:
+                - text: Когда здоровье падает ниже
+                - strong [ref=e997]: 1 сердца (2 HP)
+                - text: ", мгновенно даёт"
+                - strong [ref=e998]: Скорость II
+                - text: ","
+                - strong [ref=e999]: Сопротивление I
+                - text: и
+                - strong [ref=e1000]: 100% стойкость к отбрасыванию
+                - text: . Длительность масштабируется по числу экипированных предметов.
+            - generic [ref=e423]: 📦 Шлем · Нагрудник · Поножи · Ботинки
+            - table [ref=e424]:
+              - rowgroup [ref=e425]:
+                - row [ref=e1001]:
+                  - columnheader "Предметов" [ref=e1002]
+                  - columnheader "Скорость II" [ref=e1003]
+                  - columnheader "Сопротивление I" [ref=e1004]
+              - rowgroup [ref=e430]:
+                - row [ref=e1005]:
+                  - cell "1" [ref=e432]
+                  - cell "2 сек" [ref=e1006]
+                  - cell "1 сек" [ref=e1007]
+                - row [ref=e1008]:
+                  - cell "2" [ref=e436]
+                  - cell "3 сек" [ref=e1009]
+                  - cell "1 сек" [ref=e1010]
+                - row [ref=e1011]:
+                  - cell "3" [ref=e440]
+                  - cell "3 сек" [ref=e1012]
+                  - cell "2 сек" [ref=e1013]
+                - row [ref=e1014]:
+                  - cell "4" [ref=e444]
+                  - cell "4 сек" [ref=e1015]
+                  - cell "2 сек" [ref=e1016]
+            - list [ref=e447]:
+              - listitem [ref=e448]: "› Перезарядка: 60 секунд (настраивается)"
+              - listitem [ref=e449]: "› Визуальный эффект: частицы дыма и облака"
+          - article [ref=e450]:
+            - generic [ref=e451]:
+              - generic [ref=e452]: 🛡️
+              - generic [ref=e453]:
+                - heading "Живой щит Guardian's Grace" [level=3] [ref=e1017]
+                - generic [ref=e455]:
+                  - generic [ref=e1018]: Броня
+                  - generic [ref=e1019]: Редкое
+                  - generic [ref=e1020]: "Макс. уровень: III"
+            - paragraph [ref=e459]:
+              - generic [ref=e1021]:
+                - text: При блокировании шанс
+                - strong [ref=e1022]: восстановить 1 ед. сытости
+                - text: ". III уровень: доп. 10% шанс"
+                - strong [ref=e1023]: восстановить 1 сердце
+                - text: .
+            - generic [ref=e463]: 📦 Щит
+            - table [ref=e464]:
+              - rowgroup [ref=e465]:
+                - row [ref=e1024]:
+                  - columnheader "Уровень" [ref=e1025]
+                  - columnheader "Шанс сытости" [ref=e1026]
+                  - columnheader "Бонус" [ref=e1027]
+              - rowgroup [ref=e470]:
+                - row [ref=e471]:
+                  - cell "I" [ref=e472]
+                  - cell "10%" [ref=e473]
+                  - cell "—" [ref=e474]
+                - row [ref=e475]:
+                  - cell "II" [ref=e476]
+                  - cell "20%" [ref=e477]
+                  - cell "—" [ref=e478]
+                - row [ref=e1028]:
+                  - cell "III" [ref=e480]
+                  - cell "30%" [ref=e481]
+                  - cell "+10% лечение (2 HP)" [ref=e1029]
+            - list [ref=e483]:
+              - listitem [ref=e484]:
+                - text: ›
+                - generic [ref=e1030]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e1031]: Эластичностью
+                  - text: и
+                  - emphasis [ref=e1032]: Эхо-ударом
+          - article [ref=e488]:
+            - generic [ref=e489]:
+              - generic [ref=e490]: 🎯
+              - generic [ref=e491]:
+                - heading "Аналитик Vulnerability" [level=3] [ref=e1033]
+                - generic [ref=e493]:
+                  - generic [ref=e1034]: Дальний бой
+                  - generic [ref=e1035]: Редкое
+                  - generic [ref=e1036]: "Макс. уровень: III"
+            - paragraph [ref=e497]:
+              - generic [ref=e1037]:
+                - text: Стрелы частично
+                - strong [ref=e1038]: игнорируют броню
+                - text: цели.
+            - generic [ref=e500]: 📦 Лук · Арбалет
+            - table [ref=e501]:
+              - rowgroup [ref=e502]:
+                - row [ref=e1039]:
+                  - columnheader "Уровень" [ref=e1040]
+                  - columnheader "Игнор брони" [ref=e1041]
+              - rowgroup [ref=e506]:
+                - row [ref=e507]:
+                  - cell "I" [ref=e508]
+                  - cell "10%" [ref=e509]
+                - row [ref=e510]:
+                  - cell "II" [ref=e511]
+                  - cell "20%" [ref=e512]
+                - row [ref=e513]:
+                  - cell "III" [ref=e514]
+                  - cell "30%" [ref=e515]
+          - article [ref=e516]:
+            - generic [ref=e517]:
+              - generic [ref=e518]: 🎣
+              - generic [ref=e519]:
+                - heading "Крепкая нить Tether Master" [level=3] [ref=e1042]
+                - generic [ref=e521]:
+                  - generic [ref=e1043]: Инструмент
+                  - generic [ref=e1044]: Необычное
+                  - generic [ref=e1045]: "Макс. уровень: III"
+            - paragraph [ref=e525]:
+              - generic [ref=e1046]:
+                - text: Увеличивает
+                - strong [ref=e1047]: силу притяжения
+                - text: мобов при намотке удочки.
+            - generic [ref=e528]: 📦 Удочка
+            - table [ref=e529]:
+              - rowgroup [ref=e530]:
+                - row [ref=e1048]:
+                  - columnheader "Уровень" [ref=e1049]
+                  - columnheader "Прирост силы" [ref=e1050]
+              - rowgroup [ref=e534]:
+                - row [ref=e535]:
+                  - cell "I" [ref=e536]
+                  - cell "+15%" [ref=e537]
+                - row [ref=e538]:
+                  - cell "II" [ref=e539]
+                  - cell "+25%" [ref=e540]
+                - row [ref=e541]:
+                  - cell "III" [ref=e542]
+                  - cell "+40%" [ref=e543]
+          - article [ref=e544]:
+            - generic [ref=e545]:
+              - generic [ref=e546]: ⚡
+              - generic [ref=e547]:
+                - heading "Ярость Неба Sky Rage" [level=3] [ref=e1051]
+                - generic [ref=e549]:
+                  - generic [ref=e1052]: Дальний бой
+                  - generic [ref=e1053]: Редкое
+                  - generic [ref=e1054]: "Макс. уровень: III"
+            - paragraph [ref=e553]:
+              - generic [ref=e1055]:
+                - text: Во время
+                - strong [ref=e1056]: грозы
+                - text: стрелы с шансом вызывают
+                - strong [ref=e1057]: удар молнии
+                - text: в точку попадания.
+            - generic [ref=e557]: 📦 Лук · Арбалет
+            - table [ref=e558]:
+              - rowgroup [ref=e559]:
+                - row [ref=e1058]:
+                  - columnheader "Уровень" [ref=e1059]
+                  - columnheader "Шанс" [ref=e1060]
+              - rowgroup [ref=e563]:
+                - row [ref=e564]:
+                  - cell "I" [ref=e565]
+                  - cell "10%" [ref=e566]
+                - row [ref=e567]:
+                  - cell "II" [ref=e568]
+                  - cell "20%" [ref=e569]
+                - row [ref=e570]:
+                  - cell "III" [ref=e571]
+                  - cell "30%" [ref=e572]
+            - list [ref=e573]:
+              - listitem [ref=e574]: › Только во время грозы (не простого дождя)
+              - listitem [ref=e575]: › Не работает под крышей
+              - listitem [ref=e576]: › Кулдаун 1.5 сек между ударами на игрока
+              - listitem [ref=e577]:
+                - text: ›
+                - generic [ref=e1061]:
+                  - text: Несовместимо с
+                  - emphasis [ref=e1062]: Пламенем
+                  - text: ","
+                  - emphasis [ref=e1063]: Бесконечностью
+                  - text: ","
+                  - emphasis [ref=e1064]: Пробоем
+          - article [ref=e582]:
+            - generic [ref=e583]:
+              - generic [ref=e584]: ✨
+              - generic [ref=e585]:
+                - heading "Собиратель искр XP Syphon" [level=3] [ref=e1065]
+                - generic [ref=e587]:
+                  - generic [ref=e1066]: Оружие
+                  - generic [ref=e1067]: Необычное
+                  - generic [ref=e1068]: "Макс. уровень: III"
+            - paragraph [ref=e591]:
+              - generic [ref=e1069]:
+                - text: Удары по мобам с шансом
+                - strong [ref=e1070]: выбивают сферы опыта
+                - text: до смерти моба.
+            - generic [ref=e594]: 📦 Меч
+            - table [ref=e595]:
+              - rowgroup [ref=e596]:
+                - row [ref=e1071]:
+                  - columnheader "Уровень" [ref=e1072]
+                  - columnheader "Шанс" [ref=e1073]
+                  - columnheader "Опыт" [ref=e1074]
+              - rowgroup [ref=e601]:
+                - row [ref=e602]:
+                  - cell "I" [ref=e603]
+                  - cell "5%" [ref=e604]
+                  - cell "1" [ref=e605]
+                - row [ref=e606]:
+                  - cell "II" [ref=e607]
+                  - cell "10%" [ref=e608]
+                  - cell "2" [ref=e609]
+                - row [ref=e610]:
+                  - cell "III" [ref=e611]
+                  - cell "15%" [ref=e612]
+                  - cell "3" [ref=e613]
+            - list [ref=e614]:
+              - listitem [ref=e615]: › Работает на любых мобах, включая боссов
+          - article [ref=e616]:
+            - generic [ref=e617]:
+              - generic [ref=e618]: 💥
+              - generic [ref=e619]:
+                - heading "Кинетический разряд Kinetic Discharge" [level=3] [ref=e1075]
+                - generic [ref=e621]:
+                  - generic [ref=e1076]: Броня
+                  - generic [ref=e1077]: Редкое
+                  - generic [ref=e1078]: "Макс. уровень: III"
+            - paragraph [ref=e625]:
+              - generic [ref=e1079]:
+                - text: Приземление после быстрого полёта на элитрах создаёт
+                - strong [ref=e1080]: ударную волну
+                - text: ". III уровень: пассивно снижает расход прочности элитры на"
+                - strong [ref=e1081]: ~90%
+                - text: .
+            - generic [ref=e629]: 📦 Элитры
+            - table [ref=e630]:
+              - rowgroup [ref=e631]:
+                - row [ref=e1082]:
+                  - columnheader "Уровень" [ref=e1083]
+                  - columnheader "Радиус" [ref=e1084]
+                  - columnheader "Эффект" [ref=e1085]
+              - rowgroup [ref=e636]:
+                - row [ref=e1086]:
+                  - cell "I" [ref=e638]
+                  - cell "3 блока" [ref=e1087]
+                  - cell "Слабое отбрасывание" [ref=e1088]
+                - row [ref=e1089]:
+                  - cell "II" [ref=e642]
+                  - cell "5 блоков" [ref=e1090]
+                  - cell "Среднее отбрасывание" [ref=e1091]
+                - row [ref=e1092]:
+                  - cell "III" [ref=e646]
+                  - cell "7 блоков" [ref=e1093]
+                  - cell "Сильное + 2 HP урона" [ref=e1094]
+            - list [ref=e649]:
+              - listitem [ref=e650]: › Активируется при скорости приземления ≥ 0.4 блоков/тик
+              - listitem [ref=e651]: "› III уровень: шоквейв имеет лишь 10% шанс потратить прочность"
+          - article [ref=e652]:
+            - generic [ref=e653]:
+              - generic [ref=e654]: 🌑
+              - generic [ref=e655]:
+                - heading "Скалковое цветение Sculk Bloom" [level=3] [ref=e1095]
+                - generic [ref=e657]:
+                  - generic [ref=e1096]: Оружие
+                  - generic [ref=e1097]: Редкое
+                  - generic [ref=e1098]: "Макс. уровень: II"
+            - paragraph [ref=e661]:
+              - generic [ref=e1099]:
+                - text: При убийстве моба на месте смерти
+                - strong [ref=e1100]: распространяется скалк
+                - text: — как если бы рядом стоял
+                - strong [ref=e1101]: скалк-катализатор
+                - text: .
+            - generic [ref=e665]: 📦 Меч
+            - table [ref=e666]:
+              - rowgroup [ref=e667]:
+                - row [ref=e1102]:
+                  - columnheader "Уровень" [ref=e1103]
+                  - columnheader "Эффект" [ref=e1104]
+              - rowgroup [ref=e671]:
+                - row [ref=e1105]:
+                  - cell "I" [ref=e673]
+                  - cell "Малое цветение (≈2–3 блока)" [ref=e1106]
+                - row [ref=e1107]:
+                  - cell "II" [ref=e676]
+                  - cell "Большое цветение (≈4–5 блоков)" [ref=e1108]
+            - list [ref=e678]:
+              - listitem [ref=e679]: › Работает только при прямом убийстве зачарованным оружием
+              - listitem [ref=e680]: › Может порождать скалковые прожилки, датчики и крикуны
+      - generic [ref=e681]:
+        - heading "История версий" [level=2] [ref=e1109]
+        - generic [ref=e683]:
+          - group [ref=e684]:
+            - generic "v3.2.5 2026-08-10 Хотфикс плавности Двойного прыжка" [ref=e1110] [cursor=pointer]:
+              - generic [ref=e686]: v3.2.5
+              - generic [ref=e687]: 2026-08-10
+              - generic [ref=e1111]: Хотфикс плавности Двойного прыжка
+            - generic [ref=e689]:
+              - paragraph [ref=e690]:
+                - generic [ref=e1112]:
+                  - strong [ref=e1113]: "Совместимость:"
+                  - text: релиз для Minecraft 1.21.1 и 1.21.11 (Java 21). Minecraft 1.20.1 остаётся на 3.2.4, потому что его Double Jump уже работал корректно.
+              - paragraph [ref=e693]:
+                - generic [ref=e1114]:
+                  - strong [ref=e1115]: "Причина:"
+                  - text: на 1.21.x клиент владельца ждал полный round trip серверного подтверждения перед применением импульса Double Jump, из-за чего появлялся запоздалый горизонтальный/вертикальный толчок, а направление могло разойтись с моментом нажатия при изменении yaw.
+              - paragraph [ref=e696]:
+                - generic [ref=e1116]:
+                  - strong [ref=e1117]: "Исправлено:"
+                  - text: движение прогнозируется сразу в тик нажатия; C2S передаёт snapshot спринта и yaw момента активации; сервер остаётся авторитетным и применяет эквивалентный импульс; S2C-подтверждение не добавляет второй запоздалый импульс. Minecraft 1.21.11 использует корректный механизм синхронизации
+                  - code [ref=e1118]: hurtMarked
+                  - text: .
+              - paragraph [ref=e700]:
+                - generic [ref=e1119]:
+                  - strong [ref=e1120]: "Проверка:"
+                  - text: сборки 1.21.1 и 1.21.11 прошли автоматическую проверку и были вручную подтверждены в игре.
+          - group [ref=e703]:
+            - generic "v3.2.4 2026-08-08 Исправление торговли библиотекарей" [ref=e1121] [cursor=pointer]:
+              - generic [ref=e705]: v3.2.4
+              - generic [ref=e706]: 2026-08-08
+              - generic [ref=e1122]: Исправление торговли библиотекарей
+          - group [ref=e708]:
+            - generic "v3.2.3 2026-08-08 Исправление защиты Эхо-удара" [ref=e1123] [cursor=pointer]:
+              - generic [ref=e710]: v3.2.3
+              - generic [ref=e711]: 2026-08-08
+              - generic [ref=e1124]: Исправление защиты Эхо-удара
+          - group [ref=e713]:
+            - generic "v3.2.2 2026-08-08 Исправление геометрии Бура" [ref=e1125] [cursor=pointer]:
+              - generic [ref=e715]: v3.2.2
+              - generic [ref=e716]: 2026-08-08
+              - generic [ref=e1126]: Исправление геометрии Бура
+          - group [ref=e718]:
+            - generic "v3.1.2 2026-08-08 Исправление Двойного прыжка" [ref=e1127] [cursor=pointer]:
+              - generic [ref=e720]: v3.1.2
+              - generic [ref=e721]: 2026-08-08
+              - generic [ref=e1128]: Исправление Двойного прыжка
+          - group [ref=e723]:
+            - generic "v3.1.1 2026-08-07 Стабильность и правки" [ref=e1129] [cursor=pointer]:
+              - generic [ref=e725]: v3.1.1
+              - generic [ref=e726]: 2026-08-07
+              - generic [ref=e1130]: Стабильность и правки
+          - group [ref=e728]:
+            - generic "v3.0.0 2026-04-30 +1 зачарование" [ref=e1131] [cursor=pointer]:
+              - generic [ref=e730]: v3.0.0
+              - generic [ref=e731]: 2026-04-30
+              - generic [ref=e1132]: +1 зачарование
+          - group [ref=e733]:
+            - generic "v2.9.0 2026-03-28 +1 зачарование" [ref=e1133] [cursor=pointer]:
+              - generic [ref=e735]: v2.9.0
+              - generic [ref=e736]: 2026-03-28
+              - generic [ref=e1134]: +1 зачарование
+          - group [ref=e738]:
+            - generic "v2.8.0 2026-03-28 +1 зачарование" [ref=e1135] [cursor=pointer]:
+              - generic [ref=e740]: v2.8.0
+              - generic [ref=e741]: 2026-03-28
+              - generic [ref=e1136]: +1 зачарование
+          - group [ref=e743]:
+            - generic "v2.7.0 2026-03-28 +1 зачарование" [ref=e1137] [cursor=pointer]:
+              - generic [ref=e745]: v2.7.0
+              - generic [ref=e746]: 2026-03-28
+              - generic [ref=e1138]: +1 зачарование
+          - group [ref=e748]:
+            - generic "v2.6.0 2026-03-28 +1 зачарование" [ref=e1139] [cursor=pointer]:
+              - generic [ref=e750]: v2.6.0
+              - generic [ref=e751]: 2026-03-28
+              - generic [ref=e1140]: +1 зачарование
+          - group [ref=e753]:
+            - generic "v2.5.0 2026-03-28 +1 зачарование" [ref=e1141] [cursor=pointer]:
+              - generic [ref=e755]: v2.5.0
+              - generic [ref=e756]: 2026-03-28
+              - generic [ref=e1142]: +1 зачарование
+          - group [ref=e758]:
+            - generic "v2.4.0 2026-03-28 +1 зачарование" [ref=e1143] [cursor=pointer]:
+              - generic [ref=e760]: v2.4.0
+              - generic [ref=e761]: 2026-03-28
+              - generic [ref=e1144]: +1 зачарование
+          - group [ref=e763]:
+            - generic "v2.3.0 2026-03-27 +1 зачарование" [ref=e1145] [cursor=pointer]:
+              - generic [ref=e765]: v2.3.0
+              - generic [ref=e766]: 2026-03-27
+              - generic [ref=e1146]: +1 зачарование
+          - group [ref=e768]:
+            - generic "v2.2.0 2026-03-27 +1 зачарование" [ref=e1147] [cursor=pointer]:
+              - generic [ref=e770]: v2.2.0
+              - generic [ref=e771]: 2026-03-27
+              - generic [ref=e1148]: +1 зачарование
+          - group [ref=e773]:
+            - generic "v2.1.0 2026-03-27 +1 зачарование" [ref=e1149] [cursor=pointer]:
+              - generic [ref=e775]: v2.1.0
+              - generic [ref=e776]: 2026-03-27
+              - generic [ref=e1150]: +1 зачарование
+          - group [ref=e778]:
+            - generic "v2.0.0 2026-03-27 +1 зачарование" [ref=e1151] [cursor=pointer]:
+              - generic [ref=e780]: v2.0.0
+              - generic [ref=e781]: 2026-03-27
+              - generic [ref=e1152]: +1 зачарование
+          - group [ref=e783]:
+            - generic "v1.9.0 2026-03-26 +1 зачарование" [ref=e1153] [cursor=pointer]:
+              - generic [ref=e785]: v1.9.0
+              - generic [ref=e786]: 2026-03-26
+              - generic [ref=e1154]: +1 зачарование
+          - group [ref=e788]:
+            - generic "v1.7.0 2026-03-26 +1 зачарование" [ref=e1155] [cursor=pointer]:
+              - generic [ref=e790]: v1.7.0
+              - generic [ref=e791]: 2026-03-26
+              - generic [ref=e1156]: +1 зачарование
+          - group [ref=e793]:
+            - generic "v1.6.0 2026-03-26 +1 зачарование" [ref=e1157] [cursor=pointer]:
+              - generic [ref=e795]: v1.6.0
+              - generic [ref=e796]: 2026-03-26
+              - generic [ref=e1158]: +1 зачарование
+          - group [ref=e798]:
+            - generic "v1.5.0 2026-03-26 +1 зачарование" [ref=e1159] [cursor=pointer]:
+              - generic [ref=e800]: v1.5.0
+              - generic [ref=e801]: 2026-03-26
+              - generic [ref=e1160]: +1 зачарование
+          - group [ref=e803]:
+            - generic "v1.4.0 2026-03-26 +1 зачарование" [ref=e1161] [cursor=pointer]:
+              - generic [ref=e805]: v1.4.0
+              - generic [ref=e806]: 2026-03-26
+              - generic [ref=e1162]: +1 зачарование
+          - group [ref=e808]:
+            - generic "v1.3.0 2026-03-26 +1 зачарование" [ref=e1163] [cursor=pointer]:
+              - generic [ref=e810]: v1.3.0
+              - generic [ref=e811]: 2026-03-26
+              - generic [ref=e1164]: +1 зачарование
+          - group [ref=e813]:
+            - generic "v1.1.0 2026-03-25 +1 зачарование" [ref=e1165] [cursor=pointer]:
+              - generic [ref=e815]: v1.1.0
+              - generic [ref=e816]: 2026-03-25
+              - generic [ref=e1166]: +1 зачарование
+          - group [ref=e818]:
+            - generic "v1.0.0 2026-03-25 Первый релиз" [ref=e1167] [cursor=pointer]:
+              - generic [ref=e820]: v1.0.0
+              - generic [ref=e821]: 2026-03-25
+              - generic [ref=e1168]: Первый релиз
+  - contentinfo [ref=e823]:
+    - generic [ref=e824]:
+      - paragraph [ref=e825]:
+        - strong [ref=e826]: Mentalitys | Custom Enchantments
+        - text: — Fabric for Minecraft 1.20.1, 1.21.1 and 1.21.11
+      - generic [ref=e827]:
+        - link "GitHub" [ref=e828] [cursor=pointer]:
+          - /url: https://github.com/sqwiziiy/Custom-Enchants
+        - generic [ref=e829]: ·
+        - link "Modrinth" [ref=e830] [cursor=pointer]:
+          - /url: https://modrinth.com/project/NJPtH6f5
+      - paragraph [ref=e831]: "Автор: mentality · v3.2.5 (1.21.x) / v3.2.4 (1.20.1)"

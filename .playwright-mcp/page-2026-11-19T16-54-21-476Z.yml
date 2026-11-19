@@ -1,0 +1,432 @@
+- generic [ref=f5e1]:
+  - banner [ref=f5e2]:
+    - generic [ref=f5e3]:
+      - generic [ref=f5e8]:
+        - heading "Mentalitys | Custom Enchantments" [level=1] [ref=f5e9]
+        - paragraph [ref=f5e10]: Fabric · Minecraft 1.20.1, 1.21.1 & 1.21.11 · v3.2.5 / 3.2.4
+      - generic [ref=f5e11]:
+        - generic "Language" [ref=f5e12]:
+          - button "EN" [ref=f5e13] [cursor=pointer]
+          - button "RU" [ref=f5e14] [cursor=pointer]
+        - navigation [ref=f5e15]:
+          - link "GitHub" [ref=f5e16] [cursor=pointer]:
+            - /url: https://github.com/sqwiziiy/Custom-Enchants
+          - link "Modrinth" [ref=f5e19] [cursor=pointer]:
+            - /url: https://modrinth.com/project/NJPtH6f5
+  - navigation [ref=f5e22]:
+    - generic [ref=f5e23]:
+      - button "All" [ref=f5e886] [cursor=pointer]
+      - button "Weapon" [ref=f5e887] [cursor=pointer]
+      - button "Tools" [active] [ref=f5e888] [cursor=pointer]
+      - button "Armor" [ref=f5e889] [cursor=pointer]
+      - button "Ranged" [ref=f5e890] [cursor=pointer]
+      - button "Trades" [ref=f5e891] [cursor=pointer]
+      - button "Structure" [ref=f5e892] [cursor=pointer]
+  - main [ref=f5e63]:
+    - generic [ref=f5e64]:
+      - generic [ref=f5e65]:
+        - heading "About" [level=2] [ref=f5e893]
+        - paragraph [ref=f5e67]:
+          - generic [ref=f5e894]:
+            - strong [ref=f5e895]: Mentalitys | Custom Enchantments
+            - text: is a
+            - strong [ref=f5e896]: Fabric
+            - text: mod for Minecraft 1.20.1, 1.21.1 and 1.21.11 that adds
+            - strong [ref=f5e897]: 19 unique enchantments
+            - text: "with flexible configuration via Cloth Config API. Each enchantment can be toggled individually, and all parameters — levels, chances, durations, radii — are tweakable via the GUI settings screen (Mod Menu) without restarting the server. Config file:"
+            - code [ref=f5e898]: config/custom-enchants.json
+            - text: .
+        - generic [ref=f5e73]:
+          - generic [ref=f5e74]: Minecraft 1.20.1 · 1.21.1 · 1.21.11
+          - generic [ref=f5e75]: Fabric API
+          - generic [ref=f5e76]: Cloth Config
+          - generic [ref=f5e77]: Java 17 / 21
+          - generic [ref=f5e78]: v3.2.5
+      - generic [ref=f5e79]:
+        - heading "Minecraft Compatibility" [level=2] [ref=f5e899]
+        - paragraph [ref=f5e81]: Custom Enchants 3.2.5 is the current release for Minecraft 1.21.1 and 1.21.11. Minecraft 1.20.1 remains on 3.2.4 because the Double Jump hotfix is not required there. Pick the release that matches your server/client.
+        - generic [ref=f5e82]:
+          - generic [ref=f5e85]:
+            - generic [ref=f5e86]: Minecraft 1.20.1 · Java 17
+            - generic [ref=f5e87]:
+              - text: Branch
+              - code [ref=f5e88]: 3.2/1.20.1
+              - text: ·
+              - link "v3.2.4" [ref=f5e89] [cursor=pointer]:
+                - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.4
+          - generic [ref=f5e90]:
+            - generic [ref=f5e91]: New
+            - generic [ref=f5e92]:
+              - generic [ref=f5e93]: Minecraft 1.21.1 · Java 21
+              - generic [ref=f5e94]:
+                - text: Branch
+                - code [ref=f5e95]: 3.2/1.21.1
+                - text: ·
+                - link "v3.2.5-mc1.21.1" [ref=f5e96] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.1
+          - generic [ref=f5e97]:
+            - generic [ref=f5e98]: New
+            - generic [ref=f5e99]:
+              - generic [ref=f5e100]: Minecraft 1.21.11 · Java 21
+              - generic [ref=f5e101]:
+                - text: Branch
+                - code [ref=f5e102]: 3.2/1.21.11
+                - text: ·
+                - link "v3.2.5-mc1.21.11" [ref=f5e103] [cursor=pointer]:
+                  - /url: https://github.com/sqwiziiy/Custom-Enchants/releases/tag/v3.2.5-mc1.21.11
+        - paragraph [ref=f5e104]: The enchantment reference, configuration reference and librarian trades below are shared documentation for the maintained 3.2.x line. Minecraft 1.21.1/1.21.11 are on 3.2.5; Minecraft 1.20.1 remains on 3.2.4. Always install the JAR and dependencies for your exact Minecraft version.
+      - generic [ref=f5e105]:
+        - heading "Requirements (Minecraft 1.20.1)" [level=2] [ref=f5e900]
+        - generic [ref=f5e107]:
+          - generic [ref=f5e109]:
+            - generic [ref=f5e110]: Fabric API
+            - generic [ref=f5e111]: 0.92.7+1.20.1
+          - generic [ref=f5e113]:
+            - generic [ref=f5e114]: Cloth Config API
+            - generic [ref=f5e115]: 11.1.118
+          - generic [ref=f5e117]:
+            - generic [ref=f5e118]: Mod Menu
+            - generic [ref=f5e119]: 7.2.2
+        - paragraph [ref=f5e120]:
+          - generic [ref=f5e901]:
+            - text: Minecraft 1.21.1 requires Fabric API
+            - code [ref=f5e902]: ">=0.116.15+1.21.1"
+            - text: ", Cloth Config"
+            - code [ref=f5e903]: ">=15.0.140"
+            - text: and Mod Menu
+            - code [ref=f5e904]: ">=11.0.4"
+            - text: . Minecraft 1.21.11 requires Fabric API
+            - code [ref=f5e905]: ">=0.141.6+1.21.11"
+            - text: ", Cloth Config"
+            - code [ref=f5e906]: ">=21.11.153"
+            - text: and Mod Menu
+            - code [ref=f5e907]: ">=17.0.0"
+            - text: . Both require Java 21.
+      - generic [ref=f5e128]:
+        - heading "Enchantments" [level=2] [ref=f5e908]
+        - generic [ref=f5e130]:
+          - article [ref=f5e185]:
+            - generic [ref=f5e187]:
+              - heading "Drill" [level=3] [ref=f5e937]
+              - generic [ref=f5e190]:
+                - generic [ref=f5e938]: Tool
+                - generic [ref=f5e939]: Very Rare
+                - generic [ref=f5e940]: "Max level: I"
+            - paragraph [ref=f5e194]:
+              - generic [ref=f5e941]:
+                - text: Breaks blocks in a
+                - strong [ref=f5e942]: 3×3 area
+                - text: . The plane follows the actual block face hit by the player's view ray, including diagonal and edge/corner camera angles.
+            - generic [ref=f5e197]: Pickaxe · Shovel
+            - list [ref=f5e198]:
+              - listitem [ref=f5e199]:
+                - generic [ref=f5e943]: Disabled while sneaking (Shift)
+              - listitem [ref=f5e201]:
+                - generic [ref=f5e944]:
+                  - text: 1 durability per extra block (
+                  - emphasis [ref=f5e945]: Unbreaking
+                  - text: applies)
+              - listitem [ref=f5e204]:
+                - generic [ref=f5e946]: Air, protected, unloaded, or otherwise unavailable cells are skipped without aborting the rest of the 3×3 plane
+              - listitem [ref=f5e206]:
+                - generic [ref=f5e947]:
+                  - text: Compatible with
+                  - emphasis [ref=f5e948]: Magnet
+          - article [ref=f5e241]:
+            - generic [ref=f5e243]:
+              - heading "Lumberjack" [level=3] [ref=f5e966]
+              - generic [ref=f5e246]:
+                - generic [ref=f5e967]: Tool
+                - generic [ref=f5e968]: Rare
+                - generic [ref=f5e969]: "Max level: III"
+            - paragraph [ref=f5e250]:
+              - generic [ref=f5e970]:
+                - text: Chops an entire
+                - strong [ref=f5e971]: tree
+                - text: by breaking one log. Smart detection — won't break player-built log structures. Works with Nether trees.
+            - generic [ref=f5e253]: Axe
+            - table [ref=f5e254]:
+              - rowgroup [ref=f5e255]:
+                - row [ref=f5e972]:
+                  - columnheader "Level" [ref=f5e973]
+                  - columnheader "Max blocks" [ref=f5e974]
+              - rowgroup [ref=f5e259]:
+                - row [ref=f5e260]:
+                  - cell "I" [ref=f5e261]
+                  - cell "16" [ref=f5e262]
+                - row [ref=f5e263]:
+                  - cell "II" [ref=f5e264]
+                  - cell "48" [ref=f5e265]
+                - row [ref=f5e266]:
+                  - cell "III" [ref=f5e267]
+                  - cell "128" [ref=f5e268]
+            - list [ref=f5e269]:
+              - listitem [ref=f5e270]:
+                - generic [ref=f5e975]:
+                  - text: Does not work on
+                  - code [ref=f5e976]: _wood
+                  - text: /
+                  - code [ref=f5e977]: hyphae
+                  - text: blocks
+              - listitem [ref=f5e274]:
+                - generic [ref=f5e978]: Does not break below the original block
+              - listitem [ref=f5e276]:
+                - generic [ref=f5e979]:
+                  - text: Compatible with
+                  - emphasis [ref=f5e980]: Magnet
+          - article [ref=f5e321]:
+            - generic [ref=f5e323]:
+              - heading "Magnet" [level=3] [ref=f5e1004]
+              - generic [ref=f5e326]:
+                - generic [ref=f5e1005]: Tool
+                - generic [ref=f5e1006]: Rare
+                - generic [ref=f5e1007]: "Max level: I"
+            - paragraph [ref=f5e330]:
+              - generic [ref=f5e1008]:
+                - text: When mining,
+                - strong [ref=f5e1009]: collects linked drops
+                - text: into the player's inventory and also uses a configurable nearby-item radius (default 5 blocks).
+            - generic [ref=f5e333]: Pickaxe · Axe · Shovel · Hoe
+            - list [ref=f5e334]:
+              - listitem [ref=f5e335]:
+                - generic [ref=f5e1010]:
+                  - text: Works with
+                  - emphasis [ref=f5e1011]: Drill
+                  - text: and
+                  - emphasis [ref=f5e1012]: Lumberjack
+              - listitem [ref=f5e339]:
+                - generic [ref=f5e1013]: Pickup radius is configurable; on 1.20.1, complex Lumberjack trees can leave some secondary drops nearby without loss or duplication
+          - article [ref=f5e341]:
+            - generic [ref=f5e343]:
+              - heading "Auto Smelt" [level=3] [ref=f5e1014]
+              - generic [ref=f5e346]:
+                - generic [ref=f5e1015]: Tool
+                - generic [ref=f5e1016]: Rare
+                - generic [ref=f5e1017]: "Max level: I"
+            - paragraph [ref=f5e350]:
+              - generic [ref=f5e1018]:
+                - text: Automatically replaces eligible ore loot with the
+                - strong [ref=f5e1019]: smelted result
+                - text: while preserving the relevant vanilla loot behavior.
+            - generic [ref=f5e353]: Pickaxe
+            - list [ref=f5e354]:
+              - listitem [ref=f5e355]:
+                - generic [ref=f5e1020]: Works with the resolved vanilla loot path, including Silk Touch and Fortune behavior where applicable
+          - article [ref=f5e357]:
+            - generic [ref=f5e359]:
+              - heading "Vegetation" [level=3] [ref=f5e1021]
+              - generic [ref=f5e362]:
+                - generic [ref=f5e1022]: Tool
+                - generic [ref=f5e1023]: Rare
+                - generic [ref=f5e1024]: "Max level: III"
+            - paragraph [ref=f5e366]:
+              - generic [ref=f5e1025]:
+                - text: Breaking a mature crop has a chance to
+                - strong [ref=f5e1026]: auto-replant
+                - text: it. Works with wheat, carrots, potatoes, beetroot, nether wart.
+            - generic [ref=f5e369]: Hoe
+            - table [ref=f5e370]:
+              - rowgroup [ref=f5e371]:
+                - row [ref=f5e1027]:
+                  - columnheader "Level" [ref=f5e1028]
+                  - columnheader "Replant chance" [ref=f5e1029]
+              - rowgroup [ref=f5e375]:
+                - row [ref=f5e376]:
+                  - cell "I" [ref=f5e377]
+                  - cell "30%" [ref=f5e378]
+                - row [ref=f5e379]:
+                  - cell "II" [ref=f5e380]
+                  - cell "60%" [ref=f5e381]
+                - row [ref=f5e382]:
+                  - cell "III" [ref=f5e383]
+                  - cell "100%" [ref=f5e384]
+            - list [ref=f5e385]:
+              - listitem [ref=f5e386]:
+                - generic [ref=f5e1030]: Freshly planted crop is protected from breaking for 0.5 sec
+          - article [ref=f5e562]:
+            - generic [ref=f5e564]:
+              - heading "Tether Master" [level=3] [ref=f5e1111]
+              - generic [ref=f5e567]:
+                - generic [ref=f5e1112]: Tool
+                - generic [ref=f5e1113]: Uncommon
+                - generic [ref=f5e1114]: "Max level: III"
+            - paragraph [ref=f5e571]:
+              - generic [ref=f5e1115]:
+                - text: Increases the
+                - strong [ref=f5e1116]: pull strength
+                - text: when reeling in hooked mobs.
+            - generic [ref=f5e574]: Fishing Rod
+            - table [ref=f5e575]:
+              - rowgroup [ref=f5e576]:
+                - row [ref=f5e1117]:
+                  - columnheader "Level" [ref=f5e1118]
+                  - columnheader "Pull strength" [ref=f5e1119]
+              - rowgroup [ref=f5e580]:
+                - row [ref=f5e581]:
+                  - cell "I" [ref=f5e582]
+                  - cell "+15%" [ref=f5e583]
+                - row [ref=f5e584]:
+                  - cell "II" [ref=f5e585]
+                  - cell "+25%" [ref=f5e586]
+                - row [ref=f5e587]:
+                  - cell "III" [ref=f5e588]
+                  - cell "+40%" [ref=f5e589]
+      - generic [ref=f5e735]:
+        - heading "Changelog" [level=2] [ref=f5e1186]
+        - generic [ref=f5e737]:
+          - group [ref=f5e738]:
+            - generic "v3.2.5 2026-08-10 Double Jump smoothness hotfix" [ref=f5e1187] [cursor=pointer]:
+              - generic [ref=f5e740]: v3.2.5
+              - generic [ref=f5e741]: 2026-08-10
+              - generic [ref=f5e1188]: Double Jump smoothness hotfix
+            - generic [ref=f5e743]:
+              - paragraph [ref=f5e744]:
+                - generic [ref=f5e1189]:
+                  - strong [ref=f5e1190]: "Compatibility:"
+                  - text: released for Minecraft 1.21.1 and 1.21.11 (Java 21). Minecraft 1.20.1 remains on 3.2.4 because its Double Jump behavior was already correct.
+              - paragraph [ref=f5e747]:
+                - generic [ref=f5e1191]:
+                  - strong [ref=f5e1192]: "Root cause:"
+                  - text: the 1.21.x owner client waited for the complete server approval round trip before receiving the Double Jump impulse, creating a late horizontal/vertical kick and allowing direction to drift if yaw changed while the request was in flight.
+              - paragraph [ref=f5e750]:
+                - generic [ref=f5e1193]:
+                  - strong [ref=f5e1194]: "Fixed:"
+                  - text: movement is predicted immediately on the input tick; C2S carries sprint + activation-yaw snapshots; the server remains authoritative and applies the equivalent snapshot-based impulse; S2C approval is acknowledgement-only and cannot add a second delayed impulse. Minecraft 1.21.11 uses its valid
+                  - code [ref=f5e1195]: hurtMarked
+                  - text: synchronization path.
+              - paragraph [ref=f5e754]:
+                - generic [ref=f5e1196]:
+                  - strong [ref=f5e1197]: "Validation:"
+                  - text: both 1.21.1 and 1.21.11 builds passed automated validation and were manually accepted in-game.
+          - group [ref=f5e757]:
+            - generic "v3.2.4 2026-08-08 Librarian trade fix" [ref=f5e1198] [cursor=pointer]:
+              - generic [ref=f5e759]: v3.2.4
+              - generic [ref=f5e760]: 2026-08-08
+              - generic [ref=f5e1199]: Librarian trade fix
+          - group [ref=f5e762]:
+            - generic "v3.2.3 2026-08-08 Feedback protection fix" [ref=f5e1200] [cursor=pointer]:
+              - generic [ref=f5e764]: v3.2.3
+              - generic [ref=f5e765]: 2026-08-08
+              - generic [ref=f5e1201]: Feedback protection fix
+          - group [ref=f5e767]:
+            - generic "v3.2.2 2026-08-08 Drill geometry fix" [ref=f5e1202] [cursor=pointer]:
+              - generic [ref=f5e769]: v3.2.2
+              - generic [ref=f5e770]: 2026-08-08
+              - generic [ref=f5e1203]: Drill geometry fix
+          - group [ref=f5e772]:
+            - generic "v3.1.2 2026-08-08 Double Jump fix" [ref=f5e1204] [cursor=pointer]:
+              - generic [ref=f5e774]: v3.1.2
+              - generic [ref=f5e775]: 2026-08-08
+              - generic [ref=f5e1205]: Double Jump fix
+          - group [ref=f5e777]:
+            - generic "v3.1.1 2026-08-07 Stability & fixes" [ref=f5e1206] [cursor=pointer]:
+              - generic [ref=f5e779]: v3.1.1
+              - generic [ref=f5e780]: 2026-08-07
+              - generic [ref=f5e1207]: Stability & fixes
+          - group [ref=f5e782]:
+            - generic "v3.0.0 2026-04-30 +1 enchantment" [ref=f5e1208] [cursor=pointer]:
+              - generic [ref=f5e784]: v3.0.0
+              - generic [ref=f5e785]: 2026-04-30
+              - generic [ref=f5e1209]: +1 enchantment
+          - group [ref=f5e787]:
+            - generic "v2.9.0 2026-03-28 +1 enchantment" [ref=f5e1210] [cursor=pointer]:
+              - generic [ref=f5e789]: v2.9.0
+              - generic [ref=f5e790]: 2026-03-28
+              - generic [ref=f5e1211]: +1 enchantment
+          - group [ref=f5e792]:
+            - generic "v2.8.0 2026-03-28 +1 enchantment" [ref=f5e1212] [cursor=pointer]:
+              - generic [ref=f5e794]: v2.8.0
+              - generic [ref=f5e795]: 2026-03-28
+              - generic [ref=f5e1213]: +1 enchantment
+          - group [ref=f5e797]:
+            - generic "v2.7.0 2026-03-28 +1 enchantment" [ref=f5e1214] [cursor=pointer]:
+              - generic [ref=f5e799]: v2.7.0
+              - generic [ref=f5e800]: 2026-03-28
+              - generic [ref=f5e1215]: +1 enchantment
+          - group [ref=f5e802]:
+            - generic "v2.6.0 2026-03-28 +1 enchantment" [ref=f5e1216] [cursor=pointer]:
+              - generic [ref=f5e804]: v2.6.0
+              - generic [ref=f5e805]: 2026-03-28
+              - generic [ref=f5e1217]: +1 enchantment
+          - group [ref=f5e807]:
+            - generic "v2.5.0 2026-03-28 +1 enchantment" [ref=f5e1218] [cursor=pointer]:
+              - generic [ref=f5e809]: v2.5.0
+              - generic [ref=f5e810]: 2026-03-28
+              - generic [ref=f5e1219]: +1 enchantment
+          - group [ref=f5e812]:
+            - generic "v2.4.0 2026-03-28 +1 enchantment" [ref=f5e1220] [cursor=pointer]:
+              - generic [ref=f5e814]: v2.4.0
+              - generic [ref=f5e815]: 2026-03-28
+              - generic [ref=f5e1221]: +1 enchantment
+          - group [ref=f5e817]:
+            - generic "v2.3.0 2026-03-27 +1 enchantment" [ref=f5e1222] [cursor=pointer]:
+              - generic [ref=f5e819]: v2.3.0
+              - generic [ref=f5e820]: 2026-03-27
+              - generic [ref=f5e1223]: +1 enchantment
+          - group [ref=f5e822]:
+            - generic "v2.2.0 2026-03-27 +1 enchantment" [ref=f5e1224] [cursor=pointer]:
+              - generic [ref=f5e824]: v2.2.0
+              - generic [ref=f5e825]: 2026-03-27
+              - generic [ref=f5e1225]: +1 enchantment
+          - group [ref=f5e827]:
+            - generic "v2.1.0 2026-03-27 +1 enchantment" [ref=f5e1226] [cursor=pointer]:
+              - generic [ref=f5e829]: v2.1.0
+              - generic [ref=f5e830]: 2026-03-27
+              - generic [ref=f5e1227]: +1 enchantment
+          - group [ref=f5e832]:
+            - generic "v2.0.0 2026-03-27 +1 enchantment" [ref=f5e1228] [cursor=pointer]:
+              - generic [ref=f5e834]: v2.0.0
+              - generic [ref=f5e835]: 2026-03-27
+              - generic [ref=f5e1229]: +1 enchantment
+          - group [ref=f5e837]:
+            - generic "v1.9.0 2026-03-26 +1 enchantment" [ref=f5e1230] [cursor=pointer]:
+              - generic [ref=f5e839]: v1.9.0
+              - generic [ref=f5e840]: 2026-03-26
+              - generic [ref=f5e1231]: +1 enchantment
+          - group [ref=f5e842]:
+            - generic "v1.7.0 2026-03-26 +1 enchantment" [ref=f5e1232] [cursor=pointer]:
+              - generic [ref=f5e844]: v1.7.0
+              - generic [ref=f5e845]: 2026-03-26
+              - generic [ref=f5e1233]: +1 enchantment
+          - group [ref=f5e847]:
+            - generic "v1.6.0 2026-03-26 +1 enchantment" [ref=f5e1234] [cursor=pointer]:
+              - generic [ref=f5e849]: v1.6.0
+              - generic [ref=f5e850]: 2026-03-26
+              - generic [ref=f5e1235]: +1 enchantment
+          - group [ref=f5e852]:
+            - generic "v1.5.0 2026-03-26 +1 enchantment" [ref=f5e1236] [cursor=pointer]:
+              - generic [ref=f5e854]: v1.5.0
+              - generic [ref=f5e855]: 2026-03-26
+              - generic [ref=f5e1237]: +1 enchantment
+          - group [ref=f5e857]:
+            - generic "v1.4.0 2026-03-26 +1 enchantment" [ref=f5e1238] [cursor=pointer]:
+              - generic [ref=f5e859]: v1.4.0
+              - generic [ref=f5e860]: 2026-03-26
+              - generic [ref=f5e1239]: +1 enchantment
+          - group [ref=f5e862]:
+            - generic "v1.3.0 2026-03-26 +1 enchantment" [ref=f5e1240] [cursor=pointer]:
+              - generic [ref=f5e864]: v1.3.0
+              - generic [ref=f5e865]: 2026-03-26
+              - generic [ref=f5e1241]: +1 enchantment
+          - group [ref=f5e867]:
+            - generic "v1.1.0 2026-03-25 +1 enchantment" [ref=f5e1242] [cursor=pointer]:
+              - generic [ref=f5e869]: v1.1.0
+              - generic [ref=f5e870]: 2026-03-25
+              - generic [ref=f5e1243]: +1 enchantment
+          - group [ref=f5e872]:
+            - generic "v1.0.0 2026-03-25 Initial release" [ref=f5e1244] [cursor=pointer]:
+              - generic [ref=f5e874]: v1.0.0
+              - generic [ref=f5e875]: 2026-03-25
+              - generic [ref=f5e1245]: Initial release
+  - contentinfo [ref=f5e877]:
+    - generic [ref=f5e878]:
+      - paragraph [ref=f5e879]:
+        - strong [ref=f5e880]: Mentalitys | Custom Enchantments
+        - text: — Fabric for Minecraft 1.20.1, 1.21.1 and 1.21.11
+      - generic [ref=f5e881]:
+        - link "GitHub" [ref=f5e882] [cursor=pointer]:
+          - /url: https://github.com/sqwiziiy/Custom-Enchants
+        - generic [ref=f5e883]: ·
+        - link "Modrinth" [ref=f5e884] [cursor=pointer]:
+          - /url: https://modrinth.com/project/NJPtH6f5
+      - paragraph [ref=f5e885]: "Author: mentality · v3.2.5 (1.21.x) / v3.2.4 (1.20.1)"
